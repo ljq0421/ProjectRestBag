@@ -3,12 +3,22 @@ extends VBoxContainer
 
 signal draft_changed(draft: Dictionary)
 signal placement_rejected(reasons: Array[String])
+signal recipe_placed(instance_id: String, recipe_id: String)
+signal instance_moved(instance_id: String)
+signal instance_rotated(
+	instance_id: String,
+	recipe_id: String,
+	rotation: int,
+	shape_changed: bool
+)
+signal instance_removed(instance_id: String)
 
 const ROWS := 6
 const COLUMNS := 8
 const CELL_SIZE := 80
 const RecipeIconService = preload("res://scripts/recipe_icon_service.gd")
 const ShowcaseIconService = preload("res://scripts/ui/storefront/showcase_icon_service.gd")
+const ChallengeLoadoutServiceClass = preload("res://scripts/challenge/challenge_loadout_service.gd")
 
 var _recipe_defs: Dictionary = {}
 var _loadout_service: RefCounted
@@ -73,7 +83,10 @@ func place_recipe(
 		"rotation": rotation
 	})
 	candidate["placements"] = placements
-	return _commit_candidate(candidate)
+	if not _commit_candidate(candidate):
+		return false
+	recipe_placed.emit(resolved_instance_id, recipe_id)
+	return true
 
 
 func move_instance(instance_id: String, origin: Variant) -> bool:
@@ -86,20 +99,35 @@ func move_instance(instance_id: String, origin: Variant) -> bool:
 			placement["origin"] = _origin_array(origin)
 			found = true
 			break
-	return _commit_candidate(candidate) if found else false
+	if not found or not _commit_candidate(candidate):
+		return false
+	instance_moved.emit(instance_id)
+	return true
 
 
 func rotate_instance(instance_id: String) -> bool:
 	if _locked:
 		return false
 	var candidate := get_draft()
+	var recipe_id := ""
+	var previous_rotation := 0
+	var next_rotation := 0
 	var found := false
 	for placement in candidate.get("placements", []):
 		if placement.get("instance_id") == instance_id:
-			placement["rotation"] = int(placement.get("rotation", 0)) + 90
+			recipe_id = String(placement.get("recipe_id", ""))
+			previous_rotation = posmod(int(placement.get("rotation", 0)), 360)
+			next_rotation = posmod(previous_rotation + 90, 360)
+			placement["rotation"] = next_rotation
 			found = true
 			break
-	return _commit_candidate(candidate) if found else false
+	if not found or not _commit_candidate(candidate):
+		return false
+	var shape: Array = (_recipe_defs.get(recipe_id, {}) as Dictionary).get("shape_cells", [])
+	var before := ChallengeLoadoutServiceClass.rotated_cells(shape, previous_rotation)
+	var after := ChallengeLoadoutServiceClass.rotated_cells(shape, next_rotation)
+	instance_rotated.emit(instance_id, recipe_id, next_rotation, before != after)
+	return true
 
 
 func remove_instance(instance_id: String) -> bool:
@@ -111,7 +139,10 @@ func remove_instance(instance_id: String) -> bool:
 		if placements[index].get("instance_id") == instance_id:
 			placements.remove_at(index)
 			candidate["placements"] = placements
-			return _commit_candidate(candidate)
+			if not _commit_candidate(candidate):
+				return false
+			instance_removed.emit(instance_id)
+			return true
 	return false
 
 
@@ -131,6 +162,25 @@ func set_risk_summary(summary: String) -> void:
 
 func get_occupied_cell_count() -> int:
 	return (_analysis.get("occupied_cells", {}) as Dictionary).size()
+
+
+func is_current_draft_valid() -> bool:
+	return bool(_analysis.get("valid", false))
+
+
+func get_tutorial_target_rects(kind: String, instance_id: String = "") -> Array[Rect2]:
+	match kind:
+		"board":
+			return [$BoardFrame.get_global_rect()]
+		"risk":
+			return [$Header.get_global_rect(), $RiskLabel.get_global_rect(), $RelationSummary.get_global_rect()]
+		"instance":
+			var rects: Array[Rect2] = []
+			for cell in $BoardFrame/BoardGrid.get_children():
+				if String(cell.get_meta("instance_id", "")) == instance_id:
+					rects.append(cell.get_global_rect())
+			return rects
+	return []
 
 
 func _commit_candidate(candidate: Dictionary) -> bool:

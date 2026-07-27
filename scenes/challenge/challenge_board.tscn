@@ -43,7 +43,7 @@ theme = ExtResource("2_theme")
 theme_override_constants/separation = 12
 script = ExtResource("1_script")
 
-[node name="Header" type="HBoxContainer" parent="."]
+[node name="Header" type="HBoxContainer" parent="." groups=["tutorial_board_header"]]
 layout_mode = 2
 theme_override_constants/separation = 10
 
@@ -61,13 +61,13 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_header_chip")
 text = "展示柜占格 0 / 48"
 
-[node name="RiskLabel" type="Label" parent="."]
+[node name="RiskLabel" type="Label" parent="." groups=["tutorial_board_risk"]]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
 theme_override_font_sizes/font_size = 16
 text = "稳定覆盖：待评估"
 
-[node name="BoardFrame" type="PanelContainer" parent="."]
+[node name="BoardFrame" type="PanelContainer" parent="." groups=["tutorial_board_grid"]]
 custom_minimum_size = Vector2(670, 510)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_board_frame")
