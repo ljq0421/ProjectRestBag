@@ -31,6 +31,9 @@ func _run() -> void:
 	_expect(view.get_node("Root/TopBar/ConfidenceLabel").text.find("2") >= 0, "run should start with two confidence")
 	_expect(view.get_node("Root/Body/PreparationPanel").visible, "preparation should be visible first")
 	_expect(not view.get_node("Root/Body/BattlePanel").visible, "battle should be hidden before start")
+	_expect(view.has_node("Root/TopBar/TutorialHelpButton"), "main scene should include a stable tutorial help entry")
+	_expect(view.has_node("TutorialCanvasLayer/TutorialOverlay"), "main scene should include the packed root tutorial overlay")
+	_expect(view.get_node("TutorialCanvasLayer/TutorialOverlay").visible, "new save should show preparation tutorial")
 
 	var failing_draft := {"placements": [
 		{"instance_id": "cookie_only", "recipe_id": "butter_cookie", "origin": [0, 0], "rotation": 0}

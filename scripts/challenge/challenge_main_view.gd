@@ -8,6 +8,7 @@ const ChallengeLoadoutService = preload("res://scripts/challenge/challenge_loado
 const BossBattleService = preload("res://scripts/challenge/boss_battle_service.gd")
 const BossBattleReportService = preload("res://scripts/challenge/boss_battle_report_service.gd")
 const ChallengeRunService = preload("res://scripts/challenge/challenge_run_service.gd")
+const ChallengeTutorialProgress = preload("res://scripts/challenge/challenge_tutorial_progress.gd")
 
 const RECIPE_CONFIG_PATH := "res://doc/challenge/challenge_recipes.json"
 const ENCOUNTER_CONFIG_PATH := "res://doc/challenge/boss_encounters.json"
@@ -29,15 +30,31 @@ var _battle_service = BossBattleService.new()
 var _report_service = BossBattleReportService.new()
 var _run_service = ChallengeRunService.new()
 var _last_saved_elapsed := -1
+var _tutorial_progress = ChallengeTutorialProgress.new()
+var _tutorial_state: Dictionary = {}
+var _tutorial_replay_mode := false
+var _tutorial_persistence_blocked := false
 
 
 func _ready() -> void:
 	$Root/Body/PreparationPanel/StartButton.pressed.connect(start_battle)
 	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.draft_changed.connect(_on_draft_changed)
 	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.placement_rejected.connect(_on_placement_rejected)
+	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.recipe_placed.connect(
+		func(_instance_id: String, recipe_id: String) -> void:
+			_apply_tutorial_event("recipe_placed", {"recipe_id": recipe_id})
+	)
+	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.instance_rotated.connect(
+		func(_instance_id: String, recipe_id: String, _rotation: int, shape_changed: bool) -> void:
+			_apply_tutorial_event("instance_rotated", {
+				"recipe_id": recipe_id,
+				"shape_changed": shape_changed
+			})
+	)
 	$Root/Body/BattlePanel/ChallengeBattleView.battle_finished.connect(_on_battle_finished)
 	$SettlementDialog.retry_requested.connect(retry_same_encounter)
 	$SettlementDialog.back_requested.connect(_return_to_preparation)
+	$TutorialCanvasLayer/TutorialOverlay.confirm_requested.connect(_on_tutorial_confirm_requested)
 	start_vertical_slice()
 
 
@@ -60,6 +77,8 @@ func start_vertical_slice() -> void:
 	_load_or_create_run()
 	_refresh_top_bar()
 	if _restore_active_battle():
+		_initialize_tutorial()
+		_schedule_battle_tutorial_fade()
 		return
 	_show_preparation()
 	var saved_draft = _save_data.get("active_draft")
@@ -67,6 +86,7 @@ func start_vertical_slice() -> void:
 		$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.set_draft(saved_draft)
 	else:
 		$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.set_draft({"placements": []})
+	_initialize_tutorial()
 	_save_now(false)
 
 
@@ -101,6 +121,7 @@ func start_battle() -> void:
 	$Root/Body/PreparationPanel.visible = false
 	$Root/Body/BattlePanel.visible = true
 	_last_saved_elapsed = 0
+	_apply_tutorial_event("battle_started", {"draft": draft})
 	_save_now(true)
 	_refresh_top_bar()
 
@@ -123,6 +144,141 @@ func set_draft_for_test(draft: Dictionary) -> void:
 func advance_battle_for_test(target_elapsed_ms: int) -> void:
 	$Root/Body/BattlePanel/ChallengeBattleView.advance_for_test(target_elapsed_ms)
 	battle_state = $Root/Body/BattlePanel/ChallengeBattleView.battle_state.duplicate(true)
+
+
+func _initialize_tutorial() -> void:
+	var surface := _current_tutorial_surface()
+	var raw_onboarding = _save_data.get("onboarding")
+	_tutorial_state = _tutorial_progress.normalize(raw_onboarding, surface)
+	_tutorial_persistence_blocked = bool(_tutorial_state.get("unsupported_newer_version", false))
+	if _tutorial_persistence_blocked:
+		_hide_all_tutorial_surfaces()
+		push_warning("Challenge onboarding was created by a newer client; leaving it unchanged.")
+		return
+	_save_data["onboarding"] = _tutorial_state.duplicate(true)
+	if not raw_onboarding is Dictionary or raw_onboarding != _tutorial_state:
+		_save_now(not battle_state.is_empty())
+	_refresh_tutorial()
+
+
+func _apply_tutorial_event(event_id: String, context: Dictionary = {}) -> void:
+	if _tutorial_replay_mode or _tutorial_persistence_blocked:
+		return
+	var next := _tutorial_progress.apply_event(_tutorial_state, event_id, context)
+	if next == _tutorial_state:
+		return
+	_tutorial_state = next
+	_save_data["onboarding"] = next.duplicate(true)
+	_save_now($Root/Body/BattlePanel.visible)
+	_refresh_tutorial()
+
+
+func _refresh_tutorial() -> void:
+	if _tutorial_persistence_blocked or String(_tutorial_state.get("status", "")) != "active":
+		_hide_all_tutorial_surfaces()
+		return
+	if $SettlementDialog.visible or _current_tutorial_surface() == "finished":
+		$TutorialCanvasLayer/TutorialOverlay.hide_step()
+		return
+	var step_id := String(_tutorial_state.get("step_id", "boss_brief"))
+	var copy := _tutorial_copy(step_id)
+	$TutorialCanvasLayer/TutorialOverlay.show_step(
+		ChallengeTutorialProgress.STEPS.find(step_id) + 1,
+		ChallengeTutorialProgress.STEPS.size(),
+		String(copy.get("title", "")),
+		String(copy.get("body", "")),
+		resolve_tutorial_targets(step_id),
+		String(copy.get("confirm", "")),
+		false
+	)
+
+
+func _hide_all_tutorial_surfaces() -> void:
+	$TutorialCanvasLayer/TutorialOverlay.hide_step()
+
+
+func _current_tutorial_surface() -> String:
+	if $SettlementDialog.visible:
+		return "settlement"
+	if $Root/Body/BattlePanel.visible:
+		return "battle"
+	return "preparation"
+
+
+func _on_tutorial_confirm_requested() -> void:
+	match String(_tutorial_state.get("step_id", "")):
+		"boss_brief":
+			_apply_tutorial_event("boss_acknowledged")
+		"read_risk":
+			var board = $Root/Body/PreparationPanel/MainColumns/ChallengeBoard
+			_apply_tutorial_event("risk_acknowledged", {
+				"draft_valid": board.is_current_draft_valid()
+			})
+		"complete":
+			_apply_tutorial_event("tutorial_completed")
+
+
+func get_tutorial_state_for_test() -> Dictionary:
+	return _tutorial_state.duplicate(true)
+
+
+func acknowledge_tutorial_for_test() -> void:
+	_on_tutorial_confirm_requested()
+
+
+func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
+	var board = $Root/Body/PreparationPanel/MainColumns/ChallengeBoard
+	match step_id:
+		"boss_brief":
+			return [$Root/Body/PreparationPanel/MainColumns/BossPreview.get_global_rect()]
+		"place_recipe":
+			var placement_targets: Array[Rect2] = [$Root/Body/PreparationPanel/SupplyStrip.get_global_rect()]
+			placement_targets.append_array(board.get_tutorial_target_rects("board"))
+			return placement_targets
+		"rotate_recipe":
+			for placement_value in board.get_draft().get("placements", []):
+				var placement: Dictionary = placement_value
+				if ChallengeTutorialProgress.ROTATABLE_RECIPE_IDS.has(String(placement.get("recipe_id", ""))):
+					var instance_targets: Array[Rect2] = board.get_tutorial_target_rects("instance", String(placement.get("instance_id", "")))
+					if not instance_targets.is_empty():
+						return instance_targets
+			var supply_targets: Array[Rect2] = []
+			for card in $Root/Body/PreparationPanel/SupplyStrip.get_children():
+				if ChallengeTutorialProgress.ROTATABLE_RECIPE_IDS.has(String(card.get_meta("recipe_id", ""))):
+					supply_targets.append(card.get_global_rect())
+			return supply_targets
+		"read_risk":
+			return board.get_tutorial_target_rects("risk")
+		"start_battle":
+			return [$Root/Body/PreparationPanel/StartButton.get_global_rect()]
+	return []
+
+
+func _tutorial_copy(step_id: String) -> Dictionary:
+	match step_id:
+		"boss_brief":
+			return {"title": "了解 Boss 的完整要求", "body": "8、16、24 秒会检查需求；30 秒前要清空挑剔值。", "confirm": "开始准备"}
+		"place_recipe":
+			return {"title": "挑一份挑战备货", "body": "把任意配方拖进展示柜。本模式不会消耗经营库存。"}
+		"rotate_recipe":
+			return {"title": "试试右键旋转", "body": "牛奶布丁和蓝莓松饼可以改变占格方向。"}
+		"read_risk":
+			return {"title": "先看覆盖，再决定开战", "body": "预算、联动和失败窗口预测会随布局变化。", "confirm": "看懂风险了"}
+		"start_battle":
+			return {"title": "锁定陈列，开始挑战", "body": "开战后展示柜锁定，战斗会自动进行。"}
+		"observe_battle":
+			return {"title": "同时看住两条压力", "body": "满意度会降低 Boss 挑剔值；需求失败会损伤口碑防线。"}
+		"read_report":
+			return {"title": "从战报找出下一步", "body": "先看失败窗口，再看各配方贡献与调整建议。"}
+		"rearrange":
+			return {"title": "根据战报重排一次", "body": "移动、旋转、增加或移除配方；合法布局发生变化才算完成。"}
+		"complete":
+			return {"title": "核心循环已经掌握", "body": "以后可通过顶部问号重播引导。", "confirm": "完成引导"}
+	return {"title": "", "body": ""}
+
+
+func _schedule_battle_tutorial_fade() -> void:
+	pass
 
 
 func _load_configuration() -> void:
