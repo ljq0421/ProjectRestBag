@@ -20,6 +20,8 @@ Date: 2026-07-27
 
 The bounded runtime session was verified to use `D:/Project/ProjectRest/project-rest-two/.worktrees/challenge-onboarding/`. All seven durable evidence files below are direct viewport captures from that runtime: valid PNG signature, literal `1920x1080` dimensions, and checked after writing. Their controlled fixture is ignored under `.superpowers`; it uses a unique `user://challenge_tutorial_visual_<mode>.json` save plus the existing `ChallengeRunService`, `start_battle()`, and `advance_battle_for_test(30000)` paths. It changes no production source, default save, reward, inventory, or reset behavior.
 
+Review correction: the original report captures exposed a real PopupPanel failure (the report overlay expanded to `4799` px high and sampled targets before popup layout settled). The settlement window is now constrained to `1080x820`, its report overlay has an explicit scene host, and initial report targeting waits one frame after the popup opens. `05` and `06` below were overwritten only after real-simulation recapture, visual inspection, and PNG validation at `1920x1080`.
+
 | Required state | Status | Evidence / observation |
 |---|---|---|
 | Boss brief spotlight | OBSERVED | [01-boss-brief.png](2026-07-27-challenge-onboarding/01-boss-brief.png) — readable Boss brief, intended spotlight, and top-bar `?`; root overlay only. |

@@ -77,7 +77,7 @@ func _run() -> void:
 	_expect(view.get_node("Root/Body/PreparationPanel").visible, "challenge root should open in preparation")
 	_expect(view.has_node("Root/TopBar/TutorialHelpButton"), "default main scene exposes tutorial help")
 	_expect(view.has_node("TutorialCanvasLayer/TutorialOverlay"), "default main scene owns the root tutorial overlay")
-	_expect(view.has_node("SettlementDialog/TutorialReportOverlay"), "settlement should own a scene-local tutorial overlay")
+	_expect(view.has_node("SettlementDialog/TutorialOverlayHost/TutorialReportOverlay"), "settlement should own a scene-local tutorial overlay")
 	_expect(view.has_node("SettlementDialog/Margin/Content/ActionRow/TutorialHelpButton"), "settlement should expose a scene-local tutorial help entry")
 
 	var recipe_config := _load_json("res://doc/challenge/challenge_recipes.json")

@@ -171,14 +171,18 @@ func is_current_draft_valid() -> bool:
 func get_tutorial_target_rects(kind: String, instance_id: String = "") -> Array[Rect2]:
 	match kind:
 		"board":
-			return [$BoardFrame.get_global_rect()]
+			return [ChallengeTutorialOverlay.control_screen_rect($BoardFrame)]
 		"risk":
-			return [$Header.get_global_rect(), $RiskLabel.get_global_rect(), $RelationSummary.get_global_rect()]
+			return [
+				ChallengeTutorialOverlay.control_screen_rect($Header),
+				ChallengeTutorialOverlay.control_screen_rect($RiskLabel),
+				ChallengeTutorialOverlay.control_screen_rect($RelationSummary)
+			]
 		"instance":
 			var rects: Array[Rect2] = []
 			for cell in $BoardFrame/BoardGrid.get_children():
 				if String(cell.get_meta("instance_id", "")) == instance_id:
-					rects.append(cell.get_global_rect())
+					rects.append(ChallengeTutorialOverlay.control_screen_rect(cell))
 			return rects
 	return []
 

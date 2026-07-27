@@ -34,7 +34,7 @@ func set_targets(targets: Array[Rect2]) -> void:
 	_targets.clear()
 	var visible_rect := Rect2(Vector2.ZERO, size)
 	for target in targets.slice(0, MAX_TARGETS):
-		var local_target := _global_rect_to_local(target)
+		var local_target := _screen_rect_to_local(target)
 		var padded: Rect2 = local_target.grow(TARGET_PADDING).intersection(visible_rect)
 		if padded.has_area():
 			_targets.append(padded)
@@ -66,7 +66,15 @@ func is_showing_step() -> bool:
 
 
 func get_hint_rect_for_test() -> Rect2:
-	return $HintHost/HintPanel.get_global_rect()
+	return control_screen_rect($HintHost/HintPanel)
+
+
+func get_target_rects_for_test() -> Array[Rect2]:
+	return _targets.duplicate()
+
+
+func get_arrow_rect_for_test() -> Rect2:
+	return control_screen_rect($Arrow)
 
 
 func _layout_hint() -> void:
@@ -97,11 +105,23 @@ func _layout_hint() -> void:
 	$Arrow.position = _hint_edge_toward(hint_rect, target_center) - $Arrow.size * 0.5
 
 
-func _global_rect_to_local(global_rect: Rect2) -> Rect2:
-	var inverse: Transform2D = get_global_transform().affine_inverse()
-	var local_position: Vector2 = inverse * global_rect.position
-	var local_end: Vector2 = inverse * global_rect.end
-	return Rect2(local_position, local_end - local_position)
+static func control_screen_rect(control: Control) -> Rect2:
+	return _transform_rect(control.get_screen_transform(), Rect2(Vector2.ZERO, control.size))
+
+
+func _screen_rect_to_local(screen_rect: Rect2) -> Rect2:
+	return _transform_rect(get_screen_transform().affine_inverse(), screen_rect)
+
+
+static func _transform_rect(transform: Transform2D, rect: Rect2) -> Rect2:
+	var top_left := transform * rect.position
+	var top_right := transform * Vector2(rect.end.x, rect.position.y)
+	var bottom_left := transform * Vector2(rect.position.x, rect.end.y)
+	var bottom_right := transform * rect.end
+	var transformed := Rect2(top_left, Vector2.ZERO)
+	transformed = transformed.expand(top_right)
+	transformed = transformed.expand(bottom_left)
+	return transformed.expand(bottom_right)
 
 
 func _direction_glyph(direction: Vector2) -> String:

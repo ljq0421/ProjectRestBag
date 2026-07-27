@@ -58,6 +58,7 @@ func _assert_result_branches() -> void:
 	victory_main.start_battle()
 	victory_main.advance_battle_for_test(30000)
 	await process_frame
+	await process_frame
 	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "read_report", "victory opens report step")
 	_expect(victory_main.get_node("SettlementDialog").visible, "victory shows the settlement report")
 	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "read_report", "showing a report does not count as report exit")
@@ -81,6 +82,7 @@ func _assert_result_branches() -> void:
 	loss_main.set_draft_for_test(_fast_losing_draft())
 	loss_main.start_battle()
 	loss_main.advance_battle_for_test(30000)
+	await process_frame
 	await process_frame
 	_expect(loss_main.run_state["confidence"] == 1, "first loss leaves one confidence")
 	var retry_actions: Array[String] = []
@@ -108,13 +110,14 @@ func _assert_result_branches() -> void:
 	terminal_main.start_battle()
 	terminal_main.advance_battle_for_test(30000)
 	await process_frame
+	await process_frame
 	_expect(terminal_main.run_state["confidence"] == 0, "terminal loss consumes final confidence")
 	var terminal_settlement = terminal_main.get_node("SettlementDialog")
 	_expect(terminal_settlement.get_node("Margin/Content/ActionRow/RetryButton").disabled, "terminal report keeps retry disabled")
-	_expect(terminal_settlement.get_node("TutorialReportOverlay").visible, "terminal report guide is visible")
+	_expect(terminal_settlement.get_node("TutorialOverlayHost/TutorialReportOverlay").visible, "terminal report guide is visible")
 	var terminal_targets = terminal_settlement.resolve_tutorial_targets("loss_timeout", false)
 	_expect(
-		terminal_targets.back() == terminal_settlement.get_node("Margin/Content/ActionRow/BackButton").get_global_rect(),
+		terminal_targets.back() == ChallengeTutorialOverlay.control_screen_rect(terminal_settlement.get_node("Margin/Content/ActionRow/BackButton")),
 		"terminal report highlights return instead of disabled retry"
 	)
 	terminal_settlement.get_node("Margin/Content/ActionRow/BackButton").emit_signal("pressed")

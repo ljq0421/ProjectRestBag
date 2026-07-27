@@ -81,18 +81,18 @@ func _assert_completed_replay_is_session_only() -> void:
 	main.battle_state = {"phase": "ended", "outcome": "loss_reputation"}
 	settlement.popup_centered(Vector2i(1080, 820))
 	settlement.show_tutorial_report("loss_reputation", false, false)
-	var report_title: String = settlement.get_node("TutorialReportOverlay/HintHost/HintPanel/Margin/Content/TitleLabel").text
-	var report_body: String = settlement.get_node("TutorialReportOverlay/HintHost/HintPanel/Margin/Content/BodyLabel").text
+	var report_title: String = settlement.get_node("TutorialOverlayHost/TutorialReportOverlay/HintHost/HintPanel/Margin/Content/TitleLabel").text
+	var report_body: String = settlement.get_node("TutorialOverlayHost/TutorialReportOverlay/HintHost/HintPanel/Margin/Content/BodyLabel").text
 	settlement.get_node("Margin/Content/ActionRow/TutorialHelpButton").emit_signal("pressed")
 	_expect(main.is_tutorial_replay_for_test(), "report help also starts the shared replay coordinator")
-	_expect(settlement.get_node("TutorialReportOverlay").visible, "report replay uses its local safe fallback")
-	var report_next = settlement.get_node("TutorialReportOverlay/HintHost/HintPanel/Margin/Content/ActionRow/NextButton")
+	_expect(settlement.get_node("TutorialOverlayHost/TutorialReportOverlay").visible, "report replay uses its local safe fallback")
+	var report_next = settlement.get_node("TutorialOverlayHost/TutorialReportOverlay/HintHost/HintPanel/Margin/Content/ActionRow/NextButton")
 	for _index in range(6):
 		report_next.emit_signal("pressed")
-	_expect(settlement.get_node("TutorialReportOverlay/HintHost/HintPanel/Margin/Content/StepLabel").text == "7 / 9", "report next reaches report replay step")
-	_expect(settlement.get_node("TutorialReportOverlay/HintHost/HintPanel/Margin/Content/TitleLabel").text == report_title, "report replay reuses outcome-specific report title")
-	_expect(settlement.get_node("TutorialReportOverlay/HintHost/HintPanel/Margin/Content/BodyLabel").text == report_body, "report replay reuses outcome-specific report body")
-	settlement.get_node("TutorialReportOverlay/HintHost/HintPanel/Margin/Content/ActionRow/DismissButton").emit_signal("pressed")
+	_expect(settlement.get_node("TutorialOverlayHost/TutorialReportOverlay/HintHost/HintPanel/Margin/Content/StepLabel").text == "7 / 9", "report next reaches report replay step")
+	_expect(settlement.get_node("TutorialOverlayHost/TutorialReportOverlay/HintHost/HintPanel/Margin/Content/TitleLabel").text == report_title, "report replay reuses outcome-specific report title")
+	_expect(settlement.get_node("TutorialOverlayHost/TutorialReportOverlay/HintHost/HintPanel/Margin/Content/BodyLabel").text == report_body, "report replay reuses outcome-specific report body")
+	settlement.get_node("TutorialOverlayHost/TutorialReportOverlay/HintHost/HintPanel/Margin/Content/ActionRow/DismissButton").emit_signal("pressed")
 	_expect(not main.is_tutorial_replay_for_test(), "report dismissal exits the shared replay coordinator")
 	_expect(main.get_tutorial_state_for_test() == tutorial_before, "report replay keeps completion unchanged")
 	main.queue_free()

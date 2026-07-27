@@ -21,10 +21,10 @@ func _ready() -> void:
 	$Margin/Content/ActionRow/TutorialHelpButton.pressed.connect(func() -> void:
 		tutorial_help_requested.emit()
 	)
-	$TutorialReportOverlay.dismiss_requested.connect(func() -> void:
+	$TutorialOverlayHost/TutorialReportOverlay.dismiss_requested.connect(func() -> void:
 		tutorial_dismiss_requested.emit()
 	)
-	$TutorialReportOverlay.next_requested.connect(func() -> void:
+	$TutorialOverlayHost/TutorialReportOverlay.next_requested.connect(func() -> void:
 		tutorial_next_requested.emit()
 	)
 
@@ -32,8 +32,8 @@ func _ready() -> void:
 func resolve_tutorial_targets(outcome: String, retryable: bool = true) -> Array[Rect2]:
 	if outcome == "victory":
 		return [
-			$Margin/Content/WindowRows.get_global_rect(),
-			$Margin/Content/ContributionRows.get_global_rect()
+			ChallengeTutorialOverlay.control_screen_rect($Margin/Content/WindowRows),
+			ChallengeTutorialOverlay.control_screen_rect($Margin/Content/ContributionRows)
 		]
 	var action_target: Control = (
 		$Margin/Content/ActionRow/RetryButton
@@ -41,16 +41,16 @@ func resolve_tutorial_targets(outcome: String, retryable: bool = true) -> Array[
 		else $Margin/Content/ActionRow/BackButton
 	)
 	return [
-		$Margin/Content/PrimaryFailure.get_global_rect(),
-		$Margin/Content/SuggestionList.get_global_rect(),
-		action_target.get_global_rect()
+		ChallengeTutorialOverlay.control_screen_rect($Margin/Content/PrimaryFailure),
+		ChallengeTutorialOverlay.control_screen_rect($Margin/Content/SuggestionList),
+		ChallengeTutorialOverlay.control_screen_rect(action_target)
 	]
 
 
 func show_tutorial_report(outcome: String, replay_mode: bool = false, retryable: bool = true) -> void:
 	var victory := outcome == "victory"
 	var terminal_loss := not victory and not retryable
-	$TutorialReportOverlay.show_step(
+	$TutorialOverlayHost/TutorialReportOverlay.show_step(
 		7,
 		9,
 		"读懂胜利来自哪里" if victory else ("本场挑战已结束" if terminal_loss else "先找出本场主要缺口"),
@@ -70,7 +70,7 @@ func show_tutorial_step(
 	confirm_text: String = "",
 	replay_mode: bool = false
 ) -> void:
-	$TutorialReportOverlay.show_step(
+	$TutorialOverlayHost/TutorialReportOverlay.show_step(
 		step_number,
 		total_steps,
 		title,
@@ -82,7 +82,7 @@ func show_tutorial_step(
 
 
 func hide_tutorial_report() -> void:
-	$TutorialReportOverlay.hide_step()
+	$TutorialOverlayHost/TutorialReportOverlay.hide_step()
 
 
 func bind_report(report: Dictionary) -> void:

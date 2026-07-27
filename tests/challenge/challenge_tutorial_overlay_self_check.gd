@@ -142,7 +142,7 @@ func _run() -> void:
 	stretched_host.add_child(stretched_overlay)
 	await process_frame
 	await process_frame
-	var stretched_targets: Array[Rect2] = [target_control.get_global_rect()]
+	var stretched_targets: Array[Rect2] = [ChallengeTutorialOverlay.control_screen_rect(target_control)]
 	stretched_overlay.show_step(5, 9, "缩放画布", "get_global_rect 坐标必须保持正确。", stretched_targets)
 	await process_frame
 	var stretched_material := stretched_overlay.get_node("VisualOverlay").material as ShaderMaterial
@@ -153,10 +153,57 @@ func _run() -> void:
 	_expect(is_equal_approx(stretched_uniform.w, 96.0 / 440.0), "canvas transform keeps target height local")
 	viewport.canvas_transform = original_canvas_transform
 
+	var report_popup := PopupPanel.new()
+	report_popup.min_size = Vector2i(900, 520)
+	root.add_child(report_popup)
+	var report_content := Control.new()
+	report_content.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	report_popup.add_child(report_content)
+	var report_target := Control.new()
+	report_target.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	report_content.add_child(report_target)
+	var report_overlay = packed.instantiate()
+	report_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	report_popup.add_child(report_overlay)
+	report_popup.popup(Rect2i(420, 260, 900, 520))
+	report_popup.size = Vector2i(900, 520)
+	report_target.position = Vector2(50, 170)
+	report_target.size = Vector2(240, 100)
+	report_target.scale = Vector2(1.15, 0.9)
+	await process_frame
+	await process_frame
+	var report_target_screen := ChallengeTutorialOverlay.control_screen_rect(report_target)
+	var report_targets: Array[Rect2] = [report_target_screen]
+	report_overlay.show_step(7, 9, "战报目标", "弹窗目标必须以屏幕矩形跨画布换算。", report_targets)
+	await process_frame
+	var report_outline := report_overlay.get_node("OutlineHost/TargetOutline0") as Control
+	var report_outline_screen := ChallengeTutorialOverlay.control_screen_rect(report_outline)
+	var report_hint_screen: Rect2 = report_overlay.get_hint_rect_for_test()
+	var report_arrow_screen: Rect2 = report_overlay.get_arrow_rect_for_test()
+	var viewport_screen := Rect2(Vector2.ZERO, root.get_visible_rect().size)
+	_expect(report_outline.visible, "popup target creates a visible outline")
+	_expect(
+		report_outline_screen.encloses(report_target_screen),
+		"popup outline encloses its screen-space report target"
+	)
+	_expect(
+		viewport_screen.encloses(report_hint_screen),
+		"popup hint remains in the viewport after screen-space conversion"
+	)
+	_expect(
+		report_arrow_screen.has_area() and viewport_screen.encloses(report_arrow_screen),
+		"popup arrow remains visible and in bounds"
+	)
+	_expect(
+		not report_hint_screen.intersects(report_outline_screen),
+		"popup hint does not cover its highlighted report target"
+	)
+
 	overlay.queue_free()
 	second.queue_free()
 	popup_host.queue_free()
 	stretched_host.queue_free()
+	report_popup.queue_free()
 	await process_frame
 	_finish()
 

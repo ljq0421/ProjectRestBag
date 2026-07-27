@@ -363,7 +363,7 @@ func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
 		"place_recipe":
 			if _current_tutorial_surface() != "preparation":
 				return []
-			var placement_targets: Array[Rect2] = [$Root/Body/PreparationPanel/SupplyStrip.get_global_rect()]
+			var placement_targets: Array[Rect2] = [ChallengeTutorialOverlay.control_screen_rect($Root/Body/PreparationPanel/SupplyStrip)]
 			placement_targets.append_array(board.get_tutorial_target_rects("board"))
 			return _visible_rects(placement_targets)
 		"rotate_recipe":
@@ -379,7 +379,7 @@ func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
 			for card in $Root/Body/PreparationPanel/SupplyStrip.get_children():
 				if ChallengeTutorialProgress.ROTATABLE_RECIPE_IDS.has(String(card.get_meta("recipe_id", ""))):
 					if card.is_visible_in_tree():
-						supply_targets.append(card.get_global_rect())
+						supply_targets.append(ChallengeTutorialOverlay.control_screen_rect(card))
 			return _visible_rects(supply_targets)
 		"read_risk":
 			return _visible_rects(board.get_tutorial_target_rects("risk")) if _current_tutorial_surface() == "preparation" else []
@@ -403,7 +403,7 @@ func _visible_target_rects(controls: Array[Control]) -> Array[Rect2]:
 	var targets: Array[Rect2] = []
 	for control in controls:
 		if control.is_visible_in_tree():
-			targets.append(control.get_global_rect())
+			targets.append(ChallengeTutorialOverlay.control_screen_rect(control))
 	return _visible_rects(targets)
 
 
@@ -648,13 +648,18 @@ func _on_battle_finished(final_state: Dictionary) -> void:
 	$SettlementDialog.popup_centered(Vector2i(1080, 820))
 	$TutorialCanvasLayer/TutorialOverlay.hide_step()
 	if String(_tutorial_state.get("step_id", "")) == "read_report":
-		$SettlementDialog.show_tutorial_report(
-			String(battle_state.get("outcome", "")),
-			false,
-			retryable
-		)
+		call_deferred("_show_initial_report_tutorial", String(battle_state.get("outcome", "")), retryable)
 	_save_now(false)
 	_refresh_top_bar()
+
+
+func _show_initial_report_tutorial(outcome: String, retryable: bool) -> void:
+	await get_tree().process_frame
+	if not $SettlementDialog.visible:
+		return
+	if String(_tutorial_state.get("step_id", "")) != "read_report":
+		return
+	$SettlementDialog.show_tutorial_report(outcome, false, retryable)
 
 
 func _on_report_action_requested(_action: String) -> void:

@@ -31,6 +31,8 @@ content_margin_bottom = 12.0
 [node name="ChallengeSettlementDialog" type="PopupPanel"]
 title = "Boss 挑战战报"
 size = Vector2i(1080, 820)
+min_size = Vector2i(1080, 820)
+max_size = Vector2i(1080, 820)
 theme_override_styles/panel = SubResource("Style_popup")
 script = ExtResource("1_script")
 
@@ -127,5 +129,17 @@ layout_mode = 2
 tooltip_text = "新手引导"
 text = "?"
 
-[node name="TutorialReportOverlay" parent="." instance=ExtResource("2_tutorial_overlay")]
+[node name="TutorialOverlayHost" type="Control" parent="."]
+layout_mode = 0
+offset_right = 1080.0
+offset_bottom = 820.0
+mouse_filter = 2
+
+[node name="TutorialReportOverlay" parent="TutorialOverlayHost" instance=ExtResource("2_tutorial_overlay")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 visible = false
