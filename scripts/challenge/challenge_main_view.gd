@@ -87,7 +87,7 @@ func _process(_delta: float) -> void:
 	if elapsed_ms / 1000 != _last_saved_elapsed / 1000:
 		battle_state = current_state.duplicate(true)
 		_last_saved_elapsed = elapsed_ms
-		_save_now(true)
+		_save_now(_should_save_active_battle())
 
 
 func start_vertical_slice() -> void:
@@ -96,8 +96,8 @@ func start_vertical_slice() -> void:
 	_load_or_create_run()
 	_refresh_top_bar()
 	if _restore_active_battle():
-		_initialize_tutorial()
-		_save_now(true)
+		if not _initialize_tutorial():
+			_save_now(_should_save_active_battle())
 		_schedule_battle_tutorial_fade()
 		return
 	_show_preparation()
@@ -106,8 +106,8 @@ func start_vertical_slice() -> void:
 		$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.set_draft(saved_draft)
 	else:
 		$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.set_draft({"placements": []})
-	_initialize_tutorial()
-	_save_now(false)
+	if not _initialize_tutorial():
+		_save_now(_should_save_active_battle())
 
 
 func start_battle() -> void:
@@ -143,7 +143,7 @@ func start_battle() -> void:
 	_last_saved_elapsed = 0
 	_apply_tutorial_event("battle_started", {"draft": draft})
 	_schedule_battle_tutorial_fade()
-	_save_now(true)
+	_save_now(_should_save_active_battle())
 	_refresh_top_bar()
 
 
@@ -169,7 +169,7 @@ func advance_battle_for_test(target_elapsed_ms: int) -> void:
 	battle_state = $Root/Body/BattlePanel/ChallengeBattleView.battle_state.duplicate(true)
 
 
-func _initialize_tutorial() -> void:
+func _initialize_tutorial() -> bool:
 	var surface := _current_tutorial_surface()
 	var raw_onboarding = _save_data.get("onboarding")
 	_tutorial_finished_migration_suppressed = not raw_onboarding is Dictionary and surface == "finished"
@@ -178,9 +178,14 @@ func _initialize_tutorial() -> void:
 	if _tutorial_persistence_blocked:
 		_hide_all_tutorial_surfaces()
 		push_warning("Challenge onboarding was created by a newer client; leaving it unchanged.")
-		return
+		return false
 	_save_data["onboarding"] = _tutorial_state.duplicate(true)
+	var onboarding_changed: bool = not raw_onboarding is Dictionary or raw_onboarding != _tutorial_state
 	_refresh_tutorial()
+	if onboarding_changed:
+		_save_now(_should_save_active_battle())
+		return true
+	return false
 
 
 func _apply_tutorial_event(event_id: String, context: Dictionary = {}) -> void:
@@ -191,7 +196,7 @@ func _apply_tutorial_event(event_id: String, context: Dictionary = {}) -> void:
 		return
 	_tutorial_state = next
 	_save_data["onboarding"] = next.duplicate(true)
-	_save_now($Root/Body/BattlePanel.visible)
+	_save_now(_should_save_active_battle())
 	_refresh_tutorial()
 
 
@@ -205,20 +210,21 @@ func _refresh_tutorial() -> void:
 	var step_id := _active_tutorial_step_id()
 	if $SettlementDialog.visible:
 		$TutorialCanvasLayer/TutorialOverlay.hide_step()
-		if _tutorial_replay_mode:
+		if _tutorial_replay_mode and step_id == "read_report":
+			$SettlementDialog.show_tutorial_report(
+				String(battle_state.get("outcome", "")),
+				true,
+				_is_current_report_retryable()
+			)
+		elif _tutorial_replay_mode:
 			var replay_copy := _tutorial_copy(step_id)
-			var report_targets: Array[Rect2] = []
-			if step_id == "read_report":
-				report_targets = $SettlementDialog.resolve_tutorial_targets(
-					String(battle_state.get("outcome", "")),
-					_is_current_report_retryable()
-				)
+			var fallback_targets: Array[Rect2] = []
 			$SettlementDialog.show_tutorial_step(
 				ChallengeTutorialProgress.STEPS.find(step_id) + 1,
 				ChallengeTutorialProgress.STEPS.size(),
 				String(replay_copy.get("title", "")),
 				String(replay_copy.get("body", "")),
-				report_targets,
+				fallback_targets,
 				"",
 				true
 			)
@@ -277,7 +283,7 @@ func dismiss_tutorial() -> void:
 		return
 	_tutorial_state = _tutorial_progress.dismiss(_tutorial_state)
 	_save_data["onboarding"] = _tutorial_state.duplicate(true)
-	_save_now($Root/Body/BattlePanel.visible)
+	_save_now(_should_save_active_battle())
 	_tutorial_help_opened = false
 	_hide_all_tutorial_surfaces()
 
@@ -292,7 +298,7 @@ func open_tutorial_help() -> void:
 	else:
 		_tutorial_state = _tutorial_progress.resume(_tutorial_state, _current_tutorial_surface())
 		_save_data["onboarding"] = _tutorial_state.duplicate(true)
-		_save_now($Root/Body/BattlePanel.visible)
+		_save_now(_should_save_active_battle())
 	_refresh_tutorial()
 
 
@@ -353,37 +359,60 @@ func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
 	var board = $Root/Body/PreparationPanel/MainColumns/ChallengeBoard
 	match step_id:
 		"boss_brief":
-			return [$Root/Body/PreparationPanel/MainColumns/BossPreview.get_global_rect()]
+			return _visible_target_rects([$Root/Body/PreparationPanel/MainColumns/BossPreview]) if _current_tutorial_surface() == "preparation" else []
 		"place_recipe":
+			if _current_tutorial_surface() != "preparation":
+				return []
 			var placement_targets: Array[Rect2] = [$Root/Body/PreparationPanel/SupplyStrip.get_global_rect()]
 			placement_targets.append_array(board.get_tutorial_target_rects("board"))
-			return placement_targets
+			return _visible_rects(placement_targets)
 		"rotate_recipe":
+			if _current_tutorial_surface() != "preparation":
+				return []
 			for placement_value in board.get_draft().get("placements", []):
 				var placement: Dictionary = placement_value
 				if ChallengeTutorialProgress.ROTATABLE_RECIPE_IDS.has(String(placement.get("recipe_id", ""))):
 					var instance_targets: Array[Rect2] = board.get_tutorial_target_rects("instance", String(placement.get("instance_id", "")))
 					if not instance_targets.is_empty():
-						return instance_targets
+						return _visible_rects(instance_targets)
 			var supply_targets: Array[Rect2] = []
 			for card in $Root/Body/PreparationPanel/SupplyStrip.get_children():
 				if ChallengeTutorialProgress.ROTATABLE_RECIPE_IDS.has(String(card.get_meta("recipe_id", ""))):
-					supply_targets.append(card.get_global_rect())
-			return supply_targets
+					if card.is_visible_in_tree():
+						supply_targets.append(card.get_global_rect())
+			return _visible_rects(supply_targets)
 		"read_risk":
-			return board.get_tutorial_target_rects("risk")
+			return _visible_rects(board.get_tutorial_target_rects("risk")) if _current_tutorial_surface() == "preparation" else []
 		"start_battle":
-			return [$Root/Body/PreparationPanel/StartButton.get_global_rect()]
+			return _visible_target_rects([$Root/Body/PreparationPanel/StartButton]) if _current_tutorial_surface() == "preparation" else []
 		"observe_battle":
-			return [
-				$Root/Body/BattlePanel/ChallengeBattleView/TopStatus.get_global_rect(),
-				$Root/Body/BattlePanel/ChallengeBattleView/BossPanel/DemandTimeline.get_global_rect()
-			]
+			if _current_tutorial_surface() != "battle":
+				return []
+			return _visible_target_rects([
+				$Root/Body/BattlePanel/ChallengeBattleView/TopStatus,
+				$Root/Body/BattlePanel/ChallengeBattleView/BossPanel/DemandTimeline
+			])
 		"rearrange":
-			return board.get_tutorial_target_rects("board")
+			return _visible_rects(board.get_tutorial_target_rects("board")) if _current_tutorial_surface() == "preparation" else []
 		"complete":
-			return [$Root/TopBar/TutorialHelpButton.get_global_rect()]
+			return _visible_target_rects([$Root/TopBar/TutorialHelpButton])
 	return []
+
+
+func _visible_target_rects(controls: Array[Control]) -> Array[Rect2]:
+	var targets: Array[Rect2] = []
+	for control in controls:
+		if control.is_visible_in_tree():
+			targets.append(control.get_global_rect())
+	return _visible_rects(targets)
+
+
+func _visible_rects(rects: Array[Rect2]) -> Array[Rect2]:
+	var targets: Array[Rect2] = []
+	for rect in rects:
+		if rect.has_area():
+			targets.append(rect)
+	return targets
 
 
 func _tutorial_copy(step_id: String) -> Dictionary:
@@ -674,6 +703,13 @@ func _save_now(include_battle: bool) -> void:
 		$Root/TopBar/SaveStatusLabel.text = "挑战进度已保存"
 	else:
 		$Root/TopBar/SaveStatusLabel.text = "保存失败：%s" % String(saved.get("error", ""))
+
+
+func _should_save_active_battle() -> bool:
+	return (
+		_current_tutorial_surface() == "battle"
+		and String(battle_state.get("phase", "")) == "running"
+	)
 
 
 func _load_json(path: String) -> Dictionary:
