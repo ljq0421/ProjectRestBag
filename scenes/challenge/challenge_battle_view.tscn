@@ -1,0 +1,261 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_battle_view.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="Style_track"]
+bg_color = Color(0.137255, 0.105882, 0.207843, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.396078, 0.352941, 0.509804, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="Style_reputation"]
+bg_color = Color(0.447059, 0.839216, 0.627451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="Style_pickiness"]
+bg_color = Color(1, 0.784314, 0.341176, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="Style_board"]
+bg_color = Color(0.101961, 0.0784314, 0.164706, 0.96)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="Style_boss"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.937255, 0.278431, 0.435294, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="Style_footer"]
+bg_color = Color(0.160784, 0.129412, 0.239216, 0.96)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="Style_pause"]
+bg_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="Style_pause_hover"]
+bg_color = Color(0.396078, 0.482353, 0.945098, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+
+[node name="ChallengeBattleView" type="Control"]
+custom_minimum_size = Vector2(1760, 900)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="TopStatus" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 24.0
+offset_right = 1720.0
+offset_bottom = 98.0
+theme_override_constants/separation = 18
+
+[node name="ConfidenceLabel" type="Label" parent="TopStatus"]
+custom_minimum_size = Vector2(150, 54)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 22
+text = "信心 2 / 2"
+vertical_alignment = 1
+
+[node name="ReputationLabel" type="Label" parent="TopStatus"]
+custom_minimum_size = Vector2(180, 54)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
+theme_override_font_sizes/font_size = 20
+text = "口碑防线 100"
+vertical_alignment = 1
+
+[node name="ReputationBar" type="ProgressBar" parent="TopStatus"]
+custom_minimum_size = Vector2(440, 42)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("Style_track")
+theme_override_styles/fill = SubResource("Style_reputation")
+value = 100.0
+show_percentage = false
+
+[node name="PickinessLabel" type="Label" parent="TopStatus"]
+custom_minimum_size = Vector2(205, 54)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 20
+text = "Boss 挑剔值 197"
+vertical_alignment = 1
+
+[node name="PickinessBar" type="ProgressBar" parent="TopStatus"]
+custom_minimum_size = Vector2(440, 42)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("Style_track")
+theme_override_styles/fill = SubResource("Style_pickiness")
+show_percentage = false
+
+[node name="BoardPresentation" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 125.0
+offset_right = 675.0
+offset_bottom = 730.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_board")
+
+[node name="SnapshotGrid" type="GridContainer" parent="BoardPresentation"]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 8
+
+[node name="BossPanel" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 125.0
+offset_right = 1710.0
+offset_bottom = 730.0
+theme_override_constants/separation = 14
+theme_override_styles/panel = SubResource("Style_boss")
+
+[node name="BossPortrait" type="ColorRect" parent="BossPanel"]
+custom_minimum_size = Vector2(0, 118)
+layout_mode = 2
+color = Color(0.937255, 0.278431, 0.435294, 0.16)
+
+[node name="BossName" type="Label" parent="BossPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 30
+text = "挑剔的美食评论家"
+horizontal_alignment = 1
+
+[node name="BossRule" type="Label" parent="BossPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 18
+text = "30 秒内清空挑剔值。需求失败会削减口碑防线。"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DemandTimeline" type="VBoxContainer" parent="BossPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Window08" type="Label" parent="BossPanel/DemandTimeline"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 21
+text = "08s｜累计出餐 ≥ 3"
+
+[node name="Window16" type="Label" parent="BossPanel/DemandTimeline"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 21
+text = "16s｜有效联动 ≥ 1"
+
+[node name="Window24" type="Label" parent="BossPanel/DemandTimeline"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 21
+text = "24s｜区间满足力 ≥ 30"
+
+[node name="Window30" type="Label" parent="BossPanel/DemandTimeline"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 21
+text = "30s｜清空挑剔值，否则挑战超时"
+
+[node name="BattleFooter" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 770.0
+offset_right = 1710.0
+offset_bottom = 850.0
+theme_override_constants/separation = 24
+theme_override_styles/panel = SubResource("Style_footer")
+
+[node name="CurrentDemandLabel" type="Label" parent="BattleFooter"]
+custom_minimum_size = Vector2(590, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.784314, 0.341176, 1)
+theme_override_font_sizes/font_size = 20
+text = "全自动战斗准备中"
+vertical_alignment = 1
+
+[node name="NextDemandLabel" type="Label" parent="BattleFooter"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.968627, 0.956863, 1, 1)
+theme_override_font_sizes/font_size = 19
+text = "下一需求 08s"
+vertical_alignment = 1
+
+[node name="PauseButton" type="Button" parent="BattleFooter"]
+custom_minimum_size = Vector2(150, 54)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("Style_pause")
+theme_override_styles/hover = SubResource("Style_pause_hover")
+theme_override_styles/pressed = SubResource("Style_pause_hover")
+text = "暂停"
