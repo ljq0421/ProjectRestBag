@@ -126,9 +126,37 @@ func _run() -> void:
 		"arrow sits on the hint edge toward a below target"
 	)
 
+	var viewport := root.get_viewport()
+	var original_canvas_transform := viewport.canvas_transform
+	viewport.canvas_transform = Transform2D(Vector2(1.25, 0), Vector2(0, 1.25), Vector2(90, 60))
+	var stretched_host := Control.new()
+	stretched_host.position = Vector2(550, 240)
+	stretched_host.size = Vector2(800, 440)
+	root.add_child(stretched_host)
+	var target_control := Control.new()
+	target_control.position = Vector2(100, 100)
+	target_control.size = Vector2(160, 80)
+	stretched_host.add_child(target_control)
+	var stretched_overlay = packed.instantiate()
+	stretched_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	stretched_host.add_child(stretched_overlay)
+	await process_frame
+	await process_frame
+	var stretched_targets: Array[Rect2] = [target_control.get_global_rect()]
+	stretched_overlay.show_step(5, 9, "缩放画布", "get_global_rect 坐标必须保持正确。", stretched_targets)
+	await process_frame
+	var stretched_material := stretched_overlay.get_node("VisualOverlay").material as ShaderMaterial
+	var stretched_uniform: Vector4 = stretched_material.get_shader_parameter("target_0")
+	_expect(is_equal_approx(stretched_uniform.x, 92.0 / 800.0), "canvas transform keeps target x in containing canvas")
+	_expect(is_equal_approx(stretched_uniform.y, 92.0 / 440.0), "canvas transform keeps target y in containing canvas")
+	_expect(is_equal_approx(stretched_uniform.z, 176.0 / 800.0), "canvas transform keeps target width local")
+	_expect(is_equal_approx(stretched_uniform.w, 96.0 / 440.0), "canvas transform keeps target height local")
+	viewport.canvas_transform = original_canvas_transform
+
 	overlay.queue_free()
 	second.queue_free()
 	popup_host.queue_free()
+	stretched_host.queue_free()
 	await process_frame
 	_finish()
 

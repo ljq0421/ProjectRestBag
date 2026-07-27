@@ -98,7 +98,7 @@ func _layout_hint() -> void:
 
 
 func _global_rect_to_local(global_rect: Rect2) -> Rect2:
-	var inverse: Transform2D = get_global_transform_with_canvas().affine_inverse()
+	var inverse: Transform2D = get_global_transform().affine_inverse()
 	var local_position: Vector2 = inverse * global_rect.position
 	var local_end: Vector2 = inverse * global_rect.end
 	return Rect2(local_position, local_end - local_position)
