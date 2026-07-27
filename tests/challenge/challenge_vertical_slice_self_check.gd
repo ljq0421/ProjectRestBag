@@ -4,6 +4,7 @@ const ChallengeSaveService = preload("res://scripts/challenge/challenge_save_ser
 const ChallengeLoadoutService = preload("res://scripts/challenge/challenge_loadout_service.gd")
 const BossBattleService = preload("res://scripts/challenge/boss_battle_service.gd")
 const ChallengeRunService = preload("res://scripts/challenge/challenge_run_service.gd")
+const ChallengeTutorialProgress = preload("res://scripts/challenge/challenge_tutorial_progress.gd")
 
 const ROOT_SCENE_PATH := "res://scenes/challenge/challenge_main.tscn"
 const REQUIRED_RESOURCES := [
@@ -13,15 +14,19 @@ const REQUIRED_RESOURCES := [
 	"res://scripts/challenge/boss_battle_service.gd",
 	"res://scripts/challenge/boss_battle_report_service.gd",
 	"res://scripts/challenge/challenge_run_service.gd",
+	"res://scripts/challenge/challenge_tutorial_progress.gd",
 	"res://scripts/challenge/challenge_main_view.gd",
 	"res://scripts/challenge/ui/challenge_supply_card.gd",
 	"res://scripts/challenge/ui/challenge_board.gd",
 	"res://scripts/challenge/ui/challenge_battle_view.gd",
 	"res://scripts/challenge/ui/challenge_settlement_dialog.gd",
+	"res://scripts/challenge/ui/challenge_tutorial_overlay.gd",
 	"res://scenes/challenge/challenge_supply_card.tscn",
 	"res://scenes/challenge/challenge_board.tscn",
 	"res://scenes/challenge/challenge_battle_view.tscn",
 	"res://scenes/challenge/challenge_settlement_dialog.tscn",
+	"res://scenes/challenge/challenge_tutorial_overlay.tscn",
+	"res://shaders/challenge/tutorial_spotlight.gdshader",
 	ROOT_SCENE_PATH
 ]
 const REQUIRED_FILES := [
@@ -30,11 +35,17 @@ const REQUIRED_FILES := [
 ]
 const FORBIDDEN_TOKENS := [
 	"project_rest_new_save",
+	"const TutorialProgress =",
+	"tutorial_guide_overlay",
 	"state.inventory",
 	"display_items",
 	"refill_item(",
 	"production_queue",
-	"RecipeBook.research"
+	"RecipeBook.research",
+	"purchase",
+	"production",
+	"crafting",
+	"inventory"
 ]
 
 var _failures: Array[String] = []
@@ -64,6 +75,8 @@ func _run() -> void:
 	await process_frame
 	_expect(view.size.x >= 1920.0 and view.size.y >= 1080.0, "challenge root should fill 1920x1080 viewport")
 	_expect(view.get_node("Root/Body/PreparationPanel").visible, "challenge root should open in preparation")
+	_expect(view.has_node("Root/TopBar/TutorialHelpButton"), "default main scene exposes tutorial help")
+	_expect(view.has_node("TutorialCanvasLayer/TutorialOverlay"), "default main scene owns the root tutorial overlay")
 	_expect(view.has_node("SettlementDialog/TutorialReportOverlay"), "settlement should own a scene-local tutorial overlay")
 	_expect(view.has_node("SettlementDialog/Margin/Content/ActionRow/TutorialHelpButton"), "settlement should expose a scene-local tutorial help entry")
 
@@ -163,6 +176,10 @@ func _run() -> void:
 	_expect((registered_victory.get("run", {}) as Dictionary).get("phase") == "completed", "aggregate retry victory should complete run")
 
 	var save_data := ChallengeSaveService.empty_save()
+	_expect(
+		int((save_data.get("onboarding", {}) as Dictionary).get("version", 0)) == 1,
+		"default challenge save contains onboarding version 1"
+	)
 	save_data["active_run"] = retry_run
 	save_data["active_battle"] = battle_service.create_state(snapshot, encounter, 42)
 	var saved: Dictionary = ChallengeSaveService.save_to_path(_save_path, save_data)
@@ -172,6 +189,14 @@ func _run() -> void:
 	var loaded_data: Dictionary = loaded.get("data", {})
 	_expect((loaded_data.get("active_run", {}) as Dictionary).get("encounter_id") == "picky_food_critic", "save round trip should preserve encounter")
 	_expect((loaded_data.get("active_battle", {}) as Dictionary).get("phase") == "running", "save round trip should preserve active battle")
+
+	var tutorial = ChallengeTutorialProgress.new()
+	var first_tutorial_state := tutorial.default_state()
+	var second_tutorial_state := tutorial.default_state()
+	for event_id in ["boss_acknowledged"]:
+		first_tutorial_state = tutorial.apply_event(first_tutorial_state, event_id)
+		second_tutorial_state = tutorial.apply_event(second_tutorial_state, event_id)
+	_expect(first_tutorial_state == second_tutorial_state, "identical tutorial input events produce identical progress state")
 
 	_scan_forbidden_tokens("res://scripts/challenge")
 

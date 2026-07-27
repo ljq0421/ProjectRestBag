@@ -70,11 +70,13 @@ text = "稳定覆盖：待评估"
 [node name="BoardFrame" type="PanelContainer" parent="." groups=["tutorial_board_grid"]]
 custom_minimum_size = Vector2(670, 510)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_board_frame")
 
 [node name="BoardGrid" type="GridContainer" parent="BoardFrame"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 2
 columns = 8
