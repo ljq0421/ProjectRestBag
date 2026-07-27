@@ -33,6 +33,7 @@ title = "Boss 挑战战报"
 size = Vector2i(1080, 820)
 min_size = Vector2i(1080, 820)
 max_size = Vector2i(1080, 820)
+exclusive = true
 theme_override_styles/panel = SubResource("Style_popup")
 script = ExtResource("1_script")
 

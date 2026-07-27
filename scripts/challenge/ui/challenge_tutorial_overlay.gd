@@ -7,12 +7,14 @@ signal next_requested
 
 const SAFE_MARGIN := 24.0
 const TARGET_PADDING := 8.0
+const ARROW_GAP := 6.0
 const MAX_TARGETS := 4
 
 var _targets: Array[Rect2] = []
 
 
 func _ready() -> void:
+	$HintHost/HintPanel.resized.connect(_layout_hint)
 	$HintHost/HintPanel/Margin/Content/ActionRow/DismissButton.pressed.connect(func() -> void: dismiss_requested.emit())
 	$HintHost/HintPanel/Margin/Content/ActionRow/ConfirmButton.pressed.connect(func() -> void: confirm_requested.emit())
 	$HintHost/HintPanel/Margin/Content/ActionRow/NextButton.pressed.connect(func() -> void: next_requested.emit())
@@ -100,9 +102,19 @@ func _layout_hint() -> void:
 	var hint_rect := Rect2(hint.position, hint.size)
 	var hint_center := hint_rect.get_center()
 	var target_center := target_union.get_center()
-	$Arrow.text = _direction_glyph(target_center - hint_center)
+	var glyph := _direction_glyph(target_center - hint_center)
+	$Arrow.text = glyph
 	$Arrow.size = $Arrow.get_combined_minimum_size()
-	$Arrow.position = _hint_edge_toward(hint_rect, target_center) - $Arrow.size * 0.5
+	var hint_edge := _hint_edge_toward(hint_rect, target_center)
+	match glyph:
+		"→":
+			$Arrow.position = hint_edge + Vector2(ARROW_GAP, -$Arrow.size.y * 0.5)
+		"←":
+			$Arrow.position = hint_edge - Vector2($Arrow.size.x + ARROW_GAP, $Arrow.size.y * 0.5)
+		"↓":
+			$Arrow.position = hint_edge + Vector2(-$Arrow.size.x * 0.5, ARROW_GAP)
+		"↑":
+			$Arrow.position = hint_edge - Vector2($Arrow.size.x * 0.5, $Arrow.size.y + ARROW_GAP)
 
 
 static func control_screen_rect(control: Control) -> Rect2:

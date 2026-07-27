@@ -85,6 +85,25 @@ func _run() -> void:
 	_expect(newer_state.get("future_field", {}) == {"keep": true}, "newer version fields survive normalization")
 	_expect(newer_state.get("unsupported_newer_version", false), "newer version gains runtime marker")
 	_expect(not future_raw.has("unsupported_newer_version"), "normalization does not mutate future-version save data")
+
+	var malformed_raw := {
+		"version": {},
+		"status": ["active"],
+		"step_id": {"value": "read_report"},
+		"completed_step_ids": null,
+		"pre_battle_draft_fingerprint": ["not", "a", "string"],
+		"unknown_nested": {"keep": [1, {"value": true}]}
+	}
+	var sanitized := service.normalize(malformed_raw, "settlement")
+	_expect(sanitized["version"] == 1, "malformed version falls back without conversion")
+	_expect(sanitized["status"] == "active", "malformed status falls back without conversion")
+	_expect(sanitized["step_id"] == "read_report", "malformed step falls back to current surface")
+	_expect(sanitized["completed_step_ids"] == [], "non-array completed steps sanitize without iteration")
+	_expect(sanitized["pre_battle_draft_fingerprint"] == "", "non-string fingerprint sanitizes")
+	_expect(
+		sanitized["unknown_nested"] == {"keep": [1, {"value": true}]},
+		"unknown onboarding fields survive malformed-field sanitization"
+	)
 	_finish()
 
 

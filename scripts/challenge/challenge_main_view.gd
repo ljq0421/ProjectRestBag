@@ -70,11 +70,19 @@ func _ready() -> void:
 	$SettlementDialog.tutorial_help_requested.connect(open_tutorial_help)
 	$SettlementDialog.tutorial_dismiss_requested.connect(dismiss_tutorial)
 	$SettlementDialog.tutorial_next_requested.connect(advance_tutorial_replay)
+	$BattleTutorialFadeTimer.timeout.connect(_on_battle_tutorial_fade_timeout)
 	$TutorialCanvasLayer/TutorialOverlay.confirm_requested.connect(_on_tutorial_confirm_requested)
 	$TutorialCanvasLayer/TutorialOverlay.dismiss_requested.connect(dismiss_tutorial)
 	$TutorialCanvasLayer/TutorialOverlay.next_requested.connect(advance_tutorial_replay)
 	$Root/TopBar/TutorialHelpButton.pressed.connect(open_tutorial_help)
 	start_vertical_slice()
+	call_deferred("_refresh_tutorial_after_layout")
+
+
+func _refresh_tutorial_after_layout() -> void:
+	await get_tree().process_frame
+	if is_inside_tree():
+		_refresh_tutorial()
 
 
 func _process(_delta: float) -> void:
@@ -151,7 +159,7 @@ func retry_same_encounter() -> void:
 	if String(run_state.get("phase", "")) != "preparation" or int(run_state.get("confidence", 0)) <= 0:
 		return
 	$SettlementDialog.hide_tutorial_report()
-	$SettlementDialog.hide()
+	$SettlementDialog.close_after_report_action()
 	battle_state = {}
 	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.set_locked(false)
 	_show_preparation()
@@ -348,11 +356,10 @@ func acknowledge_tutorial_for_test() -> void:
 
 
 func exit_report_for_test(action: String) -> void:
-	_on_report_action_requested(action)
 	if action == "retry":
-		retry_same_encounter()
-	else:
-		_return_to_preparation()
+		$SettlementDialog.get_node("Margin/Content/ActionRow/RetryButton").emit_signal("pressed")
+	elif action == "back":
+		$SettlementDialog.get_node("Margin/Content/ActionRow/BackButton").emit_signal("pressed")
 
 
 func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
@@ -446,7 +453,10 @@ func _schedule_battle_tutorial_fade() -> void:
 		return
 	_battle_tutorial_hint_shown = true
 	_refresh_tutorial()
-	await get_tree().create_timer(3.0).timeout
+	$BattleTutorialFadeTimer.start()
+
+
+func _on_battle_tutorial_fade_timeout() -> void:
 	if (
 		String(_tutorial_state.get("step_id", "")) == "observe_battle"
 		and not _tutorial_replay_mode
@@ -645,7 +655,7 @@ func _on_battle_finished(final_state: Dictionary) -> void:
 	$SettlementDialog.bind_report(report)
 	var retryable := _is_current_report_retryable()
 	$SettlementDialog.set_retry_enabled(retryable)
-	$SettlementDialog.popup_centered(Vector2i(1080, 820))
+	$SettlementDialog.open_report()
 	$TutorialCanvasLayer/TutorialOverlay.hide_step()
 	if String(_tutorial_state.get("step_id", "")) == "read_report":
 		call_deferred("_show_initial_report_tutorial", String(battle_state.get("outcome", "")), retryable)
@@ -679,7 +689,7 @@ func _is_current_report_retryable() -> bool:
 
 func _return_to_preparation() -> void:
 	$SettlementDialog.hide_tutorial_report()
-	$SettlementDialog.hide()
+	$SettlementDialog.close_after_report_action()
 	if String(run_state.get("phase", "")) == "preparation":
 		retry_same_encounter()
 		return

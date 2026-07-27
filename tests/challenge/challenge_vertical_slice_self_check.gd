@@ -50,6 +50,7 @@ const FORBIDDEN_TOKENS := [
 
 var _failures: Array[String] = []
 var _save_path := OS.get_temp_dir().path_join("project_rest_two_vertical_slice_self_check.json")
+var _scanned_script_paths: Array[String] = []
 
 
 func _init() -> void:
@@ -199,6 +200,10 @@ func _run() -> void:
 	_expect(first_tutorial_state == second_tutorial_state, "identical tutorial input events produce identical progress state")
 
 	_scan_forbidden_tokens("res://scripts/challenge")
+	_expect(
+		_scanned_script_paths.has("res://scripts/challenge/ui/challenge_settlement_dialog.gd"),
+		"forbidden dependency scan recursively covers scripts/challenge/ui"
+	)
 
 	view.queue_free()
 	await process_frame
@@ -210,6 +215,7 @@ func _scan_forbidden_tokens(directory_path: String) -> void:
 		if not file_name.ends_with(".gd"):
 			continue
 		var path := directory_path.path_join(file_name)
+		_scanned_script_paths.append(path)
 		var file := FileAccess.open(path, FileAccess.READ)
 		if file == null:
 			_fail("forbidden-token scan could not read: %s" % path)

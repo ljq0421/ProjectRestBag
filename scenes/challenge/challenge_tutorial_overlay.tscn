@@ -111,6 +111,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_outline")
 
 [node name="Arrow" type="Label" parent="."]
+z_index = 20
 layout_mode = 0
 mouse_filter = 2
 theme_override_colors/font_color = Color(1, 0.784314, 0.341176, 1)

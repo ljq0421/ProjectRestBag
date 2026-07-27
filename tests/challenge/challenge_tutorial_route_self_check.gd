@@ -22,7 +22,14 @@ func _run() -> void:
 	await process_frame
 
 	_expect(main.get_tutorial_state_for_test()["step_id"] == "boss_brief", "new save starts tutorial")
-	_expect(main.get_node("TutorialCanvasLayer/TutorialOverlay").visible, "root overlay is visible")
+	var initial_overlay = main.get_node("TutorialCanvasLayer/TutorialOverlay")
+	_expect(initial_overlay.visible, "root overlay is visible")
+	_expect(not initial_overlay.get_target_rects_for_test().is_empty(), "initial boss step resolves its post-layout target")
+	_expect(initial_overlay.get_node("Arrow").visible, "initial boss step visibly points at its target")
+	_expect(
+		not initial_overlay.get_arrow_rect_for_test().intersects(initial_overlay.get_hint_rect_for_test()),
+		"initial boss arrow remains outside the hint card"
+	)
 	main.acknowledge_tutorial_for_test()
 	_expect(main.get_tutorial_state_for_test()["step_id"] == "place_recipe", "boss acknowledgement advances")
 
@@ -64,17 +71,48 @@ func _assert_result_branches() -> void:
 	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "read_report", "showing a report does not count as report exit")
 	var victory_actions: Array[String] = []
 	var victory_settlement = victory_main.get_node("SettlementDialog")
+	var victory_targets = victory_settlement.resolve_tutorial_targets("victory", false)
+	_expect(victory_targets.size() == 3, "victory report exposes content, contribution, and exit targets")
+	_expect(
+		victory_targets.back() == ChallengeTutorialOverlay.control_screen_rect(
+			victory_settlement.get_node("Margin/Content/ActionRow/BackButton")
+		),
+		"victory report highlights Back as its third target"
+	)
+	var victory_body: String = victory_settlement.get_node(
+		"TutorialOverlayHost/TutorialReportOverlay/HintHost/HintPanel/Margin/Content/BodyLabel"
+	).text
+	_expect(victory_body.find("返回") >= 0, "victory report copy explicitly directs the player to exit")
 	victory_settlement.report_action_requested.connect(func(action: String) -> void:
 		victory_actions.append("report:%s" % action)
 	)
 	victory_settlement.back_requested.connect(func() -> void:
 		victory_actions.append("back")
 	)
+	victory_settlement.close_requested.emit()
+	await process_frame
+	_expect(victory_settlement.visible, "window close request cannot dismiss settlement")
+	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "read_report", "window close request cannot advance report")
+	var escape := InputEventKey.new()
+	escape.keycode = KEY_ESCAPE
+	escape.pressed = true
+	victory_settlement.push_input(escape)
+	await process_frame
+	_expect(victory_settlement.visible, "Escape cannot dismiss settlement")
+	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "read_report", "Escape cannot advance report")
+	victory_settlement.hide()
+	await process_frame
+	await process_frame
+	_expect(victory_settlement.visible, "non-action hide is restored")
+	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "read_report", "non-action hide cannot strand or advance report")
+	_expect(victory_actions.is_empty(), "non-action close paths emit no report action")
 	victory_settlement.get_node("Margin/Content/ActionRow/BackButton").emit_signal("pressed")
 	await process_frame
 	_expect(victory_actions == ["report:back", "back"], "report action precedes the real victory back behavior")
 	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "complete", "victory completes only after report action")
 	_expect(victory_main.get_node("TutorialCanvasLayer/TutorialOverlay").visible, "victory exit visibly presents completion")
+	victory_settlement.get_node("Margin/Content/ActionRow/BackButton").emit_signal("pressed")
+	_expect(victory_actions == ["report:back", "back"], "settlement action guard prevents double report exit")
 	victory_main.queue_free()
 	await process_frame
 

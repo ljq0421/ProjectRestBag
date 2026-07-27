@@ -57,6 +57,15 @@ func _run() -> void:
 		Rect2(Vector2.ZERO, Vector2(1920, 1080)).encloses(overlay.get_hint_rect_for_test()),
 		"hint remains in viewport"
 	)
+	var primary_arrow := overlay.get_node("Arrow") as Control
+	var primary_hint: Rect2 = overlay.get_hint_rect_for_test()
+	var primary_arrow_rect: Rect2 = overlay.get_arrow_rect_for_test()
+	_expect(primary_arrow.visible and primary_arrow_rect.has_area(), "target step shows a visible arrow")
+	_expect(
+		primary_arrow.z_index > overlay.get_node("HintHost").z_index,
+		"arrow renders above the hint host"
+	)
+	_expect(not primary_arrow_rect.intersects(primary_hint), "arrow remains fully outside the hint card")
 
 	overlay.get_node("HintHost/HintPanel/Margin/Content/ActionRow/DismissButton").emit_signal("pressed")
 	var empty_targets: Array[Rect2] = []
@@ -119,11 +128,8 @@ func _run() -> void:
 	var below_arrow := offset_overlay.get_node("Arrow") as Control
 	_expect(below_arrow.text == "↓", "arrow points downward toward a below target")
 	_expect(
-		is_equal_approx(
-			below_arrow.get_global_rect().get_center().y,
-			offset_overlay.get_hint_rect_for_test().end.y
-		),
-		"arrow sits on the hint edge toward a below target"
+		below_arrow.get_global_rect().position.y > offset_overlay.get_hint_rect_for_test().end.y,
+		"arrow sits fully outside the hint edge toward a below target"
 	)
 
 	var viewport := root.get_viewport()

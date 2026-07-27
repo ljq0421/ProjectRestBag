@@ -8,15 +8,17 @@ signal tutorial_help_requested
 signal tutorial_dismiss_requested
 signal tutorial_next_requested
 
+var _report_open := false
+var _report_action_committed := false
+var _unexpected_hide_restore_pending := false
+
 
 func _ready() -> void:
 	$Margin/Content/ActionRow/RetryButton.pressed.connect(func() -> void:
-		report_action_requested.emit("retry")
-		retry_requested.emit()
+		_request_report_action("retry")
 	)
 	$Margin/Content/ActionRow/BackButton.pressed.connect(func() -> void:
-		report_action_requested.emit("back")
-		back_requested.emit()
+		_request_report_action("back")
 	)
 	$Margin/Content/ActionRow/TutorialHelpButton.pressed.connect(func() -> void:
 		tutorial_help_requested.emit()
@@ -27,13 +29,66 @@ func _ready() -> void:
 	$TutorialOverlayHost/TutorialReportOverlay.next_requested.connect(func() -> void:
 		tutorial_next_requested.emit()
 	)
+	close_requested.connect(_on_close_requested)
+	popup_hide.connect(_on_popup_hide)
+
+
+func open_report() -> void:
+	_report_open = true
+	_report_action_committed = false
+	_unexpected_hide_restore_pending = false
+	popup_centered(Vector2i(1080, 820))
+
+
+func close_after_report_action() -> bool:
+	if not _report_open or not _report_action_committed:
+		return false
+	_report_open = false
+	hide()
+	return true
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if visible and event.is_action_pressed("ui_cancel"):
+		set_input_as_handled()
+
+
+func _request_report_action(action: String) -> void:
+	if not _report_open or _report_action_committed:
+		return
+	_report_action_committed = true
+	report_action_requested.emit(action)
+	if action == "retry":
+		retry_requested.emit()
+	else:
+		back_requested.emit()
+
+
+func _on_close_requested() -> void:
+	if _report_open and not _report_action_committed:
+		grab_focus()
+
+
+func _on_popup_hide() -> void:
+	if not _report_open or _report_action_committed or _unexpected_hide_restore_pending:
+		return
+	_unexpected_hide_restore_pending = true
+	call_deferred("_restore_after_unexpected_hide")
+
+
+func _restore_after_unexpected_hide() -> void:
+	_unexpected_hide_restore_pending = false
+	if not is_inside_tree() or not _report_open or _report_action_committed or visible:
+		return
+	popup_centered(Vector2i(1080, 820))
 
 
 func resolve_tutorial_targets(outcome: String, retryable: bool = true) -> Array[Rect2]:
 	if outcome == "victory":
 		return [
 			ChallengeTutorialOverlay.control_screen_rect($Margin/Content/WindowRows),
-			ChallengeTutorialOverlay.control_screen_rect($Margin/Content/ContributionRows)
+			ChallengeTutorialOverlay.control_screen_rect($Margin/Content/ContributionRows),
+			ChallengeTutorialOverlay.control_screen_rect($Margin/Content/ActionRow/BackButton)
 		]
 	var action_target: Control = (
 		$Margin/Content/ActionRow/RetryButton
@@ -54,7 +109,7 @@ func show_tutorial_report(outcome: String, replay_mode: bool = false, retryable:
 		7,
 		9,
 		"读懂胜利来自哪里" if victory else ("本场挑战已结束" if terminal_loss else "先找出本场主要缺口"),
-		"查看需求窗口和配方贡献。" if victory else ("查看失败原因，然后返回备战。" if terminal_loss else "查看失败窗口，再按建议重排展示柜。"),
+		"查看需求窗口和配方贡献，然后点击“返回备战”离开战报。" if victory else ("查看失败原因，然后返回备战。" if terminal_loss else "查看失败窗口，再按建议重排展示柜。"),
 		resolve_tutorial_targets(outcome, retryable),
 		"",
 		replay_mode

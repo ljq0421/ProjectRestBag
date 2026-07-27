@@ -268,6 +268,10 @@ grow_vertical = 2
 [node name="ChallengeBattleView" parent="Root/Body/BattlePanel" instance=ExtResource("4_battle")]
 layout_mode = 1
 
+[node name="BattleTutorialFadeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="SettlementDialog" parent="." instance=ExtResource("5_settlement")]
 
 [node name="TutorialCanvasLayer" type="CanvasLayer" parent="."]

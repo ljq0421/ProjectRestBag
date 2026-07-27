@@ -32,21 +32,27 @@ func normalize(raw: Variant, context_surface: String = "preparation") -> Diction
 	if not raw is Dictionary:
 		return default_state(fallback_step)
 	var value: Dictionary = raw.duplicate(true)
-	if int(value.get("version", 0)) > VERSION:
+	var raw_version: Variant = value.get("version")
+	var version := int(raw_version) if raw_version is int or raw_version is float else 0
+	if version > VERSION:
 		value["unsupported_newer_version"] = true
 		return value
 	value["version"] = VERSION
-	if not VALID_STATUSES.has(String(value.get("status", ""))):
+	var raw_status: Variant = value.get("status")
+	if not raw_status is String or not VALID_STATUSES.has(raw_status):
 		value["status"] = "active"
-	if not STEPS.has(String(value.get("step_id", ""))):
+	var raw_step_id: Variant = value.get("step_id")
+	if not raw_step_id is String or not STEPS.has(raw_step_id):
 		value["step_id"] = fallback_step
 	var completed: Array[String] = []
-	for step_value in value.get("completed_step_ids", []):
-		var step_id := String(step_value)
-		if STEPS.has(step_id) and not completed.has(step_id):
-			completed.append(step_id)
+	var raw_completed_step_ids: Variant = value.get("completed_step_ids")
+	if raw_completed_step_ids is Array:
+		for step_value in raw_completed_step_ids:
+			if step_value is String and STEPS.has(step_value) and not completed.has(step_value):
+				completed.append(step_value)
 	value["completed_step_ids"] = completed
-	value["pre_battle_draft_fingerprint"] = String(value.get("pre_battle_draft_fingerprint", ""))
+	var raw_fingerprint: Variant = value.get("pre_battle_draft_fingerprint")
+	value["pre_battle_draft_fingerprint"] = raw_fingerprint if raw_fingerprint is String else ""
 	return value
 
 
