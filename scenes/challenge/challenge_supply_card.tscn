@@ -1,11 +1,49 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/challenge/ui/challenge_supply_card.gd" id="1_script"]
-[ext_resource type="Theme" path="res://resources/ui/skin/neighborhood_dessert/neighborhood_dessert_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxFlat" id="Style_card"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.756863, 0.713726, 0.87451, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="Style_card_hover"]
+bg_color = Color(1, 0.980392, 0.862745, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.784314, 0.341176, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="Style_card_disabled"]
+bg_color = Color(0.87451, 0.854902, 0.929412, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.607843, 0.568627, 0.705882, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [node name="ChallengeSupplyCard" type="Button"]
 custom_minimum_size = Vector2(184, 108)
-theme = ExtResource("2_theme")
+theme_override_styles/normal = SubResource("Style_card")
+theme_override_styles/hover = SubResource("Style_card_hover")
+theme_override_styles/pressed = SubResource("Style_card_hover")
+theme_override_styles/disabled = SubResource("Style_card_disabled")
 script = ExtResource("1_script")
 
 [node name="Icon" type="TextureRect" parent="."]

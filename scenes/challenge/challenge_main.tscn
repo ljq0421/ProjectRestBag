@@ -81,6 +81,15 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.917647, 0.905882, 0.976471, 1)
 
+[node name="TopBarBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 76.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.160784, 0.129412, 0.239216, 0.98)
+
 [node name="Root" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -94,6 +103,11 @@ custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/panel = SubResource("Style_topbar")
+
+[node name="LeftPad" type="Control" parent="Root/TopBar"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+mouse_filter = 2
 
 [node name="StageLabel" type="Label" parent="Root/TopBar"]
 layout_mode = 2
@@ -178,6 +192,8 @@ text = "挑剔值 197｜口碑防线 100｜全自动 30 秒"
 [node name="DemandTimeline" type="RichTextLabel" parent="Root/Body/PreparationPanel/MainColumns/BossPreview/Margin/Content"]
 custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
+theme_override_colors/default_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/normal_font_size = 19
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
@@ -224,6 +240,7 @@ metadata/recipe_id = "chocolate_lava_cake"
 custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.396078, 0.352941, 0.509804, 1)
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("Style_start")
 theme_override_styles/hover = SubResource("Style_start_hover")

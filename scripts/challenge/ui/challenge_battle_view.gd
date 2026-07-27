@@ -31,10 +31,10 @@ func bind_encounter(encounter: Dictionary) -> void:
 	var windows: Array = _encounter.get("windows", [])
 	for index in 3:
 		var label: Label = $BossPanel/DemandTimeline.get_child(index)
-		label.remove_theme_color_override("font_color")
+		label.add_theme_color_override("font_color", Color("#655a82"))
 		label.text = _window_text(windows[index]) if index < windows.size() else "%02ds｜等待需求" % ((index + 1) * 8)
 	var deadline: Label = $BossPanel/DemandTimeline/Window30
-	deadline.remove_theme_color_override("font_color")
+	deadline.add_theme_color_override("font_color", Color("#655a82"))
 	deadline.text = "%02ds｜清空挑剔值，否则挑战超时" % int(_encounter.get("duration_ms", 30000) / 1000)
 	_refresh_status()
 
