@@ -87,8 +87,48 @@ func _run() -> void:
 		"overlay instances keep independent target uniforms"
 	)
 
+	var popup_host := Control.new()
+	popup_host.position = Vector2(600, 300)
+	popup_host.size = Vector2(900, 500)
+	root.add_child(popup_host)
+	var offset_overlay = packed.instantiate()
+	offset_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	popup_host.add_child(offset_overlay)
+	await process_frame
+	await process_frame
+	var offset_targets: Array[Rect2] = [Rect2(720, 420, 180, 100)]
+	offset_overlay.show_step(3, 9, "弹窗内目标", "全局目标必须换算为覆盖层局部坐标。", offset_targets)
+	await process_frame
+	var offset_material := offset_overlay.get_node("VisualOverlay").material as ShaderMaterial
+	var offset_uniform: Vector4 = offset_material.get_shader_parameter("target_0")
+	_expect(is_equal_approx(offset_uniform.x, 112.0 / 900.0), "offset overlay normalizes target x locally")
+	_expect(is_equal_approx(offset_uniform.y, 112.0 / 500.0), "offset overlay normalizes target y locally")
+	_expect(is_equal_approx(offset_uniform.z, 196.0 / 900.0), "offset overlay normalizes target width locally")
+	_expect(is_equal_approx(offset_uniform.w, 116.0 / 500.0), "offset overlay normalizes target height locally")
+	var offset_outline := offset_overlay.get_node("OutlineHost/TargetOutline0") as Control
+	_expect(offset_outline.position.is_equal_approx(Vector2(112, 112)), "offset overlay places outline locally")
+	_expect(offset_outline.size.is_equal_approx(Vector2(196, 116)), "offset overlay keeps padded outline size")
+	_expect(
+		Rect2(Vector2(600, 300), Vector2(900, 500)).encloses(offset_overlay.get_hint_rect_for_test()),
+		"offset overlay keeps hint inside its visible bounds"
+	)
+
+	var below_targets: Array[Rect2] = [Rect2(630, 680, 840, 80)]
+	offset_overlay.show_step(4, 9, "下方目标", "箭头应从提示卡边缘指向下方。", below_targets)
+	await process_frame
+	var below_arrow := offset_overlay.get_node("Arrow") as Control
+	_expect(below_arrow.text == "↓", "arrow points downward toward a below target")
+	_expect(
+		is_equal_approx(
+			below_arrow.get_global_rect().get_center().y,
+			offset_overlay.get_hint_rect_for_test().end.y
+		),
+		"arrow sits on the hint edge toward a below target"
+	)
+
 	overlay.queue_free()
 	second.queue_free()
+	popup_host.queue_free()
 	await process_frame
 	_finish()
 

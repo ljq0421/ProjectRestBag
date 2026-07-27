@@ -32,18 +32,19 @@ func show_step(step_number: int, total_steps: int, title: String, body: String, 
 
 func set_targets(targets: Array[Rect2]) -> void:
 	_targets.clear()
-	var viewport_rect := Rect2(Vector2.ZERO, get_viewport_rect().size)
+	var visible_rect := Rect2(Vector2.ZERO, size)
 	for target in targets.slice(0, MAX_TARGETS):
-		var padded: Rect2 = target.grow(TARGET_PADDING).intersection(viewport_rect)
+		var local_target := _global_rect_to_local(target)
+		var padded: Rect2 = local_target.grow(TARGET_PADDING).intersection(visible_rect)
 		if padded.has_area():
 			_targets.append(padded)
 	var material := $VisualOverlay.material as ShaderMaterial
 	material.set_shader_parameter("target_count", _targets.size())
 	for index in range(MAX_TARGETS):
 		var normalized := Vector4()
-		if index < _targets.size() and viewport_rect.size.x > 0.0 and viewport_rect.size.y > 0.0:
+		if index < _targets.size() and visible_rect.size.x > 0.0 and visible_rect.size.y > 0.0:
 			var rect := _targets[index]
-			normalized = Vector4(rect.position.x / viewport_rect.size.x, rect.position.y / viewport_rect.size.y, rect.size.x / viewport_rect.size.x, rect.size.y / viewport_rect.size.y)
+			normalized = Vector4(rect.position.x / visible_rect.size.x, rect.position.y / visible_rect.size.y, rect.size.x / visible_rect.size.x, rect.size.y / visible_rect.size.y)
 		material.set_shader_parameter("target_%d" % index, normalized)
 		var outline := $OutlineHost.get_child(index) as Control
 		outline.visible = index < _targets.size()
@@ -70,9 +71,9 @@ func get_hint_rect_for_test() -> Rect2:
 
 func _layout_hint() -> void:
 	var hint := $HintHost/HintPanel as Control
-	var viewport_rect := Rect2(Vector2.ZERO, get_viewport_rect().size)
-	var safe := viewport_rect.grow(-SAFE_MARGIN)
-	var target_union := Rect2(viewport_rect.get_center(), Vector2.ZERO)
+	var visible_rect := Rect2(Vector2.ZERO, size)
+	var safe := visible_rect.grow(-SAFE_MARGIN)
+	var target_union := Rect2(visible_rect.get_center(), Vector2.ZERO)
 	if not _targets.is_empty():
 		target_union = _targets[0]
 		for target in _targets.slice(1):
@@ -88,7 +89,35 @@ func _layout_hint() -> void:
 	if _targets.is_empty():
 		$Arrow.visible = false
 		return
-	var hint_center := hint.get_global_rect().get_center()
+	var hint_rect := Rect2(hint.position, hint.size)
+	var hint_center := hint_rect.get_center()
 	var target_center := target_union.get_center()
-	$Arrow.position = (hint_center + target_center) * 0.5 - $Arrow.size * 0.5
-	$Arrow.text = "→" if target_center.x >= hint_center.x else "←"
+	$Arrow.text = _direction_glyph(target_center - hint_center)
+	$Arrow.size = $Arrow.get_combined_minimum_size()
+	$Arrow.position = _hint_edge_toward(hint_rect, target_center) - $Arrow.size * 0.5
+
+
+func _global_rect_to_local(global_rect: Rect2) -> Rect2:
+	var inverse: Transform2D = get_global_transform_with_canvas().affine_inverse()
+	var local_position: Vector2 = inverse * global_rect.position
+	var local_end: Vector2 = inverse * global_rect.end
+	return Rect2(local_position, local_end - local_position)
+
+
+func _direction_glyph(direction: Vector2) -> String:
+	if abs(direction.x) >= abs(direction.y):
+		return "→" if direction.x >= 0.0 else "←"
+	return "↓" if direction.y >= 0.0 else "↑"
+
+
+func _hint_edge_toward(hint_rect: Rect2, target_center: Vector2) -> Vector2:
+	var hint_center := hint_rect.get_center()
+	var direction := target_center - hint_center
+	if direction.is_zero_approx():
+		return hint_center
+	var half_size := hint_rect.size * 0.5
+	var scale: float = max(
+		abs(direction.x) / max(half_size.x, 1.0),
+		abs(direction.y) / max(half_size.y, 1.0)
+	)
+	return hint_center + direction / scale
