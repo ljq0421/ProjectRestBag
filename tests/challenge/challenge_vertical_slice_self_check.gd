@@ -64,6 +64,8 @@ func _run() -> void:
 	await process_frame
 	_expect(view.size.x >= 1920.0 and view.size.y >= 1080.0, "challenge root should fill 1920x1080 viewport")
 	_expect(view.get_node("Root/Body/PreparationPanel").visible, "challenge root should open in preparation")
+	_expect(view.has_node("SettlementDialog/TutorialReportOverlay"), "settlement should own a scene-local tutorial overlay")
+	_expect(view.has_node("SettlementDialog/Margin/Content/ActionRow/TutorialHelpButton"), "settlement should expose a scene-local tutorial help entry")
 
 	var recipe_config := _load_json("res://doc/challenge/challenge_recipes.json")
 	var encounter_config := _load_json("res://doc/challenge/boss_encounters.json")

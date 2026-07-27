@@ -3,15 +3,52 @@ extends PopupPanel
 
 signal retry_requested
 signal back_requested
+signal report_action_requested(action: String)
+signal tutorial_help_requested
 
 
 func _ready() -> void:
 	$Margin/Content/ActionRow/RetryButton.pressed.connect(func() -> void:
+		report_action_requested.emit("retry")
 		retry_requested.emit()
 	)
 	$Margin/Content/ActionRow/BackButton.pressed.connect(func() -> void:
+		report_action_requested.emit("back")
 		back_requested.emit()
 	)
+	$Margin/Content/ActionRow/TutorialHelpButton.pressed.connect(func() -> void:
+		tutorial_help_requested.emit()
+	)
+
+
+func resolve_tutorial_targets(outcome: String) -> Array[Rect2]:
+	if outcome == "victory":
+		return [
+			$Margin/Content/WindowRows.get_global_rect(),
+			$Margin/Content/ContributionRows.get_global_rect()
+		]
+	return [
+		$Margin/Content/PrimaryFailure.get_global_rect(),
+		$Margin/Content/SuggestionList.get_global_rect(),
+		$Margin/Content/ActionRow/RetryButton.get_global_rect()
+	]
+
+
+func show_tutorial_report(outcome: String, replay_mode: bool = false) -> void:
+	var victory := outcome == "victory"
+	$TutorialReportOverlay.show_step(
+		7,
+		9,
+		"读懂胜利来自哪里" if victory else "先找出本场主要缺口",
+		"查看需求窗口和配方贡献。" if victory else "查看失败窗口，再按建议重排展示柜。",
+		resolve_tutorial_targets(outcome),
+		"",
+		replay_mode
+	)
+
+
+func hide_tutorial_report() -> void:
+	$TutorialReportOverlay.hide_step()
 
 
 func bind_report(report: Dictionary) -> void:

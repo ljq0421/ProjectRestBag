@@ -34,6 +34,7 @@ var _tutorial_progress = ChallengeTutorialProgress.new()
 var _tutorial_state: Dictionary = {}
 var _tutorial_replay_mode := false
 var _tutorial_persistence_blocked := false
+var _battle_tutorial_hint_shown := false
 
 
 func _ready() -> void:
@@ -43,6 +44,10 @@ func _ready() -> void:
 	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.recipe_placed.connect(
 		func(_instance_id: String, recipe_id: String) -> void:
 			_apply_tutorial_event("recipe_placed", {"recipe_id": recipe_id})
+			_on_board_mutated()
+	)
+	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.instance_moved.connect(
+		func(_instance_id: String) -> void: _on_board_mutated()
 	)
 	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.instance_rotated.connect(
 		func(_instance_id: String, recipe_id: String, _rotation: int, shape_changed: bool) -> void:
@@ -50,10 +55,16 @@ func _ready() -> void:
 				"recipe_id": recipe_id,
 				"shape_changed": shape_changed
 			})
+			_on_board_mutated()
+	)
+	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.instance_removed.connect(
+		func(_instance_id: String) -> void: _on_board_mutated()
 	)
 	$Root/Body/BattlePanel/ChallengeBattleView.battle_finished.connect(_on_battle_finished)
+	$SettlementDialog.report_action_requested.connect(_on_report_action_requested)
 	$SettlementDialog.retry_requested.connect(retry_same_encounter)
 	$SettlementDialog.back_requested.connect(_return_to_preparation)
+	$SettlementDialog.tutorial_help_requested.connect(_on_settlement_tutorial_help_requested)
 	$TutorialCanvasLayer/TutorialOverlay.confirm_requested.connect(_on_tutorial_confirm_requested)
 	start_vertical_slice()
 
@@ -122,6 +133,7 @@ func start_battle() -> void:
 	$Root/Body/BattlePanel.visible = true
 	_last_saved_elapsed = 0
 	_apply_tutorial_event("battle_started", {"draft": draft})
+	_schedule_battle_tutorial_fade()
 	_save_now(true)
 	_refresh_top_bar()
 
@@ -129,6 +141,7 @@ func start_battle() -> void:
 func retry_same_encounter() -> void:
 	if String(run_state.get("phase", "")) != "preparation" or int(run_state.get("confidence", 0)) <= 0:
 		return
+	$SettlementDialog.hide_tutorial_report()
 	$SettlementDialog.hide()
 	battle_state = {}
 	$Root/Body/PreparationPanel/MainColumns/ChallengeBoard.set_locked(false)
@@ -195,6 +208,7 @@ func _refresh_tutorial() -> void:
 
 func _hide_all_tutorial_surfaces() -> void:
 	$TutorialCanvasLayer/TutorialOverlay.hide_step()
+	$SettlementDialog.hide_tutorial_report()
 
 
 func _current_tutorial_surface() -> String:
@@ -226,6 +240,14 @@ func acknowledge_tutorial_for_test() -> void:
 	_on_tutorial_confirm_requested()
 
 
+func exit_report_for_test(action: String) -> void:
+	_on_report_action_requested(action)
+	if action == "retry":
+		retry_same_encounter()
+	else:
+		_return_to_preparation()
+
+
 func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
 	var board = $Root/Body/PreparationPanel/MainColumns/ChallengeBoard
 	match step_id:
@@ -251,6 +273,15 @@ func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
 			return board.get_tutorial_target_rects("risk")
 		"start_battle":
 			return [$Root/Body/PreparationPanel/StartButton.get_global_rect()]
+		"observe_battle":
+			return [
+				$Root/Body/BattlePanel/ChallengeBattleView/TopStatus.get_global_rect(),
+				$Root/Body/BattlePanel/ChallengeBattleView/BossPanel/DemandTimeline.get_global_rect()
+			]
+		"rearrange":
+			return board.get_tutorial_target_rects("board")
+		"complete":
+			return [$Root/TopBar/TutorialHelpButton.get_global_rect()]
 	return []
 
 
@@ -278,7 +309,19 @@ func _tutorial_copy(step_id: String) -> Dictionary:
 
 
 func _schedule_battle_tutorial_fade() -> void:
-	pass
+	if (
+		_battle_tutorial_hint_shown
+		or String(_tutorial_state.get("step_id", "")) != "observe_battle"
+	):
+		return
+	_battle_tutorial_hint_shown = true
+	_refresh_tutorial()
+	await get_tree().create_timer(3.0).timeout
+	if (
+		String(_tutorial_state.get("step_id", "")) == "observe_battle"
+		and not _tutorial_replay_mode
+	):
+		$TutorialCanvasLayer/TutorialOverlay.hide_step()
 
 
 func _load_configuration() -> void:
@@ -392,6 +435,16 @@ func _on_draft_changed(draft: Dictionary) -> void:
 	_refresh_start_readiness(draft)
 
 
+func _on_board_mutated() -> void:
+	if String(_tutorial_state.get("step_id", "")) != "rearrange":
+		return
+	var board = $Root/Body/PreparationPanel/MainColumns/ChallengeBoard
+	_apply_tutorial_event("draft_changed", {
+		"draft": board.get_draft(),
+		"draft_valid": board.is_current_draft_valid()
+	})
+
+
 func _refresh_start_readiness(draft: Dictionary) -> void:
 	var start_button: Button = $Root/Body/PreparationPanel/StartButton
 	if not _config_valid:
@@ -457,6 +510,7 @@ func _on_battle_finished(final_state: Dictionary) -> void:
 		"encounter_id": String(run_state.get("encounter_id", ""))
 	})
 	run_state = (registered.get("run", run_state) as Dictionary).duplicate(true)
+	_apply_tutorial_event("battle_finished")
 	var report: Dictionary = _report_service.build(battle_state, _encounter)
 	$SettlementDialog.bind_report(report)
 	$SettlementDialog.set_retry_enabled(
@@ -464,11 +518,27 @@ func _on_battle_finished(final_state: Dictionary) -> void:
 		and int(run_state.get("confidence", 0)) > 0
 	)
 	$SettlementDialog.popup_centered(Vector2i(1080, 820))
+	$TutorialCanvasLayer/TutorialOverlay.hide_step()
+	if String(_tutorial_state.get("step_id", "")) == "read_report":
+		$SettlementDialog.show_tutorial_report(String(battle_state.get("outcome", "")))
 	_save_now(false)
 	_refresh_top_bar()
 
 
+func _on_report_action_requested(_action: String) -> void:
+	_apply_tutorial_event("report_exited", {
+		"outcome": String(battle_state.get("outcome", "")),
+		"confidence": int(run_state.get("confidence", 0))
+	})
+	$SettlementDialog.hide_tutorial_report()
+
+
+func _on_settlement_tutorial_help_requested() -> void:
+	$SettlementDialog.show_tutorial_report(String(battle_state.get("outcome", "")), true)
+
+
 func _return_to_preparation() -> void:
+	$SettlementDialog.hide_tutorial_report()
 	$SettlementDialog.hide()
 	if String(run_state.get("phase", "")) == "preparation":
 		retry_same_encounter()
