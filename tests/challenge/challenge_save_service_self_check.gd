@@ -26,7 +26,20 @@ func _run() -> void:
 
 	_cleanup()
 	var source: Dictionary = service.empty_save()
+	var default_onboarding: Dictionary = source.get("onboarding", {})
+	_expect(int(default_onboarding.get("version", 0)) == 1, "empty save should start onboarding at version 1")
+	_expect(String(default_onboarding.get("status", "")) == "active", "empty save should activate onboarding")
+	_expect(String(default_onboarding.get("step_id", "")) == "boss_brief", "empty save should start onboarding at boss brief")
+	_expect(default_onboarding.get("completed_step_ids", []) == [], "empty save should start with no completed onboarding steps")
+	_expect(String(default_onboarding.get("pre_battle_draft_fingerprint", "")) == "", "empty save should start without a draft fingerprint")
 	source["meta"]["unlocked_recipe_ids"] = ["butter_cookie"]
+	source["onboarding"] = {
+		"version": 1,
+		"status": "dismissed",
+		"step_id": "read_report",
+		"completed_step_ids": ["boss_brief", "place_recipe"],
+		"pre_battle_draft_fingerprint": "draft-fingerprint"
+	}
 	var saved: Dictionary = service.save_to_path(_save_path, source)
 	_expect(bool(saved.get("ok", false)), "save should succeed")
 	var loaded: Dictionary = service.load_from_path(_save_path)
@@ -34,6 +47,10 @@ func _run() -> void:
 	var loaded_data: Dictionary = loaded.get("data", {})
 	var loaded_meta: Dictionary = loaded_data.get("meta", {})
 	_expect(loaded_meta.get("unlocked_recipe_ids", []) == ["butter_cookie"], "loaded recipes should match saved data")
+	_expect_onboarding(loaded_data, source["onboarding"], "loaded")
+	_expect(loaded_data.get("active_run", "missing") == null, "loaded active run should keep empty-save contract")
+	_expect(loaded_data.get("active_draft", {}) == {"placements": []}, "loaded active draft should keep empty-save contract")
+	_expect(loaded_data.get("active_battle", "missing") == null, "loaded active battle should keep empty-save contract")
 
 	var replacement: Dictionary = service.empty_save()
 	replacement["meta"]["research_points"] = 7
@@ -55,6 +72,11 @@ func _run() -> void:
 	_expect(String(recovered.get("source", "")) == "previous", "recovery should report previous source")
 	var recovered_meta: Dictionary = (recovered.get("data", {}) as Dictionary).get("meta", {})
 	_expect(recovered_meta.get("unlocked_recipe_ids", []) == ["butter_cookie"], "recovery should load previous data")
+	var recovered_data: Dictionary = recovered.get("data", {})
+	_expect_onboarding(recovered_data, source["onboarding"], "recovery")
+	_expect(recovered_data.get("active_run", "missing") == null, "recovery should keep active run contract")
+	_expect(recovered_data.get("active_draft", {}) == {"placements": []}, "recovery should keep active draft contract")
+	_expect(recovered_data.get("active_battle", "missing") == null, "recovery should keep active battle contract")
 	_expect(FileAccess.file_exists(_save_path + ".broken"), "malformed save should be preserved as broken")
 
 	_cleanup()
@@ -71,6 +93,19 @@ func _cleanup() -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		_fail(message)
+
+
+func _expect_onboarding(data: Dictionary, expected: Dictionary, context: String) -> void:
+	var onboarding: Dictionary = data.get("onboarding", {})
+	_expect(int(onboarding.get("version", 0)) == int(expected.get("version", 0)), context + " onboarding version should survive")
+	_expect(String(onboarding.get("status", "")) == String(expected.get("status", "")), context + " onboarding status should survive")
+	_expect(String(onboarding.get("step_id", "")) == String(expected.get("step_id", "")), context + " onboarding step should survive")
+	_expect(onboarding.get("completed_step_ids", []) == expected.get("completed_step_ids", []), context + " onboarding completed steps should survive")
+	_expect(
+		String(onboarding.get("pre_battle_draft_fingerprint", ""))
+			== String(expected.get("pre_battle_draft_fingerprint", "")),
+		context + " onboarding draft fingerprint should survive"
+	)
 
 
 func _fail(message: String) -> void:

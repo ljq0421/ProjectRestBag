@@ -15,7 +15,15 @@ static func empty_save() -> Dictionary:
 			"boss_first_clear_ids": [],
 			"endless_records": {}
 		},
+		"onboarding": {
+			"version": 1,
+			"status": "active",
+			"step_id": "boss_brief",
+			"completed_step_ids": [],
+			"pre_battle_draft_fingerprint": ""
+		},
 		"active_run": null,
+		"active_draft": {"placements": []},
 		"active_battle": null
 	}
 
