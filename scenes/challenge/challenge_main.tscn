@@ -1,0 +1,247 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/challenge_main_view.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/challenge/challenge_board.tscn" id="2_board"]
+[ext_resource type="PackedScene" path="res://scenes/challenge/challenge_supply_card.tscn" id="3_card"]
+[ext_resource type="PackedScene" path="res://scenes/challenge/challenge_battle_view.tscn" id="4_battle"]
+[ext_resource type="PackedScene" path="res://scenes/challenge/challenge_settlement_dialog.tscn" id="5_settlement"]
+
+[sub_resource type="StyleBoxFlat" id="Style_topbar"]
+bg_color = Color(0.160784, 0.129412, 0.239216, 0.98)
+content_margin_left = 26.0
+content_margin_top = 14.0
+content_margin_right = 26.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="Style_preview"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.937255, 0.278431, 0.435294, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 22.0
+
+[sub_resource type="StyleBoxFlat" id="Style_start"]
+bg_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 28.0
+content_margin_top = 14.0
+content_margin_right = 28.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="Style_start_hover"]
+bg_color = Color(0.396078, 0.482353, 0.945098, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 28.0
+content_margin_top = 14.0
+content_margin_right = 28.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="Style_start_disabled"]
+bg_color = Color(0.607843, 0.568627, 0.705882, 0.55)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+content_margin_left = 28.0
+content_margin_top = 14.0
+content_margin_right = 28.0
+content_margin_bottom = 14.0
+
+[node name="ChallengeMain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.917647, 0.905882, 0.976471, 1)
+
+[node name="Root" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="HBoxContainer" parent="Root"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/panel = SubResource("Style_topbar")
+
+[node name="StageLabel" type="Label" parent="Root/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.968627, 0.956863, 1, 1)
+theme_override_font_sizes/font_size = 25
+text = "垂直切片｜第 1 场"
+vertical_alignment = 1
+
+[node name="ConfidenceLabel" type="Label" parent="Root/TopBar"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.784314, 0.341176, 1)
+theme_override_font_sizes/font_size = 22
+text = "信心 2 / 2"
+vertical_alignment = 1
+
+[node name="SaveStatusLabel" type="Label" parent="Root/TopBar"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.447059, 0.839216, 0.627451, 1)
+theme_override_font_sizes/font_size = 16
+text = "挑战进度待保存"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Body" type="Control" parent="Root"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PreparationPanel" type="VBoxContainer" parent="Root/Body"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 20.0
+offset_right = -34.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="MainColumns" type="HBoxContainer" parent="Root/Body/PreparationPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 28
+
+[node name="ChallengeBoard" parent="Root/Body/PreparationPanel/MainColumns" instance=ExtResource("2_board")]
+layout_mode = 2
+
+[node name="BossPreview" type="PanelContainer" parent="Root/Body/PreparationPanel/MainColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_preview")
+
+[node name="Margin" type="MarginContainer" parent="Root/Body/PreparationPanel/MainColumns/BossPreview"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Root/Body/PreparationPanel/MainColumns/BossPreview/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Eyebrow" type="Label" parent="Root/Body/PreparationPanel/MainColumns/BossPreview/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 16
+text = "BOSS / 每轮都是客潮战"
+
+[node name="BossName" type="Label" parent="Root/Body/PreparationPanel/MainColumns/BossPreview/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 34
+text = "挑剔的美食评论家"
+
+[node name="BossStats" type="Label" parent="Root/Body/PreparationPanel/MainColumns/BossPreview/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 20
+text = "挑剔值 197｜口碑防线 100｜全自动 30 秒"
+
+[node name="DemandTimeline" type="RichTextLabel" parent="Root/Body/PreparationPanel/MainColumns/BossPreview/Margin/Content"]
+custom_minimum_size = Vector2(0, 280)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+text = "[b]本场完整需求时间轴[/b]"
+
+[node name="RelationRule" type="Label" parent="Root/Body/PreparationPanel/MainColumns/BossPreview/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
+theme_override_font_sizes/font_size = 18
+text = "联动规则"
+autowrap_mode = 2
+
+[node name="SupplyStrip" type="HBoxContainer" parent="Root/Body/PreparationPanel"]
+custom_minimum_size = Vector2(0, 108)
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 12
+
+[node name="ButterCookie" parent="Root/Body/PreparationPanel/SupplyStrip" instance=ExtResource("3_card")]
+layout_mode = 2
+metadata/recipe_id = "butter_cookie"
+
+[node name="StrawberryJelly" parent="Root/Body/PreparationPanel/SupplyStrip" instance=ExtResource("3_card")]
+layout_mode = 2
+metadata/recipe_id = "strawberry_jelly"
+
+[node name="MilkPudding" parent="Root/Body/PreparationPanel/SupplyStrip" instance=ExtResource("3_card")]
+layout_mode = 2
+metadata/recipe_id = "milk_pudding"
+
+[node name="BlueberryMuffin" parent="Root/Body/PreparationPanel/SupplyStrip" instance=ExtResource("3_card")]
+layout_mode = 2
+metadata/recipe_id = "blueberry_muffin"
+
+[node name="SpongeCake" parent="Root/Body/PreparationPanel/SupplyStrip" instance=ExtResource("3_card")]
+layout_mode = 2
+metadata/recipe_id = "sponge_cake"
+
+[node name="ChocolateLavaCake" parent="Root/Body/PreparationPanel/SupplyStrip" instance=ExtResource("3_card")]
+layout_mode = 2
+metadata/recipe_id = "chocolate_lava_cake"
+
+[node name="StartButton" type="Button" parent="Root/Body/PreparationPanel"]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("Style_start")
+theme_override_styles/hover = SubResource("Style_start_hover")
+theme_override_styles/pressed = SubResource("Style_start_hover")
+theme_override_styles/disabled = SubResource("Style_start_disabled")
+disabled = true
+text = "先把配方放进挑战展示柜"
+
+[node name="BattlePanel" type="Control" parent="Root/Body"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChallengeBattleView" parent="Root/Body/BattlePanel" instance=ExtResource("4_battle")]
+layout_mode = 1
+
+[node name="SettlementDialog" parent="." instance=ExtResource("5_settlement")]

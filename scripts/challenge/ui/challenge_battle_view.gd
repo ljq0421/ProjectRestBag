@@ -48,6 +48,7 @@ func start_battle(snapshot: Dictionary, seed: int) -> void:
 	_finished_emitted = false
 	_render_snapshot()
 	_refresh_status()
+	$BattleFooter/PauseButton.disabled = false
 	$BattleFooter/PauseButton.text = "暂停"
 	set_process(true)
 

@@ -1,0 +1,109 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_settlement_dialog.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="Style_popup"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.101961, 0.0784314, 0.164706, 0.55)
+shadow_size = 24
+
+[sub_resource type="StyleBoxFlat" id="Style_retry"]
+bg_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+
+[node name="ChallengeSettlementDialog" type="PopupPanel"]
+title = "Boss 挑战战报"
+size = Vector2i(1080, 820)
+theme_override_styles/panel = SubResource("Style_popup")
+script = ExtResource("1_script")
+
+[node name="Margin" type="MarginContainer" parent="."]
+offset_right = 1080.0
+offset_bottom = 820.0
+theme_override_constants/margin_left = 34
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 34
+theme_override_constants/margin_bottom = 28
+
+[node name="Content" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ResultTitle" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 30
+text = "挑战结算"
+horizontal_alignment = 1
+
+[node name="PressureSummary" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 19
+text = "口碑防线｜Boss 挑剔值"
+horizontal_alignment = 1
+
+[node name="WindowRows" type="RichTextLabel" parent="Margin/Content"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="ContributionRows" type="RichTextLabel" parent="Margin/Content"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="PrimaryFailure" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 19
+text = "主要缺口"
+autowrap_mode = 2
+
+[node name="SuggestionList" type="RichTextLabel" parent="Margin/Content"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="ActionRow" type="HBoxContainer" parent="Margin/Content"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 16
+
+[node name="RetryButton" type="Button" parent="Margin/Content/ActionRow"]
+custom_minimum_size = Vector2(330, 58)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("Style_retry")
+theme_override_styles/hover = SubResource("Style_retry")
+theme_override_styles/pressed = SubResource("Style_retry")
+text = "调整备货，再战同一 Boss"
+
+[node name="BackButton" type="Button" parent="Margin/Content/ActionRow"]
+custom_minimum_size = Vector2(200, 58)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "返回备战"
