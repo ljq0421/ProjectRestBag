@@ -16,8 +16,6 @@ func analyze(
 		errors.append("draft: placements must be an array")
 		placements_value = []
 	var placements: Array = placements_value
-	if placements.is_empty():
-		errors.append("draft: at least one recipe instance is required")
 	if rows <= 0 or columns <= 0:
 		errors.append("board: rows and columns must be positive")
 	if budget <= 0:

@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_supply_card.gd" id="1_script"]
+[ext_resource type="Theme" path="res://resources/ui/skin/neighborhood_dessert/neighborhood_dessert_theme.tres" id="2_theme"]
+
+[node name="ChallengeSupplyCard" type="Button"]
+custom_minimum_size = Vector2(184, 108)
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 78.0
+offset_bottom = 80.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 14.0
+offset_right = 174.0
+offset_bottom = 53.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 17
+text = "配方"
+autowrap_mode = 2
+
+[node name="CostBadge" type="Label" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 58.0
+offset_right = 174.0
+offset_bottom = 83.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 14
+text = "备货 0"
+
+[node name="CountBadge" type="Label" parent="."]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 83.0
+offset_right = 174.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 13
+text = "0 / 0"
+horizontal_alignment = 2

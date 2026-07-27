@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_board.gd" id="1_script"]
+[ext_resource type="Theme" path="res://resources/ui/skin/neighborhood_dessert/neighborhood_dessert_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_board_frame"]
+bg_color = Color(0.101961, 0.0784314, 0.164706, 0.96)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+shadow_color = Color(0.160784, 0.129412, 0.239216, 0.45)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_header_chip"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.831373, 0.803922, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+
+[node name="ChallengeBoard" type="VBoxContainer"]
+custom_minimum_size = Vector2(680, 650)
+theme = ExtResource("2_theme")
+theme_override_constants/separation = 12
+script = ExtResource("1_script")
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BudgetLabel" type="Label" parent="Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_header_chip")
+text = "挑战备货 0 / 16"
+
+[node name="CoverageLabel" type="Label" parent="Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_header_chip")
+text = "展示柜占格 0 / 48"
+
+[node name="RiskLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 16
+text = "稳定覆盖：待评估"
+
+[node name="BoardFrame" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(670, 510)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_board_frame")
+
+[node name="BoardGrid" type="GridContainer" parent="BoardFrame"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 8
+
+[node name="RelationSummary" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+text = "[color=#9e94b6]组合联动：尚未激活｜让饮品与烘焙配方上下左右相邻[/color]"
