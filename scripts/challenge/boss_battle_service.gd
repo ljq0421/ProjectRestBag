@@ -1,0 +1,259 @@
+class_name BossBattleService
+extends RefCounted
+
+
+func create_state(snapshot: Dictionary, encounter: Dictionary, seed: int) -> Dictionary:
+	var snapshot_copy := snapshot.duplicate(true)
+	var encounter_copy := encounter.duplicate(true)
+	var relation_bonus_by_instance := {}
+	for relation_value in snapshot_copy.get("relations", []):
+		if not relation_value is Dictionary:
+			continue
+		var relation: Dictionary = relation_value
+		var bonus_pct := int(relation.get("bonus_pct", encounter_copy.get("relation_bonus_pct", 0)))
+		for key in ["left_instance_id", "right_instance_id"]:
+			var instance_id := String(relation.get(key, ""))
+			if instance_id.is_empty():
+				continue
+			relation_bonus_by_instance[instance_id] = maxi(
+				int(relation_bonus_by_instance.get(instance_id, 0)),
+				bonus_pct
+			)
+
+	var item_states := {}
+	for instance_value in snapshot_copy.get("instances", []):
+		if not instance_value is Dictionary:
+			continue
+		var instance: Dictionary = instance_value
+		var instance_id := String(instance.get("instance_id", ""))
+		var cycle_ms := int(instance.get("cycle_ms", 0))
+		item_states[instance_id] = {
+			"instance_id": instance_id,
+			"recipe_id": String(instance.get("recipe_id", "")),
+			"next_sale_ms": cycle_ms,
+			"remaining_stock": int(instance.get("virtual_stock", 0)),
+			"sales_count": 0,
+			"satisfaction": 0,
+			"cycle_ms": cycle_ms,
+			"base_satisfaction": int(instance.get("base_satisfaction", 0)),
+			"relation_bonus_pct": int(relation_bonus_by_instance.get(instance_id, 0))
+		}
+
+	return {
+		"phase": "running",
+		"elapsed_ms": 0,
+		"pickiness": maxi(0, int(encounter_copy.get("initial_pickiness", 0))),
+		"reputation": maxi(0, int(encounter_copy.get("initial_reputation", 0))),
+		"item_states": item_states,
+		"resolved_windows": {},
+		"events": [],
+		"outcome": "",
+		"sales_count": 0,
+		"total_satisfaction": 0,
+		"next_event_seq": 0,
+		"seed": seed,
+		"_snapshot": snapshot_copy,
+		"_encounter": encounter_copy
+	}
+
+
+func advance(state: Dictionary, target_elapsed_ms: int) -> Dictionary:
+	var next_state: Dictionary = state.duplicate(true)
+	next_state.erase("error")
+	var current_elapsed := int(next_state.get("elapsed_ms", 0))
+	if target_elapsed_ms < current_elapsed:
+		next_state["error"] = "cannot_move_backward"
+		return next_state
+	if String(next_state.get("phase", "")) != "running":
+		return next_state
+
+	var encounter: Dictionary = next_state.get("_encounter", {})
+	var duration_ms := int(encounter.get("duration_ms", 0))
+	var target_ms := mini(target_elapsed_ms, duration_ms)
+	while String(next_state.get("phase", "")) == "running" and int(next_state.get("elapsed_ms", 0)) < target_ms:
+		var event_time := _next_event_time(next_state, target_ms)
+		if event_time < 0:
+			next_state["elapsed_ms"] = target_ms
+			break
+		next_state["elapsed_ms"] = event_time
+		_resolve_sales(next_state, event_time)
+		if int(next_state.get("pickiness", 0)) <= 0:
+			_finish_battle(next_state, "victory")
+			break
+		_resolve_demand_windows(next_state, event_time)
+		if int(next_state.get("reputation", 0)) <= 0:
+			_finish_battle(next_state, "loss_reputation")
+			break
+		if event_time >= duration_ms:
+			_finish_battle(next_state, "loss_timeout")
+			break
+
+	if String(next_state.get("phase", "")) == "running" and int(next_state.get("elapsed_ms", 0)) < target_ms:
+		next_state["elapsed_ms"] = target_ms
+	return next_state
+
+
+func simulate(snapshot: Dictionary, encounter: Dictionary, seed: int) -> Dictionary:
+	return advance(create_state(snapshot, encounter, seed), int(encounter.get("duration_ms", 0)))
+
+
+func _next_event_time(state: Dictionary, target_ms: int) -> int:
+	var elapsed_ms := int(state.get("elapsed_ms", 0))
+	var candidate := target_ms + 1
+	var found := false
+	var item_states: Dictionary = state.get("item_states", {})
+	for instance_id in item_states:
+		var item: Dictionary = item_states[instance_id]
+		if int(item.get("remaining_stock", 0)) <= 0:
+			continue
+		var next_sale_ms := int(item.get("next_sale_ms", -1))
+		if next_sale_ms > elapsed_ms and next_sale_ms <= target_ms:
+			candidate = mini(candidate, next_sale_ms)
+			found = true
+
+	var encounter: Dictionary = state.get("_encounter", {})
+	var resolved_windows: Dictionary = state.get("resolved_windows", {})
+	for window_value in encounter.get("windows", []):
+		if not window_value is Dictionary:
+			continue
+		var window: Dictionary = window_value
+		var window_id := String(window.get("id", ""))
+		var at_ms := int(window.get("at_ms", -1))
+		if not resolved_windows.has(window_id) and at_ms > elapsed_ms and at_ms <= target_ms:
+			candidate = mini(candidate, at_ms)
+			found = true
+
+	var duration_ms := int(encounter.get("duration_ms", 0))
+	if duration_ms > elapsed_ms and duration_ms <= target_ms:
+		candidate = mini(candidate, duration_ms)
+		found = true
+	return candidate if found else -1
+
+
+func _resolve_sales(state: Dictionary, event_time: int) -> void:
+	var item_states: Dictionary = state.get("item_states", {})
+	var due_instance_ids: Array[String] = []
+	for instance_id_variant in item_states:
+		var instance_id := String(instance_id_variant)
+		var item: Dictionary = item_states[instance_id_variant]
+		if int(item.get("remaining_stock", 0)) > 0 and int(item.get("next_sale_ms", -1)) == event_time:
+			due_instance_ids.append(instance_id)
+	due_instance_ids.sort()
+
+	var relation_events: Array[Dictionary] = []
+	var satisfaction_at_time := 0
+	for instance_id in due_instance_ids:
+		var item: Dictionary = item_states[instance_id]
+		var base_satisfaction := int(item.get("base_satisfaction", 0))
+		var relation_bonus_pct := int(item.get("relation_bonus_pct", 0))
+		var relation_bonus := base_satisfaction * relation_bonus_pct / 100
+		var final_satisfaction := base_satisfaction + relation_bonus
+		item["remaining_stock"] = int(item.get("remaining_stock", 0)) - 1
+		item["sales_count"] = int(item.get("sales_count", 0)) + 1
+		item["satisfaction"] = int(item.get("satisfaction", 0)) + final_satisfaction
+		if int(item.get("remaining_stock", 0)) > 0:
+			item["next_sale_ms"] = event_time + int(item.get("cycle_ms", 0))
+		else:
+			item["next_sale_ms"] = -1
+		item_states[instance_id] = item
+		state["sales_count"] = int(state.get("sales_count", 0)) + 1
+		state["total_satisfaction"] = int(state.get("total_satisfaction", 0)) + final_satisfaction
+		satisfaction_at_time += final_satisfaction
+		_append_event(state, {
+			"at_ms": event_time,
+			"type": "sale",
+			"source_id": instance_id,
+			"recipe_id": String(item.get("recipe_id", "")),
+			"base_satisfaction": base_satisfaction,
+			"relation_bonus": relation_bonus,
+			"final_satisfaction": final_satisfaction
+		})
+		if relation_bonus > 0:
+			relation_events.append({
+				"at_ms": event_time,
+				"type": "relation_trigger",
+				"source_id": instance_id,
+				"bonus_pct": relation_bonus_pct,
+				"bonus_satisfaction": relation_bonus
+			})
+
+	for relation_event in relation_events:
+		_append_event(state, relation_event)
+	state["item_states"] = item_states
+	state["pickiness"] = maxi(0, int(state.get("pickiness", 0)) - satisfaction_at_time)
+
+
+func _resolve_demand_windows(state: Dictionary, event_time: int) -> void:
+	var encounter: Dictionary = state.get("_encounter", {})
+	var resolved_windows: Dictionary = state.get("resolved_windows", {})
+	for window_value in encounter.get("windows", []):
+		if not window_value is Dictionary:
+			continue
+		var window: Dictionary = window_value
+		var window_id := String(window.get("id", ""))
+		if resolved_windows.has(window_id) or int(window.get("at_ms", -1)) != event_time:
+			continue
+		var actual := _window_metric(state, window)
+		var target := int(window.get("target", 0))
+		var passed := actual >= target
+		var reputation_damage := 0 if passed else int(window.get("reputation_damage", 0))
+		state["reputation"] = maxi(0, int(state.get("reputation", 0)) - reputation_damage)
+		var demand_event := {
+			"at_ms": event_time,
+			"type": "demand_window",
+			"window_id": window_id,
+			"metric": String(window.get("metric", "")),
+			"actual": actual,
+			"target": target,
+			"passed": passed,
+			"reputation_damage": reputation_damage,
+			"reputation_after": int(state.get("reputation", 0))
+		}
+		_append_event(state, demand_event)
+		resolved_windows[window_id] = demand_event.duplicate(true)
+	state["resolved_windows"] = resolved_windows
+
+
+func _window_metric(state: Dictionary, window: Dictionary) -> int:
+	match String(window.get("metric", "")):
+		"sales_count":
+			return int(state.get("sales_count", 0))
+		"active_relation_count":
+			var snapshot: Dictionary = state.get("_snapshot", {})
+			return (snapshot.get("relations", []) as Array).size()
+		"window_satisfaction":
+			var from_ms := int(window.get("from_ms", 0))
+			var to_ms := int(window.get("at_ms", 0))
+			var total := 0
+			for event_value in state.get("events", []):
+				if not event_value is Dictionary:
+					continue
+				var event: Dictionary = event_value
+				var at_ms := int(event.get("at_ms", -1))
+				if event.get("type") == "sale" and from_ms < at_ms and at_ms <= to_ms:
+					total += int(event.get("final_satisfaction", 0))
+			return total
+	return 0
+
+
+func _finish_battle(state: Dictionary, outcome: String) -> void:
+	if String(state.get("phase", "")) == "finished":
+		return
+	state["phase"] = "finished"
+	state["outcome"] = outcome
+	_append_event(state, {
+		"at_ms": int(state.get("elapsed_ms", 0)),
+		"type": "battle_end",
+		"outcome": outcome,
+		"pickiness_after": int(state.get("pickiness", 0)),
+		"reputation_after": int(state.get("reputation", 0))
+	})
+
+
+func _append_event(state: Dictionary, event: Dictionary) -> void:
+	var events: Array = state.get("events", [])
+	var stored_event := event.duplicate(true)
+	stored_event["seq"] = int(state.get("next_event_seq", 0))
+	state["next_event_seq"] = int(state.get("next_event_seq", 0)) + 1
+	events.append(stored_event)
+	state["events"] = events
