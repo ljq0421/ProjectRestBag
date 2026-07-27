@@ -61,8 +61,19 @@ func _assert_result_branches() -> void:
 	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "read_report", "victory opens report step")
 	_expect(victory_main.get_node("SettlementDialog").visible, "victory shows the settlement report")
 	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "read_report", "showing a report does not count as report exit")
-	victory_main.exit_report_for_test("back")
+	var victory_actions: Array[String] = []
+	var victory_settlement = victory_main.get_node("SettlementDialog")
+	victory_settlement.report_action_requested.connect(func(action: String) -> void:
+		victory_actions.append("report:%s" % action)
+	)
+	victory_settlement.back_requested.connect(func() -> void:
+		victory_actions.append("back")
+	)
+	victory_settlement.get_node("Margin/Content/ActionRow/BackButton").emit_signal("pressed")
+	await process_frame
+	_expect(victory_actions == ["report:back", "back"], "report action precedes the real victory back behavior")
 	_expect(victory_main.get_tutorial_state_for_test()["step_id"] == "complete", "victory completes only after report action")
+	_expect(victory_main.get_node("TutorialCanvasLayer/TutorialOverlay").visible, "victory exit visibly presents completion")
 	victory_main.queue_free()
 	await process_frame
 
@@ -72,8 +83,19 @@ func _assert_result_branches() -> void:
 	loss_main.advance_battle_for_test(30000)
 	await process_frame
 	_expect(loss_main.run_state["confidence"] == 1, "first loss leaves one confidence")
-	loss_main.exit_report_for_test("retry")
+	var retry_actions: Array[String] = []
+	var loss_settlement = loss_main.get_node("SettlementDialog")
+	loss_settlement.report_action_requested.connect(func(action: String) -> void:
+		retry_actions.append("report:%s" % action)
+	)
+	loss_settlement.retry_requested.connect(func() -> void:
+		retry_actions.append("retry")
+	)
+	loss_settlement.get_node("Margin/Content/ActionRow/RetryButton").emit_signal("pressed")
+	await process_frame
+	_expect(retry_actions == ["report:retry", "retry"], "report action precedes the real retry behavior")
 	_expect(loss_main.get_tutorial_state_for_test()["step_id"] == "rearrange", "retryable loss waits for rearrangement")
+	_expect(loss_main.get_node("TutorialCanvasLayer/TutorialOverlay").visible, "retry exit visibly presents rearrangement")
 	_expect(loss_main.get_tutorial_state_for_test()["step_id"] == "rearrange", "return alone does not complete")
 	var loss_board = loss_main.get_node("Root/Body/PreparationPanel/MainColumns/ChallengeBoard")
 	_expect(loss_board.move_instance("cookie_1", [1, 0]), "real valid board move succeeds")
@@ -87,8 +109,18 @@ func _assert_result_branches() -> void:
 	terminal_main.advance_battle_for_test(30000)
 	await process_frame
 	_expect(terminal_main.run_state["confidence"] == 0, "terminal loss consumes final confidence")
-	terminal_main.exit_report_for_test("back")
+	var terminal_settlement = terminal_main.get_node("SettlementDialog")
+	_expect(terminal_settlement.get_node("Margin/Content/ActionRow/RetryButton").disabled, "terminal report keeps retry disabled")
+	_expect(terminal_settlement.get_node("TutorialReportOverlay").visible, "terminal report guide is visible")
+	var terminal_targets = terminal_settlement.resolve_tutorial_targets("loss_timeout", false)
+	_expect(
+		terminal_targets.back() == terminal_settlement.get_node("Margin/Content/ActionRow/BackButton").get_global_rect(),
+		"terminal report highlights return instead of disabled retry"
+	)
+	terminal_settlement.get_node("Margin/Content/ActionRow/BackButton").emit_signal("pressed")
+	await process_frame
 	_expect(terminal_main.get_tutorial_state_for_test()["step_id"] == "complete", "terminal loss completes after report action")
+	_expect(terminal_main.get_node("TutorialCanvasLayer/TutorialOverlay").visible, "terminal exit visibly presents completion")
 	terminal_main.queue_free()
 	await process_frame
 

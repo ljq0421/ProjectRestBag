@@ -148,6 +148,7 @@ func retry_same_encounter() -> void:
 	_show_preparation()
 	_save_now(false)
 	_refresh_top_bar()
+	_refresh_tutorial()
 
 
 func set_draft_for_test(draft: Dictionary) -> void:
@@ -513,14 +514,16 @@ func _on_battle_finished(final_state: Dictionary) -> void:
 	_apply_tutorial_event("battle_finished")
 	var report: Dictionary = _report_service.build(battle_state, _encounter)
 	$SettlementDialog.bind_report(report)
-	$SettlementDialog.set_retry_enabled(
-		String(run_state.get("phase", "")) == "preparation"
-		and int(run_state.get("confidence", 0)) > 0
-	)
+	var retryable := _is_current_report_retryable()
+	$SettlementDialog.set_retry_enabled(retryable)
 	$SettlementDialog.popup_centered(Vector2i(1080, 820))
 	$TutorialCanvasLayer/TutorialOverlay.hide_step()
 	if String(_tutorial_state.get("step_id", "")) == "read_report":
-		$SettlementDialog.show_tutorial_report(String(battle_state.get("outcome", "")))
+		$SettlementDialog.show_tutorial_report(
+			String(battle_state.get("outcome", "")),
+			false,
+			retryable
+		)
 	_save_now(false)
 	_refresh_top_bar()
 
@@ -534,7 +537,18 @@ func _on_report_action_requested(_action: String) -> void:
 
 
 func _on_settlement_tutorial_help_requested() -> void:
-	$SettlementDialog.show_tutorial_report(String(battle_state.get("outcome", "")), true)
+	$SettlementDialog.show_tutorial_report(
+		String(battle_state.get("outcome", "")),
+		true,
+		_is_current_report_retryable()
+	)
+
+
+func _is_current_report_retryable() -> bool:
+	return (
+		String(run_state.get("phase", "")) == "preparation"
+		and int(run_state.get("confidence", 0)) > 0
+	)
 
 
 func _return_to_preparation() -> void:
@@ -542,6 +556,8 @@ func _return_to_preparation() -> void:
 	$SettlementDialog.hide()
 	if String(run_state.get("phase", "")) == "preparation":
 		retry_same_encounter()
+		return
+	_refresh_tutorial()
 
 
 func _show_preparation() -> void:
