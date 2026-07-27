@@ -1,0 +1,2541 @@
+{
+  "meta": {
+    "recipe_count": 149,
+    "immutable_fields": [
+      "id",
+      "name",
+      "device",
+      "materials",
+      "price",
+      "output_count",
+      "tags"
+    ]
+  },
+  "recipes": {
+    "almond_chocolate_tart": {
+      "id": "almond_chocolate_tart",
+      "name": "巧克力杏仁塔",
+      "device": "oven",
+      "materials": [
+        "almond",
+        "chocolate",
+        "flour"
+      ],
+      "price": 40,
+      "output_count": 2,
+      "tags": [
+        "苦甜",
+        "香脆"
+      ]
+    },
+    "apple_cinnamon_pie": {
+      "id": "apple_cinnamon_pie",
+      "name": "苹果肉桂派",
+      "device": "oven",
+      "materials": [
+        "apple",
+        "cinnamon",
+        "flour"
+      ],
+      "price": 41,
+      "output_count": 2,
+      "tags": [
+        "果香",
+        "经典"
+      ]
+    },
+    "apple_crumble": {
+      "id": "apple_crumble",
+      "name": "苹果坚果酥",
+      "device": "oven",
+      "materials": [
+        "apple",
+        "nuts",
+        "butter"
+      ],
+      "price": 36,
+      "output_count": 2,
+      "tags": [
+        "果香",
+        "香脆"
+      ]
+    },
+    "apple_pie": {
+      "id": "apple_pie",
+      "name": "苹果派",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "apple",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 2,
+      "tags": [
+        "果香",
+        "香脆"
+      ]
+    },
+    "apple_steamed_rice_cake": {
+      "id": "apple_steamed_rice_cake",
+      "name": "苹果蒸米糕",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "apple",
+        "egg",
+        "sugar"
+      ],
+      "price": 22,
+      "output_count": 3,
+      "tags": [
+        "经典",
+        "果香"
+      ]
+    },
+    "baked_rice_cake": {
+      "id": "baked_rice_cake",
+      "name": "烤米香饼",
+      "device": "oven",
+      "materials": [
+        "rice_flour",
+        "egg",
+        "sugar"
+      ],
+      "price": 15,
+      "output_count": 4,
+      "tags": [
+        "香脆",
+        "经典"
+      ]
+    },
+    "banana_baked_pancake": {
+      "id": "banana_baked_pancake",
+      "name": "香蕉烤松饼",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "egg",
+        "milk",
+        "banana",
+        "sugar"
+      ],
+      "price": 25,
+      "output_count": 3,
+      "tags": [
+        "经典",
+        "甜"
+      ]
+    },
+    "banana_milk_drink": {
+      "id": "banana_milk_drink",
+      "name": "香蕉牛奶饮",
+      "device": "round_pot",
+      "materials": [
+        "milk",
+        "banana",
+        "sugar",
+        "spring_water"
+      ],
+      "price": 19,
+      "output_count": 3,
+      "tags": [
+        "浓郁",
+        "奶香"
+      ]
+    },
+    "banana_pancake": {
+      "id": "banana_pancake",
+      "name": "香蕉松饼",
+      "device": "griddle",
+      "materials": [
+        "flour",
+        "milk",
+        "banana"
+      ],
+      "price": 25,
+      "output_count": 3,
+      "tags": [
+        "甜",
+        "果香"
+      ]
+    },
+    "banana_pound_cake": {
+      "id": "banana_pound_cake",
+      "name": "香蕉磅蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "egg",
+        "sugar",
+        "banana"
+      ],
+      "price": 30,
+      "output_count": 2,
+      "tags": [
+        "浓郁",
+        "奶香"
+      ]
+    },
+    "banana_rice_pudding": {
+      "id": "banana_rice_pudding",
+      "name": "香蕉米布丁",
+      "device": "chiller",
+      "materials": [
+        "rice",
+        "milk",
+        "banana",
+        "sugar"
+      ],
+      "price": 24,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "奶香"
+      ]
+    },
+    "beef_baked_pie": {
+      "id": "beef_baked_pie",
+      "name": "牛肉烤馅饼",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "beef",
+        "spring_water"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "香脆",
+        "咸香"
+      ]
+    },
+    "beef_cheese_pie": {
+      "id": "beef_cheese_pie",
+      "name": "牛肉芝士派",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "beef",
+        "cheese"
+      ],
+      "price": 38,
+      "output_count": 2,
+      "tags": [
+        "咸香",
+        "香脆"
+      ]
+    },
+    "beef_nut_pie": {
+      "id": "beef_nut_pie",
+      "name": "牛肉坚果派",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "beef",
+        "nuts",
+        "sea_salt"
+      ],
+      "price": 40,
+      "output_count": 2,
+      "tags": [
+        "咸香",
+        "香脆"
+      ]
+    },
+    "berry_rice_drink": {
+      "id": "berry_rice_drink",
+      "name": "莓果米浆饮",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "spring_water",
+        "blueberry",
+        "sugar"
+      ],
+      "price": 20,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "清爽"
+      ]
+    },
+    "berry_rice_flour_cake": {
+      "id": "berry_rice_flour_cake",
+      "name": "莓果米粉蒸糕",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "sugar",
+        "egg",
+        "strawberry"
+      ],
+      "price": 20,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "清爽"
+      ]
+    },
+    "berry_yogurt_ice": {
+      "id": "berry_yogurt_ice",
+      "name": "莓果酸奶冰酪",
+      "device": "chiller",
+      "materials": [
+        "yogurt",
+        "strawberry",
+        "blueberry",
+        "gelatin",
+        "sugar"
+      ],
+      "price": 35,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "果香"
+      ]
+    },
+    "black_sesame_crisp_cake": {
+      "id": "black_sesame_crisp_cake",
+      "name": "黑芝麻酥饼",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "black_sesame",
+        "sugar"
+      ],
+      "price": 24,
+      "output_count": 4,
+      "tags": [
+        "香脆",
+        "浓郁"
+      ]
+    },
+    "black_sesame_oats_soup": {
+      "id": "black_sesame_oats_soup",
+      "name": "黑芝麻燕麦糊",
+      "device": "round_pot",
+      "materials": [
+        "black_sesame",
+        "oats",
+        "milk",
+        "sugar"
+      ],
+      "price": 24,
+      "output_count": 3,
+      "tags": [
+        "浓郁",
+        "低负担"
+      ]
+    },
+    "black_sesame_roll": {
+      "id": "black_sesame_roll",
+      "name": "黑芝麻糯米卷",
+      "device": "mixer",
+      "materials": [
+        "glutinous_rice_flour",
+        "black_sesame",
+        "sugar"
+      ],
+      "price": 30,
+      "output_count": 3,
+      "tags": [
+        "浓郁",
+        "软糯"
+      ]
+    },
+    "black_sesame_soup": {
+      "id": "black_sesame_soup",
+      "name": "黑芝麻糊",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "black_sesame",
+        "sugar",
+        "spring_water"
+      ],
+      "price": 20,
+      "output_count": 3,
+      "tags": [
+        "浓郁",
+        "低负担"
+      ]
+    },
+    "black_tea_brulee": {
+      "id": "black_tea_brulee",
+      "name": "红茶烤布蕾",
+      "device": "oven",
+      "materials": [
+        "black_tea",
+        "milk",
+        "cream",
+        "egg",
+        "sugar"
+      ],
+      "price": 38,
+      "output_count": 2,
+      "tags": [
+        "茶香",
+        "奶香"
+      ]
+    },
+    "black_tea_butter_cookie": {
+      "id": "black_tea_butter_cookie",
+      "name": "红茶黄油曲奇",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "black_tea",
+        "sugar"
+      ],
+      "price": 30,
+      "output_count": 4,
+      "tags": [
+        "茶香",
+        "香脆"
+      ]
+    },
+    "black_tea_caramel_mousse": {
+      "id": "black_tea_caramel_mousse",
+      "name": "红茶焦糖慕斯",
+      "device": "chiller",
+      "materials": [
+        "black_tea",
+        "caramel",
+        "cream",
+        "gelatin",
+        "milk"
+      ],
+      "price": 40,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "浓郁"
+      ]
+    },
+    "black_tea_chicken_baked_rice": {
+      "id": "black_tea_chicken_baked_rice",
+      "name": "红茶鸡肉焗饭",
+      "device": "oven",
+      "materials": [
+        "rice",
+        "chicken",
+        "black_tea",
+        "butter",
+        "sea_salt"
+      ],
+      "price": 40,
+      "output_count": 2,
+      "tags": [
+        "咸香",
+        "茶香"
+      ]
+    },
+    "black_tea_chiffon_cake": {
+      "id": "black_tea_chiffon_cake",
+      "name": "红茶戚风蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "egg",
+        "black_tea",
+        "sugar"
+      ],
+      "price": 36,
+      "output_count": 2,
+      "tags": [
+        "经典",
+        "茶香"
+      ]
+    },
+    "black_tea_cocoa_cookie": {
+      "id": "black_tea_cocoa_cookie",
+      "name": "红茶可可曲奇",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "black_tea",
+        "cocoa",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 4,
+      "tags": [
+        "茶香",
+        "香脆"
+      ]
+    },
+    "black_tea_latte": {
+      "id": "black_tea_latte",
+      "name": "醇香红茶拿铁",
+      "device": "round_pot",
+      "materials": [
+        "black_tea",
+        "milk",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "奶香"
+      ]
+    },
+    "black_tea_light_cheesecake": {
+      "id": "black_tea_light_cheesecake",
+      "name": "红茶轻芝士蛋糕",
+      "device": "oven",
+      "materials": [
+        "cheese",
+        "egg",
+        "black_tea",
+        "flour",
+        "sugar"
+      ],
+      "price": 40,
+      "output_count": 2,
+      "tags": [
+        "咸香",
+        "茶香"
+      ]
+    },
+    "black_tea_mousse": {
+      "id": "black_tea_mousse",
+      "name": "红茶慕斯杯",
+      "device": "chiller",
+      "materials": [
+        "black_tea",
+        "cream",
+        "gelatin",
+        "milk",
+        "sugar"
+      ],
+      "price": 38,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "浓郁"
+      ]
+    },
+    "black_tea_nut_brownie": {
+      "id": "black_tea_nut_brownie",
+      "name": "红茶坚果布朗尼",
+      "device": "oven",
+      "materials": [
+        "chocolate",
+        "egg",
+        "butter",
+        "nuts",
+        "black_tea",
+        "flour"
+      ],
+      "price": 42,
+      "output_count": 2,
+      "tags": [
+        "浓郁",
+        "茶香"
+      ]
+    },
+    "black_tea_panna": {
+      "id": "black_tea_panna",
+      "name": "红茶奶冻",
+      "device": "chiller",
+      "materials": [
+        "black_tea",
+        "milk",
+        "gelatin"
+      ],
+      "price": 39,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "奶香"
+      ]
+    },
+    "black_tea_pound_cake": {
+      "id": "black_tea_pound_cake",
+      "name": "红茶磅蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "egg",
+        "black_tea",
+        "sugar"
+      ],
+      "price": 36,
+      "output_count": 2,
+      "tags": [
+        "茶香",
+        "浓郁"
+      ]
+    },
+    "black_tea_rice_steamed_cake": {
+      "id": "black_tea_rice_steamed_cake",
+      "name": "红茶米粉蒸糕",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "egg",
+        "black_tea",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "经典",
+        "茶香"
+      ]
+    },
+    "blueberry_cream_tart": {
+      "id": "blueberry_cream_tart",
+      "name": "蓝莓奶油塔",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "cream",
+        "blueberry",
+        "sugar"
+      ],
+      "price": 30,
+      "output_count": 2,
+      "tags": [
+        "香脆",
+        "果香"
+      ]
+    },
+    "blueberry_jelly": {
+      "id": "blueberry_jelly",
+      "name": "蓝莓果冻",
+      "device": "chiller",
+      "materials": [
+        "blueberry",
+        "gelatin",
+        "sugar",
+        "spring_water"
+      ],
+      "price": 25,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "清爽"
+      ]
+    },
+    "blueberry_mousse": {
+      "id": "blueberry_mousse",
+      "name": "蓝莓慕斯杯",
+      "device": "chiller",
+      "materials": [
+        "blueberry",
+        "cream",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "清爽"
+      ]
+    },
+    "blueberry_muffin": {
+      "id": "blueberry_muffin",
+      "name": "蓝莓麦芬",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "egg",
+        "milk",
+        "blueberry",
+        "sugar"
+      ],
+      "price": 22,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "经典"
+      ]
+    },
+    "butter_beef_baked_rice": {
+      "id": "butter_beef_baked_rice",
+      "name": "黄油牛肉烤饭",
+      "device": "oven",
+      "materials": [
+        "rice",
+        "butter",
+        "beef",
+        "spring_water"
+      ],
+      "price": 28,
+      "output_count": 2,
+      "tags": [
+        "咸香",
+        "饱腹"
+      ]
+    },
+    "butter_cookie": {
+      "id": "butter_cookie",
+      "name": "黄油曲奇",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "sugar"
+      ],
+      "price": 16,
+      "output_count": 4,
+      "tags": [
+        "经典",
+        "香脆"
+      ]
+    },
+    "caramel_brulee": {
+      "id": "caramel_brulee",
+      "name": "焦糖烤布蕾",
+      "device": "oven",
+      "materials": [
+        "egg",
+        "milk",
+        "cream",
+        "caramel",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 2,
+      "tags": [
+        "甜",
+        "奶香"
+      ]
+    },
+    "caramel_mousse": {
+      "id": "caramel_mousse",
+      "name": "焦糖慕斯",
+      "device": "chiller",
+      "materials": [
+        "caramel",
+        "cream",
+        "milk",
+        "gelatin",
+        "sugar"
+      ],
+      "price": 29,
+      "output_count": 3,
+      "tags": [
+        "甜",
+        "浓郁"
+      ]
+    },
+    "caramel_pudding_steamed": {
+      "id": "caramel_pudding_steamed",
+      "name": "焦糖布丁",
+      "device": "oven",
+      "materials": [
+        "egg",
+        "milk",
+        "sugar"
+      ],
+      "price": 20,
+      "output_count": 2,
+      "tags": [
+        "奶香",
+        "甜"
+      ]
+    },
+    "cheese_baked_pumpkin": {
+      "id": "cheese_baked_pumpkin",
+      "name": "芝士焗南瓜",
+      "device": "oven",
+      "materials": [
+        "pumpkin",
+        "cheese",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 2,
+      "tags": [
+        "浓郁",
+        "咸香"
+      ]
+    },
+    "cheese_chicken_baked_rice": {
+      "id": "cheese_chicken_baked_rice",
+      "name": "芝士鸡肉焗饭",
+      "device": "oven",
+      "materials": [
+        "rice",
+        "chicken",
+        "cheese",
+        "butter",
+        "spring_water"
+      ],
+      "price": 36,
+      "output_count": 2,
+      "tags": [
+        "咸香",
+        "奶香"
+      ]
+    },
+    "cheesecake": {
+      "id": "cheesecake",
+      "name": "芝士蛋糕",
+      "device": "oven",
+      "materials": [
+        "cheese",
+        "egg",
+        "sugar"
+      ],
+      "price": 34,
+      "output_count": 2,
+      "tags": [
+        "浓郁",
+        "经典"
+      ]
+    },
+    "chestnut_chicken_baked_rice": {
+      "id": "chestnut_chicken_baked_rice",
+      "name": "栗子鸡肉焗饭",
+      "device": "oven",
+      "materials": [
+        "rice",
+        "chicken",
+        "chestnut",
+        "butter",
+        "sea_salt"
+      ],
+      "price": 38,
+      "output_count": 2,
+      "tags": [
+        "咸香",
+        "饱腹"
+      ]
+    },
+    "chestnut_glutinous_rice_cake": {
+      "id": "chestnut_glutinous_rice_cake",
+      "name": "栗子糯米糍",
+      "device": "mixer",
+      "materials": [
+        "glutinous_rice_flour",
+        "chestnut",
+        "sugar",
+        "butter"
+      ],
+      "price": 34,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "浓郁"
+      ]
+    },
+    "chestnut_mousse": {
+      "id": "chestnut_mousse",
+      "name": "栗子慕斯杯",
+      "device": "chiller",
+      "materials": [
+        "chestnut",
+        "cream",
+        "gelatin",
+        "milk",
+        "sugar"
+      ],
+      "price": 36,
+      "output_count": 3,
+      "tags": [
+        "奶香",
+        "浓郁"
+      ]
+    },
+    "chestnut_pound_cake": {
+      "id": "chestnut_pound_cake",
+      "name": "栗香磅蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "chestnut",
+        "egg",
+        "sugar"
+      ],
+      "price": 35,
+      "output_count": 2,
+      "tags": [
+        "浓郁",
+        "经典"
+      ]
+    },
+    "chestnut_redbean_steamed_cake": {
+      "id": "chestnut_redbean_steamed_cake",
+      "name": "栗子红豆蒸糕",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "chestnut",
+        "red_bean",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "甜"
+      ]
+    },
+    "chestnut_tart": {
+      "id": "chestnut_tart",
+      "name": "栗子挞",
+      "device": "oven",
+      "materials": [
+        "chestnut",
+        "butter",
+        "cream"
+      ],
+      "price": 43,
+      "output_count": 2,
+      "tags": [
+        "甜",
+        "浓郁"
+      ]
+    },
+    "chicken_cream_soup": {
+      "id": "chicken_cream_soup",
+      "name": "鸡肉奶油浓汤",
+      "device": "round_pot",
+      "materials": [
+        "chicken",
+        "cream",
+        "milk"
+      ],
+      "price": 28,
+      "output_count": 2,
+      "tags": [
+        "浓郁",
+        "咸香"
+      ]
+    },
+    "chicken_rice_flour_cake": {
+      "id": "chicken_rice_flour_cake",
+      "name": "鸡肉米粉糕",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "chicken",
+        "spring_water"
+      ],
+      "price": 20,
+      "output_count": 3,
+      "tags": [
+        "咸香",
+        "经典"
+      ]
+    },
+    "chicken_steamed_dumpling": {
+      "id": "chicken_steamed_dumpling",
+      "name": "鸡肉蒸饺",
+      "device": "round_pot",
+      "materials": [
+        "flour",
+        "chicken",
+        "spring_water"
+      ],
+      "price": 22,
+      "output_count": 4,
+      "tags": [
+        "咸香",
+        "饱腹"
+      ]
+    },
+    "chocolate_banana_roll": {
+      "id": "chocolate_banana_roll",
+      "name": "巧克力香蕉卷",
+      "device": "oven",
+      "materials": [
+        "banana",
+        "chocolate",
+        "flour"
+      ],
+      "price": 36,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "果香"
+      ]
+    },
+    "chocolate_cookie": {
+      "id": "chocolate_cookie",
+      "name": "巧克力曲奇",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "chocolate"
+      ],
+      "price": 24,
+      "output_count": 4,
+      "tags": [
+        "苦甜",
+        "香脆"
+      ]
+    },
+    "chocolate_lava_cake": {
+      "id": "chocolate_lava_cake",
+      "name": "巧克力熔岩蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "chocolate",
+        "butter",
+        "egg",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 2,
+      "tags": [
+        "奶香",
+        "浓郁"
+      ]
+    },
+    "chocolate_mousse": {
+      "id": "chocolate_mousse",
+      "name": "巧克力慕斯杯",
+      "device": "chiller",
+      "materials": [
+        "chocolate",
+        "cream",
+        "milk",
+        "gelatin",
+        "sugar"
+      ],
+      "price": 30,
+      "output_count": 3,
+      "tags": [
+        "浓郁",
+        "奶香"
+      ]
+    },
+    "cocoa_brownie": {
+      "id": "cocoa_brownie",
+      "name": "可可布朗尼",
+      "device": "oven",
+      "materials": [
+        "cocoa",
+        "chocolate",
+        "butter"
+      ],
+      "price": 38,
+      "output_count": 2,
+      "tags": [
+        "苦甜",
+        "浓郁"
+      ]
+    },
+    "cocoa_glutinous_rice_cake": {
+      "id": "cocoa_glutinous_rice_cake",
+      "name": "可可糯米糍",
+      "device": "mixer",
+      "materials": [
+        "glutinous_rice_flour",
+        "cocoa",
+        "red_bean",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "苦甜"
+      ]
+    },
+    "cocoa_panna_cotta": {
+      "id": "cocoa_panna_cotta",
+      "name": "可可奶冻",
+      "device": "chiller",
+      "materials": [
+        "milk",
+        "cocoa",
+        "gelatin",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "奶香",
+        "苦甜"
+      ]
+    },
+    "cocoa_steamed_cake": {
+      "id": "cocoa_steamed_cake",
+      "name": "可可蒸蛋糕",
+      "device": "round_pot",
+      "materials": [
+        "flour",
+        "egg",
+        "cocoa",
+        "milk",
+        "sugar"
+      ],
+      "price": 24,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "经典"
+      ]
+    },
+    "coffee_mousse": {
+      "id": "coffee_mousse",
+      "name": "咖啡慕斯",
+      "device": "chiller",
+      "materials": [
+        "coffee",
+        "cream",
+        "sugar"
+      ],
+      "price": 30,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "浓郁"
+      ]
+    },
+    "coffee_muffin": {
+      "id": "coffee_muffin",
+      "name": "咖啡玛芬",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "milk",
+        "egg",
+        "coffee",
+        "sugar"
+      ],
+      "price": 24,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "经典"
+      ]
+    },
+    "coffee_pound_cake": {
+      "id": "coffee_pound_cake",
+      "name": "咖啡磅蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "egg",
+        "coffee",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 2,
+      "tags": [
+        "浓郁",
+        "苦甜"
+      ]
+    },
+    "community_parfait": {
+      "id": "community_parfait",
+      "name": "邻街招牌芭菲",
+      "device": "chiller",
+      "materials": [
+        "cream",
+        "strawberry",
+        "yogurt"
+      ],
+      "price": 42,
+      "output_count": 2,
+      "tags": [
+        "果香",
+        "清爽",
+        "招牌"
+      ]
+    },
+    "cream_shortcake": {
+      "id": "cream_shortcake",
+      "name": "鲜奶油小蛋糕",
+      "device": "mixer",
+      "materials": [
+        "sponge_cake",
+        "cream",
+        "strawberry"
+      ],
+      "price": 28,
+      "output_count": 2,
+      "tags": [
+        "果香",
+        "浓郁"
+      ]
+    },
+    "egg_milk_custard": {
+      "id": "egg_milk_custard",
+      "name": "蛋奶甜羹",
+      "device": "round_pot",
+      "materials": [
+        "egg",
+        "milk",
+        "sugar"
+      ],
+      "price": 17,
+      "output_count": 2,
+      "tags": [
+        "奶香",
+        "甜"
+      ]
+    },
+    "green_tea_latte": {
+      "id": "green_tea_latte",
+      "name": "清润绿茶拿铁",
+      "device": "round_pot",
+      "materials": [
+        "green_tea",
+        "milk",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "奶香"
+      ]
+    },
+    "green_tea_lemon_jelly": {
+      "id": "green_tea_lemon_jelly",
+      "name": "绿茶冻柠杯",
+      "device": "chiller",
+      "materials": [
+        "green_tea",
+        "lemon",
+        "gelatin",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "清爽"
+      ]
+    },
+    "green_tea_panna_cotta": {
+      "id": "green_tea_panna_cotta",
+      "name": "绿茶奶冻",
+      "device": "chiller",
+      "materials": [
+        "green_tea",
+        "milk",
+        "gelatin",
+        "sugar"
+      ],
+      "price": 36,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "奶香"
+      ]
+    },
+    "green_tea_redbean_mochi": {
+      "id": "green_tea_redbean_mochi",
+      "name": "绿茶红豆糯米糍",
+      "device": "mixer",
+      "materials": [
+        "glutinous_rice_flour",
+        "green_tea",
+        "red_bean",
+        "sugar"
+      ],
+      "price": 34,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "软糯"
+      ]
+    },
+    "green_tea_rice_drink": {
+      "id": "green_tea_rice_drink",
+      "name": "绿茶米浆饮",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "green_tea",
+        "spring_water",
+        "sugar"
+      ],
+      "price": 22,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "经典"
+      ]
+    },
+    "green_tea_steamed_cake": {
+      "id": "green_tea_steamed_cake",
+      "name": "绿茶蒸蛋糕",
+      "device": "round_pot",
+      "materials": [
+        "flour",
+        "egg",
+        "green_tea",
+        "milk",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "经典"
+      ]
+    },
+    "green_tea_yogurt_cup": {
+      "id": "green_tea_yogurt_cup",
+      "name": "绿茶酸奶杯",
+      "device": "mixer",
+      "materials": [
+        "yogurt",
+        "green_tea",
+        "honey",
+        "blueberry"
+      ],
+      "price": 35,
+      "output_count": 3,
+      "tags": [
+        "低负担",
+        "清爽"
+      ]
+    },
+    "honey_lemon_drink": {
+      "id": "honey_lemon_drink",
+      "name": "蜂蜜柠檬饮",
+      "device": "round_pot",
+      "materials": [
+        "lemon",
+        "honey",
+        "spring_water"
+      ],
+      "price": 22,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "甜"
+      ]
+    },
+    "honey_lemon_jelly": {
+      "id": "honey_lemon_jelly",
+      "name": "蜂蜜柠檬冻",
+      "device": "chiller",
+      "materials": [
+        "honey",
+        "lemon",
+        "gelatin"
+      ],
+      "price": 34,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "甜"
+      ]
+    },
+    "honey_orange_black_tea": {
+      "id": "honey_orange_black_tea",
+      "name": "蜜橙红茶饮",
+      "device": "round_pot",
+      "materials": [
+        "black_tea",
+        "orange",
+        "honey",
+        "spring_water"
+      ],
+      "price": 30,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "茶香"
+      ]
+    },
+    "honey_sponge_cake": {
+      "id": "honey_sponge_cake",
+      "name": "蜂蜜海绵蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "egg",
+        "honey",
+        "sugar"
+      ],
+      "price": 24,
+      "output_count": 3,
+      "tags": [
+        "甜",
+        "经典"
+      ]
+    },
+    "honey_yogurt": {
+      "id": "honey_yogurt",
+      "name": "蜂蜜酸奶杯",
+      "device": "mixer",
+      "materials": [
+        "yogurt",
+        "honey",
+        "blueberry"
+      ],
+      "price": 32,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "果香"
+      ]
+    },
+    "hot_cocoa_drink": {
+      "id": "hot_cocoa_drink",
+      "name": "热可可饮",
+      "device": "round_pot",
+      "materials": [
+        "milk",
+        "cocoa",
+        "sugar"
+      ],
+      "price": 22,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "浓郁"
+      ]
+    },
+    "lemon_honey_black_tea": {
+      "id": "lemon_honey_black_tea",
+      "name": "柠檬蜂蜜红茶",
+      "device": "round_pot",
+      "materials": [
+        "black_tea",
+        "lemon",
+        "honey",
+        "spring_water"
+      ],
+      "price": 30,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "清爽"
+      ]
+    },
+    "lemon_madeleine": {
+      "id": "lemon_madeleine",
+      "name": "柠檬玛德琳",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "egg",
+        "lemon",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "浓郁"
+      ]
+    },
+    "lemon_tart": {
+      "id": "lemon_tart",
+      "name": "柠檬小塔",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "lemon"
+      ],
+      "price": 27,
+      "output_count": 2,
+      "tags": [
+        "清爽",
+        "经典"
+      ]
+    },
+    "lemon_yogurt_muffin": {
+      "id": "lemon_yogurt_muffin",
+      "name": "柠檬酸奶麦芬",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "yogurt",
+        "lemon",
+        "egg",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "经典"
+      ]
+    },
+    "mango_cheese_cup": {
+      "id": "mango_cheese_cup",
+      "name": "芒果芝士杯",
+      "device": "chiller",
+      "materials": [
+        "mango",
+        "cheese",
+        "cream"
+      ],
+      "price": 44,
+      "output_count": 2,
+      "tags": [
+        "果香",
+        "浓郁",
+        "招牌"
+      ]
+    },
+    "mango_cream_cup": {
+      "id": "mango_cream_cup",
+      "name": "芒果奶油杯",
+      "device": "mixer",
+      "materials": [
+        "mango",
+        "cream",
+        "sugar"
+      ],
+      "price": 33,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "浓郁"
+      ]
+    },
+    "mango_glutinous_rice_cake": {
+      "id": "mango_glutinous_rice_cake",
+      "name": "芒果糯米糍",
+      "device": "mixer",
+      "materials": [
+        "glutinous_rice_flour",
+        "mango",
+        "cream",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "果香"
+      ]
+    },
+    "mango_milk_drink": {
+      "id": "mango_milk_drink",
+      "name": "芒果牛奶饮",
+      "device": "round_pot",
+      "materials": [
+        "mango",
+        "milk",
+        "sugar"
+      ],
+      "price": 24,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "奶香"
+      ]
+    },
+    "mango_yogurt_cup": {
+      "id": "mango_yogurt_cup",
+      "name": "芒果酸奶杯",
+      "device": "mixer",
+      "materials": [
+        "yogurt",
+        "mango",
+        "honey"
+      ],
+      "price": 34,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "奶香"
+      ]
+    },
+    "matcha_cookie": {
+      "id": "matcha_cookie",
+      "name": "抹茶曲奇",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "matcha",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 4,
+      "tags": [
+        "苦甜",
+        "香脆"
+      ]
+    },
+    "matcha_mochi": {
+      "id": "matcha_mochi",
+      "name": "抹茶糯米团",
+      "device": "mixer",
+      "materials": [
+        "glutinous_rice_flour",
+        "matcha",
+        "red_bean"
+      ],
+      "price": 31,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "软糯"
+      ]
+    },
+    "matcha_pudding": {
+      "id": "matcha_pudding",
+      "name": "抹茶布丁",
+      "device": "chiller",
+      "materials": [
+        "milk",
+        "egg",
+        "matcha"
+      ],
+      "price": 29,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "清爽"
+      ]
+    },
+    "matcha_redbean": {
+      "id": "matcha_redbean",
+      "name": "抹茶红豆杯",
+      "device": "mixer",
+      "materials": [
+        "matcha",
+        "red_bean",
+        "cream"
+      ],
+      "price": 36,
+      "output_count": 2,
+      "tags": [
+        "苦甜",
+        "甜"
+      ]
+    },
+    "matcha_redbean_mousse": {
+      "id": "matcha_redbean_mousse",
+      "name": "抹茶红豆慕斯",
+      "device": "chiller",
+      "materials": [
+        "matcha",
+        "red_bean",
+        "cream",
+        "gelatin",
+        "milk",
+        "sugar"
+      ],
+      "price": 33,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "奶香"
+      ]
+    },
+    "milk_crisp_cake": {
+      "id": "milk_crisp_cake",
+      "name": "牛奶酥饼",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "milk",
+        "sugar"
+      ],
+      "price": 18,
+      "output_count": 4,
+      "tags": [
+        "奶香",
+        "香脆"
+      ]
+    },
+    "milk_pudding": {
+      "id": "milk_pudding",
+      "name": "牛奶布丁",
+      "device": "chiller",
+      "materials": [
+        "milk",
+        "egg",
+        "sugar"
+      ],
+      "price": 20,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "经典"
+      ]
+    },
+    "milk_rice_dew": {
+      "id": "milk_rice_dew",
+      "name": "牛奶米露",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "milk",
+        "sugar"
+      ],
+      "price": 18,
+      "output_count": 3,
+      "tags": [
+        "浓郁",
+        "奶香"
+      ]
+    },
+    "mint_chocolate_pudding": {
+      "id": "mint_chocolate_pudding",
+      "name": "薄荷巧克力布丁",
+      "device": "chiller",
+      "materials": [
+        "mint",
+        "chocolate",
+        "milk",
+        "gelatin",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 3,
+      "tags": [
+        "清凉",
+        "苦甜"
+      ]
+    },
+    "mint_cocoa_cup": {
+      "id": "mint_cocoa_cup",
+      "name": "薄荷可可杯",
+      "device": "mixer",
+      "materials": [
+        "mint",
+        "cocoa",
+        "milk"
+      ],
+      "price": 34,
+      "output_count": 3,
+      "tags": [
+        "清凉",
+        "苦甜"
+      ]
+    },
+    "mint_iced_green_tea": {
+      "id": "mint_iced_green_tea",
+      "name": "薄荷冰绿茶",
+      "device": "chiller",
+      "materials": [
+        "green_tea",
+        "mint",
+        "honey",
+        "spring_water"
+      ],
+      "price": 30,
+      "output_count": 3,
+      "tags": [
+        "清凉",
+        "茶香"
+      ]
+    },
+    "mint_lemon_drink": {
+      "id": "mint_lemon_drink",
+      "name": "薄荷柠檬饮",
+      "device": "round_pot",
+      "materials": [
+        "mint",
+        "lemon",
+        "honey",
+        "spring_water"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "清凉",
+        "清爽"
+      ]
+    },
+    "mint_mousse": {
+      "id": "mint_mousse",
+      "name": "薄荷慕斯杯",
+      "device": "chiller",
+      "materials": [
+        "mint",
+        "cream",
+        "gelatin",
+        "milk",
+        "sugar"
+      ],
+      "price": 33,
+      "output_count": 3,
+      "tags": [
+        "清凉",
+        "奶香"
+      ]
+    },
+    "mint_rice_drink": {
+      "id": "mint_rice_drink",
+      "name": "薄荷米浆饮",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "spring_water",
+        "mint",
+        "sugar"
+      ],
+      "price": 18,
+      "output_count": 3,
+      "tags": [
+        "清凉",
+        "经典"
+      ]
+    },
+    "mint_yogurt_cup": {
+      "id": "mint_yogurt_cup",
+      "name": "薄荷酸奶杯",
+      "device": "mixer",
+      "materials": [
+        "yogurt",
+        "mint",
+        "honey",
+        "blueberry"
+      ],
+      "price": 33,
+      "output_count": 3,
+      "tags": [
+        "清凉",
+        "清爽"
+      ]
+    },
+    "nut_black_tea_crisp": {
+      "id": "nut_black_tea_crisp",
+      "name": "坚果红茶酥",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "nuts",
+        "black_tea",
+        "sugar"
+      ],
+      "price": 34,
+      "output_count": 3,
+      "tags": [
+        "香脆",
+        "茶香"
+      ]
+    },
+    "nut_chicken_patty": {
+      "id": "nut_chicken_patty",
+      "name": "坚果鸡肉饼",
+      "device": "oven",
+      "materials": [
+        "chicken",
+        "nuts",
+        "flour",
+        "egg",
+        "sea_salt"
+      ],
+      "price": 36,
+      "output_count": 2,
+      "tags": [
+        "咸香",
+        "饱腹"
+      ]
+    },
+    "nut_oats_crisp": {
+      "id": "nut_oats_crisp",
+      "name": "坚果燕麦酥",
+      "device": "oven",
+      "materials": [
+        "oats",
+        "nuts",
+        "butter",
+        "honey",
+        "sugar"
+      ],
+      "price": 32,
+      "output_count": 3,
+      "tags": [
+        "香脆",
+        "饱腹"
+      ]
+    },
+    "nut_pumpkin_cake": {
+      "id": "nut_pumpkin_cake",
+      "name": "坚果南瓜饼",
+      "device": "oven",
+      "materials": [
+        "pumpkin",
+        "glutinous_rice_flour",
+        "nuts",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "甜",
+        "香脆"
+      ]
+    },
+    "nuts_cocoa_brownie": {
+      "id": "nuts_cocoa_brownie",
+      "name": "坚果可可布朗尼",
+      "device": "oven",
+      "materials": [
+        "cocoa",
+        "chocolate",
+        "butter",
+        "nuts",
+        "egg",
+        "flour"
+      ],
+      "price": 40,
+      "output_count": 2,
+      "tags": [
+        "苦甜",
+        "浓郁"
+      ]
+    },
+    "nuts_pound_cake": {
+      "id": "nuts_pound_cake",
+      "name": "坚果磅蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "nuts",
+        "egg",
+        "sugar"
+      ],
+      "price": 34,
+      "output_count": 2,
+      "tags": [
+        "浓郁",
+        "饱腹"
+      ]
+    },
+    "oats_baked_pudding": {
+      "id": "oats_baked_pudding",
+      "name": "燕麦烤布丁",
+      "device": "oven",
+      "materials": [
+        "oats",
+        "egg",
+        "milk",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "低负担",
+        "奶香"
+      ]
+    },
+    "oats_black_tea_cake": {
+      "id": "oats_black_tea_cake",
+      "name": "燕麦红茶饼",
+      "device": "oven",
+      "materials": [
+        "oats",
+        "flour",
+        "butter",
+        "black_tea",
+        "honey"
+      ],
+      "price": 30,
+      "output_count": 3,
+      "tags": [
+        "茶香",
+        "低负担"
+      ]
+    },
+    "oats_cookie": {
+      "id": "oats_cookie",
+      "name": "燕麦曲奇",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "oats",
+        "egg",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 4,
+      "tags": [
+        "香脆",
+        "低负担"
+      ]
+    },
+    "oats_milk_porridge": {
+      "id": "oats_milk_porridge",
+      "name": "燕麦牛奶粥",
+      "device": "round_pot",
+      "materials": [
+        "oats",
+        "milk",
+        "sugar"
+      ],
+      "price": 20,
+      "output_count": 3,
+      "tags": [
+        "低负担",
+        "饱腹"
+      ]
+    },
+    "oats_yogurt_bowl": {
+      "id": "oats_yogurt_bowl",
+      "name": "燕麦酸奶碗",
+      "device": "mixer",
+      "materials": [
+        "oats",
+        "yogurt",
+        "honey"
+      ],
+      "price": 33,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "低负担"
+      ]
+    },
+    "orange_chiffon_cake": {
+      "id": "orange_chiffon_cake",
+      "name": "橙香戚风蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "egg",
+        "orange",
+        "sugar"
+      ],
+      "price": 30,
+      "output_count": 2,
+      "tags": [
+        "经典",
+        "果香"
+      ]
+    },
+    "orange_crepe": {
+      "id": "orange_crepe",
+      "name": "橙香可丽饼",
+      "device": "griddle",
+      "materials": [
+        "flour",
+        "milk",
+        "orange"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "清爽"
+      ]
+    },
+    "peach_jelly": {
+      "id": "peach_jelly",
+      "name": "桃子果冻杯",
+      "device": "chiller",
+      "materials": [
+        "peach",
+        "sugar",
+        "gelatin"
+      ],
+      "price": 27,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "清爽"
+      ]
+    },
+    "peach_mousse": {
+      "id": "peach_mousse",
+      "name": "蜜桃慕斯杯",
+      "device": "chiller",
+      "materials": [
+        "peach",
+        "cream",
+        "gelatin",
+        "milk",
+        "sugar"
+      ],
+      "price": 31,
+      "output_count": 3,
+      "tags": [
+        "奶香",
+        "果香"
+      ]
+    },
+    "pumpkin_pie": {
+      "id": "pumpkin_pie",
+      "name": "南瓜派",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "pumpkin",
+        "egg",
+        "sugar"
+      ],
+      "price": 30,
+      "output_count": 2,
+      "tags": [
+        "甜",
+        "经典"
+      ]
+    },
+    "pumpkin_pudding": {
+      "id": "pumpkin_pudding",
+      "name": "南瓜布丁",
+      "device": "chiller",
+      "materials": [
+        "pumpkin",
+        "egg",
+        "milk"
+      ],
+      "price": 31,
+      "output_count": 3,
+      "tags": [
+        "甜",
+        "经典"
+      ]
+    },
+    "pumpkin_rice_drink": {
+      "id": "pumpkin_rice_drink",
+      "name": "南瓜米浆饮",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "pumpkin",
+        "spring_water",
+        "sugar"
+      ],
+      "price": 18,
+      "output_count": 3,
+      "tags": [
+        "浓郁",
+        "饱腹"
+      ]
+    },
+    "pumpkin_steamed_cake": {
+      "id": "pumpkin_steamed_cake",
+      "name": "南瓜蒸糕",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "pumpkin",
+        "sugar"
+      ],
+      "price": 18,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "甜"
+      ]
+    },
+    "red_bean_glutinous_rice_ball": {
+      "id": "red_bean_glutinous_rice_ball",
+      "name": "红豆糯米团",
+      "device": "round_pot",
+      "materials": [
+        "glutinous_rice_flour",
+        "red_bean",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "甜"
+      ]
+    },
+    "red_bean_milk_drink": {
+      "id": "red_bean_milk_drink",
+      "name": "红豆牛奶饮",
+      "device": "round_pot",
+      "materials": [
+        "red_bean",
+        "milk",
+        "sugar"
+      ],
+      "price": 21,
+      "output_count": 3,
+      "tags": [
+        "奶香",
+        "经典"
+      ]
+    },
+    "red_bean_rice_cake": {
+      "id": "red_bean_rice_cake",
+      "name": "红豆沙米糕",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "red_bean",
+        "sugar"
+      ],
+      "price": 22,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "经典"
+      ]
+    },
+    "redbean_pancake": {
+      "id": "redbean_pancake",
+      "name": "红豆煎饼",
+      "device": "griddle",
+      "materials": [
+        "flour",
+        "red_bean",
+        "milk"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "甜",
+        "经典"
+      ]
+    },
+    "rice_flour_steamed_cake": {
+      "id": "rice_flour_steamed_cake",
+      "name": "米粉蒸糕",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "sugar",
+        "egg"
+      ],
+      "price": 16,
+      "output_count": 3,
+      "tags": [
+        "经典",
+        "甜"
+      ]
+    },
+    "rice_milk_drink": {
+      "id": "rice_milk_drink",
+      "name": "米浆饮",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "spring_water",
+        "sugar"
+      ],
+      "price": 12,
+      "output_count": 3,
+      "tags": [
+        "经典",
+        "清爽"
+      ]
+    },
+    "rich_rice_drink": {
+      "id": "rich_rice_drink",
+      "name": "醇香米浆",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "milk",
+        "spring_water",
+        "sugar"
+      ],
+      "price": 16,
+      "output_count": 3,
+      "tags": [
+        "奶香",
+        "甜"
+      ]
+    },
+    "sea_salt_caramel_pudding": {
+      "id": "sea_salt_caramel_pudding",
+      "name": "海盐焦糖布丁",
+      "device": "chiller",
+      "materials": [
+        "sea_salt",
+        "caramel",
+        "milk"
+      ],
+      "price": 32,
+      "output_count": 3,
+      "tags": [
+        "苦甜",
+        "咸香"
+      ]
+    },
+    "sea_salt_chocolate_cookie": {
+      "id": "sea_salt_chocolate_cookie",
+      "name": "海盐巧克力曲奇",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "chocolate",
+        "sea_salt",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 4,
+      "tags": [
+        "咸香",
+        "苦甜"
+      ]
+    },
+    "sea_salt_cream_coffee": {
+      "id": "sea_salt_cream_coffee",
+      "name": "海盐奶盖咖啡",
+      "device": "mixer",
+      "materials": [
+        "sea_salt",
+        "coffee",
+        "cream"
+      ],
+      "price": 37,
+      "output_count": 2,
+      "tags": [
+        "苦甜",
+        "浓郁"
+      ]
+    },
+    "sea_salt_nuts_cookie": {
+      "id": "sea_salt_nuts_cookie",
+      "name": "海盐坚果曲奇",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "sea_salt",
+        "nuts",
+        "sugar"
+      ],
+      "price": 30,
+      "output_count": 4,
+      "tags": [
+        "咸香",
+        "香脆"
+      ]
+    },
+    "soft_steamed_egg_cake": {
+      "id": "soft_steamed_egg_cake",
+      "name": "软蒸鸡蛋糕",
+      "device": "round_pot",
+      "materials": [
+        "egg",
+        "flour",
+        "sugar"
+      ],
+      "price": 16,
+      "output_count": 3,
+      "tags": [
+        "经典",
+        "甜"
+      ]
+    },
+    "sponge_cake": {
+      "id": "sponge_cake",
+      "name": "海绵杯蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "egg",
+        "sugar"
+      ],
+      "price": 18,
+      "output_count": 3,
+      "tags": [
+        "经典",
+        "甜"
+      ]
+    },
+    "steamed_meat_rice_cup": {
+      "id": "steamed_meat_rice_cup",
+      "name": "蒸肉米盏",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "chicken",
+        "egg"
+      ],
+      "price": 24,
+      "output_count": 3,
+      "tags": [
+        "咸香",
+        "饱腹"
+      ]
+    },
+    "strawberry_cream_cake": {
+      "id": "strawberry_cream_cake",
+      "name": "草莓奶油蛋糕",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "egg",
+        "sugar",
+        "cream",
+        "strawberry"
+      ],
+      "price": 36,
+      "output_count": 1,
+      "tags": [
+        "果香",
+        "奶香"
+      ]
+    },
+    "strawberry_jelly": {
+      "id": "strawberry_jelly",
+      "name": "草莓果冻杯",
+      "device": "chiller",
+      "materials": [
+        "strawberry",
+        "sugar",
+        "gelatin"
+      ],
+      "price": 27,
+      "output_count": 3,
+      "tags": [
+        "果香",
+        "清爽"
+      ]
+    },
+    "strawberry_mousse": {
+      "id": "strawberry_mousse",
+      "name": "草莓慕斯杯",
+      "device": "chiller",
+      "materials": [
+        "strawberry",
+        "cream",
+        "milk",
+        "gelatin",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "清爽",
+        "果香"
+      ]
+    },
+    "sugar_roasted_chestnut": {
+      "id": "sugar_roasted_chestnut",
+      "name": "糖烤栗子",
+      "device": "oven",
+      "materials": [
+        "chestnut",
+        "sugar",
+        "spring_water"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "软糯",
+        "甜"
+      ]
+    },
+    "vanilla_cream_puff": {
+      "id": "vanilla_cream_puff",
+      "name": "香草奶油泡芙",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "egg",
+        "cream",
+        "vanilla",
+        "sugar"
+      ],
+      "price": 28,
+      "output_count": 3,
+      "tags": [
+        "香脆",
+        "奶香"
+      ]
+    },
+    "vanilla_panna_cotta": {
+      "id": "vanilla_panna_cotta",
+      "name": "香草奶冻",
+      "device": "chiller",
+      "materials": [
+        "milk",
+        "cream",
+        "gelatin",
+        "vanilla",
+        "sugar"
+      ],
+      "price": 26,
+      "output_count": 3,
+      "tags": [
+        "奶香",
+        "经典"
+      ]
+    },
+    "vanilla_scone": {
+      "id": "vanilla_scone",
+      "name": "香草司康",
+      "device": "oven",
+      "materials": [
+        "flour",
+        "butter",
+        "vanilla"
+      ],
+      "price": 24,
+      "output_count": 3,
+      "tags": [
+        "经典",
+        "香脆"
+      ]
+    },
+    "white_sugar_rice_ball": {
+      "id": "white_sugar_rice_ball",
+      "name": "白糖米圆子",
+      "device": "round_pot",
+      "materials": [
+        "rice_flour",
+        "sugar",
+        "spring_water"
+      ],
+      "price": 12,
+      "output_count": 5,
+      "tags": [
+        "软糯",
+        "甜"
+      ]
+    },
+    "white_sugar_rice_porridge": {
+      "id": "white_sugar_rice_porridge",
+      "name": "白糖米粥",
+      "device": "round_pot",
+      "materials": [
+        "rice",
+        "rice_flour",
+        "spring_water",
+        "sugar"
+      ],
+      "price": 14,
+      "output_count": 3,
+      "tags": [
+        "甜",
+        "经典"
+      ]
+    },
+    "yogurt_cheesecake": {
+      "id": "yogurt_cheesecake",
+      "name": "酸奶芝士蛋糕",
+      "device": "oven",
+      "materials": [
+        "cheese",
+        "yogurt",
+        "egg",
+        "flour",
+        "sugar"
+      ],
+      "price": 38,
+      "output_count": 2,
+      "tags": [
+        "清爽",
+        "浓郁"
+      ]
+    }
+  }
+}

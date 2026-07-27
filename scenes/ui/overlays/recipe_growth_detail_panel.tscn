@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/recipe_growth_detail_panel.gd" id="1_script"]
+
+[node name="RecipeGrowthDetailPanel" type="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 330)
+theme_override_constants/separation = 6
+script = ExtResource("1_script")
+
+[node name="StageLabel" type="Label" parent="."]
+layout_mode = 2
+text = "成长阶段｜试作品"
+theme_override_colors/font_color = Color(1, 0.827, 0.416, 1)
+
+[node name="StageTrackLabel" type="Label" parent="."]
+layout_mode = 2
+text = "【试作品】 → 人气款 → 招牌款"
+theme_override_colors/font_color = Color(0.78, 0.82, 0.88, 1)
+
+[node name="NextStageLabel" type="Label" parent="."]
+layout_mode = 2
+text = "下一阶段｜人气款"
+theme_override_colors/font_color = Color(0.91, 0.76, 0.42, 1)
+
+[node name="StageMadeRow" type="Label" parent="."]
+layout_mode = 2
+text = "制作批次｜0 / 10（还差 10）"
+
+[node name="StageEffectiveRoundRow" type="Label" parent="."]
+layout_mode = 2
+text = "有效营业｜0 / 3（还差 3）"
+
+[node name="StageSynergyRoundRow" type="Label" parent="."]
+layout_mode = 2
+text = "协同营业｜0 / 3（还差 3）"
+
+[node name="StageDeviceRow" type="Label" parent="."]
+layout_mode = 2
+text = "设备等级｜L1 / L3（等待升级）"
+
+[node name="AllConditionsHintLabel" type="Label" parent="."]
+layout_mode = 2
+text = "所有条件需同时满足；晋级后当前阶段进度清零。"
+autowrap_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.68, 0.72, 1)
+
+[node name="CountLabel" type="Label" parent="."]
+layout_mode = 2
+text = "生涯统计｜制作成品 0｜售卖 0｜正向邻接 0"
+
+[node name="DeviceStatusLabel" type="Label" parent="."]
+layout_mode = 2
+autowrap_mode = 2
+text = "设备 L1｜当前上限：试作品"
+
+[node name="MasterworkLabel" type="Label" parent="."]
+layout_mode = 2
+autowrap_mode = 2
+text = "名作｜招牌款并完成两次特性选择后开启"
+theme_override_colors/font_color = Color(0.56, 0.88, 0.76, 1)
+
+[node name="MasterworkProgress" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+show_percentage = false
+
+[node name="TraitLabel" type="Label" parent="."]
+layout_mode = 2
+autowrap_mode = 2
+text = "已选特性：暂无"
+
+[node name="ChooseTraitButton" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_type_variation = &"DessertRedActionButton"
+text = "选择成长特性"

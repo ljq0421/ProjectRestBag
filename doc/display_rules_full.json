@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "version": "v1.0",
+    "description": "12x14橱窗全量规则配置：基础标签双向加成+套装组合加成+相邻冲突减损+区域固定加成",
+    "total_rules": 21,
+    "grid_rows": 12,
+    "grid_columns": 14,
+    "grid_cells": 168
+  },
+  "region_policy": {
+    "source": "showcase_unlocked_bounds",
+    "front_row_ratio": 0.3,
+    "middle_row_ratio": 0.4,
+    "back_row_ratio": 0.3,
+    "golden_column_ratio": 0.4,
+    "minimum_band_size": 1,
+    "membership": "product_all_cells_in_same_region"
+  },
+  "spacing_rules": {
+    "unlock_cell_count": 36,
+    "required_empty_perimeter": 2,
+    "eligible_shape_categories": ["中块款", "招牌款"],
+    "eligible_roles": ["harvest"],
+    "boutique_price_pct": 6,
+    "crowded_speed_pct": -6,
+    "description": "扩张到至少36格后，中大块或收获商品可通过留白获得溢价；完全无空沿时产生拥挤减损"
+  },
+  "base_tag_bonuses": {
+    "tag_bonus_001": {
+      "priority": 80,
+      "rule_name": "果香清爽组合",
+      "trigger_tag_a": "果香",
+      "trigger_tag_b": "清爽",
+      "price_bonus_pct": 8,
+      "speed_bonus_pct": 5,
+      "trigger_mode": "双向两两触发",
+      "description": "果香甜品搭配清爽款，提升客单价与转化"
+    },
+    "tag_bonus_002": {
+      "priority": 70,
+      "rule_name": "苦甜浓郁组合",
+      "trigger_tag_a": "苦甜",
+      "trigger_tag_b": "浓郁",
+      "price_bonus_pct": 10,
+      "speed_bonus_pct": 0,
+      "trigger_mode": "双向两两触发",
+      "description": "醇厚风味搭配，提升溢价空间"
+    },
+    "tag_bonus_003": {
+      "priority": 60,
+      "rule_name": "咸甜对冲组合",
+      "trigger_tag_a": "甜",
+      "trigger_tag_b": "咸香",
+      "price_bonus_pct": 12,
+      "speed_bonus_pct": 8,
+      "trigger_mode": "双向两两触发",
+      "description": "咸甜搭配提升食欲，同时提高客单价与售速"
+    },
+    "tag_bonus_004": {
+      "priority": 50,
+      "rule_name": "软糯甜口组合",
+      "trigger_tag_a": "软糯",
+      "trigger_tag_b": "甜",
+      "price_bonus_pct": 5,
+      "speed_bonus_pct": 10,
+      "trigger_mode": "双向两两触发",
+      "description": "软糯甜食受众广，显著提升出货速度"
+    },
+    "tag_bonus_005": {
+      "priority": 40,
+      "rule_name": "茶奶香氛组合",
+      "trigger_tag_a": "茶香",
+      "trigger_tag_b": "奶香",
+      "price_bonus_pct": 10,
+      "speed_bonus_pct": 0,
+      "trigger_mode": "双向两两触发",
+      "description": "茶与奶天然适配，提升下午茶场景溢价"
+    },
+    "tag_bonus_006": {
+      "priority": 30,
+      "rule_name": "香脆浓郁组合",
+      "trigger_tag_a": "香脆",
+      "trigger_tag_b": "浓郁",
+      "price_bonus_pct": 7,
+      "speed_bonus_pct": 0,
+      "trigger_mode": "双向两两触发",
+      "description": "口感层次对比，提升食用体验溢价"
+    },
+    "tag_bonus_007": {
+      "priority": 20,
+      "rule_name": "经典怀旧组合",
+      "trigger_tag_a": "经典",
+      "trigger_tag_b": "经典",
+      "price_bonus_pct": 0,
+      "speed_bonus_pct": 6,
+      "trigger_mode": "双向两两触发",
+      "description": "两款经典款相邻，老客识别度高，售速提升"
+    },
+    "tag_bonus_008": {
+      "priority": 10,
+      "rule_name": "轻食健康组合",
+      "trigger_tag_a": "低负担",
+      "trigger_tag_b": "清爽",
+      "price_bonus_pct": 7,
+      "speed_bonus_pct": 7,
+      "trigger_mode": "双向两两触发",
+      "description": "健康轻食搭配，精准匹配健身客群付费意愿"
+    }
+  },
+  "set_bonuses": {
+    "set_bonus_001": {
+      "set_name": "经典下午茶三件套",
+      "required_tags": ["茶香", "香脆", "浓郁"],
+      "min_item_count": 3,
+      "price_bonus_pct": 15,
+      "speed_bonus_pct": 10,
+      "trigger_condition": "3件两两连通相邻",
+      "description": "1款茶饮品+1款酥饼+1款蛋糕/派，全套加成"
+    },
+    "set_bonus_002": {
+      "set_name": "夏日清凉套装",
+      "required_tags": ["果香", "清凉", "清爽"],
+      "min_item_count": 3,
+      "price_bonus_pct": 0,
+      "speed_bonus_pct": 20,
+      "trigger_condition": "3件两两连通相邻",
+      "description": "2款果香甜品+1款薄荷/清凉饮品，大幅提升售速"
+    },
+    "set_bonus_003": {
+      "set_name": "老街怀旧套装",
+      "required_tags": ["经典", "软糯", "浓郁"],
+      "min_item_count": 3,
+      "price_bonus_pct": 12,
+      "speed_bonus_pct": 0,
+      "trigger_condition": "3件两两连通相邻",
+      "description": "2款米食/传统糕点+1款甜汤糊类，提升售价"
+    },
+    "set_bonus_004": {
+      "set_name": "健身轻食套装",
+      "required_tags": ["低负担", "清爽", "香脆"],
+      "min_item_count": 3,
+      "price_bonus_pct": 10,
+      "speed_bonus_pct": 15,
+      "trigger_condition": "3件两两连通相邻",
+      "description": "2款低负担食品+1款酸奶/燕麦碗，兼顾售价与售速"
+    },
+    "set_bonus_005": {
+      "set_name": "巧克力狂热套装",
+      "required_tags": ["苦甜", "香脆", "浓郁"],
+      "min_item_count": 3,
+      "price_bonus_pct": 18,
+      "speed_bonus_pct": 0,
+      "trigger_condition": "3件两两连通相邻",
+      "description": "2款可可巧克力甜品+1款坚果，高客单价加成"
+    },
+    "set_bonus_006": {
+      "set_name": "咸甜正餐套装",
+      "required_tags": ["咸香", "甜", "茶香"],
+      "min_item_count": 3,
+      "price_bonus_pct": 5,
+      "speed_bonus_pct": 18,
+      "trigger_condition": "3件两两连通相邻",
+      "description": "1款咸口主餐+1款饮品+1款小甜品，大幅提升售速"
+    },
+    "set_bonus_007": {
+      "set_name": "全茶风味套装",
+      "required_tags": ["茶香", "苦甜", "清爽"],
+      "min_item_count": 2,
+      "price_bonus_pct": 13,
+      "speed_bonus_pct": 0,
+      "trigger_condition": "2件不同茶底甜品连通相邻",
+      "description": "双茶底搭配，茶香主题溢价"
+    }
+  },
+  "conflict_penalties": {
+    "penalty_001": {
+      "penalty_name": "同类扎堆惩罚",
+      "trigger_condition": "同标签产品连续≥3个四方向相邻",
+      "conflict_tags": ["任意相同标签"],
+      "price_penalty_pct": -5,
+      "speed_penalty_pct": -3,
+      "effect_scope": "超出第2个的所有产品",
+      "description": "同类产品过度集中，客户选择困难降低购买欲"
+    },
+    "penalty_002": {
+      "penalty_name": "口感冲突惩罚",
+      "trigger_condition": "清凉类与浓郁类四方向相邻",
+      "conflict_tags": ["清凉", "浓郁"],
+      "price_penalty_pct": -8,
+      "speed_penalty_pct": 0,
+      "effect_scope": "冲突双方产品",
+      "description": "薄荷清凉与芝士黄油浓郁口感违和，双向减价"
+    },
+    "penalty_003": {
+      "penalty_name": "饱腹压制惩罚",
+      "trigger_condition": "1个咸香主餐周围相邻≥3款甜口甜品",
+      "conflict_tags": ["咸香", "饱腹", "甜"],
+      "price_penalty_pct": 0,
+      "speed_penalty_pct": -5,
+      "effect_scope": "所有相邻的甜口甜品",
+      "description": "主餐带来饱腹感，降低周边甜品购买意愿"
+    }
+  },
+  "zone_bonuses": {
+    "zone_001": {
+      "zone_name": "引流前排位",
+      "region_id": "front",
+      "price_bonus_pct": -3,
+      "speed_bonus_pct": 8,
+      "adjacency_multiplier": 1.0,
+      "description": "最靠近顾客的第一排，售速提升、售价略降，适合走量爆款"
+    },
+    "zone_002": {
+      "zone_name": "黄金C位区",
+      "region_id": "golden",
+      "price_bonus_pct": 5,
+      "speed_bonus_pct": 0,
+      "adjacency_multiplier": 1.2,
+      "description": "橱窗中间核心区域，基础售价提升，且相邻加成效果额外+20%"
+    },
+    "zone_003": {
+      "zone_name": "宝藏深处位",
+      "region_id": "back",
+      "price_bonus_pct": 8,
+      "speed_bonus_pct": -4,
+      "adjacency_multiplier": 1.0,
+      "description": "橱窗最深处，售价大幅提升、售速略降，适合高价招牌款"
+    }
+  }
+}

@@ -1,0 +1,149 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/navigation/workbench_launcher.gd" id="1_launcher"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/workbench/generated/starlight.png" id="2_starlight"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/workbench/generated/task.png" id="3_task"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/workbench/generated/inventory.png" id="4_inventory"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/workbench/generated/catalog.png" id="5_catalog"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/workbench/generated/purchase.png" id="6_purchase"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/workbench/generated/output.png" id="7_output"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/workbench/generated/storefront.png" id="8_storefront"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/workbench/generated/research.png" id="9_research"]
+
+[node name="WorkbenchLauncher" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 74)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.0
+theme_override_constants/separation = 5
+alignment = 1
+script = ExtResource("1_launcher")
+
+[node name="StarlightButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "查看食谱星辉与自动化"
+theme_type_variation = &"DessertLauncherIconButton"
+icon = ExtResource("2_starlight")
+theme_override_constants/icon_max_width = 64
+
+[node name="Badge" type="Label" parent="StarlightButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -29.0
+offset_top = 4.0
+offset_right = -5.0
+offset_bottom = 26.0
+grow_horizontal = 0
+mouse_filter = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TaskButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "查看任务"
+theme_type_variation = &"DessertLauncherIconButton"
+icon = ExtResource("3_task")
+theme_override_constants/icon_max_width = 64
+
+[node name="Badge" type="Label" parent="TaskButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -29.0
+offset_top = 4.0
+offset_right = -5.0
+offset_bottom = 26.0
+grow_horizontal = 0
+mouse_filter = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "查看库存与补货建议"
+theme_type_variation = &"DessertLauncherIconButton"
+icon = ExtResource("4_inventory")
+theme_override_constants/icon_max_width = 64
+
+[node name="Badge" type="Label" parent="InventoryButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -29.0
+offset_top = 4.0
+offset_right = -5.0
+offset_bottom = 26.0
+grow_horizontal = 0
+mouse_filter = 2
+text = "!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CatalogButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "查看已发现配方与熟练度"
+theme_type_variation = &"DessertLauncherIconButton"
+icon = ExtResource("5_catalog")
+theme_override_constants/icon_max_width = 64
+
+[node name="ResearchButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "打开研发"
+theme_type_variation = &"DessertLauncherIconButton"
+icon = ExtResource("9_research")
+theme_override_constants/icon_max_width = 64
+
+[node name="PurchaseButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "采购原料、种苗和工具"
+theme_type_variation = &"DessertLauncherIconButton"
+icon = ExtResource("6_purchase")
+theme_override_constants/icon_max_width = 64
+
+[node name="OutputButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "查看农场、牧场、林场与水塘产出"
+theme_type_variation = &"DessertLauncherIconButton"
+icon = ExtResource("7_output")
+theme_override_constants/icon_max_width = 64
+
+[node name="StorefrontManageButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "打开经营中心：总览、橱窗策略与设备培养"
+theme_type_variation = &"DessertLauncherIconButton"
+icon = ExtResource("8_storefront")
+theme_override_constants/icon_max_width = 64

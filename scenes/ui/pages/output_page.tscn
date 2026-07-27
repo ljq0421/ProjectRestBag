@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pages/output_page.gd" id="1_output_page"]
+[ext_resource type="Theme" path="res://resources/ui/skin/neighborhood_dessert/neighborhood_dessert_theme.tres" id="2_theme"]
+
+[node name="OutputPage" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+script = ExtResource("1_output_page")
+
+[node name="PageDescription" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "挂机产出｜可收 0｜进行 0｜空闲 0"
+scroll_active = false
+
+[node name="OutputScroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="OutputGridRow" type="GridContainer" parent="OutputScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 1
+
+[node name="OutputActions" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="OutputPrimaryActionButton" type="Button" parent="OutputActions"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_type_variation = &"DessertPrimaryButton"
+text = "一键收获"
+
+[node name="OutputRefreshButton" type="Button" parent="OutputActions"]
+custom_minimum_size = Vector2(96, 40)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "刷新"
+
+[node name="OutputContextMenu" type="PopupMenu" parent="."]
+oversampling_override = 1.0
+theme = ExtResource("2_theme")
+theme_type_variation = &"DessertPopupMenu"
+theme_override_colors/font_color = Color(0.313726, 0.14902, 0.0666667, 1)
+theme_override_colors/font_disabled_color = Color(0.47451, 0.333333, 0.282353, 1)

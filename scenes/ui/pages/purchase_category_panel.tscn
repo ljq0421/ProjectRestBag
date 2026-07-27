@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pages/purchase_category_panel.gd" id="1_purchase_category_panel"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_purchase_region_translucent"]
+bg_color = Color(1, 0.968627, 0.862745, 0.24)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.411765, 0.215686, 0.0980392, 0.42)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="PurchaseCategoryPanel" type="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"DessertSectionPanel"
+theme_override_styles/panel = SubResource("StyleBox_purchase_region_translucent")
+script = ExtResource("1_purchase_category_panel")
+
+[node name="ContentMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="RegionContent" type="VBoxContainer" parent="ContentMargin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="RegionTitle" type="Label" parent="ContentMargin/RegionContent"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+vertical_alignment = 1
+
+[node name="ItemsScroll" type="ScrollContainer" parent="ContentMargin/RegionContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ItemRows" type="VBoxContainer" parent="ContentMargin/RegionContent/ItemsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="EmptyState" type="Label" parent="ContentMargin/RegionContent"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "当前暂无可采购商品"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

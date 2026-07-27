@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bwxe76vuss72h"]
+
+[ext_resource type="Script" uid="uid://ccknlxrkdjpgu" path="res://scripts/ui/pages/purchase_page.gd" id="1_purchase_page"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/purchase_category_panel.tscn" id="2_purchase_category_panel"]
+
+[node name="PurchasePage" type="VBoxContainer" unique_id=1105753271]
+offset_right = 312.0
+offset_bottom = 212.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+script = ExtResource("1_purchase_page")
+
+[node name="PageDescription" type="RichTextLabel" parent="." unique_id=1139868689]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "采购｜六个来源同时补货，底部统一结算。"
+scroll_active = false
+
+[node name="PurchaseRegionsGrid" type="GridContainer" parent="." unique_id=258111042]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="FarmRegion" parent="PurchaseRegionsGrid" unique_id=527178509 instance=ExtResource("2_purchase_category_panel")]
+category_id = "农场"
+region_title = "农场"
+
+[node name="RanchRegion" parent="PurchaseRegionsGrid" unique_id=1226050910 instance=ExtResource("2_purchase_category_panel")]
+category_id = "养殖场"
+region_title = "养殖场"
+
+[node name="ForestRegion" parent="PurchaseRegionsGrid" unique_id=1406102653 instance=ExtResource("2_purchase_category_panel")]
+category_id = "林场"
+region_title = "林场"
+
+[node name="PondRegion" parent="PurchaseRegionsGrid" unique_id=1078333322 instance=ExtResource("2_purchase_category_panel")]
+category_id = "水塘"
+region_title = "水塘"
+
+[node name="SupplyRegion" parent="PurchaseRegionsGrid" unique_id=746072424 instance=ExtResource("2_purchase_category_panel")]
+category_id = "辅料"
+region_title = "辅料"
+
+[node name="ToolsRegion" parent="PurchaseRegionsGrid" unique_id=496640704 instance=ExtResource("2_purchase_category_panel")]
+category_id = "工具"
+region_title = "工具"
+
+[node name="PurchaseFooter" type="HBoxContainer" parent="." unique_id=1368454362]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PurchaseCartLabel" type="Label" parent="PurchaseFooter" unique_id=1836502323]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "购物车：0 件｜合计:0 金币"
+vertical_alignment = 1
+
+[node name="PurchaseConfirmButton" type="Button" parent="PurchaseFooter" unique_id=383979601]
+custom_minimum_size = Vector2(110, 40)
+layout_mode = 2
+theme_type_variation = &"DessertPrimaryButton"
+disabled = true
+text = "购买"

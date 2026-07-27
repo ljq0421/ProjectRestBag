@@ -1,0 +1,86 @@
+{
+  "standard_duration_seconds": 30,
+  "grid_rows": 12,
+  "grid_columns": 14,
+  "heat_max": 100,
+  "chain_max_depth": 4,
+  "sale_tiers": {
+    "fast": {
+      "min_seconds": 4,
+      "max_seconds": 7
+    },
+    "medium": {
+      "min_seconds": 8,
+      "max_seconds": 12
+    },
+    "slow": {
+      "min_seconds": 15,
+      "max_seconds": 25
+    }
+  },
+  "shape_templates": {
+    "迷你款": {
+      "base_sale_seconds": 5,
+      "role": "lure"
+    },
+    "竖杯款": {
+      "base_sale_seconds": 7,
+      "role": "advance"
+    },
+    "横盘款": {
+      "base_sale_seconds": 10,
+      "role": "amplify"
+    },
+    "中块款": {
+      "base_sale_seconds": 16,
+      "role": "harvest"
+    },
+    "招牌款": {
+      "base_sale_seconds": 22,
+      "role": "harvest"
+    }
+  },
+  "role_rules": {
+    "recipe_overrides": {
+      "community_parfait": {"role": "harvest", "reason": "邻街招牌配方覆盖"},
+      "mango_cheese_cup": {"role": "harvest", "reason": "芒果招牌配方覆盖"}
+    },
+    "variant_overrides": {
+      "gift_box": {"role": "amplify", "reason": "礼盒展示放大单次价值"},
+      "sample": {"role": "lure", "reason": "试吃装负责快速引流"}
+    },
+    "tag_overrides": [
+      {"all_tags": ["清爽", "果香"], "role": "advance", "reason": "清爽果香组合推动邻近商品"},
+      {"all_tags": ["招牌"], "role": "harvest", "reason": "招牌标签负责热度收割"}
+    ],
+    "growth_overrides": [
+      {"min_level": 3, "role": "amplify", "reason": "成熟配方放大本次成交"}
+    ]
+  },
+  "environment_limits": {
+    "positive_pct": 25,
+    "negative_pct": -10
+  },
+  "environment": {
+    "festival_chance_pct": 20,
+    "markets": [
+      {"id": "steady_demand", "label": "平稳需求", "price_pct": 3, "speed_pct": 0, "match_tags": []},
+      {"id": "sweet_craving", "label": "甜食热潮", "price_pct": 8, "speed_pct": 0, "match_tags": ["甜"]},
+      {"id": "light_meal", "label": "轻食偏好", "price_pct": 6, "speed_pct": 2, "match_tags": ["清爽", "果香"]}
+    ],
+    "weather": [
+      {"id": "clear_day", "label": "晴朗天气", "price_pct": 0, "speed_pct": 3, "match_tags": []},
+      {"id": "light_rain", "label": "小雨", "price_pct": 4, "speed_pct": -3, "match_tags": ["热饮", "烘焙"]},
+      {"id": "warm_day", "label": "暖日", "price_pct": 3, "speed_pct": 4, "match_tags": ["冰凉", "清爽"]}
+    ],
+    "festivals": [
+      {"id": "neighborhood_fair", "label": "街区小集", "price_pct": 7, "speed_pct": 5, "match_tags": []},
+      {"id": "dessert_day", "label": "甜品日", "price_pct": 10, "speed_pct": 3, "match_tags": ["甜", "招牌"]}
+    ],
+    "waves": [
+      {"id": "stable_prices", "label": "价格平稳", "price_pct": 0, "speed_pct": 0, "match_tags": []},
+      {"id": "morning_rush", "label": "晨间客流", "price_pct": -2, "speed_pct": 6, "match_tags": []},
+      {"id": "quality_premium", "label": "品质溢价", "price_pct": 5, "speed_pct": -2, "match_tags": []}
+    ]
+  }
+}

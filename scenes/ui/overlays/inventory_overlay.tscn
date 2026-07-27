@@ -1,0 +1,134 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccbatpboqusgn"]
+
+[ext_resource type="Script" uid="uid://deo6hnyw3kcnj" path="res://scripts/ui/overlays/inventory_overlay.gd" id="1_component_script"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/right_arrow_image_button.tscn" id="2_right_arrow"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/left_arrow_image_button.tscn" id="3_left_arrow"]
+
+[node name="InventoryOverlay" type="VBoxContainer" unique_id=630049472]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_component_script")
+
+[node name="InventorySummaryRow" type="HBoxContainer" parent="." unique_id=621859389]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="InventoryCapacityLabel" type="Label" parent="InventorySummaryRow" unique_id=1952340933]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "仓库容量：0/0"
+vertical_alignment = 1
+
+[node name="InventorySearchInput" type="LineEdit" parent="InventorySummaryRow" unique_id=2145541945]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertTextInput"
+placeholder_text = "搜索物品..."
+
+[node name="InventorySortButton" type="OptionButton" parent="InventorySummaryRow" unique_id=2081503119]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_type_variation = &"DessertDropdownInput"
+
+[node name="InventoryBody" type="HBoxContainer" parent="." unique_id=1321428772]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="InventoryMainPanel" type="VBoxContainer" parent="InventoryBody" unique_id=1526737344]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 70.0
+theme_override_constants/separation = 8
+
+[node name="InventoryTabs" type="TabBar" parent="InventoryBody/InventoryMainPanel" unique_id=2036280127]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertTopTabBar"
+
+[node name="InventoryGrid" type="GridContainer" parent="InventoryBody/InventoryMainPanel" unique_id=544153590]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 8
+
+[node name="InventoryPager" type="HBoxContainer" parent="InventoryBody/InventoryMainPanel" unique_id=466208319]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InventoryPrevButton" parent="InventoryBody/InventoryMainPanel/InventoryPager" unique_id=2010952961 instance=ExtResource("3_left_arrow")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="InventoryPageLabel" type="Label" parent="InventoryBody/InventoryMainPanel/InventoryPager" unique_id=1876078638]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1/1"
+horizontal_alignment = 1
+
+[node name="InventoryNextButton" parent="InventoryBody/InventoryMainPanel/InventoryPager" unique_id=28705134 instance=ExtResource("2_right_arrow")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="InventorySidePanel" type="VBoxContainer" parent="InventoryBody" unique_id=122919915]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 30.0
+theme_override_constants/separation = 8
+
+[node name="InventoryLowStockTitle" type="Label" parent="InventoryBody/InventorySidePanel" unique_id=38281409]
+layout_mode = 2
+text = "低库存提醒"
+
+[node name="InventoryLowStockList" type="RichTextLabel" parent="InventoryBody/InventorySidePanel" unique_id=206809868]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "低库存：暂无"
+
+[node name="InventoryCapacityWarning" type="RichTextLabel" parent="InventoryBody/InventorySidePanel" unique_id=2033747697]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+bbcode_enabled = true
+text = "即将满仓：0/0"
+
+[node name="InventoryRestockRecommendations" type="RichTextLabel" parent="InventoryBody/InventorySidePanel" unique_id=1814370223]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+bbcode_enabled = true
+text = "可补货推荐：暂无"
+
+[node name="InventoryActionRow" type="HBoxContainer" parent="." unique_id=678950919]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="InventoryRestockButton" type="Button" parent="InventoryActionRow" unique_id=71104984]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+theme_type_variation = &"DessertRedActionButton"
+text = "一键补货"
+
+[node name="InventoryBatchListButton" type="Button" parent="InventoryActionRow" unique_id=509950484]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+theme_type_variation = &"DessertRedActionButton"
+text = "批量上架"
+
+[node name="InventorySellExtraButton" type="Button" parent="InventoryActionRow" unique_id=142582119]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+theme_type_variation = &"DessertRedActionButton"
+text = "出售多余"
+
+[node name="InventoryOrganizeButton" type="Button" parent="InventoryActionRow" unique_id=1664981615]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+theme_type_variation = &"DessertRedActionButton"
+text = "整理库存"

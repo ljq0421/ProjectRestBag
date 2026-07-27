@@ -1,0 +1,565 @@
+[gd_scene format=3 uid="uid://1hbj8fe7eh3d"]
+
+[ext_resource type="Script" uid="uid://dwfhqm1k8l14r" path="res://scripts/main_view.gd" id="1_main_view"]
+[ext_resource type="PackedScene" path="res://scenes/ui/storefront/showcase_board.tscn" id="2_showcase_board"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/task_overlay.tscn" id="5_task_overlay"]
+[ext_resource type="PackedScene" uid="uid://ccbatpboqusgn" path="res://scenes/ui/overlays/inventory_overlay.tscn" id="6_inventory_overlay"]
+[ext_resource type="PackedScene" uid="uid://b588dkqebna4p" path="res://scenes/ui/overlays/catalog_overlay.tscn" id="7_catalog_overlay"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/automation_overlay.tscn" id="8_automation_overlay"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/automation_report_dialog.tscn" id="9_automation_report"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/recipe_restock_dialog.tscn" id="10_recipe_restock"]
+[ext_resource type="Theme" uid="uid://dbm6miwtegodv" path="res://resources/ui/skin/neighborhood_dessert/neighborhood_dessert_theme.tres" id="11_dessert_theme"]
+[ext_resource type="Script" path="res://scripts/ui/pages/production_zone_shell.gd" id="12_production_zone_shell"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/purchase_receipt_dialog.tscn" id="13_purchase_receipt"]
+[ext_resource type="Texture2D" path="res://resources/ui/skin_v1/background.png" id="14_page_background"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/showcase_round_settlement_dialog.tscn" id="15_showcase_settlement"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/showcase_rulebook_dialog.tscn" id="16_showcase_rulebook"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/recipe_growth_choice_dialog.tscn" id="18_growth_choice"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/tutorial_guide_overlay.tscn" id="20_tutorial_guide"]
+[ext_resource type="PackedScene" path="res://scenes/ui/navigation/workbench_launcher.tscn" id="21_workbench_launcher"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/purchase_page.tscn" id="22_purchase_page"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/output_page.tscn" id="23_output_page"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/storefront_manage_page.tscn" id="24_storefront_manage_page"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/production_workbench.tscn" id="25_production_workbench"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/research_progress_dialog.tscn" id="26_research_progress"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/close_image_button.tscn" id="27_close_button"]
+[ext_resource type="Texture2D" path="res://resources/ui/skin_v1/top_star_progress_174.png" id="29_topbar_coin_progress"]
+[ext_resource type="Texture2D" path="res://resources/ui/skin_v1/progress_cake.png" id="30_topbar_reputation_progress"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/research_overlay.tscn" id="31_research_overlay"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/kitchen_schedule_overlay.tscn" id="33_kitchen_schedule"]
+[ext_resource type="Texture2D" path="res://resources/ui/production_zone/production_tile_wall_overlay.png" id="34_production_tile_texture"]
+[ext_resource type="Shader" path="res://resources/ui/shaders/production_warm_light.gdshader" id="35_production_light_shader"]
+[ext_resource type="Texture2D" path="res://resources/ui/production_zone/production_counter_overlay.png" id="36_production_counter_texture"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBox_storefront_transparent"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_production_light"]
+shader = ExtResource("35_production_light_shader")
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_topbar_progress_track"]
+bg_color = Color(0.541176, 0.356863, 0.247059, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_topbar_coin_progress_fill"]
+bg_color = Color(0.960784, 0.745098, 0.270588, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_topbar_reputation_progress_fill"]
+bg_color = Color(0.94902, 0.709804, 0.25098, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBox_topbar_coin_text"]
+content_margin_left = 42.0
+content_margin_right = 13.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBox_topbar_reputation_text"]
+content_margin_left = 42.0
+content_margin_right = 13.0
+
+[node name="Main" type="Control" unique_id=812424805]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_dessert_theme")
+script = ExtResource("1_main_view")
+
+[node name="PageBackground" type="TextureRect" parent="." unique_id=45951007]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_page_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Root" type="VBoxContainer" parent="." unique_id=1738083708]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="TopBar" type="HBoxContainer" parent="Root" unique_id=24635594]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="Root/TopBar" unique_id=369826964]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "邻街甜品店"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinsLabel" type="Label" parent="Root/TopBar" unique_id=1444422060]
+custom_minimum_size = Vector2(180, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.956863, 0.819608, 1)
+theme_override_colors/font_outline_color = Color(0.290196, 0.141176, 0.0784314, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_topbar_coin_text")
+text = "金币: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkinTexture" type="TextureRect" parent="Root/TopBar/CoinsLabel"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+offset_left = 3.0
+offset_right = 177.0
+offset_bottom = 44.0
+mouse_filter = 2
+texture = ExtResource("29_topbar_coin_progress")
+expand_mode = 1
+
+[node name="UpgradeProgress" type="ProgressBar" parent="Root/TopBar/CoinsLabel" unique_id=314569417]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+offset_left = 42.0
+offset_top = 15.0
+offset_right = 167.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBox_topbar_progress_track")
+theme_override_styles/fill = SubResource("StyleBox_topbar_coin_progress_fill")
+show_percentage = false
+
+[node name="ReputationLabel" type="Label" parent="Root/TopBar" unique_id=1967620235]
+custom_minimum_size = Vector2(180, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.956863, 0.819608, 1)
+theme_override_colors/font_outline_color = Color(0.290196, 0.141176, 0.0784314, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_topbar_reputation_text")
+text = "口碑: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkinTexture" type="TextureRect" parent="Root/TopBar/ReputationLabel"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+offset_left = 3.0
+offset_right = 177.0
+offset_bottom = 44.0
+mouse_filter = 2
+texture = ExtResource("30_topbar_reputation_progress")
+expand_mode = 1
+
+[node name="UpgradeProgress" type="ProgressBar" parent="Root/TopBar/ReputationLabel" unique_id=1425247433]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+offset_left = 42.0
+offset_top = 15.0
+offset_right = 167.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBox_topbar_progress_track")
+theme_override_styles/fill = SubResource("StyleBox_topbar_reputation_progress_fill")
+show_percentage = false
+
+[node name="LevelLabel" type="Label" parent="Root/TopBar" unique_id=1214045650]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "店铺等级: 1"
+vertical_alignment = 1
+
+[node name="Body" type="HBoxContainer" parent="Root" unique_id=420974242]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="MainArea" type="HBoxContainer" parent="Root/Body" unique_id=1301679930]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="StorefrontPanel" type="PanelContainer" parent="Root/Body/MainArea" unique_id=1809610274]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 63.0
+theme_override_styles/panel = SubResource("StyleBox_storefront_transparent")
+
+[node name="ShowcasePanel" parent="Root/Body/MainArea/StorefrontPanel" unique_id=630313739 instance=ExtResource("2_showcase_board")]
+layout_mode = 2
+
+[node name="WorkbenchPanel" type="Control" parent="Root/Body/MainArea" unique_id=1376926204]
+custom_minimum_size = Vector2(820, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+script = ExtResource("12_production_zone_shell")
+
+[node name="TileFade" type="TextureRect" parent="Root/Body/MainArea/WorkbenchPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 112.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("34_production_tile_texture")
+expand_mode = 1
+
+[node name="WarmLight" type="ColorRect" parent="Root/Body/MainArea/WorkbenchPanel"]
+material = SubResource("ShaderMaterial_production_light")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 112.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="CounterSurface" type="TextureRect" parent="Root/Body/MainArea/WorkbenchPanel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("36_production_counter_texture")
+expand_mode = 1
+
+[node name="ProductionWorkbench" parent="Root/Body/MainArea/WorkbenchPanel" unique_id=433527780 instance=ExtResource("25_production_workbench")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 112.0
+offset_bottom = -84.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorkbenchLauncher" parent="Root/Body/MainArea/WorkbenchPanel" unique_id=119742872 instance=ExtResource("21_workbench_launcher")]
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -76.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SteamEffect" type="Label" parent="Root/Body/MainArea/WorkbenchPanel"]
+visible = false
+layout_mode = 0
+offset_left = 112.0
+offset_top = 116.0
+offset_right = 144.0
+offset_bottom = 140.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.984314, 0.901961, 0.82)
+theme_override_colors/font_outline_color = Color(0.545098, 0.333333, 0.2, 0.28)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "〰"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SteamTimer" type="Timer" parent="Root/Body/MainArea/WorkbenchPanel"]
+wait_time = 3.5
+
+[node name="StatusBar" type="HBoxContainer" parent="Root" unique_id=804129822]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Root/StatusBar" unique_id=1597994484]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "准备开张"
+vertical_alignment = 1
+
+[node name="ShowcaseFeedbackLayer" type="Control" parent="." unique_id=852710863]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PurchaseReceiptDialog" parent="." unique_id=1358120468 instance=ExtResource("13_purchase_receipt")]
+
+[node name="ShowcaseRoundSettlementDialog" parent="." unique_id=566781238 instance=ExtResource("15_showcase_settlement")]
+
+[node name="ShowcaseRulebookDialog" parent="." unique_id=2046674646 instance=ExtResource("16_showcase_rulebook")]
+
+[node name="RecipeGrowthChoiceDialog" parent="." unique_id=553554260 instance=ExtResource("18_growth_choice")]
+
+[node name="GlobalPopupBackdrop" type="Button" parent="." unique_id=1343248590]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="GlobalOverlayLayer" type="Control" parent="." unique_id=1271660274]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.229167
+anchor_top = 0.12963
+anchor_right = 0.770833
+anchor_bottom = 0.87037
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_type_variation = &"DessertModalPanel"
+
+[node name="DefaultModalSurface" type="PanelContainer" parent="GlobalOverlayLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"DessertModalPanel"
+
+[node name="OverlayFrame" type="VBoxContainer" parent="GlobalOverlayLayer" unique_id=326831172]
+custom_minimum_size = Vector2(998, 755)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 20.0
+offset_right = -22.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="OverlayHeader" type="HBoxContainer" parent="GlobalOverlayLayer/OverlayFrame" unique_id=1357161775]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="OverlayTitle" type="Label" parent="GlobalOverlayLayer/OverlayFrame/OverlayHeader" unique_id=1385981357]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+text = "经营总览"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OverlaySummary" type="Label" parent="GlobalOverlayLayer/OverlayFrame/OverlayHeader" unique_id=2138454680]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "查看对应经营详情"
+vertical_alignment = 1
+clip_text = true
+
+[node name="OverlayCloseReserve" type="Control" parent="GlobalOverlayLayer/OverlayFrame/OverlayHeader"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OverlayModeStack" type="MarginContainer" parent="GlobalOverlayLayer/OverlayFrame" unique_id=152110405]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TaskOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" unique_id=947694055 instance=ExtResource("5_task_overlay")]
+
+[node name="InventoryOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" unique_id=827650954 instance=ExtResource("6_inventory_overlay")]
+layout_mode = 2
+
+[node name="CatalogOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" unique_id=1811137050 instance=ExtResource("7_catalog_overlay")]
+layout_mode = 2
+
+[node name="AutomationOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" unique_id=1119413576 instance=ExtResource("8_automation_overlay")]
+
+[node name="PurchaseOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" unique_id=1354564940 instance=ExtResource("22_purchase_page")]
+
+[node name="OutputOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" unique_id=1587360750 instance=ExtResource("23_output_page")]
+
+[node name="StorefrontManageOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" unique_id=909349463 instance=ExtResource("24_storefront_manage_page")]
+
+[node name="ResearchOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" instance=ExtResource("31_research_overlay")]
+
+[node name="KitchenScheduleOverlay" parent="GlobalOverlayLayer/OverlayFrame/OverlayModeStack" instance=ExtResource("33_kitchen_schedule")]
+
+[node name="OverlayCloseButton" parent="GlobalOverlayLayer" unique_id=1641017296 instance=ExtResource("27_close_button")]
+z_index = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 64.0
+grow_horizontal = 0
+
+[node name="AutomationReportDialog" parent="." unique_id=1754929005 instance=ExtResource("9_automation_report")]
+
+[node name="RecipeRestockDialog" parent="." unique_id=949087310 instance=ExtResource("10_recipe_restock")]
+size = Vector2i(560, 420)
+
+[node name="StorefrontChallengeDialog" type="AcceptDialog" parent="." unique_id=1698429180]
+title = "特殊挑战"
+initial_position = 2
+size = Vector2i(560, 330)
+exclusive = false
+popup_window = true
+min_size = Vector2i(560, 330)
+theme_type_variation = &"DessertNoticeDialog"
+
+[node name="ChallengeContent" type="VBoxContainer" parent="StorefrontChallengeDialog" unique_id=953862201]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="ChallengeSummary" type="RichTextLabel" parent="StorefrontChallengeDialog/ChallengeContent" unique_id=1717069063]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "特殊挑战"
+
+[node name="ChallengeButtons" type="HBoxContainer" parent="StorefrontChallengeDialog/ChallengeContent" unique_id=1096228149]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SprintChallengeButton" type="Button" parent="StorefrontChallengeDialog/ChallengeContent/ChallengeButtons" unique_id=620574602]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "20秒快售"
+
+[node name="ValueChallengeButton" type="Button" parent="StorefrontChallengeDialog/ChallengeContent/ChallengeButtons" unique_id=8517253]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "45秒收益"
+
+[node name="ChainChallengeButton" type="Button" parent="StorefrontChallengeDialog/ChallengeContent/ChallengeButtons" unique_id=1322858290]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "60秒连锁"
+
+[node name="StorefrontRecentReportDialog" type="AcceptDialog" parent="." unique_id=1671160900]
+title = "最近营业报告"
+initial_position = 2
+size = Vector2i(600, 300)
+exclusive = false
+popup_window = true
+min_size = Vector2i(600, 300)
+theme_type_variation = &"DessertNoticeDialog"
+
+[node name="ReportLabel" type="RichTextLabel" parent="StorefrontRecentReportDialog" unique_id=96681791]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "最近营业报告"
+fit_content = true
+scroll_active = false
+
+[node name="TaskPopup" type="AcceptDialog" parent="." unique_id=1157047967]
+title = "任务完成"
+theme_type_variation = &"DessertNoticeDialog"
+borderless = true
+
+[node name="TaskPopupContent" type="VBoxContainer" parent="TaskPopup"]
+custom_minimum_size = Vector2(388, 106)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 396.0
+offset_bottom = 114.0
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="TaskPopup/TaskPopupContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "任务完成"
+autowrap_mode = 2
+
+[node name="BodyLabel" type="Label" parent="TaskPopup/TaskPopupContent"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "任务目标已完成。"
+autowrap_mode = 2
+vertical_alignment = 1
+
+[node name="ResearchProgressDialog" parent="." unique_id=722128635 instance=ExtResource("26_research_progress")]
+
+[node name="TutorialGuideOverlay" parent="." unique_id=736255776 instance=ExtResource("20_tutorial_guide")]
+layout_mode = 1
+
+[node name="ShowcaseUnlistDragLabel" type="Label" parent="." unique_id=399286866]
+visible = false
+z_index = 4096
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 56.0
+theme_type_variation = &"DessertStatusTagNegative"
+theme_override_colors/font_outline_color = Color(0.16, 0.015, 0.01, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 28
+text = "下架"
+horizontal_alignment = 1
+vertical_alignment = 1

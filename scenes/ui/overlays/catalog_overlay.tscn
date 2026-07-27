@@ -1,0 +1,159 @@
+[gd_scene load_steps=5 format=3 uid="uid://b588dkqebna4p"]
+
+[ext_resource type="Script" uid="uid://dy6jf5v32q7du" path="res://scripts/ui/overlays/catalog_overlay.gd" id="1_component_script"]
+[ext_resource type="PackedScene" path="res://scenes/ui/overlays/catalog_card_action_popup.tscn" id="2_action_popup"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/right_arrow_image_button.tscn" id="3_right_arrow"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/left_arrow_image_button.tscn" id="4_left_arrow"]
+
+[node name="CatalogOverlay" type="VBoxContainer" unique_id=358773758]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_component_script")
+
+[node name="CatalogSummaryRow" type="HBoxContainer" parent="." unique_id=509360530]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="CatalogCollectionLabel" type="Label" parent="CatalogSummaryRow" unique_id=712820975]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "收集进度 0/0"
+vertical_alignment = 1
+
+[node name="CatalogStarLabel" type="Label" parent="CatalogSummaryRow" unique_id=944964363]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "星级完成度 0%"
+vertical_alignment = 1
+
+[node name="CatalogStarlightLabel" type="Label" parent="CatalogSummaryRow" unique_id=969539565]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "食谱星辉(解锁配方、提升配方熟练度，可积累食谱星辉) 可用 0｜累计 0"
+vertical_alignment = 1
+
+[node name="CatalogRewardLabel" type="Label" parent="CatalogSummaryRow" unique_id=984633212]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "收集奖励 0/0"
+vertical_alignment = 1
+
+[node name="CatalogClaimAllRewardsButton" type="Button" parent="CatalogSummaryRow" unique_id=154807043]
+custom_minimum_size = Vector2(190, 36)
+layout_mode = 2
+theme_type_variation = &"DessertRedActionButton"
+disabled = true
+text = "暂无可领取星辉"
+
+[node name="CatalogFilterTabs" type="TabBar" parent="." unique_id=1865099764]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertTopTabBar"
+
+[node name="CatalogDeviceFilterRow" type="HBoxContainer" parent="." unique_id=1558394927]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CatalogDeviceFilterLabel" type="Label" parent="CatalogDeviceFilterRow" unique_id=757909840]
+layout_mode = 2
+text = "设备筛选"
+vertical_alignment = 1
+
+[node name="CatalogDeviceFilter" type="OptionButton" parent="CatalogDeviceFilterRow" unique_id=942048271]
+custom_minimum_size = Vector2(220, 34)
+layout_mode = 2
+
+[node name="CatalogDeviceFilterHint" type="Label" parent="CatalogDeviceFilterRow" unique_id=2014689802]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.45, 0.52, 0.58, 1)
+text = "从设备培养抽屉进入时会自动定位关联配方"
+vertical_alignment = 1
+
+[node name="CatalogContent" type="HBoxContainer" parent="." unique_id=1381435339]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="CatalogGridPanel" type="VBoxContainer" parent="CatalogContent" unique_id=703554377]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 68.0
+theme_override_constants/separation = 8
+
+[node name="CatalogGrid" type="GridContainer" parent="CatalogContent/CatalogGridPanel" unique_id=2133084592]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 5
+
+[node name="CatalogPager" type="HBoxContainer" parent="CatalogContent/CatalogGridPanel" unique_id=1851058263]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CatalogPrevButton" parent="CatalogContent/CatalogGridPanel/CatalogPager" unique_id=1809070429 instance=ExtResource("4_left_arrow")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="CatalogPageLabel" type="Label" parent="CatalogContent/CatalogGridPanel/CatalogPager" unique_id=1775005628]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1/1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CatalogNextButton" parent="CatalogContent/CatalogGridPanel/CatalogPager" unique_id=949565273 instance=ExtResource("3_right_arrow")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="CatalogMilestoneTrack" type="HBoxContainer" parent="." unique_id=336494362]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CatalogMilestoneTitle" type="Label" parent="CatalogMilestoneTrack" unique_id=440045993]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "收集里程碑"
+vertical_alignment = 1
+
+[node name="CatalogMilestone25Button" type="Button" parent="CatalogMilestoneTrack" unique_id=1594084197]
+custom_minimum_size = Vector2(150, 52)
+layout_mode = 2
+disabled = true
+text = "25%
+进度 0/0"
+metadata/percent = 25
+
+[node name="CatalogMilestone50Button" type="Button" parent="CatalogMilestoneTrack" unique_id=1252561716]
+custom_minimum_size = Vector2(150, 52)
+layout_mode = 2
+disabled = true
+text = "50%
+进度 0/0"
+metadata/percent = 50
+
+[node name="CatalogMilestone75Button" type="Button" parent="CatalogMilestoneTrack" unique_id=1529051257]
+custom_minimum_size = Vector2(150, 52)
+layout_mode = 2
+disabled = true
+text = "75%
+进度 0/0"
+metadata/percent = 75
+
+[node name="CatalogMilestone100Button" type="Button" parent="CatalogMilestoneTrack" unique_id=1981584890]
+custom_minimum_size = Vector2(150, 52)
+layout_mode = 2
+disabled = true
+text = "100%
+进度 0/0"
+metadata/percent = 100
+
+[node name="CatalogCardActionPopup" parent="." instance=ExtResource("2_action_popup")]

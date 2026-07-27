@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://blrmm88nofu1t"]
+
+[ext_resource type="Script" uid="uid://maw23p0ajydy" path="res://scripts/ui/pages/kitchen_automation_panel.gd" id="1_panel_script"]
+
+[node name="KitchenAutomationPanel" type="VBoxContainer" unique_id=100866607]
+visible = false
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_type_variation = &"DessertAutomationPanel"
+theme_override_constants/separation = 6
+script = ExtResource("1_panel_script")
+
+[node name="Header" type="HBoxContainer" parent="." unique_id=1644994695]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CollapseButton" type="Button" parent="Header" unique_id=1796368068]
+custom_minimum_size = Vector2(34, 32)
+layout_mode = 2
+tooltip_text = "展开或折叠厨房排程"
+text = "▸"
+
+[node name="TitleLabel" type="Label" parent="Header" unique_id=1689961492]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "厨房排程夹板｜点击展开"
+vertical_alignment = 1
+
+[node name="PauseToggle" type="CheckButton" parent="Header" unique_id=1460093563]
+custom_minimum_size = Vector2(116, 32)
+layout_mode = 2
+theme_type_variation = &"DessertToggle"
+text = "全部暂停"
+
+[node name="LockedMessage" type="Label" parent="." unique_id=942496073]
+visible = false
+layout_mode = 2
+text = "尚未开放｜先解锁原料产地托管，再达到 Lv.4、累计 30 食谱星辉并完成“稳定出品”。"
+autowrap_mode = 2
+
+[node name="RuleList" type="ItemList" parent="." unique_id=153263254]
+visible = false
+custom_minimum_size = Vector2(0, 82)
+layout_mode = 2
+allow_reselect = true
+
+[node name="Editor" type="GridContainer" parent="." unique_id=375474383]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="RecipeLabel" type="Label" parent="Editor" unique_id=368642772]
+layout_mode = 2
+text = "甜品与设备"
+
+[node name="RecipeOption" type="OptionButton" parent="Editor" unique_id=639653267]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertDropdownInput"
+
+[node name="BatchLabel" type="Label" parent="Editor" unique_id=1713436801]
+layout_mode = 2
+text = "每轮批量"
+
+[node name="BatchOption" type="OptionButton" parent="Editor" unique_id=1942294297]
+layout_mode = 2
+theme_type_variation = &"DessertDropdownInput"
+
+[node name="TargetLabel" type="Label" parent="Editor" unique_id=302747458]
+layout_mode = 2
+text = "目标库存"
+
+[node name="TargetStockSpin" type="SpinBox" parent="Editor" unique_id=399653889]
+layout_mode = 2
+max_value = 999.0
+value = 10.0
+
+[node name="PriorityLabel" type="Label" parent="Editor" unique_id=403938235]
+layout_mode = 2
+text = "排程优先级"
+
+[node name="PriorityOption" type="OptionButton" parent="Editor" unique_id=463313049]
+layout_mode = 2
+theme_type_variation = &"DessertDropdownInput"
+
+[node name="ReserveLabel" type="Label" parent="Editor" unique_id=1348073677]
+layout_mode = 2
+text = "原料保留"
+vertical_alignment = 1
+
+[node name="MaterialReserveList" type="VBoxContainer" parent="Editor" unique_id=1462662144]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="SaveRuleButton" type="Button" parent="Editor" unique_id=276697313]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_type_variation = &"DessertPrimaryButton"
+text = "保存排程"
+
+[node name="RemoveRuleButton" type="Button" parent="Editor" unique_id=107491140]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_type_variation = &"DessertDangerButton"
+disabled = true
+text = "移除规则"
+
+[node name="StatusLabel" type="Label" parent="." unique_id=1988885113]
+visible = false
+layout_mode = 2
+theme_type_variation = &"DessertStatusTagNormal"
+text = "选择规则后可编辑排程。"
+autowrap_mode = 2

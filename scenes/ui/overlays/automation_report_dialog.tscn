@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/automation_report_dialog.gd" id="1_report_script"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/close_image_button.tscn" id="2_close_button"]
+
+[node name="AutomationReportDialog" type="AcceptDialog"]
+title = "自动化交班简报"
+theme_type_variation = &"DessertNoticeDialog"
+initial_position = 2
+borderless = true
+size = Vector2i(720, 600)
+min_size = Vector2i(620, 500)
+ok_button_text = "收好简报"
+script = ExtResource("1_report_script")
+
+[node name="DialogChrome" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="CloseButton" parent="DialogChrome" instance=ExtResource("2_close_button")]
+z_index = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 64.0
+grow_horizontal = 0
+
+[node name="DialogTitleLabel" type="Label" parent="DialogChrome"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -80.0
+offset_bottom = 64.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "自动化交班简报"
+vertical_alignment = 1
+
+[node name="ReportBody" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(580, 390)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 120.0
+offset_right = -8.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Content" type="VBoxContainer" parent="ReportBody"]
+custom_minimum_size = Vector2(580, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="HeaderSpacer" type="Control" parent="ReportBody/Content"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SummaryLabel" type="Label" parent="ReportBody/Content"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "离线 0 秒｜没有自动化事件"
+autowrap_mode = 2
+
+[node name="OutputHeading" type="Label" parent="ReportBody/Content"]
+layout_mode = 2
+text = "原料收获"
+
+[node name="OutputList" type="ItemList" parent="ReportBody/Content"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProductHeading" type="Label" parent="ReportBody/Content"]
+layout_mode = 2
+text = "甜品出品"
+
+[node name="ProductList" type="ItemList" parent="ReportBody/Content"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GrowthHeading" type="Label" parent="ReportBody/Content"]
+layout_mode = 2
+text = "配方成长"
+
+[node name="GrowthList" type="ItemList" parent="ReportBody/Content"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PauseHeading" type="Label" parent="ReportBody/Content"]
+layout_mode = 2
+text = "需要处理"
+
+[node name="PauseList" type="ItemList" parent="ReportBody/Content"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+
+[node name="NavigateButton" type="Button" parent="ReportBody/Content"]
+custom_minimum_size = Vector2(180, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"DessertRedActionButton"
+disabled = true
+text = "前往处理"

@@ -1,0 +1,2746 @@
+{
+  "meta": {
+    "version": "v1.0",
+    "description": "全售卖配方橱窗配置：占格数、形状、可旋转状态",
+    "shape_types": [
+      "迷你款",
+      "竖杯款",
+      "横盘款",
+      "中块款",
+      "大块款"
+    ],
+    "total_recipes": 166
+  },
+  "recipes": {
+    "rice_milk_drink": {
+      "recipe_name": "米浆饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "rich_rice_drink": {
+      "recipe_name": "醇香米浆",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "milk_rice_dew": {
+      "recipe_name": "牛奶米露",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "egg_milk_custard": {
+      "recipe_name": "蛋奶甜羹",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "caramel_pudding_steamed": {
+      "recipe_name": "焦糖布丁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "baked_rice_cake": {
+      "recipe_name": "烤米香饼",
+      "cell_count": 2,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "milk_crisp_cake": {
+      "recipe_name": "牛奶酥饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "soft_steamed_egg_cake": {
+      "recipe_name": "软蒸鸡蛋糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "white_sugar_rice_ball": {
+      "recipe_name": "白糖米圆子",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "chicken_steamed_dumpling": {
+      "recipe_name": "鸡肉蒸饺",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "beef_baked_pie": {
+      "recipe_name": "牛肉烤馅饼",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "chicken_rice_flour_cake": {
+      "recipe_name": "鸡肉米粉糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "butter_beef_baked_rice": {
+      "recipe_name": "黄油牛肉烤饭",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "steamed_meat_rice_cup": {
+      "recipe_name": "蒸肉米盏",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "white_sugar_rice_porridge": {
+      "recipe_name": "白糖米粥",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "rice_flour_steamed_cake": {
+      "recipe_name": "米粉蒸糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "sponge_cake": {
+      "recipe_name": "海绵杯蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "butter_cookie": {
+      "recipe_name": "黄油曲奇",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "milk_pudding": {
+      "recipe_name": "牛奶布丁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "cream_shortcake": {
+      "recipe_name": "鲜奶油小蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 9,
+          "shape_category": "大块款",
+          "default_shape": "3x3"
+        }
+      }
+    },
+    "chocolate_cookie": {
+      "recipe_name": "巧克力曲奇",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "blueberry_mousse": {
+      "recipe_name": "蓝莓慕斯杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "vanilla_scone": {
+      "recipe_name": "香草司康",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "strawberry_jelly": {
+      "recipe_name": "草莓果冻杯",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "banana_pound_cake": {
+      "recipe_name": "香蕉磅蛋糕",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "strawberry_mousse": {
+      "recipe_name": "草莓慕斯杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "blueberry_jelly": {
+      "recipe_name": "蓝莓果冻",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "chocolate_lava_cake": {
+      "recipe_name": "巧克力熔岩蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "可升级为2x3大份招牌款",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "vanilla_cream_puff": {
+      "recipe_name": "香草奶油泡芙",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "banana_rice_pudding": {
+      "recipe_name": "香蕉米布丁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "strawberry_cream_cake": {
+      "recipe_name": "草莓奶油蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": true,
+      "remark": "整只大蛋糕，默认招牌形态",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "blueberry_muffin": {
+      "recipe_name": "蓝莓麦芬",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "caramel_mousse": {
+      "recipe_name": "焦糖慕斯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "berry_rice_drink": {
+      "recipe_name": "莓果米浆饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "vanilla_panna_cotta": {
+      "recipe_name": "香草奶冻",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "banana_baked_pancake": {
+      "recipe_name": "香蕉烤松饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "chocolate_mousse": {
+      "recipe_name": "巧克力慕斯杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "berry_rice_flour_cake": {
+      "recipe_name": "莓果米粉蒸糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "caramel_brulee": {
+      "recipe_name": "焦糖烤布蕾",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "banana_milk_drink": {
+      "recipe_name": "香蕉牛奶饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "blueberry_cream_tart": {
+      "recipe_name": "蓝莓奶油塔",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "chicken_cream_soup": {
+      "recipe_name": "鸡肉奶油浓汤",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "banana_pancake": {
+      "recipe_name": "香蕉松饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "orange_crepe": {
+      "recipe_name": "橙香可丽饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "lemon_tart": {
+      "recipe_name": "柠檬小塔",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "peach_jelly": {
+      "recipe_name": "桃子果冻杯",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "matcha_pudding": {
+      "recipe_name": "抹茶布丁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "coffee_mousse": {
+      "recipe_name": "咖啡慕斯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "redbean_pancake": {
+      "recipe_name": "红豆煎饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "cheesecake": {
+      "recipe_name": "芝士蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 9,
+          "shape_category": "大块款",
+          "default_shape": "3x3"
+        }
+      }
+    },
+    "sea_salt_caramel_pudding": {
+      "recipe_name": "海盐焦糖布丁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "matcha_mochi": {
+      "recipe_name": "抹茶糯米团",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "black_sesame_roll": {
+      "recipe_name": "黑芝麻糯米卷",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "mango_cream_cup": {
+      "recipe_name": "芒果奶油杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "apple_pie": {
+      "recipe_name": "苹果派",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "lemon_madeleine": {
+      "recipe_name": "柠檬玛德琳",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "orange_chiffon_cake": {
+      "recipe_name": "橙香戚风蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 9,
+          "shape_category": "大块款",
+          "default_shape": "3x3"
+        }
+      }
+    },
+    "peach_mousse": {
+      "recipe_name": "蜜桃慕斯杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "matcha_cookie": {
+      "recipe_name": "抹茶曲奇",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "matcha_redbean_mousse": {
+      "recipe_name": "抹茶红豆慕斯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "coffee_pound_cake": {
+      "recipe_name": "咖啡磅蛋糕",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "red_bean_rice_cake": {
+      "recipe_name": "红豆沙米糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "red_bean_milk_drink": {
+      "recipe_name": "红豆牛奶饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "mango_glutinous_rice_cake": {
+      "recipe_name": "芒果糯米糍",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "black_sesame_soup": {
+      "recipe_name": "黑芝麻糊",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "black_sesame_crisp_cake": {
+      "recipe_name": "黑芝麻酥饼",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "pumpkin_pie": {
+      "recipe_name": "南瓜派",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "pumpkin_steamed_cake": {
+      "recipe_name": "南瓜蒸糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "honey_lemon_drink": {
+      "recipe_name": "蜂蜜柠檬饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "honey_sponge_cake": {
+      "recipe_name": "蜂蜜海绵蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 9,
+          "shape_category": "大块款",
+          "default_shape": "3x3"
+        }
+      }
+    },
+    "sea_salt_chocolate_cookie": {
+      "recipe_name": "海盐巧克力曲奇",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "cheese_chicken_baked_rice": {
+      "recipe_name": "芝士鸡肉焗饭",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "beef_cheese_pie": {
+      "recipe_name": "牛肉芝士派",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "pumpkin_rice_drink": {
+      "recipe_name": "南瓜米浆饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "mango_milk_drink": {
+      "recipe_name": "芒果牛奶饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "red_bean_glutinous_rice_ball": {
+      "recipe_name": "红豆糯米团",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "cheese_baked_pumpkin": {
+      "recipe_name": "芝士焗南瓜",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "coffee_muffin": {
+      "recipe_name": "咖啡玛芬",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "apple_steamed_rice_cake": {
+      "recipe_name": "苹果蒸米糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "honey_yogurt": {
+      "recipe_name": "蜂蜜酸奶杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "apple_crumble": {
+      "recipe_name": "苹果坚果酥",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "cocoa_brownie": {
+      "recipe_name": "可可布朗尼",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "matcha_redbean": {
+      "recipe_name": "抹茶红豆杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "mint_cocoa_cup": {
+      "recipe_name": "薄荷可可杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "almond_chocolate_tart": {
+      "recipe_name": "巧克力杏仁塔",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "pumpkin_pudding": {
+      "recipe_name": "南瓜布丁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "oats_yogurt_bowl": {
+      "recipe_name": "燕麦酸奶碗",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "honey_lemon_jelly": {
+      "recipe_name": "蜂蜜柠檬冻",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "sea_salt_cream_coffee": {
+      "recipe_name": "海盐奶盖咖啡",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "chestnut_pound_cake": {
+      "recipe_name": "栗香磅蛋糕",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "chestnut_mousse": {
+      "recipe_name": "栗子慕斯杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "sugar_roasted_chestnut": {
+      "recipe_name": "糖烤栗子",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "chestnut_glutinous_rice_cake": {
+      "recipe_name": "栗子糯米糍",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "oats_cookie": {
+      "recipe_name": "燕麦曲奇",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "oats_baked_pudding": {
+      "recipe_name": "燕麦烤布丁",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "nut_oats_crisp": {
+      "recipe_name": "坚果燕麦酥",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "berry_yogurt_ice": {
+      "recipe_name": "莓果酸奶冰酪",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "mango_yogurt_cup": {
+      "recipe_name": "芒果酸奶杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "yogurt_cheesecake": {
+      "recipe_name": "酸奶芝士蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 9,
+          "shape_category": "大块款",
+          "default_shape": "3x3"
+        }
+      }
+    },
+    "lemon_yogurt_muffin": {
+      "recipe_name": "柠檬酸奶麦芬",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "nuts_pound_cake": {
+      "recipe_name": "坚果磅蛋糕",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "sea_salt_nuts_cookie": {
+      "recipe_name": "海盐坚果曲奇",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "nuts_cocoa_brownie": {
+      "recipe_name": "坚果可可布朗尼",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "mint_lemon_drink": {
+      "recipe_name": "薄荷柠檬饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "mint_mousse": {
+      "recipe_name": "薄荷慕斯杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "mint_chocolate_pudding": {
+      "recipe_name": "薄荷巧克力布丁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "mint_rice_drink": {
+      "recipe_name": "薄荷米浆饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "cocoa_steamed_cake": {
+      "recipe_name": "可可蒸蛋糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "cocoa_panna_cotta": {
+      "recipe_name": "可可奶冻",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "cocoa_glutinous_rice_cake": {
+      "recipe_name": "可可糯米糍",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "hot_cocoa_drink": {
+      "recipe_name": "热可可饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "nut_chicken_patty": {
+      "recipe_name": "坚果鸡肉饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "chestnut_chicken_baked_rice": {
+      "recipe_name": "栗子鸡肉焗饭",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "beef_nut_pie": {
+      "recipe_name": "牛肉坚果派",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "oats_milk_porridge": {
+      "recipe_name": "燕麦牛奶粥",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "chestnut_redbean_steamed_cake": {
+      "recipe_name": "栗子红豆蒸糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "nut_pumpkin_cake": {
+      "recipe_name": "坚果南瓜饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "mint_yogurt_cup": {
+      "recipe_name": "薄荷酸奶杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "black_sesame_oats_soup": {
+      "recipe_name": "黑芝麻燕麦糊",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "community_parfait": {
+      "recipe_name": "邻街招牌芭菲",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "可升级为2x3大份招牌款",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3"
+        }
+      }
+    },
+    "mango_cheese_cup": {
+      "recipe_name": "芒果芝士杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "chestnut_tart": {
+      "recipe_name": "栗子挞",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "可升级为2x3大份招牌款",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "black_tea_panna": {
+      "recipe_name": "红茶奶冻",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "apple_cinnamon_pie": {
+      "recipe_name": "苹果肉桂派",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "chocolate_banana_roll": {
+      "recipe_name": "巧克力香蕉卷",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "black_tea_latte": {
+      "recipe_name": "醇香红茶拿铁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "green_tea_latte": {
+      "recipe_name": "清润绿茶拿铁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "lemon_honey_black_tea": {
+      "recipe_name": "柠檬蜂蜜红茶",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "mint_iced_green_tea": {
+      "recipe_name": "薄荷冰绿茶",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "black_tea_butter_cookie": {
+      "recipe_name": "红茶黄油曲奇",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "black_tea_chiffon_cake": {
+      "recipe_name": "红茶戚风蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 9,
+          "shape_category": "大块款",
+          "default_shape": "3x3"
+        }
+      }
+    },
+    "green_tea_panna_cotta": {
+      "recipe_name": "绿茶奶冻",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "black_tea_mousse": {
+      "recipe_name": "红茶慕斯杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "green_tea_redbean_mochi": {
+      "recipe_name": "绿茶红豆糯米糍",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "black_tea_pound_cake": {
+      "recipe_name": "红茶磅蛋糕",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "black_tea_light_cheesecake": {
+      "recipe_name": "红茶轻芝士蛋糕",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 9,
+          "shape_category": "大块款",
+          "default_shape": "3x3"
+        }
+      }
+    },
+    "honey_orange_black_tea": {
+      "recipe_name": "蜜橙红茶饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "green_tea_lemon_jelly": {
+      "recipe_name": "绿茶冻柠杯",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "black_tea_brulee": {
+      "recipe_name": "红茶烤布蕾",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "nut_black_tea_crisp": {
+      "recipe_name": "坚果红茶酥",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "green_tea_yogurt_cup": {
+      "recipe_name": "绿茶酸奶杯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "black_tea_rice_steamed_cake": {
+      "recipe_name": "红茶米粉蒸糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "black_tea_cocoa_cookie": {
+      "recipe_name": "红茶可可曲奇",
+      "cell_count": 1,
+      "shape_category": "迷你款",
+      "default_shape": "1x1",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 2,
+          "shape_category": "横盘款",
+          "default_shape": "1x2",
+          "rotatable": true
+        }
+      }
+    },
+    "green_tea_rice_drink": {
+      "recipe_name": "绿茶米浆饮",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "black_tea_chicken_baked_rice": {
+      "recipe_name": "红茶鸡肉焗饭",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "oats_black_tea_cake": {
+      "recipe_name": "燕麦红茶饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "black_tea_caramel_mousse": {
+      "recipe_name": "红茶焦糖慕斯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "green_tea_steamed_cake": {
+      "recipe_name": "绿茶蒸蛋糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "black_tea_nut_brownie": {
+      "recipe_name": "红茶坚果布朗尼",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "可升级为2x3大份招牌款",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "egg_rice_flour_custard": {
+      "recipe_name": "蛋香米粉羹",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "butter_chicken_steamed_cake": {
+      "recipe_name": "黄油鸡肉蒸糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "chicken_wheat_porridge": {
+      "recipe_name": "鸡肉麦仁粥",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "honey_peach_jelly": {
+      "recipe_name": "蜂蜜桃子冻",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "honey_redbean_steamed_cake": {
+      "recipe_name": "蜂蜜红豆蒸糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "duck_egg_pumpkin_pudding": {
+      "recipe_name": "鸭蛋南瓜布丁",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "coffee_duck_egg_cake": {
+      "recipe_name": "咖啡鸭蛋糕",
+      "cell_count": 3,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "shape_cells": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true,
+          "shape_cells": []
+        }
+      }
+    },
+    "duck_egg_banana_griddle_cake": {
+      "recipe_name": "鸭蛋香蕉煎糕",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "cheese_duck_baked_rice": {
+      "recipe_name": "芝士鸭肉焗饭",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "sea_salt_duck_rice_cup": {
+      "recipe_name": "海盐鸭肉米盏",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "pumpkin_duck_pancake": {
+      "recipe_name": "南瓜鸭肉煎饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "goat_milk_black_tea_jelly": {
+      "recipe_name": "羊奶红茶冻",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "matcha_goat_milk_mousse": {
+      "recipe_name": "抹茶羊奶慕斯",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "goat_milk_oats_porridge": {
+      "recipe_name": "羊奶燕麦粥",
+      "cell_count": 2,
+      "shape_category": "竖杯款",
+      "default_shape": "2x1",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {}
+      }
+    },
+    "chestnut_mutton_baked_rice": {
+      "recipe_name": "栗子羊肉焗饭",
+      "cell_count": 4,
+      "shape_category": "中块款",
+      "default_shape": "2x2",
+      "rotatable": false,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 6,
+          "shape_category": "大块款",
+          "default_shape": "2x3",
+          "rotatable": true
+        }
+      }
+    },
+    "black_tea_mutton_pastry": {
+      "recipe_name": "红茶羊肉酥饼",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    },
+    "mutton_glutinous_shumai": {
+      "recipe_name": "羊肉糯米烧卖",
+      "cell_count": 2,
+      "shape_category": "横盘款",
+      "default_shape": "1x2",
+      "rotatable": true,
+      "remark": "",
+      "growth_variants": {
+        "popular": {},
+        "signature": {
+          "cell_count": 4,
+          "shape_category": "中块款",
+          "default_shape": "2x2"
+        }
+      }
+    }
+  }
+}

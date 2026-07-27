@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/recipe_growth_choice_dialog.gd" id="1_growth_choice"]
+
+[node name="RecipeGrowthChoiceDialog" type="ConfirmationDialog"]
+title = "配方成长选择"
+theme_type_variation = &"DessertNoticeDialog"
+initial_position = 2
+exclusive = true
+size = Vector2i(760, 560)
+min_size = Vector2i(680, 500)
+ok_button_text = "确认特性"
+cancel_button_text = "稍后选择"
+script = ExtResource("1_growth_choice")
+
+[node name="ChoiceBody" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(700, 430)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 18.0
+offset_right = -20.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChoiceContent" type="VBoxContainer" parent="ChoiceBody"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="ChoiceBody/ChoiceContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "配方成长为人气款"
+horizontal_alignment = 1
+
+[node name="InstructionLabel" type="Label" parent="ChoiceBody/ChoiceContent"]
+layout_mode = 2
+text = "选择一个永久成长特性；选择前可对比本轮经营影响。"
+horizontal_alignment = 1
+
+[node name="CandidateList" type="ItemList" parent="ChoiceBody/ChoiceContent"]
+custom_minimum_size = Vector2(0, 116)
+layout_mode = 2
+size_flags_horizontal = 3
+allow_reselect = true
+
+[node name="ImpactLabel" type="RichTextLabel" parent="ChoiceBody/ChoiceContent"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "30 秒预计成交与收益对比"
+fit_content = true
+scroll_active = false

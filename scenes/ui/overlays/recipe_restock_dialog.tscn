@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/recipe_restock_dialog.gd" id="1_script"]
+
+[node name="RecipeRestockDialog" type="ConfirmationDialog"]
+title = "配方一键补货"
+theme_type_variation = &"DessertNoticeDialog"
+initial_position = 2
+min_size = Vector2i(560, 420)
+ok_button_text = "确认补货"
+cancel_button_text = "取消"
+script = ExtResource("1_script")
+
+[node name="Body" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(520, 340)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 528.0
+offset_bottom = 348.0
+theme_override_constants/separation = 10
+
+[node name="RecipeLabel" type="Label" parent="Body"]
+layout_mode = 2
+text = "补货范围"
+
+[node name="RestockList" type="RichTextLabel" parent="Body"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 3
+fit_content = false
+
+[node name="TotalLabel" type="Label" parent="Body"]
+layout_mode = 2
+text = "本次可采购合计：0 金币"
+
+[node name="HintLabel" type="Label" parent="Body"]
+layout_mode = 2
+autowrap_mode = 2

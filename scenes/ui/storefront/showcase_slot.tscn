@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3 uid="uid://b67w26pv0nnl6"]
+
+[ext_resource type="Script" path="res://scripts/ui/storefront/showcase_slot.gd" id="1_showcase_slot"]
+
+[node name="ShowcaseSlot" type="Button" unique_id=1412321618]
+custom_minimum_size = Vector2(72, 72)
+self_modulate = Color(1, 1, 1, 0.76)
+clip_contents = true
+theme_type_variation = &"DessertShowcaseSlot"
+script = ExtResource("1_showcase_slot")
+
+[node name="RecipeIcon" type="TextureRect" parent="." unique_id=2107328379]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="SaleCompleteFlash" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.96, 0.76, 0)
+
+[node name="MasterworkGlow" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.79, 0.3, 0.15)
+
+[node name="MasterworkFrame" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MasterworkSeal" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -24.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = 24.0
+grow_horizontal = 0
+mouse_filter = 2
+text = "名"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_colors/font_color = Color(1, 0.91, 0.55, 1)
+theme_override_colors/font_shadow_color = Color(0.08, 0.04, 0.01, 0.9)
+theme_override_font_sizes/font_size = 10
+
+[node name="PreviewTint" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.2, 0.75, 0.35, 0.16)
+
+[node name="GroupOutline" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StatusBadge" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -18.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"DessertShowcaseBadge"
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true

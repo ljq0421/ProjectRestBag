@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://bk8f2vpyb2vg0"]
+
+[node name="CatalogRecipeCard" type="Button" unique_id=279857911]
+custom_minimum_size = Vector2(112, 112)
+theme_type_variation = &"DessertItemSlot"
+clip_contents = true
+clip_text = true
+
+[node name="RecipeIcon" type="TextureRect" parent="." unique_id=728606980]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MasterworkGlow" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.78, 0.28, 0.13)
+
+[node name="MasterworkFrame" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StageBadge" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 69.0
+offset_bottom = 29.0
+mouse_filter = 2
+text = "试作"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_colors/font_color = Color(0.96, 0.91, 0.8, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.03, 0.05, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+
+[node name="MasterworkBadge" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -82.0
+offset_top = -31.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+text = "名作 L1"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_colors/font_color = Color(1, 0.827, 0.416, 1)
+theme_override_colors/font_shadow_color = Color(0.02, 0.03, 0.05, 0.9)
+
+[node name="MasterworkSeal" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -35.0
+offset_right = 39.0
+offset_bottom = -6.0
+grow_vertical = 0
+mouse_filter = 2
+text = "印"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_colors/font_color = Color(1, 0.91, 0.55, 1)

@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/catalog_card_action_popup.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://resources/ui/skin/neighborhood_dessert/runtime/panel_v1.png" id="2_popup_background"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_catalog_popup"]
+texture = ExtResource("2_popup_background")
+texture_margin_left = 52.0
+texture_margin_top = 52.0
+texture_margin_right = 52.0
+texture_margin_bottom = 52.0
+
+[node name="CatalogCardActionPopup" type="PopupPanel"]
+size = Vector2i(460, 560)
+min_size = Vector2i(460, 560)
+max_size = Vector2i(460, 560)
+unresizable = true
+theme_override_styles/panel = SubResource("StyleBox_catalog_popup")
+script = ExtResource("1_script")
+
+[node name="PopupMargin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PopupContent" type="VBoxContainer" parent="PopupMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PopupTitle" type="Label" parent="PopupMargin/PopupContent"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "配方详情"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 22
+
+[node name="DetailScroll" type="ScrollContainer" parent="PopupMargin/PopupContent"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="DetailText" type="RichTextLabel" parent="PopupMargin/PopupContent/DetailScroll"]
+custom_minimum_size = Vector2(410, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="ActionRow" type="HBoxContainer" parent="PopupMargin/PopupContent"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ClaimRewardButton" type="Button" parent="PopupMargin/PopupContent/ActionRow"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "星辉已领取"
+theme_type_variation = &"DessertSecondaryButton"
+
+[node name="MakeButton" type="Button" parent="PopupMargin/PopupContent/ActionRow"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "前往制作"
+theme_type_variation = &"DessertPrimaryButton"

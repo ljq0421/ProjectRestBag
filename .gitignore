@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/.superpowers
+
+# Python test-tool caches
+__pycache__/
+/tmp
+/.worktrees/

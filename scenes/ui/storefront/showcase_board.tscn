@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://dleltqjhgrag4"]
+
+[ext_resource type="Script" uid="uid://rheccqavnma6" path="res://scripts/ui/storefront/showcase_board.gd" id="1_showcase_board"]
+[ext_resource type="Texture2D" uid="uid://dfajx537d5ajs" path="res://resources/ui/icons/storefront/weather_clear.svg" id="3_weather_clear"]
+[ext_resource type="Texture2D" uid="uid://bdahx0d5wl4ag" path="res://resources/ui/icons/storefront/countdown_alarm.svg" id="7_countdown_alarm"]
+[ext_resource type="Texture2D" uid="uid://btunkmou4qtdd" path="res://resources/ui/icons/storefront/countdown_hand.svg" id="8_countdown_hand"]
+[ext_resource type="Script" uid="uid://bjatd3m8igefs" path="res://scripts/ui/storefront/live_countdown_icon.gd" id="9_live_countdown"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_showcase_header_overlay"]
+bg_color = Color(1, 0.956863, 0.835294, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65098, 0.360784, 0.203922, 0.32)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="ShowcasePanel" type="VBoxContainer" unique_id=1002291338]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 100.0
+theme_type_variation = &"DessertShowcaseBoard"
+theme_override_constants/separation = 0
+script = ExtResource("1_showcase_board")
+showcase_header_overlay_style = SubResource("StyleBox_showcase_header_overlay")
+
+[node name="ShowcaseTitle" type="Label" parent="." unique_id=267411509]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "橱窗"
+horizontal_alignment = 1
+
+[node name="RoundControlBar" type="HBoxContainer" parent="." unique_id=1747516865]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RoundStateLabel" type="Label" parent="RoundControlBar" unique_id=1598607949]
+custom_minimum_size = Vector2(72, 30)
+layout_mode = 2
+text = "调整中"
+vertical_alignment = 1
+
+[node name="WeatherForecastIcon" type="TextureRect" parent="RoundControlBar" unique_id=737866165]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+tooltip_text = "天气预报"
+texture = ExtResource("3_weather_clear")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CountdownIcon" type="Control" parent="RoundControlBar" unique_id=640388730]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+tooltip_text = "经营倒计时：30.0 秒"
+script = ExtResource("9_live_countdown")
+
+[node name="AlarmFace" type="TextureRect" parent="RoundControlBar/CountdownIcon" unique_id=1952872793]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_countdown_alarm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SecondHand" type="TextureRect" parent="RoundControlBar/CountdownIcon" unique_id=562038209]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(15, 15)
+mouse_filter = 2
+texture = ExtResource("8_countdown_hand")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HeatBar" type="ProgressBar" parent="RoundControlBar" unique_id=1067538130]
+custom_minimum_size = Vector2(150, 24)
+layout_mode = 2
+show_percentage = false
+
+[node name="RulebookButton" type="Button" parent="RoundControlBar" unique_id=1192388295]
+custom_minimum_size = Vector2(96, 30)
+layout_mode = 2
+tooltip_text = "查看区域、相邻、套装、冲突、变体、成长、道具与主题规则"
+theme_type_variation = &"DessertSecondaryButton"
+text = "构筑规则"
+
+[node name="StartRoundButton" type="Button" parent="RoundControlBar" unique_id=1149769270]
+custom_minimum_size = Vector2(104, 30)
+layout_mode = 2
+theme_type_variation = &"DessertRedCompactButton"
+text = "开始营业"
+
+[node name="SetProgressLabel" type="Label" parent="." unique_id=1034752022]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.96, 0.82, 0.46, 1)
+theme_override_font_sizes/font_size = 13
+text = "套装进度"
+autowrap_mode = 3
+text_overrun_behavior = 3
+max_lines_visible = 2
+
+[node name="ShowcasePulseSummary" type="Label" parent="." unique_id=1849259136]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.22, 1)
+theme_override_font_sizes/font_size = 14
+text = "布局调整｜热度 0｜可售库存 0"
+horizontal_alignment = 2
+
+[node name="TaskProgressPanel" type="PanelContainer" parent="." unique_id=96625209]
+visible = false
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TaskProgressLabel" type="Label" parent="TaskProgressPanel" unique_id=182335955]
+layout_mode = 2
+text = "合同进度"
+autowrap_mode = 2
+
+[node name="ExpansionToolbar" type="PanelContainer" parent="." unique_id=2030344090]
+visible = false
+layout_mode = 2
+theme_type_variation = &"DessertPanel"
+
+[node name="ExpansionContent" type="VBoxContainer" parent="ExpansionToolbar" unique_id=2035102133]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ExpansionToolRow" type="HBoxContainer" parent="ExpansionToolbar/ExpansionContent" unique_id=1639081276]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ExpansionModeLabel" type="Label" parent="ExpansionToolbar/ExpansionContent/ExpansionToolRow" unique_id=1861740215]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "扩建模式｜绿色可选，金色已选"
+
+[node name="CellToolButton" type="Button" parent="ExpansionToolbar/ExpansionContent/ExpansionToolRow" unique_id=1419225207]
+custom_minimum_size = Vector2(88, 28)
+layout_mode = 2
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "单格/N格"
+
+[node name="RowToolButton" type="Button" parent="ExpansionToolbar/ExpansionContent/ExpansionToolRow" unique_id=726358451]
+custom_minimum_size = Vector2(72, 28)
+layout_mode = 2
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "购买行"
+
+[node name="ColumnToolButton" type="Button" parent="ExpansionToolbar/ExpansionContent/ExpansionToolRow" unique_id=705887326]
+custom_minimum_size = Vector2(72, 28)
+layout_mode = 2
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "购买列"
+
+[node name="ExpansionQuoteLabel" type="Label" parent="ExpansionToolbar/ExpansionContent" unique_id=1522504360]
+layout_mode = 2
+text = "点击与已开放区域相邻的格子开始选择"
+autowrap_mode = 2
+
+[node name="ExpansionActionRow" type="HBoxContainer" parent="ExpansionToolbar/ExpansionContent" unique_id=1371881773]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="ExpansionConfirmButton" type="Button" parent="ExpansionToolbar/ExpansionContent/ExpansionActionRow" unique_id=947543947]
+custom_minimum_size = Vector2(104, 28)
+layout_mode = 2
+theme_type_variation = &"DessertRedCompactButton"
+disabled = true
+text = "确认购买"
+
+[node name="ExpansionCancelButton" type="Button" parent="ExpansionToolbar/ExpansionContent/ExpansionActionRow" unique_id=2142879535]
+custom_minimum_size = Vector2(80, 28)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "退出扩建"
+
+[node name="ShowcaseGrid" type="GridContainer" parent="." unique_id=1052985100]
+custom_minimum_size = Vector2(1008, 864)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 14

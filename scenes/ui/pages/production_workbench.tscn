@@ -1,0 +1,202 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pages/production_workbench.gd" id="1_workbench"]
+[ext_resource type="Texture2D" path="res://resources/device_icons/mixer.png" id="2_mixer"]
+[ext_resource type="Texture2D" path="res://resources/ui/production_zone/production_completed_shelf_v2.png" id="3_completed_shelf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_empty"]
+bg_color = Color(1, 0.976471, 0.92549, 0.82)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.741176, 0.615686, 0.517647, 0.6)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 18.0
+content_margin_top = 18.0
+content_margin_right = 18.0
+content_margin_bottom = 18.0
+
+[node name="ProductionWorkbench" type="VBoxContainer"]
+custom_minimum_size = Vector2(0, 766)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+theme_override_constants/separation = 10
+script = ExtResource("1_workbench")
+
+[node name="ProductionQueueHeader" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleIcon" type="TextureRect" parent="ProductionQueueHeader"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_mixer")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QueueTitleLabel" type="Label" parent="ProductionQueueHeader"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "制作队列"
+vertical_alignment = 1
+
+[node name="SearchField" type="LineEdit" parent="ProductionQueueHeader"]
+custom_minimum_size = Vector2(220, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "搜索名称或材料"
+clear_button_enabled = true
+
+[node name="AutomationPausedLabel" type="Label" parent="ProductionQueueHeader"]
+visible = false
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.760784, 0.313726, 0.258824, 1)
+theme_override_font_sizes/font_size = 11
+text = "自动化暂停"
+vertical_alignment = 1
+
+[node name="BulkActionButton" type="MenuButton" parent="ProductionQueueHeader"]
+custom_minimum_size = Vector2(108, 40)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "批量操作"
+
+[node name="KitchenScheduleButton" type="Button" parent="ProductionQueueHeader"]
+custom_minimum_size = Vector2(116, 40)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "自动排程"
+
+[node name="ProductionColumns" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(820, 702)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="CompletedColumn" type="Control" parent="ProductionColumns"]
+custom_minimum_size = Vector2(104, 702)
+layout_mode = 2
+
+[node name="ShelfFrame" type="TextureRect" parent="ProductionColumns/CompletedColumn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_completed_shelf")
+expand_mode = 1
+
+[node name="CompletedScroll" type="ScrollContainer" parent="ProductionColumns/CompletedColumn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 26.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 0
+horizontal_scroll_mode = 0
+
+[node name="CompletedCenter" type="CenterContainer" parent="ProductionColumns/CompletedColumn/CompletedScroll"]
+custom_minimum_size = Vector2(92, 628)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CompletedCells" type="VBoxContainer" parent="ProductionColumns/CompletedColumn/CompletedScroll/CompletedCenter"]
+custom_minimum_size = Vector2(68, 628)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="PreviousPageButton" type="Button" parent="ProductionColumns/CompletedColumn"]
+layout_mode = 0
+offset_left = 18.0
+offset_right = 86.0
+offset_bottom = 26.0
+tooltip_text = "上一页待上架商品"
+theme_type_variation = &"DessertSecondaryButton"
+theme_override_font_sizes/font_size = 13
+text = "▲"
+
+[node name="PageLabel" type="Label" parent="ProductionColumns/CompletedColumn"]
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -44.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.352941, 0.203922, 0.117647, 1)
+theme_override_colors/font_outline_color = Color(1, 0.921569, 0.705882, 0.9)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 12
+text = "0 / 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextPageButton" type="Button" parent="ProductionColumns/CompletedColumn"]
+layout_mode = 1
+anchors_preset = 12
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -26.0
+offset_right = 34.0
+grow_horizontal = 2
+grow_vertical = 0
+tooltip_text = "下一页待上架商品"
+theme_type_variation = &"DessertSecondaryButton"
+theme_override_font_sizes/font_size = 13
+text = "▼"
+
+[node name="QueueColumn" type="Control" parent="ProductionColumns"]
+custom_minimum_size = Vector2(708, 702)
+layout_mode = 2
+
+[node name="QueueScroll" type="ScrollContainer" parent="ProductionColumns/QueueColumn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 1
+horizontal_scroll_mode = 0
+
+[node name="QueueRows" type="VBoxContainer" parent="ProductionColumns/QueueColumn/QueueScroll"]
+custom_minimum_size = Vector2(696, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="EmptyQueuePanel" type="PanelContainer" parent="ProductionColumns/QueueColumn/QueueScroll/QueueRows"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_empty")
+
+[node name="EmptyQueueLabel" type="Label" parent="ProductionColumns/QueueColumn/QueueScroll/QueueRows/EmptyQueuePanel"]
+layout_mode = 2
+text = "没有匹配的配方"
+horizontal_alignment = 1
+vertical_alignment = 1

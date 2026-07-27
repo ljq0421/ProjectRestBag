@@ -1,0 +1,165 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/tutorial_guide_overlay.gd" id="1_tutorial_guide"]
+
+[node name="TutorialGuideOverlay" type="Control"]
+visible = false
+z_index = 90
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_tutorial_guide")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.160784, 0.0941176, 0.0627451, 0.18)
+
+[node name="Arrow" type="Polygon2D" parent="."]
+visible = false
+z_index = 2
+polygon = PackedVector2Array(-7, -22, 7, -22, 7, 2, 16, 2, 0, 22, -16, 2, -7, 2)
+color = Color(0.9, 0.321569, 0.298039, 1)
+
+[node name="GrandmaIconButton" type="Button" parent="."]
+visible = false
+z_index = 3
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+mouse_filter = 0
+theme_type_variation = &"DessertLegacyPrimaryButton"
+theme_override_font_sizes/font_size = 11
+tooltip_text = "点击查看外婆的当前指引"
+text = "外婆"
+
+[node name="DialoguePanel" type="PanelContainer" parent="."]
+visible = false
+z_index = 3
+custom_minimum_size = Vector2(0, 118)
+layout_mode = 0
+offset_right = 700.0
+offset_bottom = 118.0
+mouse_filter = 0
+theme_type_variation = &"DessertSectionPanel"
+
+[node name="DialogueContent" type="HBoxContainer" parent="DialoguePanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PortraitFrame" type="PanelContainer" parent="DialoguePanel/DialogueContent"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_type_variation = &"DessertPanel"
+
+[node name="PortraitSilhouette" type="PanelContainer" parent="DialoguePanel/DialogueContent/PortraitFrame"]
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"DessertStatusTagWarning"
+
+[node name="SilhouetteLabel" type="Label" parent="DialoguePanel/DialogueContent/PortraitFrame/PortraitSilhouette"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.960784, 0.901961, 1)
+theme_override_font_sizes/font_size = 12
+text = "外婆"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DialogueBody" type="VBoxContainer" parent="DialoguePanel/DialogueContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="SpeakerRow" type="HBoxContainer" parent="DialoguePanel/DialogueContent/DialogueBody"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SpeakerLabel" type="Label" parent="DialoguePanel/DialogueContent/DialogueBody/SpeakerRow"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.478431, 0.235294, 0.145098, 1)
+theme_override_font_sizes/font_size = 15
+text = "外婆"
+vertical_alignment = 1
+
+[node name="StepLabel" type="Label" parent="DialoguePanel/DialogueContent/DialogueBody/SpeakerRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.65098, 0.419608, 0.309804, 1)
+theme_override_font_sizes/font_size = 11
+text = "备好种子"
+vertical_alignment = 1
+
+[node name="DialogueLabel" type="Label" parent="DialoguePanel/DialogueContent/DialogueBody"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.258824, 0.180392, 0.141176, 1)
+theme_override_font_sizes/font_size = 13
+text = "新店开张，先从一袋水稻种子开始吧。"
+autowrap_mode = 2
+vertical_alignment = 1
+max_lines_visible = 2
+text_overrun_behavior = 3
+
+[node name="ActionRow" type="HBoxContainer" parent="DialoguePanel/DialogueContent/DialogueBody"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SkipButton" type="Button" parent="DialoguePanel/DialogueContent/DialogueBody/ActionRow"]
+custom_minimum_size = Vector2(84, 26)
+layout_mode = 2
+mouse_filter = 0
+theme_type_variation = &"DessertSecondaryButton"
+theme_override_font_sizes/font_size = 11
+text = "我自己来"
+
+[node name="ActionSpacer" type="Control" parent="DialoguePanel/DialogueContent/DialogueBody/ActionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ConfirmButton" type="Button" parent="DialoguePanel/DialogueContent/DialogueBody/ActionRow"]
+custom_minimum_size = Vector2(112, 26)
+layout_mode = 2
+mouse_filter = 0
+theme_type_variation = &"DessertPrimaryButton"
+theme_override_font_sizes/font_size = 11
+text = "我知道了"
+
+[node name="CloseButton" type="Button" parent="DialoguePanel/DialogueContent/DialogueBody/ActionRow"]
+visible = false
+custom_minimum_size = Vector2(104, 26)
+layout_mode = 2
+mouse_filter = 0
+theme_type_variation = &"DessertLegacyPrimaryButton"
+theme_override_font_sizes/font_size = 11
+text = "结束引导"
+
+[node name="RestartButton" type="Button" parent="DialoguePanel/DialogueContent/DialogueBody/ActionRow"]
+visible = false
+custom_minimum_size = Vector2(104, 26)
+layout_mode = 2
+mouse_filter = 0
+theme_type_variation = &"DessertSecondaryButton"
+theme_override_font_sizes/font_size = 11
+text = "再来一遍"

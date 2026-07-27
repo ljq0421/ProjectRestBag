@@ -1,0 +1,246 @@
+# 食材图标批次 3/4
+batch_instruction: >
+  Generate 16 separate 512x512 PNG images, exactly one image per item.
+  Use each item's filename exactly. Do not create a collage, contact sheet, sprite sheet,
+  comparison board, or multi-panel image. Keep visual style and apparent scale consistent
+  across all 16 images.
+
+items:
+  - filename: cheese.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One warm golden wedge of semi-hard cheese with a few
+      rounded holes and a creamy cut face, no wrapper, board, knife, grapes, or text. Avoid: photorealistic, 3D
+      render, realistic food photography, thin outline, messy sketch, complex scene, kitchen, farm landscape,
+      table surface, basket, decorative frame, branded packaging, readable label, text, Chinese characters,
+      numbers, watermark, logo, visible grid, UI frame, gradient background, textured background, cast shadow,
+      drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal, cropped subject, low contrast.
+  - filename: yogurt.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One small plain ceramic cup filled with smooth white
+      yogurt, a single creamy swirl visible on top, no label, foil lid, fruit, spoon, or garnish. Avoid:
+      photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene, kitchen,
+      farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text, Chinese
+      characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured background, cast
+      shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal, cropped subject, low
+      contrast.
+  - filename: strawberry.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One ripe heart-shaped strawberry, bright red with evenly
+      spaced golden seeds and a fresh green leafy crown, whole uncut fruit, no flower, basket, or extra berries.
+      Avoid: photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene,
+      kitchen, farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text,
+      Chinese characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured
+      background, cast shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal,
+      cropped subject, low contrast.
+  - filename: blueberry.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. A compact cluster of three plump blueberries in varied
+      deep-blue tones, clear star-shaped calyx details, no leaves, branch, bowl, or extra fruit. Avoid:
+      photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene, kitchen,
+      farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text, Chinese
+      characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured background, cast
+      shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal, cropped subject, low
+      contrast.
+  - filename: banana.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One small curved ripe yellow banana with a dark tip and a
+      few soft brown freckles, whole unpeeled fruit, no bunch, leaf, peel pieces, or plate. Avoid: photorealistic,
+      3D render, realistic food photography, thin outline, messy sketch, complex scene, kitchen, farm landscape,
+      table surface, basket, decorative frame, branded packaging, readable label, text, Chinese characters,
+      numbers, watermark, logo, visible grid, UI frame, gradient background, textured background, cast shadow,
+      drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal, cropped subject, low contrast.
+  - filename: apple.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One round ripe red apple with a warm yellow cheek, short
+      brown stem and one attached green leaf, whole uncut fruit, no slice, basket, or blossom. Avoid:
+      photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene, kitchen,
+      farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text, Chinese
+      characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured background, cast
+      shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal, cropped subject, low
+      contrast.
+  - filename: lemon.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One bright yellow lemon with a slightly pointed oval shape,
+      dimpled peel details and one attached green leaf, whole uncut fruit, no slices, juice splash, or glass.
+      Avoid: photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene,
+      kitchen, farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text,
+      Chinese characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured
+      background, cast shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal,
+      cropped subject, low contrast.
+  - filename: peach.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One plump peach with warm pink and golden skin, a clear
+      center crease, soft fuzz marks, short stem and one attached leaf, no slices or basket. Avoid:
+      photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene, kitchen,
+      farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text, Chinese
+      characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured background, cast
+      shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal, cropped subject, low
+      contrast.
+  - filename: orange.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One round vivid orange with subtle dimpled peel, short stem
+      and one attached dark-green leaf, whole uncut fruit, no segments, juice splash, or basket. Avoid:
+      photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene, kitchen,
+      farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text, Chinese
+      characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured background, cast
+      shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal, cropped subject, low
+      contrast.
+  - filename: mango.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One plump curved mango with golden-yellow skin blending
+      into coral red and a small attached green leaf, whole uncut fruit, no slices, pit, or basket. Avoid:
+      photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene, kitchen,
+      farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text, Chinese
+      characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured background, cast
+      shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal, cropped subject, low
+      contrast.
+  - filename: honey.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One small round clear jar filled with glowing amber honey,
+      a simple cork lid and one thick honey curl visible inside the jar, no label, text, dipper, bee, flower, or
+      spill. Avoid: photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex
+      scene, kitchen, farm landscape, table surface, basket, decorative frame, branded packaging, readable label,
+      text, Chinese characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured
+      background, cast shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal,
+      cropped subject, low contrast.
+  - filename: nuts.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. A compact mixed cluster of shelled walnut, hazelnut and
+      cashew pieces, warm natural browns, clearly readable shapes, no bowl, sack, leaves, or scattered crumbs.
+      Avoid: photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene,
+      kitchen, farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text,
+      Chinese characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured
+      background, cast shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal,
+      cropped subject, low contrast.
+  - filename: mint.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One compact fresh mint sprig with three pairs of bright
+      green serrated leaves and a curved stem, visible leaf veins, no pot, soil, drink, ice, or extra herbs.
+      Avoid: photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex scene,
+      kitchen, farm landscape, table surface, basket, decorative frame, branded packaging, readable label, text,
+      Chinese characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured
+      background, cast shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal,
+      cropped subject, low contrast.
+  - filename: cinnamon.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. A compact pair of warm reddish-brown cinnamon sticks
+      crossed gently, curled layered ends clearly visible, no powder pile, ribbon, cup, star anise, or extra
+      spices. Avoid: photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex
+      scene, kitchen, farm landscape, table surface, basket, decorative frame, branded packaging, readable label,
+      text, Chinese characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured
+      background, cast shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal,
+      cropped subject, low contrast.
+  - filename: spring_water_starter.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One small clear teardrop-shaped glass vial filled with pale
+      aqua spring-water starter, sealed with a simple cork and marked only by an embossed ripple symbol, no text,
+      label, splash, or scenery. Avoid: photorealistic, 3D render, realistic food photography, thin outline, messy
+      sketch, complex scene, kitchen, farm landscape, table surface, basket, decorative frame, branded packaging,
+      readable label, text, Chinese characters, numbers, watermark, logo, visible grid, UI frame, gradient
+      background, textured background, cast shadow, drop shadow, glow, multiple unrelated ingredients, recipe
+      dish, cooked meal, cropped subject, low contrast.
+  - filename: spring_water.png
+    prompt: >
+      512x512 game ingredient inventory icon, isolated single ingredient subject, hand-drawn simple 2D
+      illustration, thick dark-brown outline, rounded cute shapes, warm natural pastel colors, simple but not
+      empty, a few clear interior details, clean readable silhouette, slightly top-down 3/4 view, cozy cooking
+      game UI icon. Center the subject and make it fit comfortably inside one centered cell of an invisible 4x4
+      grid; do not draw the grid. Leave generous transparent padding on every side. Transparent PNG background
+      preferred. If transparency is unavailable, use one perfectly flat solid chroma-key light cyan background
+      (#DDF8F5), with no texture, gradient, or shadow. One large crystal-clear pale-blue water droplet with two
+      simple white highlight shapes and a subtle inner ripple, no glass, bottle, splash scene, wave, fish, or
+      landscape. Avoid: photorealistic, 3D render, realistic food photography, thin outline, messy sketch, complex
+      scene, kitchen, farm landscape, table surface, basket, decorative frame, branded packaging, readable label,
+      text, Chinese characters, numbers, watermark, logo, visible grid, UI frame, gradient background, textured
+      background, cast shadow, drop shadow, glow, multiple unrelated ingredients, recipe dish, cooked meal,
+      cropped subject, low contrast.

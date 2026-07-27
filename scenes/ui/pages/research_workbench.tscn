@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/workbench_pages.tscn" id="1_workbench_pages"]
+
+[node name="ResearchWorkbench" type="VBoxContainer" unique_id=1812601369]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+theme_override_constants/separation = 8
+
+[node name="PageHeaderRow" type="HBoxContainer" parent="." unique_id=1933903956]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="PageDescription" type="RichTextLabel" parent="PageHeaderRow" unique_id=1322413026]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "选择页面开始经营。"
+scroll_active = false
+
+[node name="ListRow" parent="." unique_id=1086775611 instance=ExtResource("1_workbench_pages")]
+layout_mode = 2
+
+[node name="ActionRow" type="HBoxContainer" parent="." unique_id=1611898363]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LeftActionHalf" type="HBoxContainer" parent="ActionRow" unique_id=529871574]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="PurchaseCartLabel" type="Label" parent="ActionRow/LeftActionHalf" unique_id=917936139]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "购物车：0 件｜合计:0 金币"
+vertical_alignment = 1
+clip_text = true
+
+[node name="PrimaryActionButton" type="Button" parent="ActionRow/LeftActionHalf" unique_id=844690415]
+custom_minimum_size = Vector2(82, 36)
+layout_mode = 2
+theme_type_variation = &"DessertPrimaryButton"
+text = "执行"
+
+[node name="RightActionHalf" type="HBoxContainer" parent="ActionRow" unique_id=430342836]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="SecondaryActionButton" type="Button" parent="ActionRow/RightActionHalf" unique_id=1099796881]
+custom_minimum_size = Vector2(82, 36)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "次要操作"
+
+[node name="TertiaryActionButton" type="Button" parent="ActionRow/RightActionHalf" unique_id=859979182]
+custom_minimum_size = Vector2(82, 36)
+layout_mode = 2
+theme_type_variation = &"DessertFlatButton"
+text = "上架"
+
+[node name="BulkRestockButton" type="Button" parent="ActionRow/RightActionHalf" unique_id=569167996]
+visible = false
+custom_minimum_size = Vector2(82, 36)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "一键补货"

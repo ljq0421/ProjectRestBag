@@ -1,0 +1,134 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/purchase_receipt_dialog.gd" id="1_receipt_script"]
+[ext_resource type="Texture2D" path="res://resources/ui/backgrounds/小票背景.png" id="2_receipt_paper"]
+
+[node name="PurchaseReceiptDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+visible = false
+z_index = 100
+script = ExtResource("1_receipt_script")
+
+[node name="ReceiptFrame" type="Control" parent="."]
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -400.0
+offset_right = 300.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ReceiptPaper" type="TextureRect" parent="ReceiptFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -71.0
+offset_right = 53.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_receipt_paper")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ReceiptBody" type="ScrollContainer" parent="ReceiptFrame"]
+custom_minimum_size = Vector2(380, 455)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 115.0
+offset_top = 165.0
+offset_right = -105.0
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="ReceiptContent" type="VBoxContainer" parent="ReceiptFrame/ReceiptBody"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="ReceiptGrid" type="GridContainer" parent="ReceiptFrame/ReceiptBody/ReceiptContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 4
+columns = 4
+
+[node name="ItemHeader" type="Label" parent="ReceiptFrame/ReceiptBody/ReceiptContent/ReceiptGrid"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "商品"
+vertical_alignment = 1
+
+[node name="QuantityHeader" type="Label" parent="ReceiptFrame/ReceiptBody/ReceiptContent/ReceiptGrid"]
+custom_minimum_size = Vector2(62, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "数量"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="UnitPriceHeader" type="Label" parent="ReceiptFrame/ReceiptBody/ReceiptContent/ReceiptGrid"]
+custom_minimum_size = Vector2(62, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "单价"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SubtotalHeader" type="Label" parent="ReceiptFrame/ReceiptBody/ReceiptContent/ReceiptGrid"]
+custom_minimum_size = Vector2(62, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "小计"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ReceiptDivider" type="HSeparator" parent="ReceiptFrame/ReceiptBody/ReceiptContent"]
+layout_mode = 2
+
+[node name="ReceiptSummary" type="Label" parent="ReceiptFrame/ReceiptBody/ReceiptContent"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "商品总件数：0\n总支出：0 金币\n剩余金币：0"
+vertical_alignment = 1
+
+[node name="ReceiptCloseButton" type="Button" parent="ReceiptFrame"]
+custom_minimum_size = Vector2(136, 44)
+layout_mode = 1
+anchors_preset = 12
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -92.0
+offset_right = 68.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"DessertLegacyPrimaryButton"
+text = "收好小票"

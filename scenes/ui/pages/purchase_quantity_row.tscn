@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pages/purchase_quantity_row.gd" id="1_purchase_quantity_row"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/purchase/coin.svg" id="2_coin"]
+[ext_resource type="Texture2D" path="res://resources/ui/icons/purchase/stock.svg" id="3_stock"]
+
+[node name="PurchaseQuantityRow" type="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+script = ExtResource("1_purchase_quantity_row")
+
+[node name="PurchaseItemLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(54, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+clip_text = true
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="PriceStat" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="CoinIcon" type="TextureRect" parent="PriceStat"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+tooltip_text = "单价"
+texture = ExtResource("2_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PriceLabel" type="Label" parent="PriceStat"]
+custom_minimum_size = Vector2(24, 30)
+layout_mode = 2
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="StockStat" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="StockIcon" type="TextureRect" parent="StockStat"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+tooltip_text = "当前库存"
+texture = ExtResource("3_stock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StockLabel" type="Label" parent="StockStat"]
+custom_minimum_size = Vector2(24, 30)
+layout_mode = 2
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PurchaseMinusButton" type="Button" parent="."]
+custom_minimum_size = Vector2(34, 30)
+layout_mode = 2
+text = "-"
+
+[node name="PurchaseQuantityLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(34, 30)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PurchasePlusButton" type="Button" parent="."]
+custom_minimum_size = Vector2(34, 30)
+layout_mode = 2
+text = "+"

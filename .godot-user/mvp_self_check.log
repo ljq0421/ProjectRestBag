@@ -1,0 +1,173 @@
+Godot Engine v4.6.1.stable.official.14d19694e - https://godotengine.org
+
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_self_check_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _expect_production_site_behaviors (res://tests/mvp_self_check.gd:907)
+       [2] _run (res://tests/mvp_self_check.gd:96)
+       [3] _init (res://tests/mvp_self_check.gd:17)
+SCRIPT ERROR: Invalid access of index '0' on a base object of type: 'Array'.
+   at: _expect_production_site_behaviors (res://tests/mvp_self_check.gd:914)
+   GDScript backtrace (most recent call first):
+       [0] _expect_production_site_behaviors (res://tests/mvp_self_check.gd:914)
+       [1] _run (res://tests/mvp_self_check.gd:96)
+       [2] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_self_check_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _expect_save_system_roundtrip (res://tests/mvp_self_check.gd:1384)
+       [2] _run (res://tests/mvp_self_check.gd:100)
+       [3] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _unlock_output_slot (res://scripts/main_view.gd:729)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:1779)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _unlock_output_bag_page (res://scripts/main_view.gd:738)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:1785)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _on_primary_action (res://scripts/main_view.gd:1104)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:1815)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _on_secondary_action (res://scripts/main_view.gd:1115)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:1840)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _on_output_context_menu_id_pressed (res://scripts/main_view.gd:970)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:1907)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _on_output_context_menu_id_pressed (res://scripts/main_view.gd:977)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:1927)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _on_primary_action (res://scripts/main_view.gd:1104)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:1944)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _on_primary_action (res://scripts/main_view.gd:1104)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:1988)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _on_secondary_action (res://scripts/main_view.gd:1115)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:2004)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _drop_output_slot_to_unlocked (res://scripts/main_view.gd:858)
+       [3] _drop_output_data (res://scripts/main_view.gd:471)
+       [4] _expect_main_scene_structure (res://tests/mvp_self_check.gd:2015)
+       [5] _run (res://tests/mvp_self_check.gd:101)
+       [6] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _drop_output_item_to_active (res://scripts/main_view.gd:848)
+       [3] _drop_output_data (res://scripts/main_view.gd:469)
+       [4] _expect_main_scene_structure (res://tests/mvp_self_check.gd:2040)
+       [5] _run (res://tests/mvp_self_check.gd:101)
+       [6] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _drop_output_slot_to_unlocked (res://scripts/main_view.gd:858)
+       [3] _drop_output_data (res://scripts/main_view.gd:471)
+       [4] _expect_main_scene_structure (res://tests/mvp_self_check.gd:2074)
+       [5] _run (res://tests/mvp_self_check.gd:101)
+       [6] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _drop_output_item_to_active (res://scripts/main_view.gd:848)
+       [3] _drop_output_data (res://scripts/main_view.gd:469)
+       [4] _expect_main_scene_structure (res://tests/mvp_self_check.gd:2079)
+       [5] _run (res://tests/mvp_self_check.gd:101)
+       [6] _init (res://tests/mvp_self_check.gd:17)
+WARNING: Could not open temp save file for writing: user://neighbor_dessert_save.json.tmp
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] save_game (res://scripts/save_system.gd:24)
+       [1] _save_game (res://scripts/main_view.gd:1660)
+       [2] _on_secondary_action (res://scripts/main_view.gd:1115)
+       [3] _expect_main_scene_structure (res://tests/mvp_self_check.gd:2110)
+       [4] _run (res://tests/mvp_self_check.gd:101)
+       [5] _init (res://tests/mvp_self_check.gd:17)
+ERROR: production slot save roundtrip should save
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tests/mvp_self_check.gd:2584)
+       [1] _run (res://tests/mvp_self_check.gd:103)
+       [2] _init (res://tests/mvp_self_check.gd:17)
+ERROR: production slot save roundtrip slots expected size 1, got 0
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tests/mvp_self_check.gd:2584)
+       [1] _run (res://tests/mvp_self_check.gd:103)
+       [2] _init (res://tests/mvp_self_check.gd:17)
+ERROR: SaveSystem.save_game() should return true
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _finish (res://tests/mvp_self_check.gd:2584)
+       [1] _run (res://tests/mvp_self_check.gd:103)
+       [2] _init (res://tests/mvp_self_check.gd:17)
+ERROR: Failed to read the root certificate store.
+   at: get_system_ca_certificates (platform/windows/os_windows.cpp:2570)
+[godot_ai game_helper] registered mcp capture (debugger active=false, logger=true)

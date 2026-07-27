@@ -1,0 +1,91 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/research_input_slot.tscn" id="1_research_input_slot"]
+[ext_resource type="Texture2D" path="res://resources/ui/skin/neighborhood_dessert/runtime/panel_v1.png" id="2_panel"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_research_tool_picker"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("2_panel")
+texture_margin_left = 52.0
+texture_margin_top = 52.0
+texture_margin_right = 52.0
+texture_margin_bottom = 52.0
+
+[node name="ResearchOverlay" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="PageDescription" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "研发制作｜至少选择 2 个食材开始研发"
+scroll_active = false
+
+[node name="ResearchInputBar" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ToolSlot" parent="ResearchInputBar" instance=ExtResource("1_research_input_slot")]
+custom_minimum_size = Vector2(104, 104)
+
+[node name="InventoryGrid" type="GridContainer" parent="ResearchInputBar"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 6
+
+[node name="ResearchToolPickerPopup" type="PopupPanel" parent="ResearchInputBar"]
+size = Vector2i(720, 504)
+theme_override_styles/panel = SubResource("StyleBox_research_tool_picker")
+
+[node name="ToolPickerMargin" type="MarginContainer" parent="ResearchInputBar/ResearchToolPickerPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 48
+
+[node name="ToolPickerBox" type="VBoxContainer" parent="ResearchInputBar/ResearchToolPickerPopup/ToolPickerMargin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ToolPickerTitle" type="Label" parent="ResearchInputBar/ResearchToolPickerPopup/ToolPickerMargin/ToolPickerBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "选择研发工具"
+horizontal_alignment = 1
+
+[node name="ToolPickerGrid" type="GridContainer" parent="ResearchInputBar/ResearchToolPickerPopup/ToolPickerMargin/ToolPickerBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="ActionRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="ResearchActionButton" type="Button" parent="ActionRow"]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_type_variation = &"DessertPrimaryButton"
+text = "研发"

@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/task_overlay.gd" id="1_component_script"]
+
+[node name="TaskOverlay" type="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+script = ExtResource("1_component_script")
+
+[node name="TaskBody" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+
+[node name="TaskTabs" type="VBoxContainer" parent="TaskBody"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+
+[node name="TaskListScroll" type="ScrollContainer" parent="TaskBody"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+
+[node name="TaskListPanel" type="VBoxContainer" parent="TaskBody/TaskListScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+
+[node name="TaskDetailPanel" type="VBoxContainer" parent="TaskBody"]
+custom_minimum_size = Vector2(310, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+
+[node name="TaskRewardActions" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TaskRewardHintLabel" type="Label" parent="TaskRewardActions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "已完成任务的奖励可一键领取。"
+vertical_alignment = 1
+
+[node name="TaskClaimAllRewardsButton" type="Button" parent="TaskRewardActions"]
+custom_minimum_size = Vector2(190, 36)
+layout_mode = 2
+theme_type_variation = &"DessertRedActionButton"
+disabled = true
+text = "暂无可领取奖励"

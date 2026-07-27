@@ -1,0 +1,528 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pages/storefront_manage_page.gd" id="1_storefront_manage_page"]
+[ext_resource type="Script" path="res://scripts/ui/storefront/showcase_prop_drag_button.gd" id="2_prop_drag"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/device_growth_center_page.tscn" id="3_device_growth"]
+
+[node name="StorefrontManagePage" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+script = ExtResource("1_storefront_manage_page")
+
+[node name="StorefrontManagePanel" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ManagementCenterTabs" type="HBoxContainer" parent="StorefrontManagePanel"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="OverviewTab" type="Button" parent="StorefrontManagePanel/ManagementCenterTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+button_pressed = true
+text = "经营总览"
+
+[node name="StrategyTab" type="Button" parent="StorefrontManagePanel/ManagementCenterTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "橱窗策略"
+
+[node name="DeviceGrowthTab" type="Button" parent="StorefrontManagePanel/ManagementCenterTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "设备培养"
+
+[node name="ManagementCenterPages" type="VBoxContainer" parent="StorefrontManagePanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OverviewPage" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="CurrentBuildPanel" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage"]
+custom_minimum_size = Vector2(0, 122)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSectionPanel"
+
+[node name="CurrentBuildContent" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CurrentBuildHeader" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent"]
+layout_mode = 2
+
+[node name="CurrentBuildTitle" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent/CurrentBuildHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 17
+text = "当前经营"
+vertical_alignment = 1
+
+[node name="RecentReportButton" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent/CurrentBuildHeader"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "最近营业报告"
+
+[node name="CurrentBuildMetrics" type="GridContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 3
+
+[node name="OpenSlotsMetric" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent/CurrentBuildMetrics"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="OpenSlotsValue" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent/CurrentBuildMetrics/OpenSlotsMetric"]
+layout_mode = 2
+text = "开放格位 16/168"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlacedMetric" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent/CurrentBuildMetrics"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="PlacedValue" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent/CurrentBuildMetrics/PlacedMetric"]
+layout_mode = 2
+text = "已摆放 0 件"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ListedStockMetric" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent/CurrentBuildMetrics"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="ListedStockValue" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/CurrentBuildPanel/CurrentBuildContent/CurrentBuildMetrics/ListedStockMetric"]
+layout_mode = 2
+text = "可售库存 0 件"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundForecastPanel" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"DessertSectionPanel"
+
+[node name="RoundForecastContent" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="RoundForecastTitle" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "本轮经营预估"
+
+[node name="ForecastMetricGrid" type="GridContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 4
+
+[node name="IncomeMetric" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ForecastMetricGrid"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="IncomeValue" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ForecastMetricGrid/IncomeMetric"]
+layout_mode = 2
+text = "预计收益\n+0 金币"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReputationMetric" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ForecastMetricGrid"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="ReputationValue" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ForecastMetricGrid/ReputationMetric"]
+layout_mode = 2
+text = "预计口碑\n+0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoldMetric" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ForecastMetricGrid"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="SoldValue" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ForecastMetricGrid/SoldMetric"]
+layout_mode = 2
+text = "预计售出\n0 件"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LowStockMetric" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ForecastMetricGrid"]
+custom_minimum_size = Vector2(0, 68)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="LowStockValue" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ForecastMetricGrid/LowStockMetric"]
+layout_mode = 2
+text = "低库存提示\n库存充足"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ProductRateTitle" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent"]
+layout_mode = 2
+text = "产品收益率 Top4｜按金币/秒排序"
+
+[node name="ProductRateGrid" type="GridContainer" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+columns = 4
+
+[node name="ProductRate1" type="RichTextLabel" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ProductRateGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]1  暂无\n0 金币/s[/center]"
+scroll_active = false
+
+[node name="ProductRate2" type="RichTextLabel" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ProductRateGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]2  暂无\n0 金币/s[/center]"
+scroll_active = false
+
+[node name="ProductRate3" type="RichTextLabel" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ProductRateGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]3  暂无\n0 金币/s[/center]"
+scroll_active = false
+
+[node name="ProductRate4" type="RichTextLabel" parent="StorefrontManagePanel/ManagementCenterPages/OverviewPage/RoundForecastPanel/RoundForecastContent/ProductRateGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]4  暂无\n0 金币/s[/center]"
+scroll_active = false
+
+[node name="StrategyPage" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StrategyColumns" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="StrategyLeft" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.2
+theme_override_constants/separation = 10
+
+[node name="CombinationBonusPanel" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"DessertSectionPanel"
+
+[node name="CombinationBonusContent" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CombinationBonusHeader" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent"]
+layout_mode = 2
+
+[node name="CombinationBonusTitle" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/CombinationBonusHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 17
+text = "组合加成"
+
+[node name="ViewAllRulesButton" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/CombinationBonusHeader"]
+custom_minimum_size = Vector2(112, 32)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "查看全部规则"
+
+[node name="BonusGrid" type="GridContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="RegionBonusCell" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+[node name="Content" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/RegionBonusCell"]
+layout_mode = 2
+[node name="Label" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/RegionBonusCell/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "区域加成"
+[node name="Value" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/RegionBonusCell/Content"]
+layout_mode = 2
+text = "+0%"
+
+[node name="FlavorBonusCell" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+[node name="Content" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/FlavorBonusCell"]
+layout_mode = 2
+[node name="Label" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/FlavorBonusCell/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "口味组合"
+[node name="Value" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/FlavorBonusCell/Content"]
+layout_mode = 2
+text = "+0%"
+
+[node name="SetBonusCell" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+[node name="Content" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/SetBonusCell"]
+layout_mode = 2
+[node name="Label" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/SetBonusCell/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "连通套装"
+[node name="Value" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/SetBonusCell/Content"]
+layout_mode = 2
+text = "+0%"
+
+[node name="ConflictBonusCell" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+[node name="Content" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/ConflictBonusCell"]
+layout_mode = 2
+[node name="Label" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/ConflictBonusCell/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "冲突减损"
+[node name="Value" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/ConflictBonusCell/Content"]
+layout_mode = 2
+text = "-0%"
+
+[node name="PropBonusCell" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+[node name="Content" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/PropBonusCell"]
+layout_mode = 2
+[node name="Label" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/PropBonusCell/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "陈列道具"
+[node name="Value" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/PropBonusCell/Content"]
+layout_mode = 2
+text = "+0%"
+
+[node name="ThemeBonusCell" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+[node name="Content" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/ThemeBonusCell"]
+layout_mode = 2
+[node name="Label" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/ThemeBonusCell/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "橱窗主题"
+[node name="Value" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/CombinationBonusPanel/CombinationBonusContent/BonusGrid/ThemeBonusCell/Content"]
+layout_mode = 2
+text = "+0%"
+
+[node name="StrategyActionRow" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SpecialChallengeButton" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/StrategyActionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "特殊挑战"
+
+[node name="StorefrontExpansionButton" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/StrategyLeft/StrategyActionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Lv.2 起进入真实橱窗网格，按单格、N格、行或列扩建"
+theme_type_variation = &"DessertPrimaryButton"
+text = "Lv.2 开放扩建"
+
+[node name="PropsThemePanel" type="PanelContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSectionPanel"
+
+[node name="PropsThemeContent" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "道具与主题"
+
+[node name="PropsThemeColumns" type="HBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="PropsColumn" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="PropSummary" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/PropsColumn"]
+layout_mode = 2
+text = "陈列道具｜拖到左侧空格放置"
+autowrap_mode = 2
+
+[node name="PropScroll" type="ScrollContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/PropsColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="PropButtons" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/PropsColumn/PropScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="cake_stand" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/PropsColumn/PropScroll/PropButtons"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "蛋糕架｜售价+4%·售速+4%"
+script = ExtResource("2_prop_drag")
+prop_id = "cake_stand"
+prop_label = "蛋糕架"
+
+[node name="chilled_case" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/PropsColumn/PropScroll/PropButtons"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "冷藏展示柜｜清爽类售速+8%"
+script = ExtResource("2_prop_drag")
+prop_id = "chilled_case"
+prop_label = "冷藏展示柜"
+shape_cells = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1)])
+
+[node name="retro_tray" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/PropsColumn/PropScroll/PropButtons"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "复古托盘｜经典类售价+5%"
+script = ExtResource("2_prop_drag")
+prop_id = "retro_tray"
+prop_label = "复古托盘"
+
+[node name="sample_sign" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/PropsColumn/PropScroll/PropButtons"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "试吃牌｜小份售速+10%"
+script = ExtResource("2_prop_drag")
+prop_id = "sample_sign"
+prop_label = "试吃牌"
+
+[node name="gift_corner" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/PropsColumn/PropScroll/PropButtons"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+text = "礼盒角｜礼盒售价+10%"
+script = ExtResource("2_prop_drag")
+prop_id = "gift_corner"
+prop_label = "礼盒角"
+
+[node name="ThemeColumn" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="ThemeSummary" type="Label" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/ThemeColumn"]
+layout_mode = 2
+text = "橱窗主题｜单选"
+
+[node name="ThemeScroll" type="ScrollContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/ThemeColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ThemeButtons" type="VBoxContainer" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/ThemeColumn/ThemeScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="none" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/ThemeColumn/ThemeScroll/ThemeButtons"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "无主题｜无加成"
+
+[node name="summer" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/ThemeColumn/ThemeScroll/ThemeButtons"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "夏日｜售速+8%"
+
+[node name="retro" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/ThemeColumn/ThemeScroll/ThemeButtons"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "复古｜售价+6%"
+
+[node name="tea" type="Button" parent="StorefrontManagePanel/ManagementCenterPages/StrategyPage/StrategyColumns/PropsThemePanel/PropsThemeContent/PropsThemeColumns/ThemeColumn/ThemeScroll/ThemeButtons"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+text = "茶会｜售价+4%·售速+4%"
+
+[node name="DeviceGrowthPage" parent="StorefrontManagePanel/ManagementCenterPages" instance=ExtResource("3_device_growth")]
+visible = false
+layout_mode = 2

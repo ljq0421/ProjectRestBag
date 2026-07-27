@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "version": "1.0",
+    "total_tags": 15
+  },
+  "tags": {
+    "甜": {"category": "风味", "description": "明确甜味", "consumers": ["display_rules", "customers", "tasks", "growth"]},
+    "苦甜": {"category": "风味", "description": "可可、咖啡或茶类苦甜", "consumers": ["display_rules", "customers", "growth"]},
+    "咸香": {"category": "风味", "description": "咸口主餐或点心", "consumers": ["display_rules", "customers"]},
+    "果香": {"category": "香型", "description": "水果主导风味", "consumers": ["display_rules", "customers", "growth"]},
+    "茶香": {"category": "香型", "description": "茶底主导风味", "consumers": ["display_rules", "growth"]},
+    "奶香": {"category": "香型", "description": "乳制品主导香型", "consumers": ["display_rules"]},
+    "香脆": {"category": "口感", "description": "曲奇、酥饼或坚果脆感", "consumers": ["display_rules", "growth"]},
+    "软糯": {"category": "口感", "description": "糯米或柔软黏糯口感", "consumers": ["display_rules", "growth"]},
+    "清爽": {"category": "风格", "description": "清新、解腻或轻盈风格", "consumers": ["display_rules", "customers", "growth"]},
+    "浓郁": {"category": "风格", "description": "奶油、芝士、坚果或厚重风味", "consumers": ["display_rules", "customers", "growth"]},
+    "清凉": {"category": "风格", "description": "薄荷或冰凉主题", "consumers": ["display_rules"]},
+    "低负担": {"category": "定位", "description": "燕麦、酸奶或轻食定位", "consumers": ["display_rules", "customers", "growth"]},
+    "饱腹": {"category": "定位", "description": "主餐或高饱腹产品", "consumers": ["display_rules"]},
+    "经典": {"category": "定位", "description": "传统或基础款", "consumers": ["display_rules", "customers", "growth"]},
+    "招牌": {"category": "定位", "description": "特色招牌产品", "consumers": ["customers"]}
+  }
+}

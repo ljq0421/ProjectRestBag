@@ -1,0 +1,192 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/output_cell.gd" id="1_output_cell"]
+
+[node name="OutputCell" type="Button"]
+custom_minimum_size = Vector2(96, 96)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_type_variation = &"DessertItemSlot"
+clip_text = true
+alignment = 1
+script = ExtResource("1_output_cell")
+
+[node name="ProductDisplayArea" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(112, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -48.0
+offset_right = 56.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PrimaryProductIcon" type="TextureRect" parent="ProductDisplayArea"]
+visible = false
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = 102.0
+offset_bottom = 94.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MissingIconLabel" type="Label" parent="ProductDisplayArea/PrimaryProductIcon"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.42, 0.28, 0.16, 1)
+theme_override_font_sizes/font_size = 32
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuantityLabel" type="Label" parent="ProductDisplayArea/PrimaryProductIcon"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"DessertStatusTagWarning"
+theme_override_font_sizes/font_size = 12
+text = "×1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SecondaryProductIcon" type="TextureRect" parent="ProductDisplayArea"]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_left = 52.0
+offset_top = 28.0
+offset_right = 112.0
+offset_bottom = 88.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MissingIconLabel" type="Label" parent="ProductDisplayArea/SecondaryProductIcon"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.42, 0.28, 0.16, 1)
+theme_override_font_sizes/font_size = 28
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuantityLabel" type="Label" parent="ProductDisplayArea/SecondaryProductIcon"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"DessertStatusTagWarning"
+theme_override_font_sizes/font_size = 12
+text = "×1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OverflowLabel" type="Label" parent="ProductDisplayArea"]
+visible = false
+z_index = 4
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -34.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = 24.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_type_variation = &"DessertStatusTagWarning"
+theme_override_font_sizes/font_size = 12
+text = "+1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProductionProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = -5.0
+offset_bottom = 10.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_type_variation = &"DessertProgressBar"
+max_value = 1.0
+show_percentage = false
+
+[node name="AutomationStatusLabel" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -22.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"DessertStatusTagNormal"
+theme_override_font_sizes/font_size = 11
+text = "托管中"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="AutomationToggle" type="CheckButton" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -42.0
+offset_top = 12.0
+offset_right = -2.0
+offset_bottom = 36.0
+grow_horizontal = 0
+mouse_filter = 0
+theme_type_variation = &"DessertToggle"
+theme_override_font_sizes/font_size = 11
+text = "托"
+tooltip_text = "开启或关闭此生产槽托管"

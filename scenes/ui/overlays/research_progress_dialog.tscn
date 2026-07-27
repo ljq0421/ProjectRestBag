@@ -1,0 +1,120 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/research_progress_dialog.gd" id="1_research_progress"]
+[ext_resource type="Texture2D" path="res://resources/ui/skin/neighborhood_dessert/runtime/panel_v1.png" id="2_panel_v1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_panel_v1"]
+texture = ExtResource("2_panel_v1")
+texture_margin_left = 52.0
+texture_margin_top = 52.0
+texture_margin_right = 52.0
+texture_margin_bottom = 52.0
+
+[node name="ResearchProgressDialog" type="PopupPanel"]
+exclusive = true
+popup_window = true
+size = Vector2i(520, 420)
+theme_override_styles/panel = SubResource("StyleBox_panel_v1")
+script = ExtResource("1_research_progress")
+
+[node name="DialogMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(480, 380)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogContent" type="VBoxContainer" parent="DialogMargin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="DialogMargin/DialogContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "产品研发"
+horizontal_alignment = 1
+
+[node name="StateContent" type="Control" parent="DialogMargin/DialogContent"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DefaultResultCenter" type="CenterContainer" parent="DialogMargin/DialogContent/StateContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResultContent" type="VBoxContainer" parent="DialogMargin/DialogContent/StateContent/DefaultResultCenter"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ResultIcon" type="TextureRect" parent="DialogMargin/DialogContent/StateContent/DefaultResultCenter/ResultContent"]
+visible = false
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ResultNameLabel" type="Label" parent="DialogMargin/DialogContent/StateContent/DefaultResultCenter/ResultContent"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "新配方"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="RichTextLabel" parent="DialogMargin/DialogContent/StateContent/DefaultResultCenter/ResultContent"]
+custom_minimum_size = Vector2(420, 76)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]研发中[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="ResearchFailureContent" type="VBoxContainer" parent="DialogMargin/DialogContent/StateContent"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="FailureMessageLabel" type="RichTextLabel" parent="DialogMargin/DialogContent/StateContent/ResearchFailureContent"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]研发失败[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="ResearchHintTitle" type="Label" parent="DialogMargin/DialogContent/StateContent/ResearchFailureContent"]
+layout_mode = 2
+text = "研发笔记｜暂无有效线索"
+
+[node name="ResearchHintBody" type="RichTextLabel" parent="DialogMargin/DialogContent/StateContent/ResearchFailureContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "选择至少 2 个食材并进行研发，接近失败会留下永久线索。"
+scroll_active = false
+fit_content = true
+
+[node name="ConfirmButton" type="Button" parent="DialogMargin/DialogContent"]
+custom_minimum_size = Vector2(160, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"DessertPrimaryButton"
+text = "确认"

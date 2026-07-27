@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/task_objective_row.gd" id="1_objective_row"]
+
+[node name="TaskObjectiveRow" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("1_objective_row")
+
+[node name="StateLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+text = "○"
+horizontal_alignment = 1
+
+[node name="ObjectiveLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "子目标"
+
+[node name="ProgressLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "0/1"
+horizontal_alignment = 2

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/common/right_arrow_image_button.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://resources/ui/skin_v1/arrow_right_normal.png" id="2_normal"]
+
+[node name="RightArrowImageButton" type="Button"]
+custom_minimum_size = Vector2(48, 48)
+focus_mode = 2
+mouse_default_cursor_shape = 2
+tooltip_text = "下一页"
+flat = true
+icon = ExtResource("2_normal")
+expand_icon = true
+script = ExtResource("1_script")

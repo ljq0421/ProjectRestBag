@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/kitchen_schedule_overlay.gd" id="1_overlay"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pages/kitchen_automation_panel.tscn" id="2_panel"]
+
+[node name="KitchenScheduleOverlay" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+script = ExtResource("1_overlay")
+
+[node name="IntroLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.541176, 0.454902, 0.403922, 1)
+text = "自动规则与手动制作共享同一配方的 3 个槽位；每轮可安排 1 批或 3 批。"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="KitchenAutomationPanel" parent="." instance=ExtResource("2_panel")]
+layout_mode = 2
+size_flags_vertical = 3

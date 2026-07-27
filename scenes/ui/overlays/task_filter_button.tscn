@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/task_filter_button.gd" id="1_task_filter_button"]
+
+[node name="TaskFilterButton" type="Button"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertRedToggleButton"
+toggle_mode = true
+script = ExtResource("1_task_filter_button")

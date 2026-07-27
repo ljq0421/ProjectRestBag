@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "version": "v3.3-continuous-operation",
+    "description": "持续经营版：Lv.0-Lv.5逐级建设基础厨房，Lv.6进入经营合同循环，Lv.7以后按统一公式长期升级；养殖投入、食材、设备、配方与任务路线同步。",
+    "generate_date": "2026-07-13",
+    "total_ingredients": 71,
+    "total_recipes": 166
+  },
+
+  "level_progression": {
+    "base_upgrade_requirements": {
+      "1": {"cost": 0, "required_reputation": 0, "mode": "complete_business_tutorial"},
+      "2": {"cost": 900, "required_reputation": 30, "target_business_rounds": 5, "device": "oven"},
+      "3": {"cost": 2200, "required_reputation": 80, "target_business_rounds": 6, "device": "chiller"},
+      "4": {"cost": 4500, "required_reputation": 170, "target_business_rounds": 7, "device": "griddle"},
+      "5": {"cost": 8000, "required_reputation": 300, "target_business_rounds": 8, "device": "mixer"},
+      "6": {"cost": 13000, "required_reputation": 500, "target_business_rounds": 9}
+    },
+    "infinite_formula": {
+      "starts_at_level": 7,
+      "max_supported_level": 247,
+      "target_business_rounds": "min(16, 10 + floor((L - 7) / 5))",
+      "coin_cost": "round_to_500(15000 * 1.15^(L - 7) * D / 10)",
+      "reputation_increment": "round_to_10(D * (22 + 2 * (L - 7)))",
+      "reputation_is_cumulative_and_not_spent": true
+    }
+  },
+
+  "automation": {
+    "event_limit": 10000,
+    "base_effects": {
+      "managed_output_sites": 1,
+      "kitchen_rules": 1,
+      "managed_kitchen_devices": 1,
+      "offline_seconds": 7200,
+      "priority_enabled": false,
+      "inventory_policy_enabled": false
+    },
+    "feature_unlocks": {
+      "output": {"level": 3, "lifetime_starlight": 12, "task_id": "feature_output_automation"},
+      "kitchen": {"level": 4, "lifetime_starlight": 30, "task_id": "feature_kitchen_automation", "requires": ["output"]}
+    },
+    "starlight_rewards": {
+      "recipe_unlock": 1,
+      "recipe_mastery": {"1": 3, "2": 3},
+      "catalog_milestones": {"25": 3, "50": 5, "75": 5, "100": 8},
+      "tasks": {
+        "growth_l1_leftover_decision": 3,
+        "growth_l2_compact_build": 4,
+        "growth_l3_inventory_pressure": 4,
+        "growth_l4_chain_efficiency": 5,
+        "growth_l5_signature_build": 6
+      }
+    },
+    "upgrades": {
+      "output_capacity_1": {"feature": "output", "cost": 6, "effect": {"managed_output_sites": 2}},
+      "offline_duration_1": {"feature": "output", "cost": 8, "effect": {"offline_seconds": 14400}},
+      "output_capacity_2": {"feature": "output", "cost": 12, "requires_upgrades": ["output_capacity_1"], "effect": {"managed_output_sites": 3}},
+      "offline_duration_2": {"feature": "output", "cost": 16, "requires_upgrades": ["offline_duration_1"], "effect": {"offline_seconds": 28800}},
+      "output_capacity_all": {"feature": "output", "cost": 24, "requires_upgrades": ["output_capacity_2"], "effect": {"managed_output_sites": -1}},
+      "kitchen_devices_2": {"feature": "kitchen", "cost": 8, "effect": {"managed_kitchen_devices": 2}},
+      "kitchen_rules_3": {"feature": "kitchen", "cost": 10, "effect": {"kitchen_rules": 3}},
+      "kitchen_priority": {"feature": "kitchen", "cost": 12, "requires_upgrades": ["kitchen_rules_3"], "effect": {"priority_enabled": true}},
+      "kitchen_inventory_policy": {"feature": "kitchen", "cost": 16, "requires_upgrades": ["kitchen_priority"], "effect": {"inventory_policy_enabled": true}},
+      "kitchen_all": {"feature": "kitchen", "cost": 30, "requires_upgrades": ["kitchen_devices_2", "kitchen_rules_3", "kitchen_priority", "kitchen_inventory_policy"], "effect": {"managed_kitchen_devices": -1, "kitchen_rules": 8}}
+    }
+  },
+
+  "unlock_route": [
+    {
+      "level": 0,
+      "core": "跟随外婆完成第一次真实经营",
+      "new_origins": ["农场"],
+      "new_equipment": ["蒸煮一体的圆锅（教学开放）"],
+      "new_ingredients": ["水稻种子", "大米", "初始泉水"],
+      "new_recipes": 1,
+      "total_recipes": 1,
+      "new_functions": ["采购", "农场产出", "研发", "制作", "上架", "经营规则", "橱窗调整", "营业", "橱窗经营"],
+      "upgrade_condition": ["完成至少 1 件商品的真实营业结算，并确认外婆最后的说明后进入 Lv.1"]
+    },
+    {
+      "level": 1,
+      "core": "研磨与正式营业",
+      "new_origins": ["养殖场", "水塘", "辅料", "工具"],
+      "new_equipment": ["研磨机"],
+      "new_ingredients": ["小麦", "大米粉", "面粉", "鸡蛋", "鸡肉", "黄油"],
+      "new_recipes": 8,
+      "total_recipes": 9,
+      "new_functions": ["谷物研磨", "正式营业", "顾客偏好入门"],
+      "upgrade_condition": ["升级资金 900 金币", "累计口碑 30", "在“成长任务”中点击“升级店铺”，口碑不扣除"]
+    },
+    {
+      "level": 2,
+      "core": "基础烘焙",
+      "new_origins": ["养殖场：小牛犊", "林场：香蕉、草莓、蓝莓"],
+      "new_equipment": ["烤箱"],
+      "new_ingredients": ["香蕉", "草莓", "蓝莓", "牛奶", "牛肉", "巧克力", "香草", "焦糖", "奶油", "芝士"],
+      "new_recipes": 17,
+      "total_recipes": 26,
+      "new_functions": ["基础烘焙菜单", "多客群经营"],
+      "upgrade_condition": ["升级资金 2200 金币", "累计口碑 80", "在“成长任务”中点击“升级店铺”，口碑不扣除"]
+    },
+    {
+      "level": 3,
+      "core": "冷藏商品与库存规划",
+      "new_origins": ["养殖场：蜜蜂群", "林场扩展"],
+      "new_equipment": ["冷藏柜"],
+      "new_ingredients": ["吉利丁", "桃子", "苹果", "柠檬", "橙子", "芒果", "蜂蜜", "海盐", "红豆", "黑芝麻"],
+      "new_recipes": 23,
+      "total_recipes": 49,
+      "new_functions": ["冷藏定型", "临期销售", "库存规划", "美食家评鉴"],
+      "upgrade_condition": ["升级资金 4500 金币", "累计口碑 170", "在“成长任务”中点击“升级店铺”，口碑不扣除"]
+    },
+    {
+      "level": 4,
+      "core": "煎烤与多设备菜单",
+      "new_origins": ["养殖场：小鸭苗", "农场扩展", "林场咖啡区"],
+      "new_equipment": ["煎烤盘"],
+      "new_ingredients": ["南瓜", "糯米", "糯米粉", "咖啡", "可可粉", "酸奶", "薄荷", "酵母", "鸭蛋", "鸭肉"],
+      "new_recipes": 35,
+      "total_recipes": 84,
+      "new_functions": ["煎烤菜单", "多设备橱窗", "制作队列"],
+      "upgrade_condition": ["升级资金 8000 金币", "累计口碑 300", "在“成长任务”中点击“升级店铺”，口碑不扣除"]
+    },
+    {
+      "level": 5,
+      "core": "搅拌、复合配方与招牌经营",
+      "new_origins": ["养殖场：小羊羔", "农场与林场高阶产物"],
+      "new_equipment": ["搅拌机"],
+      "new_ingredients": ["栗子", "燕麦", "坚果", "肉桂", "抹茶", "杏仁", "红茶", "绿茶", "羊奶", "羊肉"],
+      "new_recipes": 44,
+      "total_recipes": 128,
+      "new_functions": ["复合配方", "招牌培养", "门店评级", "持续经营等级"],
+      "upgrade_condition": ["升级资金 13000 金币", "累计口碑 500", "在“成长任务”中点击“升级店铺”，口碑不扣除"]
+    }
+  ],
+
+  "tasks": {
+    "tutorial_tasks": [],
+    "growth_tasks": [
+      {"id":"growth_l1_sales_rhythm","version":2,"title":"销售节奏","type":"growth","level":1,"source_stage":"Lv.1经营操作","description":"掌握标准营业、同款连续成交和轮内补货。","progress_text":"完成 0/3 项","objectives":[{"id":"standard_round","title":"完成一次标准 30 秒营业","event":"business_round_completed","condition":{"kind":"round_report","field":"duration_ms","operator":"eq","value":30000},"goal":1},{"id":"repeat_sale","title":"同款商品一轮售出至少 2 份","event":"business_round_completed","condition":{"kind":"round_report","field":"max_product_sold","operator":"gte","value":2},"goal":1},{"id":"refill","title":"营业中完成 1 次补货","event":"business_round_completed","condition":{"kind":"round_report","field":"counts.refill_actions","operator":"gte","value":1},"goal":1}],"prerequisites":[],"reward":{"coins":135,"reputation":3},"sort_order":110,"notification_title":"成长目标完成：销售节奏","notification_body":"接下来学习如何处理余货。"},
+      {"id":"growth_l1_leftover_decision","version":1,"title":"余货决策","type":"growth","level":1,"source_stage":"Lv.1经营操作","description":"体验保留、直接清仓，并避免被迫清仓。","progress_text":"完成 0/3 项","objectives":[{"id":"carry_leftover","title":"保留至少 1 份八折余货","event":"business_round_completed","condition":{"kind":"round_report","field":"counts.carried_leftovers","operator":"gte","value":1},"goal":1},{"id":"direct_clearance","title":"直接清仓至少 1 份商品","event":"business_round_completed","condition":{"kind":"round_report","field":"counts.direct_clearance","operator":"gte","value":1},"goal":1},{"id":"clean_settlement","title":"售出至少 3 份且没有强制清仓","event":"business_round_completed","condition":{"kind":"round_report","operator":"all","conditions":[{"field":"counts.sold","operator":"gte","value":3},{"field":"counts.forced_clearance","operator":"lte","value":0}]},"goal":1}],"prerequisites":["growth_l1_sales_rhythm"],"reward":{"coins":180,"reputation":5},"sort_order":120,"notification_title":"成长目标完成：余货决策","notification_body":"Lv.1经营闭环已经掌握。"},
+      {"id":"growth_l2_basic_combo","version":1,"title":"形成基础组合","type":"growth","level":2,"source_stage":"Lv.2基础构筑","description":"让不同商品定位形成第一笔构筑收益。","progress_text":"完成 0/2 项","objectives":[{"id":"distinct_roles","title":"使用至少 2 种商品定位","event":"business_round_completed","condition":{"kind":"round_report","field":"layout.distinct_roles","operator":"gte","value":2},"goal":1},{"id":"layout_income","title":"获得至少 1 布局额外收益","event":"business_round_completed","condition":{"kind":"round_report","field":"layout_extra_income","operator":"gte","value":1},"goal":1}],"prerequisites":["growth_l1_leftover_decision"],"reward":{"coins":130,"reputation":4},"sort_order":210,"notification_title":"成长目标完成：基础组合","notification_body":"继续尝试更紧凑的有效构筑。"},
+      {"id":"growth_l2_compact_build","version":1,"title":"完成紧凑构筑","type":"growth","level":2,"source_stage":"Lv.2基础构筑","description":"用有限格数完成有效角色组合和收益。","progress_text":"完成 0/2 项","objectives":[{"id":"compact_income","title":"不超过 6 格并达到 80 金币","event":"business_round_completed","condition":{"kind":"round_report","operator":"all","conditions":[{"field":"layout.occupied_cells","operator":"lte","value":6},{"field":"total_coins","operator":"gte","value":80}]},"goal":1},{"id":"effective_combo","title":"至少 2 种定位并获得 10 额外收益","event":"business_round_completed","condition":{"kind":"round_report","operator":"all","conditions":[{"field":"layout.distinct_roles","operator":"gte","value":2},{"field":"layout_extra_income","operator":"gte","value":10}]},"goal":1}],"prerequisites":["growth_l2_basic_combo"],"reward":{"coins":290,"reputation":9},"sort_order":220,"notification_title":"成长目标完成：紧凑构筑","notification_body":"基础课程结束，接下来只保留综合构筑挑战。"},
+      {"id":"growth_l3_inventory_pressure","version":1,"title":"库存压力挑战","type":"growth","level":3,"source_stage":"Lv.3综合构筑","description":"在库存压力下维持销量并控制强制清仓。","progress_text":"售出 7｜补货 2｜强制清仓 ≤1","event":"business_round_completed","condition":{"kind":"round_report","operator":"all","conditions":[{"field":"counts.sold","operator":"gte","value":7},{"field":"counts.refill_actions","operator":"gte","value":2},{"field":"counts.forced_clearance","operator":"lte","value":1}]},"goal":1,"prerequisites":["growth_l2_compact_build"],"reward":{"coins":400,"reputation":15},"sort_order":310,"notification_title":"挑战完成：库存压力","notification_body":"库存和补货节奏已经稳定。"},
+      {"id":"growth_l4_chain_efficiency","version":1,"title":"连锁效率挑战","type":"growth","level":4,"source_stage":"Lv.4综合构筑","description":"用多商品协同创造稳定连锁收益。","progress_text":"3 种商品｜连锁 2｜额外收益 60","event":"business_round_completed","condition":{"kind":"round_report","operator":"all","conditions":[{"field":"sold_distinct_recipes","operator":"gte","value":3},{"field":"counts.chain_triggers","operator":"gte","value":2},{"field":"layout_extra_income","operator":"gte","value":60}]},"goal":1,"prerequisites":["growth_l3_inventory_pressure"],"reward":{"coins":520,"reputation":23},"sort_order":410,"notification_title":"挑战完成：连锁效率","notification_body":"多商品连锁已经稳定运转。"},
+      {"id":"growth_l5_signature_build","version":1,"title":"招牌构筑挑战","type":"growth","level":5,"source_stage":"Lv.5综合构筑","description":"在限制格数内完成高收益主题橱窗。","progress_text":"≤9 格｜同主题 3 件｜收入 300","event":"business_round_completed","condition":{"kind":"round_report","operator":"all","conditions":[{"field":"layout.occupied_cells","operator":"lte","value":9},{"field":"layout.max_shared_tag","operator":"gte","value":3},{"field":"total_coins","operator":"gte","value":300}]},"goal":1,"prerequisites":["growth_l4_chain_efficiency"],"reward":{"coins":680,"reputation":36},"sort_order":510,"notification_title":"挑战完成：招牌构筑","notification_body":"固定成长路线完成，Lv.6 起进入经营合同循环。"}
+    ],
+    "round_contracts": [
+      {"id":"contract_fast_turnover","version":1,"title":"快速周转","type":"contract","level":6,"source_stage":"经营合同","description":"用紧凑库存提高成交量。","progress_text":"按铜银金评级","event":"business_round_completed","condition":{"kind":"round_report"},"goal":1,"required_tier":"bronze","prerequisites":[],"availability":{"min_level":6},"environment_id":"steady_demand","duration_seconds":30,"risk":"normal","dimensions":["sales","inventory"],"tiers":[{"id":"bronze","condition":{"field":"counts.sold","operator":"gte","value":6}},{"id":"silver","condition":{"field":"counts.sold","operator":"gte","value":9}},{"id":"gold","condition":{"field":"counts.sold","operator":"gte","value":12}}],"reward":{"coins":120},"sort_order":710,"notification_title":"合同完成：快速周转","notification_body":"评价已计入门店评级。"},
+      {"id":"contract_compact_value","version":1,"title":"寸土寸金","type":"contract","level":6,"source_stage":"经营合同","description":"限制格数并提高营业收入。","progress_text":"按铜银金评级","event":"business_round_completed","condition":{"kind":"round_report"},"goal":1,"required_tier":"bronze","prerequisites":[],"availability":{"min_level":6},"environment_id":"quality_premium","duration_seconds":30,"risk":"normal","dimensions":["layout","income"],"tiers":[{"id":"bronze","condition":{"operator":"all","conditions":[{"field":"layout.occupied_cells","operator":"lte","value":10},{"field":"total_coins","operator":"gte","value":220}]}},{"id":"silver","condition":{"operator":"all","conditions":[{"field":"layout.occupied_cells","operator":"lte","value":9},{"field":"total_coins","operator":"gte","value":300}]}},{"id":"gold","condition":{"operator":"all","conditions":[{"field":"layout.occupied_cells","operator":"lte","value":8},{"field":"total_coins","operator":"gte","value":400}]}}],"reward":{"coins":150},"sort_order":720,"notification_title":"合同完成：寸土寸金","notification_body":"评价已计入门店评级。"},
+      {"id":"contract_chain_stage","version":1,"title":"连锁舞台","type":"contract","level":6,"source_stage":"经营合同","description":"用角色协同创造连锁收益。","progress_text":"按铜银金评级","event":"business_round_completed","condition":{"kind":"round_report"},"goal":1,"required_tier":"bronze","prerequisites":[],"availability":{"min_level":6},"environment_id":"neighborhood_fair","duration_seconds":30,"risk":"normal","dimensions":["chain","roles"],"tiers":[{"id":"bronze","condition":{"field":"counts.chain_triggers","operator":"gte","value":2}},{"id":"silver","condition":{"field":"counts.chain_triggers","operator":"gte","value":4}},{"id":"gold","condition":{"field":"counts.chain_triggers","operator":"gte","value":6}}],"reward":{"coins":150},"sort_order":730,"notification_title":"合同完成：连锁舞台","notification_body":"评价已计入门店评级。"},
+      {"id":"contract_zero_waste","version":1,"title":"零浪费经营","type":"contract","level":6,"source_stage":"经营合同","description":"提高销量并避免强制清仓。","progress_text":"按铜银金评级","event":"business_round_completed","condition":{"kind":"round_report"},"goal":1,"required_tier":"bronze","prerequisites":[],"availability":{"min_level":6},"environment_id":"light_meal","duration_seconds":30,"risk":"normal","dimensions":["inventory","sales"],"tiers":[{"id":"bronze","condition":{"operator":"all","conditions":[{"field":"counts.sold","operator":"gte","value":5},{"field":"counts.forced_clearance","operator":"lte","value":1}]}},{"id":"silver","condition":{"operator":"all","conditions":[{"field":"counts.sold","operator":"gte","value":7},{"field":"counts.forced_clearance","operator":"lte","value":0}]}},{"id":"gold","condition":{"operator":"all","conditions":[{"field":"counts.sold","operator":"gte","value":10},{"field":"counts.forced_clearance","operator":"lte","value":0}]}}],"reward":{"coins":140},"sort_order":740,"notification_title":"合同完成：零浪费经营","notification_body":"评价已计入门店评级。"},
+      {"id":"contract_high_risk_rush","version":1,"title":"高风险客流","type":"contract","level":6,"source_stage":"经营合同","description":"支付保证金，冲刺更高成交与收益。","progress_text":"按铜银金评级","event":"business_round_completed","condition":{"kind":"round_report"},"goal":1,"required_tier":"bronze","prerequisites":[],"availability":{"min_level":6},"environment_id":"morning_rush","duration_seconds":30,"risk":"high","deposit":50,"dimensions":["sales","income"],"tiers":[{"id":"bronze","condition":{"operator":"all","conditions":[{"field":"counts.sold","operator":"gte","value":8},{"field":"total_coins","operator":"gte","value":220}]}},{"id":"silver","condition":{"operator":"all","conditions":[{"field":"counts.sold","operator":"gte","value":11},{"field":"total_coins","operator":"gte","value":320}]}},{"id":"gold","condition":{"operator":"all","conditions":[{"field":"counts.sold","operator":"gte","value":14},{"field":"total_coins","operator":"gte","value":450}]}}],"reward":{"coins":220},"sort_order":750,"notification_title":"合同完成：高风险客流","notification_body":"高风险合同评价已记录。"}
+    ],
+    "side_tasks": [
+      {"id":"daily_farm_harvest","version":1,"title":"勤劳农夫","type":"daily","level":0,"source_stage":"每日任务","description":"今日收获任意农场食材 10 次。","progress_text":"农场收获 10 次","event":"harvest","condition":{"kind":"event_count","site_id":"farm"},"goal":10,"prerequisites":[],"availability":{"enabled":true},"reward":{"coins":50,"ingredients":{"rice_seed":3,"wheat_seed":2}},"reset_policy":"daily","sort_order":1010,"notification_title":"每日任务完成：勤劳农夫","notification_body":"今日目标已经达成，奖励待领取。"},
+      {"id":"daily_forest_harvest","version":1,"title":"山林采集","type":"daily","level":0,"source_stage":"每日任务","description":"今日收获任意林场食材 5 次。","progress_text":"林场收获 5 次","event":"harvest","condition":{"kind":"event_count","site_id":"forest"},"goal":5,"prerequisites":[],"availability":{"enabled":true},"reward":{"coins":60,"ingredients":{"strawberry_seed":3}},"reset_policy":"daily","sort_order":1020,"notification_title":"每日任务完成：山林采集","notification_body":"今日目标已经达成，奖励待领取。"},
+      {"id":"daily_product_sales","version":1,"title":"营业达人","type":"daily","level":0,"source_stage":"每日任务","description":"今日售卖甜品 20 份。","progress_text":"售卖甜品 20 份","event":"showcase_sale","condition":{},"goal":20,"prerequisites":[],"availability":{"enabled":true},"reward":{"coins":80,"reputation":30},"reset_policy":"daily","sort_order":1030,"notification_title":"每日任务完成：营业达人","notification_body":"今日目标已经达成，奖励待领取。"},
+      {"id":"daily_research_attempts","version":1,"title":"研发尝试","type":"daily","level":0,"source_stage":"每日任务","description":"今日进行 5 次配方研发。","progress_text":"配方研发 5 次","event":"research_attempt","condition":{"kind":"event_count"},"goal":5,"prerequisites":[],"availability":{"enabled":true},"reward":{"coins":40,"ingredients":{"sugar":10}},"reset_policy":"daily","sort_order":1040,"notification_title":"每日任务完成：研发尝试","notification_body":"今日目标已经达成，奖励待领取。"},
+      {"id":"daily_customer_orders","version":1,"title":"订单完成","type":"daily","level":0,"source_stage":"每日任务","description":"今日完成 3 笔顾客订单。","progress_text":"完成顾客订单 3 笔","event":"business_result","condition":{"kind":"order_count"},"goal":3,"prerequisites":[],"availability":{"enabled":true},"reward":{"coins":100,"ingredients":{"sugar":5}},"reset_policy":"daily","sort_order":1050,"notification_title":"每日任务完成：订单完成","notification_body":"今日目标已经达成，奖励待领取。"},
+      {"id":"daily_ranch_harvest","version":1,"title":"养殖场打理","type":"daily","level":0,"source_stage":"每日任务","description":"今日收获畜牧产品 8 次。","progress_text":"养殖场收获 8 次","event":"harvest","condition":{"kind":"event_count","site_id":"ranch"},"goal":8,"prerequisites":[],"availability":{"enabled":true},"reward":{"coins":60,"ingredients":{"chick":3}},"reset_policy":"daily","sort_order":1060,"notification_title":"每日任务完成：养殖场打理","notification_body":"今日目标已经达成，奖励待领取。"},
+      {"id":"daily_neighbor_gift","version":1,"title":"拜访邻里","type":"daily","level":0,"source_stage":"每日任务","description":"今日给 NPC 赠送 1 份甜品。","progress_text":"赠送甜品 1 份","event":"npc_gift","condition":{"kind":"event_count"},"goal":1,"prerequisites":[],"availability":{"enabled":false},"reward":{"coins":50},"reset_policy":"daily","sort_order":1070,"notification_title":"每日任务完成：拜访邻里","notification_body":"今日目标已经达成，奖励待领取。"},
+      {"id":"feature_harvest_all","version":1,"title":"熟练收获","type":"feature","level":0,"source_stage":"产地操作","description":"手动收获30次，解锁一键收获。","progress_text":"手动收获30次","event":"manual_harvest","condition":{"kind":"event_count"},"goal":30,"prerequisites":[],"availability":{"min_level":0},"reward":{"unlock_features":["harvest_all"]},"sort_order":50,"notification_title":"一键收获已开放","notification_body":"你已经熟练掌握产地收获，现在可以一次收取所有成熟产出了。"},
+      {"id":"feature_restock_all","version":1,"title":"备货熟手","type":"feature","level":0,"source_stage":"研发制作","description":"成功手动补货10次，解锁一键补货。","progress_text":"成功手动补货10次","event":"manual_restock_success","condition":{"kind":"event_count"},"goal":10,"prerequisites":[],"availability":{"min_level":0},"reward":{"unlock_features":["research_bulk_restock"]},"sort_order":60,"notification_title":"一键补货已开放","notification_body":"你已经熟悉单项补货流程，现在可以一次补齐所有可购买材料。"},
+      {"id":"feature_make_all","version":1,"title":"制作熟手","type":"feature","level":0,"source_stage":"研发制作","description":"成功手动制作或加工30次，解锁制作全部。","progress_text":"成功手动制作或加工30次","event":"manual_craft_success","condition":{"kind":"event_count"},"goal":30,"prerequisites":[],"availability":{"min_level":0},"reward":{"unlock_features":["research_make_all"]},"sort_order":70,"notification_title":"制作全部已开放","notification_body":"你已经熟练掌握制作与加工，现在可以批量制作所有材料充足的项目。"},
+      {"id":"feature_list_all","version":1,"title":"上架熟手","type":"feature","level":0,"source_stage":"研发制作","description":"成功手动上架60次，解锁上架全部。","progress_text":"成功手动上架60次","event":"manual_list_success","condition":{"kind":"event_count"},"goal":60,"prerequisites":[],"availability":{"min_level":0},"reward":{"unlock_features":["research_list_all"]},"sort_order":80,"notification_title":"上架全部已开放","notification_body":"你已经熟练掌握商品上架，现在可以批量上架所有可售成品。"},
+      {"id":"feature_output_automation","version":1,"title":"产地轮转","type":"feature","level":3,"source_stage":"自动化","description":"在至少两类产地中手动收获6批，并设置3次下一轮产物。","progress_text":"收获6批/2类产地，设置3次下一轮","events":["harvest","output_next_set"],"condition":{"kind":"output_automation_practice","harvest_count":6,"site_count":2,"next_set_count":3},"goal":1,"prerequisites":[],"availability":{"min_level":3,"min_lifetime_starlight":12},"reward":{"unlock_automation":["output"]},"sort_order":350,"notification_title":"产地管家已开放","notification_body":"选择1块产地进行板块托管，自动收获并续产其中所有已开工格子。"},
+      {"id":"feature_kitchen_automation","version":1,"title":"稳定出品","type":"feature","level":4,"source_stage":"自动化","description":"使用至少两类设备完成3次批量制作。","progress_text":"批量制作3次/2类设备","events":["recipe_queue_complete"],"condition":{"kind":"kitchen_automation_practice","completion_count":3,"device_count":2,"min_batches":5},"goal":1,"prerequisites":[],"availability":{"min_level":4,"min_lifetime_starlight":30,"automation_unlocks":["output"]},"reward":{"unlock_automation":["kitchen"]},"sort_order":450,"notification_title":"厨房排程台已开放","notification_body":"可以配置1台设备和1条自动制作规则。"}
+    ]
+  }
+}

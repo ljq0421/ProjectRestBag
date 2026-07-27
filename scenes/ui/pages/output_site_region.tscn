@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pages/output_site_region.gd" id="1_output_site_region"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/right_arrow_image_button.tscn" id="2_right_arrow"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/left_arrow_image_button.tscn" id="3_left_arrow"]
+
+[node name="OutputSiteRegion" type="PanelContainer"]
+custom_minimum_size = Vector2(210, 190)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"DessertInsetPanel"
+script = ExtResource("1_output_site_region")
+metadata/dynamic_output_region = true
+
+[node name="OutputSiteBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OutputSiteBody" type="HBoxContainer" parent="OutputSiteBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+theme_override_constants/separation = 4
+
+[node name="SiteIdentityColumn" type="VBoxContainer" parent="OutputSiteBox/OutputSiteBody"]
+custom_minimum_size = Vector2(132, 164)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="OutputSiteImage" type="TextureRect" parent="OutputSiteBox/OutputSiteBody/SiteIdentityColumn"]
+custom_minimum_size = Vector2(132, 132)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OutputSiteTitle" type="Label" parent="OutputSiteBox/OutputSiteBody/SiteIdentityColumn"]
+custom_minimum_size = Vector2(132, 28)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="ProductionSummaryPanel" type="VBoxContainer" parent="OutputSiteBox/OutputSiteBody"]
+custom_minimum_size = Vector2(100, 180)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ProductionSummaryBox" type="VBoxContainer" parent="OutputSiteBox/OutputSiteBody/ProductionSummaryPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="ProductionSummaryHeader" type="HBoxContainer" parent="OutputSiteBox/OutputSiteBody/ProductionSummaryPanel/ProductionSummaryBox"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ProductionSummaryTitle" type="Label" parent="OutputSiteBox/OutputSiteBody/ProductionSummaryPanel/ProductionSummaryBox/ProductionSummaryHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "产出总览"
+vertical_alignment = 1
+
+[node name="OutputSiteAutomationToggle" type="CheckButton" parent="OutputSiteBox/OutputSiteBody/ProductionSummaryPanel/ProductionSummaryBox/ProductionSummaryHeader"]
+visible = false
+custom_minimum_size = Vector2(28, 24)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = ""
+tooltip_text = "托管：开启后，自动收获并续产本产地所有已开工格子。"
+
+[node name="ProductionSummaryList" type="VBoxContainer" parent="OutputSiteBox/OutputSiteBody/ProductionSummaryPanel/ProductionSummaryBox"]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 1
+
+[node name="PlotColumn" type="VBoxContainer" parent="OutputSiteBox/OutputSiteBody"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="OutputSiteGrid" type="GridContainer" parent="OutputSiteBox/OutputSiteBody/PlotColumn"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 4
+
+[node name="OutputSitePager" type="HBoxContainer" parent="OutputSiteBox/OutputSiteBody/PlotColumn"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+theme_override_constants/separation = 6
+
+[node name="OutputPrevPageButton" parent="OutputSiteBox/OutputSiteBody/PlotColumn/OutputSitePager" instance=ExtResource("3_left_arrow")]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+
+[node name="OutputPageLabel" type="Label" parent="OutputSiteBox/OutputSiteBody/PlotColumn/OutputSitePager"]
+custom_minimum_size = Vector2(42, 26)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OutputNextPageButton" parent="OutputSiteBox/OutputSiteBody/PlotColumn/OutputSitePager" instance=ExtResource("2_right_arrow")]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2

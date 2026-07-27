@@ -1,0 +1,204 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/pages/device_growth_center_page.gd" id="1_script"]
+
+[node name="DeviceGrowthPage" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_script")
+
+[node name="DeviceSelectorPanel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSectionPanel"
+
+[node name="DeviceButtons" type="HBoxContainer" parent="DeviceSelectorPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="round_pot" type="Button" parent="DeviceSelectorPanel/DeviceButtons"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+toggle_mode = true
+text = "蒸煮一体的圆锅  L1
+0/10"
+theme_override_constants/icon_max_width = 46
+
+[node name="oven" type="Button" parent="DeviceSelectorPanel/DeviceButtons"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+toggle_mode = true
+text = "烤箱
+未解锁"
+theme_override_constants/icon_max_width = 46
+
+[node name="chiller" type="Button" parent="DeviceSelectorPanel/DeviceButtons"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+toggle_mode = true
+text = "冷藏柜
+未解锁"
+theme_override_constants/icon_max_width = 46
+
+[node name="griddle" type="Button" parent="DeviceSelectorPanel/DeviceButtons"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+toggle_mode = true
+text = "煎烤盘
+未解锁"
+theme_override_constants/icon_max_width = 46
+
+[node name="mixer" type="Button" parent="DeviceSelectorPanel/DeviceButtons"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertSecondaryButton"
+toggle_mode = true
+text = "搅拌机
+未解锁"
+theme_override_constants/icon_max_width = 46
+
+[node name="EmptyStateLabel" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+size_flags_vertical = 3
+text = "尚未解锁成品设备。"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DeviceDetailColumns" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="DetailPanel" type="PanelContainer" parent="DeviceDetailColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 65.0
+theme_type_variation = &"DessertSectionPanel"
+
+[node name="DetailContent" type="VBoxContainer" parent="DeviceDetailColumns/DetailPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="DeviceDetailColumns/DetailPanel/DetailContent"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="DeviceDetailColumns/DetailPanel/DetailContent/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "设备培养"
+
+[node name="CatalogButton" type="Button" parent="DeviceDetailColumns/DetailPanel/DetailContent/Header"]
+custom_minimum_size = Vector2(132, 32)
+layout_mode = 2
+theme_type_variation = &"DessertSecondaryButton"
+text = "查看关联配方"
+
+[node name="LevelLabel" type="Label" parent="DeviceDetailColumns/DetailPanel/DetailContent"]
+layout_mode = 2
+text = "当前 L1"
+
+[node name="EffectColumns" type="HBoxContainer" parent="DeviceDetailColumns/DetailPanel/DetailContent"]
+custom_minimum_size = Vector2(0, 112)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CurrentEffectPanel" type="PanelContainer" parent="DeviceDetailColumns/DetailPanel/DetailContent/EffectColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="CurrentEffectText" type="RichTextLabel" parent="DeviceDetailColumns/DetailPanel/DetailContent/EffectColumns/CurrentEffectPanel"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]当前效果[/b]
+试作品培养上限"
+fit_content = true
+scroll_active = false
+
+[node name="NextEffectPanel" type="PanelContainer" parent="DeviceDetailColumns/DetailPanel/DetailContent/EffectColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DessertMetricPanel"
+
+[node name="NextEffectText" type="RichTextLabel" parent="DeviceDetailColumns/DetailPanel/DetailContent/EffectColumns/NextEffectPanel"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]下一等级[/b]
+研发失败线索 +2"
+fit_content = true
+scroll_active = false
+
+[node name="RecipeSummary" type="RichTextLabel" parent="DeviceDetailColumns/DetailPanel/DetailContent"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]关联配方[/b]　试作 0｜人气 0｜招牌 0"
+fit_content = true
+scroll_active = false
+
+[node name="WaitingLabel" type="Label" parent="DeviceDetailColumns/DetailPanel/DetailContent"]
+layout_mode = 2
+text = "当前没有等待设备条件的配方。"
+autowrap_mode = 2
+
+[node name="HonorLabel" type="Label" parent="DeviceDetailColumns/DetailPanel/DetailContent"]
+layout_mode = 2
+text = "荣誉记录　成功研发 0 次｜累计制作 0 批"
+autowrap_mode = 2
+
+[node name="UpgradePanel" type="PanelContainer" parent="DeviceDetailColumns"]
+custom_minimum_size = Vector2(285, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 35.0
+theme_type_variation = &"DessertSectionPanel"
+
+[node name="UpgradeContent" type="VBoxContainer" parent="DeviceDetailColumns/UpgradePanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="UpgradeTitle" type="Label" parent="DeviceDetailColumns/UpgradePanel/UpgradeContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "升级至 L2"
+
+[node name="UseProgress" type="ProgressBar" parent="DeviceDetailColumns/UpgradePanel/UpgradeContent"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+show_percentage = false
+
+[node name="RequirementLabel" type="Label" parent="DeviceDetailColumns/UpgradePanel/UpgradeContent"]
+layout_mode = 2
+text = "有效使用 0/10
+升级费用 120 金币
+仍缺：使用 10 次｜金币 0"
+autowrap_mode = 2
+
+[node name="UpgradeSpacer" type="Control" parent="DeviceDetailColumns/UpgradePanel/UpgradeContent"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UpgradeButton" type="Button" parent="DeviceDetailColumns/UpgradePanel/UpgradeContent"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_type_variation = &"DessertRedActionButton"
+text = "升级到 L2"

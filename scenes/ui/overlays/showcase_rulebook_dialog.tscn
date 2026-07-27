@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/overlays/showcase_rulebook_dialog.gd" id="1_rulebook_script"]
+[ext_resource type="PackedScene" path="res://scenes/ui/common/close_image_button.tscn" id="2_close_button"]
+
+[node name="ShowcaseRulebookDialog" type="AcceptDialog"]
+title = "橱窗构筑规则"
+theme_type_variation = &"DessertNoticeDialog"
+initial_position = 2
+borderless = true
+exclusive = false
+popup_window = true
+size = Vector2i(980, 720)
+min_size = Vector2i(880, 620)
+script = ExtResource("1_rulebook_script")
+
+[node name="DialogChrome" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="CloseButton" parent="DialogChrome" instance=ExtResource("2_close_button")]
+z_index = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 64.0
+grow_horizontal = 0
+
+[node name="DialogTitleLabel" type="Label" parent="DialogChrome"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -80.0
+offset_bottom = 64.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+text = "构筑规则"
+vertical_alignment = 1
+
+[node name="RulebookBody" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(780, 500)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 120.0
+offset_right = -20.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RulebookLayout" type="HBoxContainer" parent="RulebookBody"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="CategoryPanel" type="VBoxContainer" parent="RulebookBody/RulebookLayout"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BoundsLabel" type="Label" parent="RulebookBody/RulebookLayout/CategoryPanel"]
+layout_mode = 2
+text = "已开放 16/168"
+autowrap_mode = 2
+
+[node name="CategoryList" type="ItemList" parent="RulebookBody/RulebookLayout/CategoryPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+select_mode = 0
+allow_reselect = true
+
+[node name="RuleScroll" type="ScrollContainer" parent="RulebookBody/RulebookLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="RuleText" type="RichTextLabel" parent="RulebookBody/RulebookLayout/RuleScroll"]
+custom_minimum_size = Vector2(560, 390)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+text = "选择左侧分类查看橱窗构筑规则。"
