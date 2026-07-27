@@ -1,0 +1,39 @@
+{
+  "encounters": {
+    "picky_food_critic": {
+      "duration_ms": 30000,
+      "initial_pickiness": 197,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 25,
+      "relation": {
+        "id": "drink_bake_pair",
+        "left_tag": "drink",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "early_tempo",
+          "at_ms": 8000,
+          "metric": "sales_count",
+          "target": 3,
+          "reputation_damage": 25
+        },
+        {
+          "id": "linked_display",
+          "at_ms": 16000,
+          "metric": "active_relation_count",
+          "target": 1,
+          "reputation_damage": 30
+        },
+        {
+          "id": "sustained_service",
+          "at_ms": 24000,
+          "from_ms": 16000,
+          "metric": "window_satisfaction",
+          "target": 30,
+          "reputation_damage": 45
+        }
+      ]
+    }
+  }
+}
