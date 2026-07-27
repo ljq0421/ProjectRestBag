@@ -5,6 +5,8 @@ signal retry_requested
 signal back_requested
 signal report_action_requested(action: String)
 signal tutorial_help_requested
+signal tutorial_dismiss_requested
+signal tutorial_next_requested
 
 
 func _ready() -> void:
@@ -18,6 +20,12 @@ func _ready() -> void:
 	)
 	$Margin/Content/ActionRow/TutorialHelpButton.pressed.connect(func() -> void:
 		tutorial_help_requested.emit()
+	)
+	$TutorialReportOverlay.dismiss_requested.connect(func() -> void:
+		tutorial_dismiss_requested.emit()
+	)
+	$TutorialReportOverlay.next_requested.connect(func() -> void:
+		tutorial_next_requested.emit()
 	)
 
 
@@ -49,6 +57,26 @@ func show_tutorial_report(outcome: String, replay_mode: bool = false, retryable:
 		"查看需求窗口和配方贡献。" if victory else ("查看失败原因，然后返回备战。" if terminal_loss else "查看失败窗口，再按建议重排展示柜。"),
 		resolve_tutorial_targets(outcome, retryable),
 		"",
+		replay_mode
+	)
+
+
+func show_tutorial_step(
+	step_number: int,
+	total_steps: int,
+	title: String,
+	body: String,
+	targets: Array[Rect2],
+	confirm_text: String = "",
+	replay_mode: bool = false
+) -> void:
+	$TutorialReportOverlay.show_step(
+		step_number,
+		total_steps,
+		title,
+		body,
+		targets,
+		confirm_text,
 		replay_mode
 	)
 

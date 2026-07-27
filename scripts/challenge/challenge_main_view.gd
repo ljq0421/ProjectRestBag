@@ -33,7 +33,10 @@ var _last_saved_elapsed := -1
 var _tutorial_progress = ChallengeTutorialProgress.new()
 var _tutorial_state: Dictionary = {}
 var _tutorial_replay_mode := false
+var _tutorial_replay_step_index := 0
 var _tutorial_persistence_blocked := false
+var _tutorial_help_opened := false
+var _tutorial_finished_migration_suppressed := false
 var _battle_tutorial_hint_shown := false
 
 
@@ -64,8 +67,13 @@ func _ready() -> void:
 	$SettlementDialog.report_action_requested.connect(_on_report_action_requested)
 	$SettlementDialog.retry_requested.connect(retry_same_encounter)
 	$SettlementDialog.back_requested.connect(_return_to_preparation)
-	$SettlementDialog.tutorial_help_requested.connect(_on_settlement_tutorial_help_requested)
+	$SettlementDialog.tutorial_help_requested.connect(open_tutorial_help)
+	$SettlementDialog.tutorial_dismiss_requested.connect(dismiss_tutorial)
+	$SettlementDialog.tutorial_next_requested.connect(advance_tutorial_replay)
 	$TutorialCanvasLayer/TutorialOverlay.confirm_requested.connect(_on_tutorial_confirm_requested)
+	$TutorialCanvasLayer/TutorialOverlay.dismiss_requested.connect(dismiss_tutorial)
+	$TutorialCanvasLayer/TutorialOverlay.next_requested.connect(advance_tutorial_replay)
+	$Root/TopBar/TutorialHelpButton.pressed.connect(open_tutorial_help)
 	start_vertical_slice()
 
 
@@ -89,6 +97,7 @@ func start_vertical_slice() -> void:
 	_refresh_top_bar()
 	if _restore_active_battle():
 		_initialize_tutorial()
+		_save_now(true)
 		_schedule_battle_tutorial_fade()
 		return
 	_show_preparation()
@@ -163,6 +172,7 @@ func advance_battle_for_test(target_elapsed_ms: int) -> void:
 func _initialize_tutorial() -> void:
 	var surface := _current_tutorial_surface()
 	var raw_onboarding = _save_data.get("onboarding")
+	_tutorial_finished_migration_suppressed = not raw_onboarding is Dictionary and surface == "finished"
 	_tutorial_state = _tutorial_progress.normalize(raw_onboarding, surface)
 	_tutorial_persistence_blocked = bool(_tutorial_state.get("unsupported_newer_version", false))
 	if _tutorial_persistence_blocked:
@@ -170,8 +180,6 @@ func _initialize_tutorial() -> void:
 		push_warning("Challenge onboarding was created by a newer client; leaving it unchanged.")
 		return
 	_save_data["onboarding"] = _tutorial_state.duplicate(true)
-	if not raw_onboarding is Dictionary or raw_onboarding != _tutorial_state:
-		_save_now(not battle_state.is_empty())
 	_refresh_tutorial()
 
 
@@ -188,13 +196,50 @@ func _apply_tutorial_event(event_id: String, context: Dictionary = {}) -> void:
 
 
 func _refresh_tutorial() -> void:
-	if _tutorial_persistence_blocked or String(_tutorial_state.get("status", "")) != "active":
+	if _tutorial_persistence_blocked:
 		_hide_all_tutorial_surfaces()
 		return
-	if $SettlementDialog.visible or _current_tutorial_surface() == "finished":
+	if not _tutorial_replay_mode and String(_tutorial_state.get("status", "")) != "active":
+		_hide_all_tutorial_surfaces()
+		return
+	var step_id := _active_tutorial_step_id()
+	if $SettlementDialog.visible:
+		$TutorialCanvasLayer/TutorialOverlay.hide_step()
+		if _tutorial_replay_mode:
+			var replay_copy := _tutorial_copy(step_id)
+			var report_targets: Array[Rect2] = []
+			if step_id == "read_report":
+				report_targets = $SettlementDialog.resolve_tutorial_targets(
+					String(battle_state.get("outcome", "")),
+					_is_current_report_retryable()
+				)
+			$SettlementDialog.show_tutorial_step(
+				ChallengeTutorialProgress.STEPS.find(step_id) + 1,
+				ChallengeTutorialProgress.STEPS.size(),
+				String(replay_copy.get("title", "")),
+				String(replay_copy.get("body", "")),
+				report_targets,
+				"",
+				true
+			)
+		elif step_id == "read_report":
+			$SettlementDialog.show_tutorial_report(
+				String(battle_state.get("outcome", "")),
+				false,
+				_is_current_report_retryable()
+			)
+		else:
+			$SettlementDialog.hide_tutorial_report()
+		return
+	$SettlementDialog.hide_tutorial_report()
+	if (
+		_current_tutorial_surface() == "finished"
+		and _tutorial_finished_migration_suppressed
+		and not _tutorial_replay_mode
+		and not _tutorial_help_opened
+	):
 		$TutorialCanvasLayer/TutorialOverlay.hide_step()
 		return
-	var step_id := String(_tutorial_state.get("step_id", "boss_brief"))
 	var copy := _tutorial_copy(step_id)
 	$TutorialCanvasLayer/TutorialOverlay.show_step(
 		ChallengeTutorialProgress.STEPS.find(step_id) + 1,
@@ -202,8 +247,8 @@ func _refresh_tutorial() -> void:
 		String(copy.get("title", "")),
 		String(copy.get("body", "")),
 		resolve_tutorial_targets(step_id),
-		String(copy.get("confirm", "")),
-		false
+		"" if _tutorial_replay_mode else String(copy.get("confirm", "")),
+		_tutorial_replay_mode
 	)
 
 
@@ -215,13 +260,64 @@ func _hide_all_tutorial_surfaces() -> void:
 func _current_tutorial_surface() -> String:
 	if $SettlementDialog.visible:
 		return "settlement"
+	if String(run_state.get("phase", "")) in ["completed", "ended"]:
+		return "finished"
 	if $Root/Body/BattlePanel.visible:
 		return "battle"
 	return "preparation"
 
 
+func dismiss_tutorial() -> void:
+	if _tutorial_replay_mode:
+		_tutorial_replay_mode = false
+		_tutorial_help_opened = false
+		_hide_all_tutorial_surfaces()
+		return
+	if _tutorial_persistence_blocked:
+		return
+	_tutorial_state = _tutorial_progress.dismiss(_tutorial_state)
+	_save_data["onboarding"] = _tutorial_state.duplicate(true)
+	_save_now($Root/Body/BattlePanel.visible)
+	_tutorial_help_opened = false
+	_hide_all_tutorial_surfaces()
+
+
+func open_tutorial_help() -> void:
+	if _tutorial_persistence_blocked:
+		return
+	_tutorial_help_opened = true
+	if String(_tutorial_state.get("status", "")) == "completed":
+		_tutorial_replay_mode = true
+		_tutorial_replay_step_index = 0
+	else:
+		_tutorial_state = _tutorial_progress.resume(_tutorial_state, _current_tutorial_surface())
+		_save_data["onboarding"] = _tutorial_state.duplicate(true)
+		_save_now($Root/Body/BattlePanel.visible)
+	_refresh_tutorial()
+
+
+func advance_tutorial_replay() -> void:
+	if not _tutorial_replay_mode:
+		return
+	_tutorial_replay_step_index += 1
+	if _tutorial_replay_step_index >= ChallengeTutorialProgress.STEPS.size():
+		_tutorial_replay_mode = false
+		_tutorial_help_opened = false
+		_hide_all_tutorial_surfaces()
+		return
+	_refresh_tutorial()
+
+
+func _active_tutorial_step_id() -> String:
+	if _tutorial_replay_mode:
+		return ChallengeTutorialProgress.STEPS[_tutorial_replay_step_index]
+	return String(_tutorial_state.get("step_id", "boss_brief"))
+
+
 func _on_tutorial_confirm_requested() -> void:
-	match String(_tutorial_state.get("step_id", "")):
+	if _tutorial_replay_mode:
+		return
+	match _active_tutorial_step_id():
 		"boss_brief":
 			_apply_tutorial_event("boss_acknowledged")
 		"read_risk":
@@ -235,6 +331,10 @@ func _on_tutorial_confirm_requested() -> void:
 
 func get_tutorial_state_for_test() -> Dictionary:
 	return _tutorial_state.duplicate(true)
+
+
+func is_tutorial_replay_for_test() -> bool:
+	return _tutorial_replay_mode
 
 
 func acknowledge_tutorial_for_test() -> void:
@@ -534,14 +634,6 @@ func _on_report_action_requested(_action: String) -> void:
 		"confidence": int(run_state.get("confidence", 0))
 	})
 	$SettlementDialog.hide_tutorial_report()
-
-
-func _on_settlement_tutorial_help_requested() -> void:
-	$SettlementDialog.show_tutorial_report(
-		String(battle_state.get("outcome", "")),
-		true,
-		_is_current_report_retryable()
-	)
 
 
 func _is_current_report_retryable() -> bool:

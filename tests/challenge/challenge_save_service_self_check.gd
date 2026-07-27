@@ -79,6 +79,19 @@ func _run() -> void:
 	_expect(recovered_data.get("active_battle", "missing") == null, "recovery should keep active battle contract")
 	_expect(FileAccess.file_exists(_save_path + ".broken"), "malformed save should be preserved as broken")
 
+	var future_source: Dictionary = service.empty_save()
+	future_source["onboarding"] = {
+		"version": 2,
+		"status": "future-status",
+		"step_id": "future-step",
+		"unknown_nested": {"keep": [1, {"value": true}]}
+	}
+	_expect(bool(service.save_to_path(_save_path, future_source).get("ok", false)), "future onboarding save should succeed")
+	var future_loaded: Dictionary = service.load_from_path(_save_path)
+	var future_onboarding: Dictionary = (future_loaded.get("data", {}) as Dictionary).get("onboarding", {})
+	_expect(int(future_onboarding.get("version", 0)) == 2, "save service should not downgrade a future onboarding version")
+	_expect(future_onboarding.get("unknown_nested", {}) == {"keep": [1.0, {"value": true}]}, "save service should preserve unknown future onboarding fields")
+
 	_cleanup()
 	_finish()
 
