@@ -3,6 +3,7 @@ extends SceneTree
 const MAIN_PATH := "res://scenes/challenge/challenge_main.tscn"
 const ChallengeSaveService = preload("res://scripts/challenge/challenge_save_service.gd")
 const ChallengeRunService = preload("res://scripts/challenge/challenge_run_service.gd")
+const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
 
 var _failures: Array[String] = []
 var _save_path := OS.get_temp_dir().path_join("project_rest_two_tutorial_route_self_check.json")

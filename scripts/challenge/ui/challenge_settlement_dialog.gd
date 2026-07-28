@@ -8,6 +8,8 @@ signal tutorial_help_requested
 signal tutorial_dismiss_requested
 signal tutorial_next_requested
 
+const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
+
 var _report_open := false
 var _report_action_committed := false
 var _unexpected_hide_restore_pending := false

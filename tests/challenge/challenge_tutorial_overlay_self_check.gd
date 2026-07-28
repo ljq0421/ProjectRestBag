@@ -1,6 +1,7 @@
 extends SceneTree
 
 const OVERLAY_PATH := "res://scenes/challenge/challenge_tutorial_overlay.tscn"
+const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
 
 var _failures: Array[String] = []
 

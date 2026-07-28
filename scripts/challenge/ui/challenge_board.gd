@@ -19,6 +19,7 @@ const CELL_SIZE := 80
 const RecipeIconService = preload("res://scripts/recipe_icon_service.gd")
 const ShowcaseIconService = preload("res://scripts/ui/storefront/showcase_icon_service.gd")
 const ChallengeLoadoutServiceClass = preload("res://scripts/challenge/challenge_loadout_service.gd")
+const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
 
 var _recipe_defs: Dictionary = {}
 var _loadout_service: RefCounted

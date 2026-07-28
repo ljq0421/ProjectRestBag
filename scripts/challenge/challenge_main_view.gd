@@ -9,6 +9,7 @@ const BossBattleService = preload("res://scripts/challenge/boss_battle_service.g
 const BossBattleReportService = preload("res://scripts/challenge/boss_battle_report_service.gd")
 const ChallengeRunService = preload("res://scripts/challenge/challenge_run_service.gd")
 const ChallengeTutorialProgress = preload("res://scripts/challenge/challenge_tutorial_progress.gd")
+const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
 
 const RECIPE_CONFIG_PATH := "res://doc/challenge/challenge_recipes.json"
 const ENCOUNTER_CONFIG_PATH := "res://doc/challenge/boss_encounters.json"
