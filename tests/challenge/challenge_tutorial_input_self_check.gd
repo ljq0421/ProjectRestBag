@@ -80,7 +80,7 @@ func _run() -> void:
 
 
 func _find_supply_card(preparation: Control, recipe_id: String) -> Control:
-	for card in preparation.get_node("SupplyScroll/SupplyStrip").get_children():
+	for card in preparation.supply_cards():
 		if String(card.get_meta("recipe_id", "")) == recipe_id:
 			return card
 	return null

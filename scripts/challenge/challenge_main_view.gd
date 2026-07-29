@@ -134,6 +134,7 @@ func _connect_signals() -> void:
 	hub.start_requested.connect(func() -> void: start_new_run())
 	hub.endless_requested.connect(func() -> void: start_endless_run())
 	hub.continue_requested.connect(continue_run)
+	hub.menu_requested.connect(_show_menu)
 	hub.research_requested.connect(_show_research)
 	var preparation = $Root/PageHost/PreparationHost/PreparationView
 	preparation.battle_requested.connect(_start_battle_with_draft)
@@ -159,6 +160,8 @@ func _connect_signals() -> void:
 	$Root/PageHost/UpgradeHost/UpgradeSelectView.upgrade_requested.connect(_on_upgrade_requested)
 	$Root/PageHost/ResearchHost/ResearchView.unlock_requested.connect(_on_research_unlock_requested)
 	$Root/PageHost/ResearchHost/ResearchView.back_requested.connect(_show_hub)
+	$Root/PageHost/MenuHost/MenuView.back_requested.connect(_show_hub)
+	$Root/PageHost/MenuHost/MenuView.save_requested.connect(_on_menu_save_requested)
 	$Root/PageHost/SummaryHost/RunSummaryView.reward_requested.connect(_on_reward_requested)
 	$Root/PageHost/SummaryHost/RunSummaryView.return_requested.connect(_on_return_requested)
 	$SettlementDialog.report_action_requested.connect(_on_report_action_requested)
@@ -288,6 +291,32 @@ func _show_research() -> void:
 	_offer_stage_two_hint("research_unlock")
 
 
+func _show_menu() -> void:
+	var default_ids: Array[String] = []
+	for value in _session.research_tree().get("starter_recipe_ids", []):
+		if value is String:
+			default_ids.append(String(value))
+	$Root/PageHost/MenuHost/MenuView.bind(
+		_session.available_recipe_ids(_save_data),
+		_session.active_menu(_save_data),
+		_session.recipe_definitions(),
+		Catalog.new().get_recipes(),
+		default_ids
+	)
+	_set_page("menu")
+	_refresh_top_bar()
+
+
+func _on_menu_save_requested(recipe_ids: Array[String]) -> void:
+	var saved := _session.set_active_menu(_save_data, recipe_ids)
+	if not bool(saved.get("applied", false)):
+		_set_status(_error_text(saved))
+		return
+	_adopt(saved)
+	_set_status("本局菜单已保存；开局后将冻结这份清单")
+	_show_hub()
+
+
 func _show_summary() -> void:
 	run_state = (_save_data.get("active_run", {}) as Dictionary).duplicate(true)
 	$Root/PageHost/SummaryHost/RunSummaryView.bind(run_state, _save_data.get("meta", {}))
@@ -392,7 +421,7 @@ func _on_research_unlock_requested(node_id: String) -> void:
 	var unlocked := _session.unlock_research(_save_data, node_id)
 	if bool(unlocked.get("applied", false)):
 		_adopt(unlocked)
-		_set_status("已解锁配方：%s（下一局生效）" % node_id)
+		_set_status("研究成果已进入永久收藏；加入本局菜单后，下局生效")
 	else:
 		_set_status(_error_text(unlocked))
 	_show_research()
@@ -428,6 +457,7 @@ func _set_page(page: String) -> void:
 	$Root/PageHost/BattleView.visible = page == "battle"
 	$Root/PageHost/UpgradeHost.visible = page == "upgrade"
 	$Root/PageHost/ResearchHost.visible = page == "research"
+	$Root/PageHost/MenuHost.visible = page == "menu"
 	$Root/PageHost/SummaryHost.visible = page == "summary"
 
 
@@ -526,7 +556,7 @@ func _refresh_tutorial() -> void:
 		or (
 			not _tutorial_replay_mode
 			and
-			_page in ["hub", "upgrade", "research", "summary"]
+			_page in ["hub", "menu", "upgrade", "research", "summary"]
 			and _active_tutorial_step_id() != "complete"
 		)
 	):
@@ -761,12 +791,12 @@ func _stage_two_tutorial_copy(hint_id: String) -> Dictionary:
 		"research_unlock":
 			return {
 				"title": "永久解锁走研发树",
-				"body": "节点有前置与研究点成本。解锁的新配方从下一局开始加入候选池。"
+				"body": "节点有前置与研究点成本。新配方进入永久收藏；回大厅加入本局菜单后，才会在下一局使用。"
 			}
 		"next_run_recipe":
 			return {
-				"title": "新配方已加入本局候选池",
-				"body": "永久研发不会改写上一局；新开短链时会冻结新的配方池快照。"
+				"title": "菜单已冻结为本局配方池",
+				"body": "永久收藏不会改写活动局；只有开局前加入菜单的 4～8 个配方会进入这局快照。"
 			}
 	return {"title": "", "body": ""}
 

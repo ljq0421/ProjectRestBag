@@ -39,7 +39,7 @@ func _run() -> void:
 	_expect(view.get_node("Root/PageHost/PreparationHost").visible, "starting run should open preparation")
 	var preparation = view.get_node("Root/PageHost/PreparationHost/PreparationView")
 	_expect(
-		preparation.get_node("SupplyScroll/SupplyStrip").get_child_count() == 6,
+		preparation.supply_cards().size() == 6,
 		"first run should dynamically show six starter recipes"
 	)
 	var run: Dictionary = view.run_state

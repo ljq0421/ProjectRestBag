@@ -77,11 +77,11 @@ func _run() -> void:
 			"本局强化 4" in preparation.get_node("StageMeta").text,
 			"preparation should count stacked upgrades instead of merged entries"
 		)
-		var supply_strip = preparation.get_node("SupplyScroll/SupplyStrip")
-		_expect(supply_strip.get_child_count() == 2, "preparation should build supply cards from frozen pool")
-		if supply_strip.get_child_count() == 2:
+		var supply_cards: Array = preparation.supply_cards()
+		_expect(supply_cards.size() == 2, "preparation should build supply cards from frozen pool")
+		if supply_cards.size() == 2:
 			_expect(
-				String(supply_strip.get_child(0).get_meta("recipe_id", "")) == "a_recipe",
+				String(supply_cards[0].get_meta("recipe_id", "")) == "a_recipe",
 				"dynamic supply cards should use stable recipe ID order"
 			)
 
@@ -110,19 +110,25 @@ func _run() -> void:
 				"build_purpose": "测试构筑"
 			}
 		})
-		var tempo_branch = research_view.get_node("Content/Branches/TempoBranch")
-		_expect(
-			tempo_branch.get_child_count() >= 3,
-			"research branch should render heading, description, and node"
+		var branch_buttons = research_view.get_node(
+			"Content/Branches/BranchRail/Content/BranchScroll/BranchButtons"
 		)
-		if tempo_branch.get_child_count() >= 1:
-			var branch_title: Label = tempo_branch.get_child(0)
-			_expect(
-				branch_title.get_theme_color("font_color") == Color("#29213D"),
-				"research branch heading should keep readable dark text on the light panel"
+		var node_list = research_view.get_node(
+			"Content/Branches/NodePanel/Content/NodeScroll/NodeList"
+		)
+		_expect(
+			branch_buttons.get_child_count() == 3,
+			"research view should render its dynamic branch navigation"
+		)
+		if node_list.get_child_count() >= 1:
+			var branch_title: Label = research_view.get_node(
+				"Content/Branches/NodePanel/Content/BranchTitle"
 			)
-		if tempo_branch.get_child_count() >= 3:
-			var research_button: Button = tempo_branch.get_child(2)
+			_expect(
+				branch_title.get_theme_color("font_color").is_equal_approx(Color("#29213D")),
+				"selected research branch heading should keep readable dark text"
+			)
+			var research_button: Button = node_list.get_child(0)
 			_expect("黄油曲奇" in research_button.text, "research node should use the player-facing recipe name")
 			_expect(not "available" in research_button.text, "research node should translate internal status values")
 

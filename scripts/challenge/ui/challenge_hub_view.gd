@@ -6,6 +6,7 @@ const UiStyle = preload("res://scripts/challenge/ui/challenge_ui_style.gd")
 signal start_requested
 signal endless_requested
 signal continue_requested
+signal menu_requested
 signal research_requested
 
 
@@ -13,10 +14,12 @@ func _ready() -> void:
 	UiStyle.apply_primary($Content/Actions/StartButton)
 	UiStyle.apply_primary($Content/Actions/EndlessButton, Color("#6B63C7"))
 	UiStyle.apply_primary($Content/Actions/ContinueButton)
+	UiStyle.apply_secondary($Content/Actions/MenuButton)
 	UiStyle.apply_secondary($Content/Actions/ResearchButton)
 	$Content/Actions/StartButton.pressed.connect(func() -> void: start_requested.emit())
 	$Content/Actions/EndlessButton.pressed.connect(func() -> void: endless_requested.emit())
 	$Content/Actions/ContinueButton.pressed.connect(func() -> void: continue_requested.emit())
+	$Content/Actions/MenuButton.pressed.connect(func() -> void: menu_requested.emit())
 	$Content/Actions/ResearchButton.pressed.connect(func() -> void: research_requested.emit())
 
 
@@ -25,9 +28,10 @@ func bind(meta: Dictionary, active_run: Variant) -> void:
 	var records: Dictionary = meta.get("endless_records", {})
 	var endless_unlocked := bool(records.get("unlocked", false))
 	$Content/ResearchPoints.text = "研究点 %d" % int(meta.get("research_points", 0))
-	$Content/PoolSummary.text = "永久配方 %d 种 · 新解锁在下一局生效" % (
-		meta.get("unlocked_recipe_ids", []) as Array
-	).size()
+	$Content/PoolSummary.text = "永久收藏 %d 种 · 本局菜单 %d / 8" % [
+		(meta.get("unlocked_recipe_ids", []) as Array).size(),
+		(meta.get("active_menu_recipe_ids", []) as Array).size()
+	]
 	$Content/EndlessRecord.text = (
 		"无尽纪录：最高 %d 层 · 分段研究收益单局最多 3 点" % int(records.get("best_floor", 0))
 		if endless_unlocked
@@ -39,6 +43,7 @@ func bind(meta: Dictionary, active_run: Variant) -> void:
 	$Content/Actions/EndlessButton.text = "开始无尽爬升" if endless_unlocked else "无尽爬升（未解锁）"
 	$Content/Actions/ContinueButton.visible = has_run
 	$Content/Actions/ContinueButton.disabled = not has_run
+	$Content/Actions/MenuButton.visible = not has_run
 	if has_run:
 		var run: Dictionary = active_run
 		if String(run.get("mode", "")) == "endless":

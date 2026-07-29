@@ -6,6 +6,7 @@ const ChallengeRunService = preload("res://scripts/challenge/challenge_run_servi
 const BossEncounterService = preload("res://scripts/challenge/boss_encounter_service.gd")
 const RunUpgradeService = preload("res://scripts/challenge/run_upgrade_service.gd")
 const RecipeResearchService = preload("res://scripts/challenge/recipe_research_service.gd")
+const ChallengeMenuService = preload("res://scripts/challenge/challenge_menu_service.gd")
 const ChallengeLoadoutService = preload("res://scripts/challenge/challenge_loadout_service.gd")
 const BossBattleService = preload("res://scripts/challenge/boss_battle_service.gd")
 const BossBattleReportService = preload("res://scripts/challenge/boss_battle_report_service.gd")
@@ -31,6 +32,7 @@ var _run_service = ChallengeRunService.new()
 var _encounter_service = BossEncounterService.new()
 var _upgrade_service = RunUpgradeService.new()
 var _research_service = RecipeResearchService.new()
+var _menu_service = ChallengeMenuService.new()
 var _loadout_service = ChallengeLoadoutService.new()
 var _battle_service = BossBattleService.new()
 var _report_service = BossBattleReportService.new()
@@ -85,8 +87,7 @@ func create_standard_run(save_data: Dictionary, route_id: String, seed: int) -> 
 	if not _route_defs.has(route_id) or not _route_defs[route_id] is Dictionary:
 		return _result(false, next_save, "unknown_route")
 	var route: Dictionary = _route_defs[route_id]
-	var meta: Dictionary = next_save.get("meta", {})
-	var recipe_ids: Array[String] = _research_service.available_recipe_ids(meta, _research_tree)
+	var recipe_ids := active_menu(next_save)
 	var pool_snapshot := {
 		"recipe_ids": recipe_ids.duplicate(),
 		"recipe_defs": _recipe_subset(recipe_ids)
@@ -127,8 +128,7 @@ func create_endless_run(save_data: Dictionary, seed: int) -> Dictionary:
 		return _result(false, next_save, "active_run_already_exists")
 	if not can_start_endless(next_save):
 		return _result(false, next_save, "endless_not_unlocked")
-	var meta: Dictionary = next_save.get("meta", {})
-	var recipe_ids: Array[String] = _research_service.available_recipe_ids(meta, _research_tree)
+	var recipe_ids := active_menu(next_save)
 	var pool_snapshot := {
 		"recipe_ids": recipe_ids.duplicate(),
 		"recipe_defs": _recipe_subset(recipe_ids)
@@ -506,6 +506,53 @@ func research_tree() -> Dictionary:
 	return _research_tree.duplicate(true)
 
 
+func available_recipe_ids(save_data: Dictionary) -> Array[String]:
+	_ensure_configured()
+	var meta: Dictionary = (_bootstrap_save(save_data).get("meta", {}) as Dictionary)
+	return _research_service.available_recipe_ids(meta, _research_tree)
+
+
+func active_menu(save_data: Dictionary) -> Array[String]:
+	_ensure_configured()
+	var bootstrapped := _bootstrap_save(save_data)
+	var meta: Dictionary = bootstrapped.get("meta", {})
+	var result: Array[String] = []
+	for value in meta.get("active_menu_recipe_ids", []):
+		if value is String:
+			result.append(String(value))
+	return result
+
+
+func menu_analysis(save_data: Dictionary) -> Dictionary:
+	_ensure_configured()
+	return _menu_service.analyze_menu(active_menu(save_data), _recipe_config.get("recipes", {}))
+
+
+func set_active_menu(save_data: Dictionary, recipe_ids: Variant) -> Dictionary:
+	_ensure_configured()
+	var next_save := _bootstrap_save(save_data)
+	if next_save.get("active_run") is Dictionary:
+		return _result(false, next_save, "active_run_menu_locked")
+	var available := available_recipe_ids(next_save)
+	var changed := _menu_service.set_active_menu(
+		next_save.get("meta", {}),
+		recipe_ids,
+		available,
+		_recipe_config.get("recipes", {})
+	)
+	if not bool(changed.get("applied", false)):
+		var rejected := _result(false, next_save, "invalid_active_menu")
+		rejected["errors"] = (changed.get("errors", []) as Array).duplicate()
+		return rejected
+	next_save["meta"] = (changed.get("meta", {}) as Dictionary).duplicate(true)
+	return _commit(next_save, {"recipe_ids": changed.get("recipe_ids", [])})
+
+
+func recipe_definitions() -> Dictionary:
+	_ensure_configured()
+	return (_recipe_config.get("recipes", {}) as Dictionary).duplicate(true)
+
+
 func research_node_state(save_data: Dictionary, node_id: String) -> Dictionary:
 	_ensure_configured()
 	return _research_service.node_state(
@@ -590,6 +637,19 @@ func _bootstrap_save(save_data: Dictionary) -> Dictionary:
 	if next_save.is_empty():
 		next_save = ChallengeSaveService.empty_save()
 	var meta: Dictionary = _research_service.bootstrap_meta(next_save.get("meta", {}), _research_tree)
+	for field in [
+		"unlocked_route_ids",
+		"route_first_clear_ids",
+		"completed_mastery_ids"
+	]:
+		if not meta.get(field) is Array:
+			meta[field] = []
+	var available := _research_service.available_recipe_ids(meta, _research_tree)
+	var starters: Array[String] = []
+	for value in _research_tree.get("starter_recipe_ids", []):
+		if value is String:
+			starters.append(String(value))
+	meta = _menu_service.bootstrap_meta(meta, available, starters)
 	var records: Dictionary = (meta.get("endless_records", {}) as Dictionary).duplicate(true)
 	if not records.has("unlocked"):
 		records["unlocked"] = false

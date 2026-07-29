@@ -163,13 +163,22 @@ func _run() -> void:
 	_expect(bool(returned.get("applied", false)), "rewarded run should return to hub")
 	save_data = returned.get("save_data", {})
 	_expect(save_data.get("active_run") == null, "returning to hub should clear active run")
+	_expect(
+		not (session.active_menu(save_data) as Array).has("vanilla_scone"),
+		"research unlock should enter collection without mutating the active menu"
+	)
+	var next_menu: Array[String] = session.active_menu(save_data)
+	next_menu.append("vanilla_scone")
+	var menu_saved := session.set_active_menu(save_data, next_menu)
+	_expect(bool(menu_saved.get("applied", false)), "newly unlocked recipe should be addable at the hub")
+	save_data = menu_saved.get("save_data", {})
 
 	var next_created := session.create_standard_run(save_data, "standard_short_chain", 303)
 	_expect(bool(next_created.get("applied", false)), "next run should be creatable")
 	var next_run: Dictionary = next_created.get("save_data", {}).get("active_run", {})
 	_expect(
 		(next_run.get("permanent_pool_snapshot", {}).get("recipe_ids", []) as Array).has("vanilla_scone"),
-		"newly unlocked recipe should appear only in the next run pool"
+		"newly unlocked recipe should appear after it is added to the next run menu"
 	)
 	_expect((next_run.get("run_upgrades", []) as Array).is_empty(), "run upgrades should not persist between runs")
 

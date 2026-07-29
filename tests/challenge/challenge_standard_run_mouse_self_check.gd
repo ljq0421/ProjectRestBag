@@ -124,7 +124,9 @@ func _complete_meta_loop_with_mouse(main: Control) -> void:
 	await process_frame
 	_expect(main._page == "research", "mouse click should open research tree")
 	var research_view: Control = main.get_node("Root/PageHost/ResearchHost/ResearchView")
-	var unlock_button := _first_enabled_research_button(research_view.get_node("Content/Branches"))
+	var unlock_button := _first_enabled_research_button(
+		research_view.get_node("Content/Branches/NodePanel/Content/NodeScroll/NodeList")
+	)
 	_expect(unlock_button != null, "three points and boss reveals should expose an unlockable recipe node")
 	if unlock_button == null:
 		return
@@ -139,12 +141,38 @@ func _complete_meta_loop_with_mouse(main: Control) -> void:
 	await process_frame
 	await process_frame
 	_expect(main._page == "hub", "research back button should return to hub")
+	var researched_recipe_id := ""
+	for recipe_id in unlocked_ids:
+		if not (main._save_data.get("meta", {}).get("active_menu_recipe_ids", []) as Array).has(recipe_id):
+			researched_recipe_id = String(recipe_id)
+			break
+	_expect(not researched_recipe_id.is_empty(), "new research recipe should enter collection without auto-changing the menu")
+	var menu_button: Button = main.get_node("Root/PageHost/HubHost/HubView/Content/Actions/MenuButton")
+	await _click(_viewport_center(menu_button))
+	await process_frame
+	await process_frame
+	_expect(main._page == "menu", "mouse click should open the menu editor")
+	var menu_view: Control = main.get_node("Root/PageHost/MenuHost/MenuView")
+	var collection_button := _find_menu_recipe_button(menu_view, researched_recipe_id)
+	_expect(collection_button != null, "newly researched recipe should appear in the permanent collection")
+	if collection_button == null:
+		return
+	await _click(_viewport_center(collection_button))
+	await process_frame
+	var save_menu_button: Button = menu_view.get_node("Content/Body/MenuPanel/Menu/Actions/SaveButton")
+	_expect(not save_menu_button.disabled, "seven-recipe menu should be valid")
+	await _click(_viewport_center(save_menu_button))
+	await process_frame
+	await process_frame
+	_expect(main._page == "hub", "saving the menu should return to the hub")
 	var start_button: Button = main.get_node("Root/PageHost/HubHost/HubView/Content/Actions/StartButton")
 	await _click(_viewport_center(start_button))
 	await process_frame
 	await process_frame
 	_expect(main._page == "preparation", "mouse should start the post-research run")
-	var supply_count := main.get_node("Root/PageHost/PreparationHost/PreparationView/SupplyScroll/SupplyStrip").get_child_count()
+	var supply_count: int = main.get_node(
+		"Root/PageHost/PreparationHost/PreparationView"
+	).supply_cards().size()
 	_expect(supply_count == 7, "next run should expose six starters plus the researched recipe")
 
 func _arrange_draft_with_mouse(preparation: Control, target_draft: Dictionary) -> bool:
@@ -215,9 +243,19 @@ func _first_enabled_research_button(root_node: Node) -> Button:
 	return null
 
 func _find_supply_card(preparation: Control, recipe_id: String) -> Control:
-	for card in preparation.get_node("SupplyScroll/SupplyStrip").get_children():
+	for card in preparation.supply_cards():
 		if String(card.get("recipe_id")) == recipe_id:
 			return card
+	return null
+
+
+func _find_menu_recipe_button(menu_view: Control, recipe_id: String) -> Button:
+	var grid = menu_view.get_node(
+		"Content/Body/CollectionPanel/Collection/CollectionScroll/CollectionGrid"
+	)
+	for button in grid.get_children():
+		if button is Button and String(button.get_meta("recipe_id", "")) == recipe_id:
+			return button
 	return null
 
 func _first_occupied_cell(board: Control) -> Control:

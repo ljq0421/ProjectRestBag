@@ -1,0 +1,197 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_menu_view.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="Style_menu"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+content_margin_left = 38.0
+content_margin_top = 32.0
+content_margin_right = 38.0
+content_margin_bottom = 32.0
+
+[sub_resource type="StyleBoxFlat" id="Style_section"]
+bg_color = Color(1, 0.988235, 0.956863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.776471, 0.741176, 0.913725, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+content_margin_left = 24.0
+content_margin_top = 22.0
+content_margin_right = 24.0
+content_margin_bottom = 22.0
+
+[node name="ChallengeMenuView" type="PanelContainer"]
+custom_minimum_size = Vector2(1500, 820)
+theme_override_styles/panel = SubResource("Style_menu")
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Header" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleBlock" type="VBoxContainer" parent="Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Eyebrow" type="Label" parent="Content/Header/TitleBlock"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 16
+text = "SERVICE PASS · 本局出餐清单"
+
+[node name="Title" type="Label" parent="Content/Header/TitleBlock"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 36
+text = "编排本局菜单"
+
+[node name="Subtitle" type="Label" parent="Content/Header/TitleBlock"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 17
+text = "永久收藏不会自动全部上桌；每局选择 4～8 个配方，开局后冻结。"
+
+[node name="BackButton" type="Button" parent="Content/Header"]
+custom_minimum_size = Vector2(170, 52)
+layout_mode = 2
+text = "返回大厅"
+
+[node name="Body" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 22
+
+[node name="CollectionPanel" type="PanelContainer" parent="Content/Body"]
+custom_minimum_size = Vector2(720, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_section")
+
+[node name="Collection" type="VBoxContainer" parent="Content/Body/CollectionPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CollectionTitle" type="Label" parent="Content/Body/CollectionPanel/Collection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 24
+text = "永久收藏"
+
+[node name="Filters" type="GridContainer" parent="Content/Body/CollectionPanel/Collection"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 8
+
+[node name="Search" type="LineEdit" parent="Content/Body/CollectionPanel/Collection/Filters"]
+custom_minimum_size = Vector2(360, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "搜索配方"
+
+[node name="RoleFilter" type="OptionButton" parent="Content/Body/CollectionPanel/Collection/Filters"]
+custom_minimum_size = Vector2(250, 46)
+layout_mode = 2
+
+[node name="BranchFilter" type="OptionButton" parent="Content/Body/CollectionPanel/Collection/Filters"]
+custom_minimum_size = Vector2(300, 46)
+layout_mode = 2
+
+[node name="TagFilter" type="OptionButton" parent="Content/Body/CollectionPanel/Collection/Filters"]
+custom_minimum_size = Vector2(250, 46)
+layout_mode = 2
+
+[node name="ShapeFilter" type="OptionButton" parent="Content/Body/CollectionPanel/Collection/Filters"]
+custom_minimum_size = Vector2(300, 46)
+layout_mode = 2
+
+[node name="CollectionScroll" type="ScrollContainer" parent="Content/Body/CollectionPanel/Collection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CollectionGrid" type="GridContainer" parent="Content/Body/CollectionPanel/Collection/CollectionScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="MenuPanel" type="PanelContainer" parent="Content/Body"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_section")
+
+[node name="Menu" type="VBoxContainer" parent="Content/Body/MenuPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="MenuTitle" type="Label" parent="Content/Body/MenuPanel/Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 24
+text = "本局菜单 6 / 8"
+
+[node name="MenuSummary" type="Label" parent="Content/Body/MenuPanel/Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
+theme_override_font_sizes/font_size = 17
+text = "周转 2 · 联动 2 · 招牌 2"
+autowrap_mode = 2
+
+[node name="CoverageSummary" type="Label" parent="Content/Body/MenuPanel/Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 16
+text = "当前路线覆盖：等待分析"
+autowrap_mode = 2
+
+[node name="MenuSlots" type="GridContainer" parent="Content/Body/MenuPanel/Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="Status" type="Label" parent="Content/Body/MenuPanel/Menu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 16
+text = "还可加入 2 个配方"
+horizontal_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="Content/Body/MenuPanel/Menu"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RestoreDefaultButton" type="Button" parent="Content/Body/MenuPanel/Menu/Actions"]
+custom_minimum_size = Vector2(220, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "恢复六配方默认菜单"
+
+[node name="SaveButton" type="Button" parent="Content/Body/MenuPanel/Menu/Actions"]
+custom_minimum_size = Vector2(220, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "保存本局菜单"

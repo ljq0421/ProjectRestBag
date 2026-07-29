@@ -7,6 +7,18 @@ signal placement_rejected(reasons: Array[String])
 
 const SupplyCardScene = preload("res://scenes/challenge/challenge_supply_card.tscn")
 const UiStyle = preload("res://scripts/challenge/ui/challenge_ui_style.gd")
+const ROLE_ORDER := ["tempo", "pairing", "signature", "softness", "flavor", "shape", "sustain", "space", "other"]
+const ROLE_NAMES := {
+	"tempo": "快速周转",
+	"pairing": "搭配联动",
+	"signature": "招牌输出",
+	"softness": "柔软质感",
+	"flavor": "风味覆盖",
+	"shape": "形状构筑",
+	"sustain": "持续供给",
+	"space": "空间组合",
+	"other": "其他"
+}
 
 var _catalog_recipes: Dictionary = {}
 var _effective_recipe_defs: Dictionary = {}
@@ -36,7 +48,7 @@ func bind(
 		effective_context.get("recipe_defs", {}) as Dictionary
 	).duplicate(true)
 	var pool: Dictionary = run.get("permanent_pool_snapshot", {})
-	_pool_recipe_ids = _sorted_strings(pool.get("recipe_ids", []))
+	_pool_recipe_ids = _sorted_recipe_ids(pool.get("recipe_ids", []))
 	$MainColumns/ChallengeBoard.bind_effective_context(
 		effective_context,
 		loadout_service,
@@ -119,18 +131,35 @@ func _bind_boss(encounter: Dictionary) -> void:
 func _rebuild_supply_cards() -> void:
 	for child in $SupplyScroll/SupplyStrip.get_children():
 		child.queue_free()
-	for recipe_id in _pool_recipe_ids:
-		if not _effective_recipe_defs.has(recipe_id):
+	for role in ROLE_ORDER:
+		var role_recipe_ids: Array[String] = []
+		for recipe_id in _pool_recipe_ids:
+			if _primary_role(_effective_recipe_defs.get(recipe_id, {})) == role:
+				role_recipe_ids.append(recipe_id)
+		if role_recipe_ids.is_empty():
 			continue
-		var card = SupplyCardScene.instantiate()
-		card.set_meta("recipe_id", recipe_id)
-		$SupplyScroll/SupplyStrip.add_child(card)
-		var catalog_entry: Dictionary = _catalog_recipes.get(recipe_id, {})
-		card.bind(
-			recipe_id,
-			_effective_recipe_defs.get(recipe_id, {}),
-			String(catalog_entry.get("name", recipe_id))
-		)
+		var group := VBoxContainer.new()
+		group.set_meta("build_role", role)
+		group.add_theme_constant_override("separation", 5)
+		var title := Label.new()
+		title.text = String(ROLE_NAMES.get(role, role))
+		title.add_theme_font_size_override("font_size", 14)
+		title.add_theme_color_override("font_color", Color("#665A82"))
+		group.add_child(title)
+		var cards := HBoxContainer.new()
+		cards.add_theme_constant_override("separation", 10)
+		group.add_child(cards)
+		$SupplyScroll/SupplyStrip.add_child(group)
+		for recipe_id in role_recipe_ids:
+			var card = SupplyCardScene.instantiate()
+			card.set_meta("recipe_id", recipe_id)
+			cards.add_child(card)
+			var catalog_entry: Dictionary = _catalog_recipes.get(recipe_id, {})
+			card.bind(
+				recipe_id,
+				_effective_recipe_defs.get(recipe_id, {}),
+				String(catalog_entry.get("name", recipe_id))
+			)
 	_update_counts(get_draft())
 
 
@@ -153,9 +182,22 @@ func _update_counts(draft: Dictionary) -> void:
 	for placement in draft.get("placements", []):
 		var recipe_id := String(placement.get("recipe_id", ""))
 		counts[recipe_id] = int(counts.get(recipe_id, 0)) + 1
-	for card in $SupplyScroll/SupplyStrip.get_children():
+	for card in supply_cards():
 		var recipe_id := String(card.get_meta("recipe_id", ""))
 		card.set_selected_count(int(counts.get(recipe_id, 0)))
+
+
+func supply_cards() -> Array[Control]:
+	var result: Array[Control] = []
+	_collect_supply_cards($SupplyScroll/SupplyStrip, result)
+	return result
+
+
+func _collect_supply_cards(node: Node, result: Array[Control]) -> void:
+	for child in node.get_children():
+		if child is Control and not String(child.get_meta("recipe_id", "")).is_empty():
+			result.append(child)
+		_collect_supply_cards(child, result)
 
 
 func _count_upgrade_stacks(upgrades: Array) -> int:
@@ -165,15 +207,29 @@ func _count_upgrade_stacks(upgrades: Array) -> int:
 	return count
 
 
-func _sorted_strings(values: Variant) -> Array[String]:
+func _sorted_recipe_ids(values: Variant) -> Array[String]:
 	var result: Array[String] = []
 	if values is Array:
 		for value in values:
 			var text := String(value)
 			if not text.is_empty() and not result.has(text):
 				result.append(text)
-	result.sort()
+	result.sort_custom(
+		func(a: String, b: String) -> bool:
+			var a_role := _primary_role(_effective_recipe_defs.get(a, {}))
+			var b_role := _primary_role(_effective_recipe_defs.get(b, {}))
+			var a_index := ROLE_ORDER.find(a_role)
+			var b_index := ROLE_ORDER.find(b_role)
+			if a_index == b_index:
+				return a < b
+			return a_index < b_index
+	)
 	return result
+
+
+func _primary_role(recipe_def: Dictionary) -> String:
+	var roles: Array = recipe_def.get("build_roles", [])
+	return String(roles[0]) if not roles.is_empty() else "other"
 
 
 func _metric_name(metric: String) -> String:

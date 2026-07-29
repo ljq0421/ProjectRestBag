@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "description": "挑战模式标签与构筑角色的唯一策划字典",
+    "tag_count": 16,
+    "build_role_count": 8
+  },
+  "tags": {
+    "fast": {
+      "display_name": "快速",
+      "status": "released",
+      "purpose": "高频售卖与早期窗口"
+    },
+    "bake": {
+      "display_name": "烘焙",
+      "status": "released",
+      "purpose": "烘焙关系与需求覆盖"
+    },
+    "fruit": {
+      "display_name": "水果",
+      "status": "released",
+      "purpose": "水果关系与清爽需求"
+    },
+    "drink": {
+      "display_name": "饮品",
+      "status": "released",
+      "purpose": "饮品关系与连续供应"
+    },
+    "set": {
+      "display_name": "搭配",
+      "status": "released",
+      "purpose": "套装和相邻构筑"
+    },
+    "signature": {
+      "display_name": "招牌",
+      "status": "released",
+      "purpose": "大件高满足力构筑"
+    },
+    "chocolate": {
+      "display_name": "巧克力",
+      "status": "released",
+      "purpose": "浓郁风味关系"
+    },
+    "aromatic": {
+      "display_name": "香气",
+      "status": "released",
+      "purpose": "风味覆盖和跨分支关系"
+    },
+    "soft": {
+      "display_name": "软糯",
+      "status": "planned",
+      "purpose": "持续供应和质地需求"
+    },
+    "tea": {
+      "display_name": "茶香",
+      "status": "planned",
+      "purpose": "茶香与苦甜主题需求"
+    },
+    "crisp": {
+      "display_name": "香脆",
+      "status": "planned",
+      "purpose": "小件节奏和烘焙关系"
+    },
+    "savory": {
+      "display_name": "咸香",
+      "status": "planned",
+      "purpose": "咸味主题需求"
+    },
+    "hearty": {
+      "display_name": "饱腹",
+      "status": "planned",
+      "purpose": "低频高覆盖需求"
+    },
+    "refreshing": {
+      "display_name": "清爽",
+      "status": "planned",
+      "purpose": "快速恢复和水果饮品关系"
+    },
+    "rich": {
+      "display_name": "浓郁",
+      "status": "planned",
+      "purpose": "高满足力风味需求"
+    },
+    "spatial": {
+      "display_name": "空间",
+      "status": "planned",
+      "purpose": "形状、旋转和区域构筑"
+    }
+  },
+  "build_roles": {
+    "tempo": {
+      "display_name": "快速周转",
+      "color": "#E34B72"
+    },
+    "pairing": {
+      "display_name": "搭配联动",
+      "color": "#2D9A6A"
+    },
+    "signature": {
+      "display_name": "招牌输出",
+      "color": "#546BDD"
+    },
+    "softness": {
+      "display_name": "柔软续航",
+      "color": "#D875A7"
+    },
+    "flavor": {
+      "display_name": "风味覆盖",
+      "color": "#8B63C7"
+    },
+    "shape": {
+      "display_name": "形状效率",
+      "color": "#D9822B"
+    },
+    "sustain": {
+      "display_name": "持续经营",
+      "color": "#6B7B3D"
+    },
+    "space": {
+      "display_name": "空间联动",
+      "color": "#397D8C"
+    }
+  }
+}

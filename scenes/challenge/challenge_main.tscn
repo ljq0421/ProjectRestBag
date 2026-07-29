@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/challenge/challenge_main_view.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://scenes/challenge/challenge_hub_view.tscn" id="2_hub"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/challenge/challenge_run_summary_view.tscn" id="7_summary"]
 [ext_resource type="PackedScene" path="res://scenes/challenge/challenge_settlement_dialog.tscn" id="8_settlement"]
 [ext_resource type="PackedScene" path="res://scenes/challenge/challenge_tutorial_overlay.tscn" id="9_tutorial"]
+[ext_resource type="PackedScene" path="res://scenes/challenge/challenge_menu_view.tscn" id="10_menu"]
 
 [node name="ChallengeMain" type="Control"]
 layout_mode = 3
@@ -167,6 +168,22 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ResearchView" parent="Root/PageHost/ResearchHost" instance=ExtResource("6_research")]
+layout_mode = 2
+
+[node name="MenuHost" type="CenterContainer" parent="Root/PageHost"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 20.0
+offset_right = -32.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuView" parent="Root/PageHost/MenuHost" instance=ExtResource("10_menu")]
 layout_mode = 2
 
 [node name="SummaryHost" type="CenterContainer" parent="Root/PageHost"]

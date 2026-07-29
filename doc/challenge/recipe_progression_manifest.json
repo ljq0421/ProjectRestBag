@@ -1,0 +1,6389 @@
+{
+  "meta": {
+    "total_recipes": 166,
+    "released_recipes": 12,
+    "starter_recipes": 6,
+    "research_recipes": 6,
+    "migration_batches": {
+      "A": 18,
+      "B": 34,
+      "C": 48,
+      "D": 54
+    },
+    "content_status_order": [
+      "draft",
+      "data_validated",
+      "simulation_validated",
+      "mouse_validated",
+      "released"
+    ]
+  },
+  "branches": [
+    "tempo_display",
+    "fruit_set",
+    "signature_display",
+    "milk_soft",
+    "tea_bittersweet",
+    "crisp_bake",
+    "savory_hearty",
+    "spatial_combo"
+  ],
+  "recipes": {
+    "rice_milk_drink": {
+      "recipe_id": "rice_milk_drink",
+      "display_name": "米浆饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "spring_water"
+        ],
+        "tags": [
+          "经典",
+          "清爽"
+        ],
+        "unlock_level": 0,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "rice_flour_steamed_cake": {
+      "recipe_id": "rice_flour_steamed_cake",
+      "display_name": "米粉蒸糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "sugar",
+          "egg"
+        ],
+        "tags": [
+          "经典",
+          "甜"
+        ],
+        "unlock_level": 1,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "sponge_cake": {
+      "recipe_id": "sponge_cake",
+      "display_name": "海绵杯蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "甜"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "starter",
+      "research_branch_id": "signature_display",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "signature",
+        "bake"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "supply_cost": 5,
+        "copy_limit": 1,
+        "virtual_stock": 3,
+        "cycle_ms": 8000,
+        "satisfaction": 22,
+        "tags": [
+          "signature",
+          "bake"
+        ],
+        "rotatable": false
+      },
+      "review_notes": ""
+    },
+    "butter_cookie": {
+      "recipe_id": "butter_cookie",
+      "display_name": "黄油曲奇",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "香脆"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "starter",
+      "research_branch_id": "tempo_display",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "bake"
+      ],
+      "build_roles": [
+        "tempo"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ]
+        ],
+        "supply_cost": 2,
+        "copy_limit": 3,
+        "virtual_stock": 6,
+        "cycle_ms": 4000,
+        "satisfaction": 4,
+        "tags": [
+          "fast",
+          "bake"
+        ],
+        "rotatable": false
+      },
+      "review_notes": ""
+    },
+    "rich_rice_drink": {
+      "recipe_id": "rich_rice_drink",
+      "display_name": "醇香米浆",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "milk",
+          "spring_water",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "甜"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "milk_rice_dew": {
+      "recipe_id": "milk_rice_dew",
+      "display_name": "牛奶米露",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "奶香"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "egg_milk_custard": {
+      "recipe_id": "egg_milk_custard",
+      "display_name": "蛋奶甜羹",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "egg",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "甜"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "caramel_pudding_steamed": {
+      "recipe_id": "caramel_pudding_steamed",
+      "display_name": "焦糖布丁",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "egg",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "甜"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "baked_rice_cake": {
+      "recipe_id": "baked_rice_cake",
+      "display_name": "烤米香饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "rice_flour",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "香脆",
+          "经典"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "milk_crisp_cake": {
+      "recipe_id": "milk_crisp_cake",
+      "display_name": "牛奶酥饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "香脆"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 4,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "crisp"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "soft_steamed_egg_cake": {
+      "recipe_id": "soft_steamed_egg_cake",
+      "display_name": "软蒸鸡蛋糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "egg",
+          "flour",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "甜"
+        ],
+        "unlock_level": 1,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "white_sugar_rice_ball": {
+      "recipe_id": "white_sugar_rice_ball",
+      "display_name": "白糖米圆子",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "sugar",
+          "spring_water"
+        ],
+        "tags": [
+          "软糯",
+          "甜"
+        ],
+        "unlock_level": 1,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chicken_steamed_dumpling": {
+      "recipe_id": "chicken_steamed_dumpling",
+      "display_name": "鸡肉蒸饺",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "flour",
+          "chicken",
+          "spring_water"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 1,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "beef_baked_pie": {
+      "recipe_id": "beef_baked_pie",
+      "display_name": "牛肉烤馅饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "beef",
+          "spring_water"
+        ],
+        "tags": [
+          "香脆",
+          "咸香"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp",
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chicken_rice_flour_cake": {
+      "recipe_id": "chicken_rice_flour_cake",
+      "display_name": "鸡肉米粉糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "chicken",
+          "spring_water"
+        ],
+        "tags": [
+          "咸香",
+          "经典"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "butter_beef_baked_rice": {
+      "recipe_id": "butter_beef_baked_rice",
+      "display_name": "黄油牛肉烤饭",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "rice",
+          "butter",
+          "beef",
+          "spring_water"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "steamed_meat_rice_cup": {
+      "recipe_id": "steamed_meat_rice_cup",
+      "display_name": "蒸肉米盏",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "chicken",
+          "egg"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "white_sugar_rice_porridge": {
+      "recipe_id": "white_sugar_rice_porridge",
+      "display_name": "白糖米粥",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "rice_flour",
+          "spring_water",
+          "sugar"
+        ],
+        "tags": [
+          "甜",
+          "经典"
+        ],
+        "unlock_level": 1,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "milk_pudding": {
+      "recipe_id": "milk_pudding",
+      "display_name": "牛奶布丁",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "milk",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "清爽",
+          "经典"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "starter",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "set"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 5000,
+        "satisfaction": 7,
+        "tags": [
+          "drink",
+          "set"
+        ],
+        "rotatable": true
+      },
+      "review_notes": ""
+    },
+    "cream_shortcake": {
+      "recipe_id": "cream_shortcake",
+      "display_name": "鲜奶油小蛋糕",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "sponge_cake",
+          "cream",
+          "strawberry"
+        ],
+        "tags": [
+          "果香",
+          "浓郁"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "research",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "cream_shortcake",
+      "combat_tags": [
+        "signature",
+        "bake",
+        "fruit"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 7000,
+        "satisfaction": 14,
+        "tags": [
+          "signature",
+          "bake",
+          "fruit"
+        ],
+        "rotatable": true
+      },
+      "review_notes": ""
+    },
+    "chocolate_cookie": {
+      "recipe_id": "chocolate_cookie",
+      "display_name": "巧克力曲奇",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "chocolate"
+        ],
+        "tags": [
+          "苦甜",
+          "香脆"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "research",
+      "research_branch_id": "tempo_display",
+      "research_tier": 2,
+      "research_node_id": "chocolate_cookie",
+      "combat_tags": [
+        "fast",
+        "bake",
+        "chocolate"
+      ],
+      "build_roles": [
+        "tempo"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 6,
+        "cycle_ms": 4000,
+        "satisfaction": 6,
+        "tags": [
+          "fast",
+          "bake",
+          "chocolate"
+        ],
+        "rotatable": false
+      },
+      "review_notes": ""
+    },
+    "blueberry_mousse": {
+      "recipe_id": "blueberry_mousse",
+      "display_name": "蓝莓慕斯杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "blueberry",
+          "cream",
+          "sugar"
+        ],
+        "tags": [
+          "果香",
+          "清爽"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "research",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "blueberry_mousse",
+      "combat_tags": [
+        "fruit",
+        "drink",
+        "set"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 5,
+        "cycle_ms": 5000,
+        "satisfaction": 8,
+        "tags": [
+          "fruit",
+          "drink",
+          "set"
+        ],
+        "rotatable": true
+      },
+      "review_notes": ""
+    },
+    "vanilla_scone": {
+      "recipe_id": "vanilla_scone",
+      "display_name": "香草司康",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "vanilla"
+        ],
+        "tags": [
+          "经典",
+          "香脆"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "research",
+      "research_branch_id": "tempo_display",
+      "research_tier": 2,
+      "research_node_id": "vanilla_scone",
+      "combat_tags": [
+        "fast",
+        "bake",
+        "aromatic"
+      ],
+      "build_roles": [
+        "tempo"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 5,
+        "cycle_ms": 5000,
+        "satisfaction": 9,
+        "tags": [
+          "fast",
+          "bake",
+          "aromatic"
+        ],
+        "rotatable": true
+      },
+      "review_notes": ""
+    },
+    "strawberry_jelly": {
+      "recipe_id": "strawberry_jelly",
+      "display_name": "草莓果冻杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "strawberry",
+          "sugar",
+          "gelatin"
+        ],
+        "tags": [
+          "果香",
+          "清爽"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "starter",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "fruit"
+      ],
+      "build_roles": [
+        "tempo"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ]
+        ],
+        "supply_cost": 2,
+        "copy_limit": 3,
+        "virtual_stock": 5,
+        "cycle_ms": 5000,
+        "satisfaction": 5,
+        "tags": [
+          "fast",
+          "fruit"
+        ],
+        "rotatable": false
+      },
+      "review_notes": ""
+    },
+    "banana_pound_cake": {
+      "recipe_id": "banana_pound_cake",
+      "display_name": "香蕉磅蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "egg",
+          "sugar",
+          "banana"
+        ],
+        "tags": [
+          "浓郁",
+          "奶香"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "strawberry_mousse": {
+      "recipe_id": "strawberry_mousse",
+      "display_name": "草莓慕斯杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "strawberry",
+          "cream",
+          "milk",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "清爽",
+          "果香"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "research",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "strawberry_mousse",
+      "combat_tags": [
+        "fruit",
+        "drink",
+        "set"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 5,
+        "cycle_ms": 5000,
+        "satisfaction": 8,
+        "tags": [
+          "fruit",
+          "drink",
+          "set"
+        ],
+        "rotatable": true
+      },
+      "review_notes": ""
+    },
+    "blueberry_jelly": {
+      "recipe_id": "blueberry_jelly",
+      "display_name": "蓝莓果冻",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "blueberry",
+          "gelatin",
+          "sugar",
+          "spring_water"
+        ],
+        "tags": [
+          "果香",
+          "清爽"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chocolate_lava_cake": {
+      "recipe_id": "chocolate_lava_cake",
+      "display_name": "巧克力熔岩蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "chocolate",
+          "butter",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "浓郁"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "starter",
+      "research_branch_id": "signature_display",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "signature",
+        "chocolate"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "supply_cost": 5,
+        "copy_limit": 1,
+        "virtual_stock": 3,
+        "cycle_ms": 10000,
+        "satisfaction": 29,
+        "tags": [
+          "signature",
+          "chocolate"
+        ],
+        "rotatable": false
+      },
+      "review_notes": ""
+    },
+    "vanilla_cream_puff": {
+      "recipe_id": "vanilla_cream_puff",
+      "display_name": "香草奶油泡芙",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "egg",
+          "cream",
+          "vanilla",
+          "sugar"
+        ],
+        "tags": [
+          "香脆",
+          "奶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "crisp"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "banana_rice_pudding": {
+      "recipe_id": "banana_rice_pudding",
+      "display_name": "香蕉米布丁",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "rice",
+          "milk",
+          "banana",
+          "sugar"
+        ],
+        "tags": [
+          "软糯",
+          "奶香"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "strawberry_cream_cake": {
+      "recipe_id": "strawberry_cream_cake",
+      "display_name": "草莓奶油蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "egg",
+          "sugar",
+          "cream",
+          "strawberry"
+        ],
+        "tags": [
+          "果香",
+          "奶香"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "blueberry_muffin": {
+      "recipe_id": "blueberry_muffin",
+      "display_name": "蓝莓麦芬",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "egg",
+          "milk",
+          "blueberry",
+          "sugar"
+        ],
+        "tags": [
+          "果香",
+          "经典"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "starter",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "bake",
+        "set"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 5,
+        "cycle_ms": 6000,
+        "satisfaction": 8,
+        "tags": [
+          "bake",
+          "set"
+        ],
+        "rotatable": true
+      },
+      "review_notes": ""
+    },
+    "caramel_mousse": {
+      "recipe_id": "caramel_mousse",
+      "display_name": "焦糖慕斯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "caramel",
+          "cream",
+          "milk",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "甜",
+          "浓郁"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "baseline",
+      "content_status": "released",
+      "unlock_kind": "research",
+      "research_branch_id": "signature_display",
+      "research_tier": 2,
+      "research_node_id": "caramel_mousse",
+      "combat_tags": [
+        "drink",
+        "signature",
+        "chocolate"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 6000,
+        "satisfaction": 12,
+        "tags": [
+          "drink",
+          "signature",
+          "chocolate"
+        ],
+        "rotatable": true
+      },
+      "review_notes": ""
+    },
+    "berry_rice_drink": {
+      "recipe_id": "berry_rice_drink",
+      "display_name": "莓果米浆饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "spring_water",
+          "blueberry",
+          "sugar"
+        ],
+        "tags": [
+          "果香",
+          "清爽"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "vanilla_panna_cotta": {
+      "recipe_id": "vanilla_panna_cotta",
+      "display_name": "香草奶冻",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "milk",
+          "cream",
+          "gelatin",
+          "vanilla",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "经典"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "banana_baked_pancake": {
+      "recipe_id": "banana_baked_pancake",
+      "display_name": "香蕉烤松饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "egg",
+          "milk",
+          "banana",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "甜"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chocolate_mousse": {
+      "recipe_id": "chocolate_mousse",
+      "display_name": "巧克力慕斯杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "chocolate",
+          "cream",
+          "milk",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "奶香"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "berry_rice_flour_cake": {
+      "recipe_id": "berry_rice_flour_cake",
+      "display_name": "莓果米粉蒸糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "sugar",
+          "egg",
+          "strawberry"
+        ],
+        "tags": [
+          "果香",
+          "清爽"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "caramel_brulee": {
+      "recipe_id": "caramel_brulee",
+      "display_name": "焦糖烤布蕾",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "egg",
+          "milk",
+          "cream",
+          "caramel",
+          "sugar"
+        ],
+        "tags": [
+          "甜",
+          "奶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "banana_milk_drink": {
+      "recipe_id": "banana_milk_drink",
+      "display_name": "香蕉牛奶饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "milk",
+          "banana",
+          "sugar",
+          "spring_water"
+        ],
+        "tags": [
+          "浓郁",
+          "奶香"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "blueberry_cream_tart": {
+      "recipe_id": "blueberry_cream_tart",
+      "display_name": "蓝莓奶油塔",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "cream",
+          "blueberry",
+          "sugar"
+        ],
+        "tags": [
+          "香脆",
+          "果香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "crisp"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chicken_cream_soup": {
+      "recipe_id": "chicken_cream_soup",
+      "display_name": "鸡肉奶油浓汤",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "chicken",
+          "cream",
+          "milk"
+        ],
+        "tags": [
+          "浓郁",
+          "咸香"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "rich"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "banana_pancake": {
+      "recipe_id": "banana_pancake",
+      "display_name": "香蕉松饼",
+      "source": {
+        "device": "griddle",
+        "materials": [
+          "flour",
+          "milk",
+          "banana"
+        ],
+        "tags": [
+          "甜",
+          "果香"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "orange_crepe": {
+      "recipe_id": "orange_crepe",
+      "display_name": "橙香可丽饼",
+      "source": {
+        "device": "griddle",
+        "materials": [
+          "flour",
+          "milk",
+          "orange"
+        ],
+        "tags": [
+          "果香",
+          "清爽"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "lemon_tart": {
+      "recipe_id": "lemon_tart",
+      "display_name": "柠檬小塔",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "lemon"
+        ],
+        "tags": [
+          "清爽",
+          "经典"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "peach_jelly": {
+      "recipe_id": "peach_jelly",
+      "display_name": "桃子果冻杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "peach",
+          "sugar",
+          "gelatin"
+        ],
+        "tags": [
+          "果香",
+          "清爽"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "matcha_pudding": {
+      "recipe_id": "matcha_pudding",
+      "display_name": "抹茶布丁",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "milk",
+          "egg",
+          "matcha"
+        ],
+        "tags": [
+          "苦甜",
+          "清爽"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "rich"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "coffee_mousse": {
+      "recipe_id": "coffee_mousse",
+      "display_name": "咖啡慕斯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "coffee",
+          "cream",
+          "sugar"
+        ],
+        "tags": [
+          "苦甜",
+          "浓郁"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "redbean_pancake": {
+      "recipe_id": "redbean_pancake",
+      "display_name": "红豆煎饼",
+      "source": {
+        "device": "griddle",
+        "materials": [
+          "flour",
+          "red_bean",
+          "milk"
+        ],
+        "tags": [
+          "甜",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "cheesecake": {
+      "recipe_id": "cheesecake",
+      "display_name": "芝士蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "cheese",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "经典"
+        ],
+        "unlock_level": 2,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "sea_salt_caramel_pudding": {
+      "recipe_id": "sea_salt_caramel_pudding",
+      "display_name": "海盐焦糖布丁",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "sea_salt",
+          "caramel",
+          "milk"
+        ],
+        "tags": [
+          "苦甜",
+          "咸香"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "rich"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "matcha_mochi": {
+      "recipe_id": "matcha_mochi",
+      "display_name": "抹茶糯米团",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "glutinous_rice_flour",
+          "matcha",
+          "red_bean"
+        ],
+        "tags": [
+          "苦甜",
+          "软糯"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_sesame_roll": {
+      "recipe_id": "black_sesame_roll",
+      "display_name": "黑芝麻糯米卷",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "glutinous_rice_flour",
+          "black_sesame",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "软糯"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mango_cream_cup": {
+      "recipe_id": "mango_cream_cup",
+      "display_name": "芒果奶油杯",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "mango",
+          "cream",
+          "sugar"
+        ],
+        "tags": [
+          "果香",
+          "浓郁"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "rich"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "apple_pie": {
+      "recipe_id": "apple_pie",
+      "display_name": "苹果派",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "apple",
+          "sugar"
+        ],
+        "tags": [
+          "果香",
+          "香脆"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "crisp"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "lemon_madeleine": {
+      "recipe_id": "lemon_madeleine",
+      "display_name": "柠檬玛德琳",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "egg",
+          "lemon",
+          "sugar"
+        ],
+        "tags": [
+          "清爽",
+          "浓郁"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "rich"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "orange_chiffon_cake": {
+      "recipe_id": "orange_chiffon_cake",
+      "display_name": "橙香戚风蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "egg",
+          "orange",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "果香"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "peach_mousse": {
+      "recipe_id": "peach_mousse",
+      "display_name": "蜜桃慕斯杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "peach",
+          "cream",
+          "gelatin",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "果香"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "matcha_cookie": {
+      "recipe_id": "matcha_cookie",
+      "display_name": "抹茶曲奇",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "matcha",
+          "sugar"
+        ],
+        "tags": [
+          "苦甜",
+          "香脆"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp",
+        "rich"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "matcha_redbean_mousse": {
+      "recipe_id": "matcha_redbean_mousse",
+      "display_name": "抹茶红豆慕斯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "matcha",
+          "red_bean",
+          "cream",
+          "gelatin",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "苦甜",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "coffee_pound_cake": {
+      "recipe_id": "coffee_pound_cake",
+      "display_name": "咖啡磅蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "egg",
+          "coffee",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "苦甜"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "red_bean_rice_cake": {
+      "recipe_id": "red_bean_rice_cake",
+      "display_name": "红豆沙米糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "red_bean",
+          "sugar"
+        ],
+        "tags": [
+          "软糯",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "red_bean_milk_drink": {
+      "recipe_id": "red_bean_milk_drink",
+      "display_name": "红豆牛奶饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "red_bean",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mango_glutinous_rice_cake": {
+      "recipe_id": "mango_glutinous_rice_cake",
+      "display_name": "芒果糯米糍",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "glutinous_rice_flour",
+          "mango",
+          "cream",
+          "sugar"
+        ],
+        "tags": [
+          "软糯",
+          "果香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_sesame_soup": {
+      "recipe_id": "black_sesame_soup",
+      "display_name": "黑芝麻糊",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "black_sesame",
+          "sugar",
+          "spring_water"
+        ],
+        "tags": [
+          "浓郁",
+          "低负担"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_sesame_crisp_cake": {
+      "recipe_id": "black_sesame_crisp_cake",
+      "display_name": "黑芝麻酥饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "black_sesame",
+          "sugar"
+        ],
+        "tags": [
+          "香脆",
+          "浓郁"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp",
+        "rich"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "pumpkin_pie": {
+      "recipe_id": "pumpkin_pie",
+      "display_name": "南瓜派",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "pumpkin",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "甜",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "pumpkin_steamed_cake": {
+      "recipe_id": "pumpkin_steamed_cake",
+      "display_name": "南瓜蒸糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "pumpkin",
+          "sugar"
+        ],
+        "tags": [
+          "软糯",
+          "甜"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "honey_lemon_drink": {
+      "recipe_id": "honey_lemon_drink",
+      "display_name": "蜂蜜柠檬饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "lemon",
+          "honey",
+          "spring_water"
+        ],
+        "tags": [
+          "清爽",
+          "甜"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "honey_sponge_cake": {
+      "recipe_id": "honey_sponge_cake",
+      "display_name": "蜂蜜海绵蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "egg",
+          "honey",
+          "sugar"
+        ],
+        "tags": [
+          "甜",
+          "经典"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "sea_salt_chocolate_cookie": {
+      "recipe_id": "sea_salt_chocolate_cookie",
+      "display_name": "海盐巧克力曲奇",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "chocolate",
+          "sea_salt",
+          "sugar"
+        ],
+        "tags": [
+          "咸香",
+          "苦甜"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "rich"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "cheese_chicken_baked_rice": {
+      "recipe_id": "cheese_chicken_baked_rice",
+      "display_name": "芝士鸡肉焗饭",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "rice",
+          "chicken",
+          "cheese",
+          "butter",
+          "spring_water"
+        ],
+        "tags": [
+          "咸香",
+          "奶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "beef_cheese_pie": {
+      "recipe_id": "beef_cheese_pie",
+      "display_name": "牛肉芝士派",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "beef",
+          "cheese"
+        ],
+        "tags": [
+          "咸香",
+          "香脆"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp",
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "pumpkin_rice_drink": {
+      "recipe_id": "pumpkin_rice_drink",
+      "display_name": "南瓜米浆饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "pumpkin",
+          "spring_water",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "饱腹"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "hearty",
+        "rich"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mango_milk_drink": {
+      "recipe_id": "mango_milk_drink",
+      "display_name": "芒果牛奶饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "mango",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "果香",
+          "奶香"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "red_bean_glutinous_rice_ball": {
+      "recipe_id": "red_bean_glutinous_rice_ball",
+      "display_name": "红豆糯米团",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "glutinous_rice_flour",
+          "red_bean",
+          "sugar"
+        ],
+        "tags": [
+          "软糯",
+          "甜"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "cheese_baked_pumpkin": {
+      "recipe_id": "cheese_baked_pumpkin",
+      "display_name": "芝士焗南瓜",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "pumpkin",
+          "cheese",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "咸香"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "rich"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "coffee_muffin": {
+      "recipe_id": "coffee_muffin",
+      "display_name": "咖啡玛芬",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "milk",
+          "egg",
+          "coffee",
+          "sugar"
+        ],
+        "tags": [
+          "苦甜",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "apple_steamed_rice_cake": {
+      "recipe_id": "apple_steamed_rice_cake",
+      "display_name": "苹果蒸米糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "apple",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "果香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "honey_yogurt": {
+      "recipe_id": "honey_yogurt",
+      "display_name": "蜂蜜酸奶杯",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "yogurt",
+          "honey",
+          "blueberry"
+        ],
+        "tags": [
+          "清爽",
+          "果香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "apple_crumble": {
+      "recipe_id": "apple_crumble",
+      "display_name": "苹果坚果酥",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "apple",
+          "nuts",
+          "butter"
+        ],
+        "tags": [
+          "果香",
+          "香脆"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "crisp"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "cocoa_brownie": {
+      "recipe_id": "cocoa_brownie",
+      "display_name": "可可布朗尼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "cocoa",
+          "chocolate",
+          "butter"
+        ],
+        "tags": [
+          "苦甜",
+          "浓郁"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "matcha_redbean": {
+      "recipe_id": "matcha_redbean",
+      "display_name": "抹茶红豆杯",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "matcha",
+          "red_bean",
+          "cream"
+        ],
+        "tags": [
+          "苦甜",
+          "甜"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mint_cocoa_cup": {
+      "recipe_id": "mint_cocoa_cup",
+      "display_name": "薄荷可可杯",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "mint",
+          "cocoa",
+          "milk"
+        ],
+        "tags": [
+          "清凉",
+          "苦甜"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "rich"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "almond_chocolate_tart": {
+      "recipe_id": "almond_chocolate_tart",
+      "display_name": "巧克力杏仁塔",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "almond",
+          "chocolate",
+          "flour"
+        ],
+        "tags": [
+          "苦甜",
+          "香脆"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp",
+        "rich"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "pumpkin_pudding": {
+      "recipe_id": "pumpkin_pudding",
+      "display_name": "南瓜布丁",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "pumpkin",
+          "egg",
+          "milk"
+        ],
+        "tags": [
+          "甜",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "oats_yogurt_bowl": {
+      "recipe_id": "oats_yogurt_bowl",
+      "display_name": "燕麦酸奶碗",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "oats",
+          "yogurt",
+          "honey"
+        ],
+        "tags": [
+          "清爽",
+          "低负担"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "honey_lemon_jelly": {
+      "recipe_id": "honey_lemon_jelly",
+      "display_name": "蜂蜜柠檬冻",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "honey",
+          "lemon",
+          "gelatin"
+        ],
+        "tags": [
+          "清爽",
+          "甜"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "sea_salt_cream_coffee": {
+      "recipe_id": "sea_salt_cream_coffee",
+      "display_name": "海盐奶盖咖啡",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "sea_salt",
+          "coffee",
+          "cream"
+        ],
+        "tags": [
+          "苦甜",
+          "浓郁"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chestnut_pound_cake": {
+      "recipe_id": "chestnut_pound_cake",
+      "display_name": "栗香磅蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "chestnut",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "经典"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chestnut_mousse": {
+      "recipe_id": "chestnut_mousse",
+      "display_name": "栗子慕斯杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "chestnut",
+          "cream",
+          "gelatin",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "浓郁"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "sugar_roasted_chestnut": {
+      "recipe_id": "sugar_roasted_chestnut",
+      "display_name": "糖烤栗子",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "chestnut",
+          "sugar",
+          "spring_water"
+        ],
+        "tags": [
+          "软糯",
+          "甜"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 2,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chestnut_glutinous_rice_cake": {
+      "recipe_id": "chestnut_glutinous_rice_cake",
+      "display_name": "栗子糯米糍",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "glutinous_rice_flour",
+          "chestnut",
+          "sugar",
+          "butter"
+        ],
+        "tags": [
+          "软糯",
+          "浓郁"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "oats_cookie": {
+      "recipe_id": "oats_cookie",
+      "display_name": "燕麦曲奇",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "oats",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "香脆",
+          "低负担"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 8,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "crisp"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "oats_baked_pudding": {
+      "recipe_id": "oats_baked_pudding",
+      "display_name": "燕麦烤布丁",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "oats",
+          "egg",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "低负担",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "nut_oats_crisp": {
+      "recipe_id": "nut_oats_crisp",
+      "display_name": "坚果燕麦酥",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "oats",
+          "nuts",
+          "butter",
+          "honey",
+          "sugar"
+        ],
+        "tags": [
+          "香脆",
+          "饱腹"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "berry_yogurt_ice": {
+      "recipe_id": "berry_yogurt_ice",
+      "display_name": "莓果酸奶冰酪",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "yogurt",
+          "strawberry",
+          "blueberry",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "清爽",
+          "果香"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mango_yogurt_cup": {
+      "recipe_id": "mango_yogurt_cup",
+      "display_name": "芒果酸奶杯",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "yogurt",
+          "mango",
+          "honey"
+        ],
+        "tags": [
+          "果香",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "yogurt_cheesecake": {
+      "recipe_id": "yogurt_cheesecake",
+      "display_name": "酸奶芝士蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "cheese",
+          "yogurt",
+          "egg",
+          "flour",
+          "sugar"
+        ],
+        "tags": [
+          "清爽",
+          "浓郁"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "rich"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "lemon_yogurt_muffin": {
+      "recipe_id": "lemon_yogurt_muffin",
+      "display_name": "柠檬酸奶麦芬",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "yogurt",
+          "lemon",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "清爽",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "nuts_pound_cake": {
+      "recipe_id": "nuts_pound_cake",
+      "display_name": "坚果磅蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "nuts",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "饱腹"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "hearty",
+        "rich"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "sea_salt_nuts_cookie": {
+      "recipe_id": "sea_salt_nuts_cookie",
+      "display_name": "海盐坚果曲奇",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "sea_salt",
+          "nuts",
+          "sugar"
+        ],
+        "tags": [
+          "咸香",
+          "香脆"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp",
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "nuts_cocoa_brownie": {
+      "recipe_id": "nuts_cocoa_brownie",
+      "display_name": "坚果可可布朗尼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "cocoa",
+          "chocolate",
+          "butter",
+          "nuts",
+          "egg",
+          "flour"
+        ],
+        "tags": [
+          "苦甜",
+          "浓郁"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mint_lemon_drink": {
+      "recipe_id": "mint_lemon_drink",
+      "display_name": "薄荷柠檬饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "mint",
+          "lemon",
+          "honey",
+          "spring_water"
+        ],
+        "tags": [
+          "清凉",
+          "清爽"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mint_mousse": {
+      "recipe_id": "mint_mousse",
+      "display_name": "薄荷慕斯杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "mint",
+          "cream",
+          "gelatin",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "清凉",
+          "奶香"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mint_chocolate_pudding": {
+      "recipe_id": "mint_chocolate_pudding",
+      "display_name": "薄荷巧克力布丁",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "mint",
+          "chocolate",
+          "milk",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "清凉",
+          "苦甜"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "rich"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mint_rice_drink": {
+      "recipe_id": "mint_rice_drink",
+      "display_name": "薄荷米浆饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "spring_water",
+          "mint",
+          "sugar"
+        ],
+        "tags": [
+          "清凉",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "cocoa_steamed_cake": {
+      "recipe_id": "cocoa_steamed_cake",
+      "display_name": "可可蒸蛋糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "flour",
+          "egg",
+          "cocoa",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "苦甜",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "cocoa_panna_cotta": {
+      "recipe_id": "cocoa_panna_cotta",
+      "display_name": "可可奶冻",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "milk",
+          "cocoa",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "奶香",
+          "苦甜"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "cocoa_glutinous_rice_cake": {
+      "recipe_id": "cocoa_glutinous_rice_cake",
+      "display_name": "可可糯米糍",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "glutinous_rice_flour",
+          "cocoa",
+          "red_bean",
+          "sugar"
+        ],
+        "tags": [
+          "软糯",
+          "苦甜"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "rich"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "hot_cocoa_drink": {
+      "recipe_id": "hot_cocoa_drink",
+      "display_name": "热可可饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "milk",
+          "cocoa",
+          "sugar"
+        ],
+        "tags": [
+          "苦甜",
+          "浓郁"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "nut_chicken_patty": {
+      "recipe_id": "nut_chicken_patty",
+      "display_name": "坚果鸡肉饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "chicken",
+          "nuts",
+          "flour",
+          "egg",
+          "sea_salt"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chestnut_chicken_baked_rice": {
+      "recipe_id": "chestnut_chicken_baked_rice",
+      "display_name": "栗子鸡肉焗饭",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "rice",
+          "chicken",
+          "chestnut",
+          "butter",
+          "sea_salt"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "beef_nut_pie": {
+      "recipe_id": "beef_nut_pie",
+      "display_name": "牛肉坚果派",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "beef",
+          "nuts",
+          "sea_salt"
+        ],
+        "tags": [
+          "咸香",
+          "香脆"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp",
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "oats_milk_porridge": {
+      "recipe_id": "oats_milk_porridge",
+      "display_name": "燕麦牛奶粥",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "oats",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "低负担",
+          "饱腹"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chestnut_redbean_steamed_cake": {
+      "recipe_id": "chestnut_redbean_steamed_cake",
+      "display_name": "栗子红豆蒸糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "chestnut",
+          "red_bean",
+          "sugar"
+        ],
+        "tags": [
+          "软糯",
+          "甜"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "nut_pumpkin_cake": {
+      "recipe_id": "nut_pumpkin_cake",
+      "display_name": "坚果南瓜饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "pumpkin",
+          "glutinous_rice_flour",
+          "nuts",
+          "sugar"
+        ],
+        "tags": [
+          "甜",
+          "香脆"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "crisp_bake",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "crisp"
+      ],
+      "build_roles": [
+        "tempo",
+        "shape"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mint_yogurt_cup": {
+      "recipe_id": "mint_yogurt_cup",
+      "display_name": "薄荷酸奶杯",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "yogurt",
+          "mint",
+          "honey",
+          "blueberry"
+        ],
+        "tags": [
+          "清凉",
+          "清爽"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_sesame_oats_soup": {
+      "recipe_id": "black_sesame_oats_soup",
+      "display_name": "黑芝麻燕麦糊",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "black_sesame",
+          "oats",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "浓郁",
+          "低负担"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "community_parfait": {
+      "recipe_id": "community_parfait",
+      "display_name": "邻街招牌芭菲",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "cream",
+          "strawberry",
+          "yogurt"
+        ],
+        "tags": [
+          "果香",
+          "清爽",
+          "招牌"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink",
+        "signature"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mango_cheese_cup": {
+      "recipe_id": "mango_cheese_cup",
+      "display_name": "芒果芝士杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "mango",
+          "cheese",
+          "cream"
+        ],
+        "tags": [
+          "果香",
+          "浓郁",
+          "招牌"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "rich",
+        "signature"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chestnut_tart": {
+      "recipe_id": "chestnut_tart",
+      "display_name": "栗子挞",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "chestnut",
+          "butter",
+          "cream"
+        ],
+        "tags": [
+          "甜",
+          "浓郁"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_panna": {
+      "recipe_id": "black_tea_panna",
+      "display_name": "红茶奶冻",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "black_tea",
+          "milk",
+          "gelatin"
+        ],
+        "tags": [
+          "茶香",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "apple_cinnamon_pie": {
+      "recipe_id": "apple_cinnamon_pie",
+      "display_name": "苹果肉桂派",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "apple",
+          "cinnamon",
+          "flour"
+        ],
+        "tags": [
+          "果香",
+          "经典"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chocolate_banana_roll": {
+      "recipe_id": "chocolate_banana_roll",
+      "display_name": "巧克力香蕉卷",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "banana",
+          "chocolate",
+          "flour"
+        ],
+        "tags": [
+          "苦甜",
+          "果香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 2,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "rich"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_latte": {
+      "recipe_id": "black_tea_latte",
+      "display_name": "醇香红茶拿铁",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "black_tea",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "green_tea_latte": {
+      "recipe_id": "green_tea_latte",
+      "display_name": "清润绿茶拿铁",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "green_tea",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "lemon_honey_black_tea": {
+      "recipe_id": "lemon_honey_black_tea",
+      "display_name": "柠檬蜂蜜红茶",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "black_tea",
+          "lemon",
+          "honey",
+          "spring_water"
+        ],
+        "tags": [
+          "茶香",
+          "清爽"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mint_iced_green_tea": {
+      "recipe_id": "mint_iced_green_tea",
+      "display_name": "薄荷冰绿茶",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "green_tea",
+          "mint",
+          "honey",
+          "spring_water"
+        ],
+        "tags": [
+          "清凉",
+          "茶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_butter_cookie": {
+      "recipe_id": "black_tea_butter_cookie",
+      "display_name": "红茶黄油曲奇",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "black_tea",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "香脆"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "crisp"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_chiffon_cake": {
+      "recipe_id": "black_tea_chiffon_cake",
+      "display_name": "红茶戚风蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "egg",
+          "black_tea",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "茶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "green_tea_panna_cotta": {
+      "recipe_id": "green_tea_panna_cotta",
+      "display_name": "绿茶奶冻",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "green_tea",
+          "milk",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_mousse": {
+      "recipe_id": "black_tea_mousse",
+      "display_name": "红茶慕斯杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "black_tea",
+          "cream",
+          "gelatin",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "浓郁"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "rich"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "green_tea_redbean_mochi": {
+      "recipe_id": "green_tea_redbean_mochi",
+      "display_name": "绿茶红豆糯米糍",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "glutinous_rice_flour",
+          "green_tea",
+          "red_bean",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "软糯"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_pound_cake": {
+      "recipe_id": "black_tea_pound_cake",
+      "display_name": "红茶磅蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "egg",
+          "black_tea",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "浓郁"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "rich"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_light_cheesecake": {
+      "recipe_id": "black_tea_light_cheesecake",
+      "display_name": "红茶轻芝士蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "cheese",
+          "egg",
+          "black_tea",
+          "flour",
+          "sugar"
+        ],
+        "tags": [
+          "咸香",
+          "茶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "honey_orange_black_tea": {
+      "recipe_id": "honey_orange_black_tea",
+      "display_name": "蜜橙红茶饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "black_tea",
+          "orange",
+          "honey",
+          "spring_water"
+        ],
+        "tags": [
+          "果香",
+          "茶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "green_tea_lemon_jelly": {
+      "recipe_id": "green_tea_lemon_jelly",
+      "display_name": "绿茶冻柠杯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "green_tea",
+          "lemon",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "清爽"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "drink",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_brulee": {
+      "recipe_id": "black_tea_brulee",
+      "display_name": "红茶烤布蕾",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "black_tea",
+          "milk",
+          "cream",
+          "egg",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "奶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "nut_black_tea_crisp": {
+      "recipe_id": "nut_black_tea_crisp",
+      "display_name": "坚果红茶酥",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "nuts",
+          "black_tea",
+          "sugar"
+        ],
+        "tags": [
+          "香脆",
+          "茶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "crisp"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "green_tea_yogurt_cup": {
+      "recipe_id": "green_tea_yogurt_cup",
+      "display_name": "绿茶酸奶杯",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "yogurt",
+          "green_tea",
+          "honey",
+          "blueberry"
+        ],
+        "tags": [
+          "低负担",
+          "清爽"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_rice_steamed_cake": {
+      "recipe_id": "black_tea_rice_steamed_cake",
+      "display_name": "红茶米粉蒸糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "egg",
+          "black_tea",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "茶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 4,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_cocoa_cookie": {
+      "recipe_id": "black_tea_cocoa_cookie",
+      "display_name": "红茶可可曲奇",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "flour",
+          "butter",
+          "black_tea",
+          "cocoa",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "香脆"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "1x1",
+        "cell_count": 1,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "crisp"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "green_tea_rice_drink": {
+      "recipe_id": "green_tea_rice_drink",
+      "display_name": "绿茶米浆饮",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice",
+          "green_tea",
+          "spring_water",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "经典"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_chicken_baked_rice": {
+      "recipe_id": "black_tea_chicken_baked_rice",
+      "display_name": "红茶鸡肉焗饭",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "rice",
+          "chicken",
+          "black_tea",
+          "butter",
+          "sea_salt"
+        ],
+        "tags": [
+          "咸香",
+          "茶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "oats_black_tea_cake": {
+      "recipe_id": "oats_black_tea_cake",
+      "display_name": "燕麦红茶饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "oats",
+          "flour",
+          "butter",
+          "black_tea",
+          "honey"
+        ],
+        "tags": [
+          "茶香",
+          "低负担"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_caramel_mousse": {
+      "recipe_id": "black_tea_caramel_mousse",
+      "display_name": "红茶焦糖慕斯",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "black_tea",
+          "caramel",
+          "cream",
+          "gelatin",
+          "milk"
+        ],
+        "tags": [
+          "茶香",
+          "浓郁"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "rich"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "green_tea_steamed_cake": {
+      "recipe_id": "green_tea_steamed_cake",
+      "display_name": "绿茶蒸蛋糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "flour",
+          "egg",
+          "green_tea",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "经典"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_nut_brownie": {
+      "recipe_id": "black_tea_nut_brownie",
+      "display_name": "红茶坚果布朗尼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "chocolate",
+          "egg",
+          "butter",
+          "nuts",
+          "black_tea",
+          "flour"
+        ],
+        "tags": [
+          "浓郁",
+          "茶香"
+        ],
+        "unlock_level": 6,
+        "production_duration_seconds": 8,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 4,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "rich"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "egg_rice_flour_custard": {
+      "recipe_id": "egg_rice_flour_custard",
+      "display_name": "蛋香米粉羹",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "rice_flour",
+          "egg",
+          "spring_water",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "甜"
+        ],
+        "unlock_level": 1,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "butter_chicken_steamed_cake": {
+      "recipe_id": "butter_chicken_steamed_cake",
+      "display_name": "黄油鸡肉蒸糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "flour",
+          "chicken",
+          "butter"
+        ],
+        "tags": [
+          "咸香",
+          "浓郁"
+        ],
+        "unlock_level": 1,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "rich"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chicken_wheat_porridge": {
+      "recipe_id": "chicken_wheat_porridge",
+      "display_name": "鸡肉麦仁粥",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "wheat",
+          "chicken",
+          "spring_water"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 1,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "A",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 1,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "honey_peach_jelly": {
+      "recipe_id": "honey_peach_jelly",
+      "display_name": "蜂蜜桃子冻",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "honey",
+          "peach",
+          "gelatin"
+        ],
+        "tags": [
+          "果香",
+          "清爽"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit",
+        "drink"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "honey_redbean_steamed_cake": {
+      "recipe_id": "honey_redbean_steamed_cake",
+      "display_name": "蜂蜜红豆蒸糕",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "honey",
+          "red_bean",
+          "rice_flour"
+        ],
+        "tags": [
+          "甜",
+          "经典"
+        ],
+        "unlock_level": 3,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "spatial_combo",
+      "research_tier": 2,
+      "research_node_id": "",
+      "combat_tags": [
+        "spatial"
+      ],
+      "build_roles": [
+        "space"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "duck_egg_pumpkin_pudding": {
+      "recipe_id": "duck_egg_pumpkin_pudding",
+      "display_name": "鸭蛋南瓜布丁",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "duck_egg",
+          "pumpkin",
+          "milk",
+          "sugar"
+        ],
+        "tags": [
+          "经典",
+          "浓郁"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "coffee_duck_egg_cake": {
+      "recipe_id": "coffee_duck_egg_cake",
+      "display_name": "咖啡鸭蛋糕",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "duck_egg",
+          "coffee",
+          "flour",
+          "sugar"
+        ],
+        "tags": [
+          "苦甜",
+          "浓郁"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 3,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "signature_display",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "rich"
+      ],
+      "build_roles": [
+        "signature"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "duck_egg_banana_griddle_cake": {
+      "recipe_id": "duck_egg_banana_griddle_cake",
+      "display_name": "鸭蛋香蕉煎糕",
+      "source": {
+        "device": "griddle",
+        "materials": [
+          "duck_egg",
+          "banana",
+          "flour",
+          "milk"
+        ],
+        "tags": [
+          "甜",
+          "果香"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "fruit_set",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fruit"
+      ],
+      "build_roles": [
+        "pairing"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "cheese_duck_baked_rice": {
+      "recipe_id": "cheese_duck_baked_rice",
+      "display_name": "芝士鸭肉焗饭",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "duck_meat",
+          "rice",
+          "cheese",
+          "butter"
+        ],
+        "tags": [
+          "咸香",
+          "浓郁"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "B",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "rich"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "sea_salt_duck_rice_cup": {
+      "recipe_id": "sea_salt_duck_rice_cup",
+      "display_name": "海盐鸭肉米盏",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "duck_meat",
+          "rice_flour",
+          "sea_salt"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "pumpkin_duck_pancake": {
+      "recipe_id": "pumpkin_duck_pancake",
+      "display_name": "南瓜鸭肉煎饼",
+      "source": {
+        "device": "griddle",
+        "materials": [
+          "duck_meat",
+          "pumpkin",
+          "flour"
+        ],
+        "tags": [
+          "咸香",
+          "经典"
+        ],
+        "unlock_level": 4,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "goat_milk_black_tea_jelly": {
+      "recipe_id": "goat_milk_black_tea_jelly",
+      "display_name": "羊奶红茶冻",
+      "source": {
+        "device": "chiller",
+        "materials": [
+          "goat_milk",
+          "black_tea",
+          "gelatin",
+          "sugar"
+        ],
+        "tags": [
+          "茶香",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "soft",
+        "tea"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "matcha_goat_milk_mousse": {
+      "recipe_id": "matcha_goat_milk_mousse",
+      "display_name": "抹茶羊奶慕斯",
+      "source": {
+        "device": "mixer",
+        "materials": [
+          "goat_milk",
+          "matcha",
+          "cream",
+          "gelatin"
+        ],
+        "tags": [
+          "茶香",
+          "浓郁"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "tea_bittersweet",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "rich"
+      ],
+      "build_roles": [
+        "flavor"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "goat_milk_oats_porridge": {
+      "recipe_id": "goat_milk_oats_porridge",
+      "display_name": "羊奶燕麦粥",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "goat_milk",
+          "oats",
+          "sugar"
+        ],
+        "tags": [
+          "低负担",
+          "奶香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "2x1",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "milk_soft",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "fast",
+        "soft"
+      ],
+      "build_roles": [
+        "softness"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "chestnut_mutton_baked_rice": {
+      "recipe_id": "chestnut_mutton_baked_rice",
+      "display_name": "栗子羊肉焗饭",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "mutton",
+          "rice",
+          "chestnut",
+          "butter"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "2x2",
+        "cell_count": 4,
+        "rotatable": false
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "black_tea_mutton_pastry": {
+      "recipe_id": "black_tea_mutton_pastry",
+      "display_name": "红茶羊肉酥饼",
+      "source": {
+        "device": "oven",
+        "materials": [
+          "mutton",
+          "black_tea",
+          "flour",
+          "butter"
+        ],
+        "tags": [
+          "茶香",
+          "咸香"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 4,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "C",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "tea",
+        "savory"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    },
+    "mutton_glutinous_shumai": {
+      "recipe_id": "mutton_glutinous_shumai",
+      "display_name": "羊肉糯米烧卖",
+      "source": {
+        "device": "round_pot",
+        "materials": [
+          "mutton",
+          "glutinous_rice_flour",
+          "sea_salt"
+        ],
+        "tags": [
+          "咸香",
+          "饱腹"
+        ],
+        "unlock_level": 5,
+        "production_duration_seconds": 2,
+        "display_shape": "1x2",
+        "cell_count": 2,
+        "rotatable": true
+      },
+      "migration_batch": "D",
+      "content_status": "draft",
+      "unlock_kind": "draft",
+      "research_branch_id": "savory_hearty",
+      "research_tier": 3,
+      "research_node_id": "",
+      "combat_tags": [
+        "savory",
+        "hearty"
+      ],
+      "build_roles": [
+        "sustain"
+      ],
+      "runtime": {},
+      "review_notes": ""
+    }
+  }
+}

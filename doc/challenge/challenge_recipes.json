@@ -20,124 +20,322 @@
   ],
   "recipes": {
     "butter_cookie": {
-      "shape_cells": [[0, 0]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
       "supply_cost": 2,
       "copy_limit": 3,
       "virtual_stock": 6,
       "cycle_ms": 4000,
       "satisfaction": 4,
-      "tags": ["fast", "bake"],
-      "rotatable": false
+      "tags": [
+        "fast",
+        "bake"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo"
+      ]
     },
     "strawberry_jelly": {
-      "shape_cells": [[0, 0]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
       "supply_cost": 2,
       "copy_limit": 3,
       "virtual_stock": 5,
       "cycle_ms": 5000,
       "satisfaction": 5,
-      "tags": ["fast", "fruit"],
-      "rotatable": false
+      "tags": [
+        "fast",
+        "fruit"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo"
+      ]
     },
     "milk_pudding": {
-      "shape_cells": [[0, 0], [0, 1]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
       "supply_cost": 3,
       "copy_limit": 2,
       "virtual_stock": 4,
       "cycle_ms": 5000,
       "satisfaction": 7,
-      "tags": ["drink", "set"],
-      "rotatable": true
+      "tags": [
+        "drink",
+        "set"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
     },
     "blueberry_muffin": {
-      "shape_cells": [[0, 0], [1, 0]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
       "supply_cost": 3,
       "copy_limit": 2,
       "virtual_stock": 5,
       "cycle_ms": 6000,
       "satisfaction": 8,
-      "tags": ["bake", "set"],
-      "rotatable": true
+      "tags": [
+        "bake",
+        "set"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
     },
     "sponge_cake": {
-      "shape_cells": [[0, 0], [0, 1], [1, 0], [1, 1]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
       "supply_cost": 5,
       "copy_limit": 1,
       "virtual_stock": 3,
       "cycle_ms": 8000,
       "satisfaction": 22,
-      "tags": ["signature", "bake"],
-      "rotatable": false
+      "tags": [
+        "signature",
+        "bake"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
     },
     "chocolate_lava_cake": {
-      "shape_cells": [[0, 0], [0, 1], [1, 0], [1, 1]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
       "supply_cost": 5,
       "copy_limit": 1,
       "virtual_stock": 3,
       "cycle_ms": 10000,
       "satisfaction": 29,
-      "tags": ["signature", "chocolate"],
-      "rotatable": false
+      "tags": [
+        "signature",
+        "chocolate"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
     },
     "vanilla_scone": {
-      "shape_cells": [[0, 0], [0, 1], [1, 0]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
       "supply_cost": 4,
       "copy_limit": 2,
       "virtual_stock": 5,
       "cycle_ms": 5000,
       "satisfaction": 9,
-      "tags": ["fast", "bake", "aromatic"],
-      "rotatable": true
+      "tags": [
+        "fast",
+        "bake",
+        "aromatic"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "tempo"
+      ]
     },
     "chocolate_cookie": {
-      "shape_cells": [[0, 0]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
       "supply_cost": 3,
       "copy_limit": 3,
       "virtual_stock": 6,
       "cycle_ms": 4000,
       "satisfaction": 6,
-      "tags": ["fast", "bake", "chocolate"],
-      "rotatable": false
+      "tags": [
+        "fast",
+        "bake",
+        "chocolate"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo"
+      ]
     },
     "blueberry_mousse": {
-      "shape_cells": [[0, 0], [1, 0]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
       "supply_cost": 3,
       "copy_limit": 2,
       "virtual_stock": 5,
       "cycle_ms": 5000,
       "satisfaction": 8,
-      "tags": ["fruit", "drink", "set"],
-      "rotatable": true
+      "tags": [
+        "fruit",
+        "drink",
+        "set"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
     },
     "strawberry_mousse": {
-      "shape_cells": [[0, 0], [0, 1]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
       "supply_cost": 3,
       "copy_limit": 2,
       "virtual_stock": 5,
       "cycle_ms": 5000,
       "satisfaction": 8,
-      "tags": ["fruit", "drink", "set"],
-      "rotatable": true
+      "tags": [
+        "fruit",
+        "drink",
+        "set"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
     },
     "cream_shortcake": {
-      "shape_cells": [[0, 0], [0, 1], [1, 0]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
       "supply_cost": 4,
       "copy_limit": 2,
       "virtual_stock": 4,
       "cycle_ms": 7000,
       "satisfaction": 14,
-      "tags": ["signature", "bake", "fruit"],
-      "rotatable": true
+      "tags": [
+        "signature",
+        "bake",
+        "fruit"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
     },
     "caramel_mousse": {
-      "shape_cells": [[0, 0], [0, 1]],
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
       "supply_cost": 4,
       "copy_limit": 2,
       "virtual_stock": 4,
       "cycle_ms": 6000,
       "satisfaction": 12,
-      "tags": ["drink", "signature", "chocolate"],
-      "rotatable": true
+      "tags": [
+        "drink",
+        "signature",
+        "chocolate"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
     }
   }
 }

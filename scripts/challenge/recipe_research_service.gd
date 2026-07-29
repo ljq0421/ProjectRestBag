@@ -307,6 +307,22 @@ func unlock_node(
 			granted_unlocks.append(unlock.duplicate(true))
 		next_meta[meta_field] = unlocked_ids
 	next_meta["research_points"] = int(next_meta.get("research_points", 0)) - int(node.get("cost", 0))
+	var revealed := _unique_existing_strings(next_meta.get("revealed_research_node_ids", []))
+	var newly_revealed: Array[String] = []
+	var nodes: Dictionary = tree_def.get("nodes", {})
+	for successor_key in nodes:
+		var successor_id := String(successor_key)
+		var successor_value: Variant = nodes[successor_key]
+		if not successor_value is Dictionary or revealed.has(successor_id):
+			continue
+		var successor: Dictionary = successor_value
+		if (
+			String(successor.get("branch_id", "")) == String(node.get("branch_id", ""))
+			and _safe_string_array(successor.get("prerequisite_ids")).has(node_id)
+		):
+			revealed.append(successor_id)
+			newly_revealed.append(successor_id)
+	next_meta["revealed_research_node_ids"] = revealed
 	transactions.append(clean_reward_tx)
 	next_meta["applied_reward_transaction_ids"] = transactions
 	return {
@@ -314,7 +330,8 @@ func unlock_node(
 		"meta": next_meta,
 		"node_id": node_id,
 		"spent_points": int(node.get("cost", 0)),
-		"granted_unlocks": granted_unlocks
+		"granted_unlocks": granted_unlocks,
+		"revealed_node_ids": newly_revealed
 	}
 
 

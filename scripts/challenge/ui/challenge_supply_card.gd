@@ -5,6 +5,16 @@ signal recipe_drag_started(recipe_id: String)
 
 const RecipeIconService = preload("res://scripts/recipe_icon_service.gd")
 const ShowcaseIconService = preload("res://scripts/ui/storefront/showcase_icon_service.gd")
+const ROLE_NAMES := {
+	"tempo": "周转",
+	"pairing": "联动",
+	"signature": "招牌",
+	"softness": "柔软",
+	"flavor": "风味",
+	"shape": "形状",
+	"sustain": "持续",
+	"space": "空间"
+}
 
 var recipe_id := ""
 var recipe_definition: Dictionary = {}
@@ -23,7 +33,12 @@ func bind(next_recipe_id: String, definition: Dictionary, display_name: String =
 	$NameLabel.text = display_name if not display_name.is_empty() else next_recipe_id
 	$CostBadge.text = "备货 %d" % int(recipe_definition.get("supply_cost", 0))
 	var source_ids: Array = recipe_definition.get("_upgrade_source_ids", [])
-	$EffectBadge.text = "强化 ×%d" % source_ids.size() if not source_ids.is_empty() else ""
+	var roles: Array = recipe_definition.get("build_roles", [])
+	$EffectBadge.text = (
+		"强化 ×%d" % source_ids.size()
+		if not source_ids.is_empty()
+		else String(ROLE_NAMES.get(String(roles[0]), "")) if not roles.is_empty() else ""
+	)
 	tooltip_text = "%s\n挑战备货 %d · 最多 %d 份\n不消耗经营库存" % [
 		$NameLabel.text,
 		int(recipe_definition.get("supply_cost", 0)),
@@ -31,6 +46,8 @@ func bind(next_recipe_id: String, definition: Dictionary, display_name: String =
 	]
 	if not source_ids.is_empty():
 		tooltip_text += "\n本局强化：" + "、".join(source_ids)
+	elif not roles.is_empty():
+		tooltip_text += "\n构筑方向：" + String(ROLE_NAMES.get(String(roles[0]), String(roles[0])))
 	_refresh_icon()
 	set_selected_count(selected_count)
 
