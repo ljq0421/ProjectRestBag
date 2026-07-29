@@ -3,6 +3,7 @@ extends RefCounted
 
 const MIN_RECIPES := 4
 const MAX_RECIPES := 8
+const MAX_SAVED_MENUS := 3
 
 
 func bootstrap_meta(
@@ -123,6 +124,59 @@ func analyze_menu(menu_value: Variant, recipe_defs: Dictionary) -> Dictionary:
 		"total_cells": total_cells,
 		"cycle_range": [min_cycle, max_cycle]
 	}
+
+
+func save_preset(
+	meta: Dictionary,
+	preset_id: String,
+	display_name: String,
+	menu_value: Variant,
+	available_recipe_ids: Array[String],
+	recipe_defs: Dictionary
+) -> Dictionary:
+	var validation := validate_menu(menu_value, available_recipe_ids, recipe_defs)
+	if not bool(validation.get("valid", false)):
+		return {"applied": false, "meta": meta.duplicate(true), "errors": validation.get("errors", [])}
+	var clean_id := preset_id.strip_edges()
+	if clean_id.is_empty():
+		return {"applied": false, "meta": meta.duplicate(true), "errors": ["preset id required"]}
+	var next_meta := meta.duplicate(true)
+	var presets: Array = (next_meta.get("saved_menus", []) as Array).duplicate(true)
+	var existing_index := -1
+	for index in range(presets.size()):
+		if presets[index] is Dictionary and String(presets[index].get("id", "")) == clean_id:
+			existing_index = index
+			break
+	if existing_index < 0 and presets.size() >= MAX_SAVED_MENUS:
+		return {"applied": false, "meta": meta.duplicate(true), "errors": ["at most three saved menus"]}
+	var preset := {
+		"id": clean_id,
+		"display_name": display_name.strip_edges() if not display_name.strip_edges().is_empty() else clean_id,
+		"recipe_ids": (validation.get("recipe_ids", []) as Array).duplicate()
+	}
+	if existing_index >= 0:
+		presets[existing_index] = preset
+	else:
+		presets.append(preset)
+	next_meta["saved_menus"] = presets
+	return {"applied": true, "meta": next_meta, "preset": preset}
+
+
+func load_preset(
+	meta: Dictionary,
+	preset_id: String,
+	available_recipe_ids: Array[String],
+	recipe_defs: Dictionary
+) -> Dictionary:
+	for preset_value in meta.get("saved_menus", []):
+		if preset_value is Dictionary and String(preset_value.get("id", "")) == preset_id:
+			return set_active_menu(
+				meta,
+				preset_value.get("recipe_ids", []),
+				available_recipe_ids,
+				recipe_defs
+			)
+	return {"applied": false, "meta": meta.duplicate(true), "errors": ["unknown menu preset"]}
 
 
 func primary_role(recipe_def: Dictionary) -> String:

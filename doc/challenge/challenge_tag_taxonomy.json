@@ -47,42 +47,42 @@
     },
     "soft": {
       "display_name": "软糯",
-      "status": "planned",
+      "status": "released",
       "purpose": "持续供应和质地需求"
     },
     "tea": {
       "display_name": "茶香",
-      "status": "planned",
+      "status": "released",
       "purpose": "茶香与苦甜主题需求"
     },
     "crisp": {
       "display_name": "香脆",
-      "status": "planned",
+      "status": "released",
       "purpose": "小件节奏和烘焙关系"
     },
     "savory": {
       "display_name": "咸香",
-      "status": "planned",
+      "status": "released",
       "purpose": "咸味主题需求"
     },
     "hearty": {
       "display_name": "饱腹",
-      "status": "planned",
+      "status": "released",
       "purpose": "低频高覆盖需求"
     },
     "refreshing": {
       "display_name": "清爽",
-      "status": "planned",
+      "status": "released",
       "purpose": "快速恢复和水果饮品关系"
     },
     "rich": {
       "display_name": "浓郁",
-      "status": "planned",
+      "status": "released",
       "purpose": "高满足力风味需求"
     },
     "spatial": {
       "display_name": "空间",
-      "status": "planned",
+      "status": "released",
       "purpose": "形状、旋转和区域构筑"
     }
   },

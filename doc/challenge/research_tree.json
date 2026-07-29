@@ -1,5 +1,5 @@
 {
-  "id": "initial_recipe_research",
+  "id": "complete_recipe_research",
   "display_name": "甜点陈列研究",
   "completion_reward_points": 3,
   "starter_recipe_ids": [
@@ -14,7 +14,7 @@
     {
       "id": "tempo_display",
       "display_name": "节奏陈列",
-      "description": "用快速出餐与多副本持续争夺压力条。",
+      "description": "快速周转、小件复制与早期窗口。",
       "node_ids": [
         "vanilla_scone",
         "chocolate_cookie"
@@ -23,19 +23,113 @@
     {
       "id": "fruit_set",
       "display_name": "水果套装",
-      "description": "通过水果、饮品与套装标签覆盖复合客潮。",
+      "description": "水果、饮品与套装标签的复合覆盖。",
       "node_ids": [
         "blueberry_mousse",
-        "strawberry_mousse"
+        "strawberry_mousse",
+        "family_fruit_set_t1_01",
+        "family_fruit_set_t2_02",
+        "family_fruit_set_t2_03",
+        "family_fruit_set_t2_04",
+        "family_fruit_set_t3_05",
+        "family_fruit_set_t3_06",
+        "family_fruit_set_t3_07",
+        "family_fruit_set_t3_08",
+        "family_fruit_set_t3_09",
+        "family_fruit_set_t3_10",
+        "family_fruit_set_t4_11",
+        "family_fruit_set_t4_12"
       ]
     },
     {
       "id": "signature_display",
       "display_name": "招牌展示",
-      "description": "用高满足力招牌承担空间取舍并压制关键窗口。",
+      "description": "高满足力、大件与晚期招牌取舍。",
       "node_ids": [
         "cream_shortcake",
-        "caramel_mousse"
+        "caramel_mousse",
+        "family_signature_display_t2_01",
+        "family_signature_display_t3_02",
+        "family_signature_display_t3_03",
+        "family_signature_display_t3_04",
+        "family_signature_display_t3_05",
+        "family_signature_display_t3_06",
+        "family_signature_display_t4_07"
+      ]
+    },
+    {
+      "id": "milk_soft",
+      "display_name": "奶香软糯",
+      "description": "柔软质地、奶香与持续供给。",
+      "node_ids": [
+        "family_milk_soft_t1_01",
+        "family_milk_soft_t2_02",
+        "family_milk_soft_t2_03",
+        "family_milk_soft_t2_04",
+        "family_milk_soft_t2_05",
+        "family_milk_soft_t3_06",
+        "family_milk_soft_t3_07",
+        "family_milk_soft_t3_08",
+        "family_milk_soft_t3_09",
+        "family_milk_soft_t3_10",
+        "family_milk_soft_t3_11",
+        "family_milk_soft_t4_12"
+      ]
+    },
+    {
+      "id": "tea_bittersweet",
+      "display_name": "茶香苦甜",
+      "description": "茶香、苦甜与浓郁风味覆盖。",
+      "node_ids": [
+        "family_tea_bittersweet_t3_01",
+        "family_tea_bittersweet_t3_02",
+        "family_tea_bittersweet_t3_03",
+        "family_tea_bittersweet_t3_04",
+        "family_tea_bittersweet_t4_05",
+        "family_tea_bittersweet_t4_06",
+        "family_tea_bittersweet_t4_07",
+        "family_tea_bittersweet_t4_08"
+      ]
+    },
+    {
+      "id": "crisp_bake",
+      "display_name": "香脆烘焙",
+      "description": "小件香脆、烘焙与形状效率。",
+      "node_ids": [
+        "family_crisp_bake_t2_01",
+        "family_crisp_bake_t3_02",
+        "family_crisp_bake_t3_03",
+        "family_crisp_bake_t4_04",
+        "family_crisp_bake_t4_05"
+      ]
+    },
+    {
+      "id": "savory_hearty",
+      "display_name": "咸香饱腹",
+      "description": "咸香、饱腹与低频高覆盖。",
+      "node_ids": [
+        "family_savory_hearty_t1_01",
+        "family_savory_hearty_t2_02",
+        "family_savory_hearty_t3_03",
+        "family_savory_hearty_t3_04",
+        "family_savory_hearty_t3_05",
+        "family_savory_hearty_t3_06",
+        "family_savory_hearty_t4_07",
+        "family_savory_hearty_t4_08",
+        "family_savory_hearty_t4_09",
+        "family_savory_hearty_t4_10"
+      ]
+    },
+    {
+      "id": "spatial_combo",
+      "display_name": "空间联动",
+      "description": "旋转、异形和相邻空间组合。",
+      "node_ids": [
+        "family_spatial_combo_t1_01",
+        "family_spatial_combo_t1_02",
+        "family_spatial_combo_t2_03",
+        "family_spatial_combo_t3_04",
+        "family_spatial_combo_t3_05"
       ]
     }
   ],
@@ -51,6 +145,21 @@
     "picky_food_critic": [
       "cream_shortcake",
       "caramel_mousse"
+    ],
+    "route_b_soft_opening": [
+      "family_milk_soft_t1_01"
+    ],
+    "route_b_tea_salon": [
+      "family_tea_bittersweet_t3_01"
+    ],
+    "route_b_crisp_festival": [
+      "family_crisp_bake_t2_01"
+    ],
+    "route_c_hearty_market": [
+      "family_savory_hearty_t1_01"
+    ],
+    "route_c_space_architect": [
+      "family_spatial_combo_t1_01"
     ]
   },
   "nodes": {
@@ -171,6 +280,1648 @@
         {
           "type": "recipe",
           "id": "caramel_mousse"
+        }
+      ]
+    },
+    "family_fruit_set_t1_01": {
+      "id": "family_fruit_set_t1_01",
+      "display_name": "水果套装 · T1-1",
+      "branch_id": "fruit_set",
+      "tier": 1,
+      "cost": 3,
+      "prerequisite_ids": [
+        "strawberry_mousse"
+      ],
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "build_purpose": "解锁 1 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "rice_milk_drink"
+        }
+      ]
+    },
+    "family_fruit_set_t2_02": {
+      "id": "family_fruit_set_t2_02",
+      "display_name": "水果套装 · T2-2",
+      "branch_id": "fruit_set",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_fruit_set_t1_01"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "blueberry_jelly"
+        },
+        {
+          "type": "recipe",
+          "id": "honey_lemon_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "honey_lemon_jelly"
+        }
+      ]
+    },
+    "family_fruit_set_t2_03": {
+      "id": "family_fruit_set_t2_03",
+      "display_name": "水果套装 · T2-3",
+      "branch_id": "fruit_set",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_fruit_set_t2_02"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing",
+        "rich"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "honey_peach_jelly"
+        },
+        {
+          "type": "recipe",
+          "id": "lemon_madeleine"
+        },
+        {
+          "type": "recipe",
+          "id": "lemon_tart"
+        }
+      ]
+    },
+    "family_fruit_set_t2_04": {
+      "id": "family_fruit_set_t2_04",
+      "display_name": "水果套装 · T2-4",
+      "branch_id": "fruit_set",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_fruit_set_t2_03"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing",
+        "rich",
+        "signature"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "mango_cheese_cup"
+        },
+        {
+          "type": "recipe",
+          "id": "orange_chiffon_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "peach_jelly"
+        }
+      ]
+    },
+    "family_fruit_set_t3_05": {
+      "id": "family_fruit_set_t3_05",
+      "display_name": "水果套装 · T3-5",
+      "branch_id": "fruit_set",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_fruit_set_t2_04"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "banana_pancake"
+        },
+        {
+          "type": "recipe",
+          "id": "berry_yogurt_ice"
+        },
+        {
+          "type": "recipe",
+          "id": "apple_cinnamon_pie"
+        }
+      ]
+    },
+    "family_fruit_set_t3_06": {
+      "id": "family_fruit_set_t3_06",
+      "display_name": "水果套装 · T3-6",
+      "branch_id": "fruit_set",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_fruit_set_t3_05"
+      ],
+      "tags": [
+        "drink",
+        "fast",
+        "fruit",
+        "refreshing"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "duck_egg_banana_griddle_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "green_tea_yogurt_cup"
+        },
+        {
+          "type": "recipe",
+          "id": "honey_yogurt"
+        }
+      ]
+    },
+    "family_fruit_set_t3_07": {
+      "id": "family_fruit_set_t3_07",
+      "display_name": "水果套装 · T3-7",
+      "branch_id": "fruit_set",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_fruit_set_t3_06"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing",
+        "rich"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "lemon_yogurt_muffin"
+        },
+        {
+          "type": "recipe",
+          "id": "mango_cream_cup"
+        },
+        {
+          "type": "recipe",
+          "id": "mint_chocolate_pudding"
+        }
+      ]
+    },
+    "family_fruit_set_t3_08": {
+      "id": "family_fruit_set_t3_08",
+      "display_name": "水果套装 · T3-8",
+      "branch_id": "fruit_set",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_fruit_set_t3_07"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "mint_lemon_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "mint_rice_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "orange_crepe"
+        }
+      ]
+    },
+    "family_fruit_set_t3_09": {
+      "id": "family_fruit_set_t3_09",
+      "display_name": "水果套装 · T3-9",
+      "branch_id": "fruit_set",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_fruit_set_t3_08"
+      ],
+      "tags": [
+        "drink",
+        "refreshing",
+        "rich"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "yogurt_cheesecake"
+        },
+        {
+          "type": "recipe",
+          "id": "matcha_pudding"
+        },
+        {
+          "type": "recipe",
+          "id": "mint_cocoa_cup"
+        }
+      ]
+    },
+    "family_fruit_set_t3_10": {
+      "id": "family_fruit_set_t3_10",
+      "display_name": "水果套装 · T3-10",
+      "branch_id": "fruit_set",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_fruit_set_t3_09"
+      ],
+      "tags": [
+        "drink",
+        "fast",
+        "refreshing"
+      ],
+      "build_purpose": "解锁 2 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "mint_yogurt_cup"
+        },
+        {
+          "type": "recipe",
+          "id": "oats_yogurt_bowl"
+        }
+      ]
+    },
+    "family_fruit_set_t4_11": {
+      "id": "family_fruit_set_t4_11",
+      "display_name": "水果套装 · T4-11",
+      "branch_id": "fruit_set",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_fruit_set_t3_10"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing"
+      ],
+      "build_purpose": "解锁 3 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "apple_steamed_rice_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "berry_rice_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "berry_rice_flour_cake"
+        }
+      ]
+    },
+    "family_fruit_set_t4_12": {
+      "id": "family_fruit_set_t4_12",
+      "display_name": "水果套装 · T4-12",
+      "branch_id": "fruit_set",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_fruit_set_t4_11"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing",
+        "rich",
+        "signature"
+      ],
+      "build_purpose": "解锁 2 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "chocolate_banana_roll"
+        },
+        {
+          "type": "recipe",
+          "id": "community_parfait"
+        }
+      ]
+    },
+    "family_signature_display_t2_01": {
+      "id": "family_signature_display_t2_01",
+      "display_name": "招牌展示 · T2-1",
+      "branch_id": "signature_display",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "caramel_mousse"
+      ],
+      "tags": [
+        "rich"
+      ],
+      "build_purpose": "解锁 1 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "cheesecake"
+        }
+      ]
+    },
+    "family_signature_display_t3_02": {
+      "id": "family_signature_display_t3_02",
+      "display_name": "招牌展示 · T3-2",
+      "branch_id": "signature_display",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_signature_display_t2_01"
+      ],
+      "tags": [
+        "fast",
+        "rich"
+      ],
+      "build_purpose": "解锁 3 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "black_sesame_soup"
+        },
+        {
+          "type": "recipe",
+          "id": "cocoa_brownie"
+        },
+        {
+          "type": "recipe",
+          "id": "cocoa_steamed_cake"
+        }
+      ]
+    },
+    "family_signature_display_t3_03": {
+      "id": "family_signature_display_t3_03",
+      "display_name": "招牌展示 · T3-3",
+      "branch_id": "signature_display",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_signature_display_t3_02"
+      ],
+      "tags": [
+        "rich"
+      ],
+      "build_purpose": "解锁 3 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "coffee_duck_egg_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "coffee_mousse"
+        },
+        {
+          "type": "recipe",
+          "id": "coffee_muffin"
+        }
+      ]
+    },
+    "family_signature_display_t3_04": {
+      "id": "family_signature_display_t3_04",
+      "display_name": "招牌展示 · T3-4",
+      "branch_id": "signature_display",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_signature_display_t3_03"
+      ],
+      "tags": [
+        "fast",
+        "rich"
+      ],
+      "build_purpose": "解锁 3 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "black_sesame_oats_soup"
+        },
+        {
+          "type": "recipe",
+          "id": "chestnut_pound_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "chestnut_tart"
+        }
+      ]
+    },
+    "family_signature_display_t3_05": {
+      "id": "family_signature_display_t3_05",
+      "display_name": "招牌展示 · T3-5",
+      "branch_id": "signature_display",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_signature_display_t3_04"
+      ],
+      "tags": [
+        "rich"
+      ],
+      "build_purpose": "解锁 3 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "coffee_pound_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "duck_egg_pumpkin_pudding"
+        },
+        {
+          "type": "recipe",
+          "id": "hot_cocoa_drink"
+        }
+      ]
+    },
+    "family_signature_display_t3_06": {
+      "id": "family_signature_display_t3_06",
+      "display_name": "招牌展示 · T3-6",
+      "branch_id": "signature_display",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_signature_display_t3_05"
+      ],
+      "tags": [
+        "rich"
+      ],
+      "build_purpose": "解锁 2 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "matcha_redbean"
+        },
+        {
+          "type": "recipe",
+          "id": "sea_salt_cream_coffee"
+        }
+      ]
+    },
+    "family_signature_display_t4_07": {
+      "id": "family_signature_display_t4_07",
+      "display_name": "招牌展示 · T4-7",
+      "branch_id": "signature_display",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_signature_display_t3_06"
+      ],
+      "tags": [
+        "rich"
+      ],
+      "build_purpose": "解锁 1 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "nuts_cocoa_brownie"
+        }
+      ]
+    },
+    "family_milk_soft_t1_01": {
+      "id": "family_milk_soft_t1_01",
+      "display_name": "奶香软糯 · T1-1",
+      "branch_id": "milk_soft",
+      "tier": 1,
+      "cost": 3,
+      "prerequisite_ids": [],
+      "tags": [
+        "soft"
+      ],
+      "build_purpose": "解锁 1 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "white_sugar_rice_ball"
+        }
+      ]
+    },
+    "family_milk_soft_t2_02": {
+      "id": "family_milk_soft_t2_02",
+      "display_name": "奶香软糯 · T2-2",
+      "branch_id": "milk_soft",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_milk_soft_t1_01"
+      ],
+      "tags": [
+        "rich",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "banana_milk_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "banana_pound_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "caramel_pudding_steamed"
+        }
+      ]
+    },
+    "family_milk_soft_t2_03": {
+      "id": "family_milk_soft_t2_03",
+      "display_name": "奶香软糯 · T2-3",
+      "branch_id": "milk_soft",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_milk_soft_t2_02"
+      ],
+      "tags": [
+        "rich",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "egg_milk_custard"
+        },
+        {
+          "type": "recipe",
+          "id": "banana_rice_pudding"
+        },
+        {
+          "type": "recipe",
+          "id": "chocolate_mousse"
+        }
+      ]
+    },
+    "family_milk_soft_t2_04": {
+      "id": "family_milk_soft_t2_04",
+      "display_name": "奶香软糯 · T2-4",
+      "branch_id": "milk_soft",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_milk_soft_t2_03"
+      ],
+      "tags": [
+        "fruit",
+        "rich",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "mango_milk_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "milk_rice_dew"
+        },
+        {
+          "type": "recipe",
+          "id": "peach_mousse"
+        }
+      ]
+    },
+    "family_milk_soft_t2_05": {
+      "id": "family_milk_soft_t2_05",
+      "display_name": "奶香软糯 · T2-5",
+      "branch_id": "milk_soft",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_milk_soft_t2_04"
+      ],
+      "tags": [
+        "fruit",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "rich_rice_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "strawberry_cream_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "vanilla_panna_cotta"
+        }
+      ]
+    },
+    "family_milk_soft_t3_06": {
+      "id": "family_milk_soft_t3_06",
+      "display_name": "奶香软糯 · T3-6",
+      "branch_id": "milk_soft",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_milk_soft_t2_05"
+      ],
+      "tags": [
+        "rich",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "cocoa_panna_cotta"
+        },
+        {
+          "type": "recipe",
+          "id": "black_sesame_roll"
+        },
+        {
+          "type": "recipe",
+          "id": "chestnut_glutinous_rice_cake"
+        }
+      ]
+    },
+    "family_milk_soft_t3_07": {
+      "id": "family_milk_soft_t3_07",
+      "display_name": "奶香软糯 · T3-7",
+      "branch_id": "milk_soft",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_milk_soft_t3_06"
+      ],
+      "tags": [
+        "fast",
+        "rich",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "chestnut_mousse"
+        },
+        {
+          "type": "recipe",
+          "id": "cocoa_glutinous_rice_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "goat_milk_oats_porridge"
+        }
+      ]
+    },
+    "family_milk_soft_t3_08": {
+      "id": "family_milk_soft_t3_08",
+      "display_name": "奶香软糯 · T3-8",
+      "branch_id": "milk_soft",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_milk_soft_t3_07"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "mango_glutinous_rice_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "mint_mousse"
+        },
+        {
+          "type": "recipe",
+          "id": "pumpkin_steamed_cake"
+        }
+      ]
+    },
+    "family_milk_soft_t3_09": {
+      "id": "family_milk_soft_t3_09",
+      "display_name": "奶香软糯 · T3-9",
+      "branch_id": "milk_soft",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_milk_soft_t3_08"
+      ],
+      "tags": [
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "red_bean_glutinous_rice_ball"
+        },
+        {
+          "type": "recipe",
+          "id": "red_bean_milk_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "red_bean_rice_cake"
+        }
+      ]
+    },
+    "family_milk_soft_t3_10": {
+      "id": "family_milk_soft_t3_10",
+      "display_name": "奶香软糯 · T3-10",
+      "branch_id": "milk_soft",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_milk_soft_t3_09"
+      ],
+      "tags": [
+        "fruit",
+        "rich",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "mango_yogurt_cup"
+        },
+        {
+          "type": "recipe",
+          "id": "matcha_mochi"
+        },
+        {
+          "type": "recipe",
+          "id": "matcha_redbean_mousse"
+        }
+      ]
+    },
+    "family_milk_soft_t3_11": {
+      "id": "family_milk_soft_t3_11",
+      "display_name": "奶香软糯 · T3-11",
+      "branch_id": "milk_soft",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_milk_soft_t3_10"
+      ],
+      "tags": [
+        "fast",
+        "soft"
+      ],
+      "build_purpose": "解锁 1 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "oats_baked_pudding"
+        }
+      ]
+    },
+    "family_milk_soft_t4_12": {
+      "id": "family_milk_soft_t4_12",
+      "display_name": "奶香软糯 · T4-12",
+      "branch_id": "milk_soft",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_milk_soft_t3_11"
+      ],
+      "tags": [
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个奶香软糯家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "caramel_brulee"
+        },
+        {
+          "type": "recipe",
+          "id": "chestnut_redbean_steamed_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "sugar_roasted_chestnut"
+        }
+      ]
+    },
+    "family_tea_bittersweet_t3_01": {
+      "id": "family_tea_bittersweet_t3_01",
+      "display_name": "茶香苦甜 · T3-1",
+      "branch_id": "tea_bittersweet",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [],
+      "tags": [
+        "crisp",
+        "soft",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个茶香苦甜家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "black_tea_butter_cookie"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_chiffon_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_latte"
+        }
+      ]
+    },
+    "family_tea_bittersweet_t3_02": {
+      "id": "family_tea_bittersweet_t3_02",
+      "display_name": "茶香苦甜 · T3-2",
+      "branch_id": "tea_bittersweet",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_tea_bittersweet_t3_01"
+      ],
+      "tags": [
+        "rich",
+        "soft",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个茶香苦甜家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "black_tea_panna"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_pound_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "goat_milk_black_tea_jelly"
+        }
+      ]
+    },
+    "family_tea_bittersweet_t3_03": {
+      "id": "family_tea_bittersweet_t3_03",
+      "display_name": "茶香苦甜 · T3-3",
+      "branch_id": "tea_bittersweet",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_tea_bittersweet_t3_02"
+      ],
+      "tags": [
+        "soft",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个茶香苦甜家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "green_tea_latte"
+        },
+        {
+          "type": "recipe",
+          "id": "green_tea_panna_cotta"
+        },
+        {
+          "type": "recipe",
+          "id": "green_tea_redbean_mochi"
+        }
+      ]
+    },
+    "family_tea_bittersweet_t3_04": {
+      "id": "family_tea_bittersweet_t3_04",
+      "display_name": "茶香苦甜 · T3-4",
+      "branch_id": "tea_bittersweet",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_tea_bittersweet_t3_03"
+      ],
+      "tags": [
+        "drink",
+        "refreshing",
+        "rich",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个茶香苦甜家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "green_tea_rice_drink"
+        },
+        {
+          "type": "recipe",
+          "id": "matcha_goat_milk_mousse"
+        },
+        {
+          "type": "recipe",
+          "id": "mint_iced_green_tea"
+        }
+      ]
+    },
+    "family_tea_bittersweet_t4_05": {
+      "id": "family_tea_bittersweet_t4_05",
+      "display_name": "茶香苦甜 · T4-5",
+      "branch_id": "tea_bittersweet",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_tea_bittersweet_t3_04"
+      ],
+      "tags": [
+        "crisp",
+        "rich",
+        "soft",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个茶香苦甜家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "black_tea_brulee"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_caramel_mousse"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_cocoa_cookie"
+        }
+      ]
+    },
+    "family_tea_bittersweet_t4_06": {
+      "id": "family_tea_bittersweet_t4_06",
+      "display_name": "茶香苦甜 · T4-6",
+      "branch_id": "tea_bittersweet",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_tea_bittersweet_t4_05"
+      ],
+      "tags": [
+        "rich",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个茶香苦甜家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "black_tea_mousse"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_nut_brownie"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_rice_steamed_cake"
+        }
+      ]
+    },
+    "family_tea_bittersweet_t4_07": {
+      "id": "family_tea_bittersweet_t4_07",
+      "display_name": "茶香苦甜 · T4-7",
+      "branch_id": "tea_bittersweet",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_tea_bittersweet_t4_06"
+      ],
+      "tags": [
+        "drink",
+        "fruit",
+        "refreshing",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个茶香苦甜家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "green_tea_lemon_jelly"
+        },
+        {
+          "type": "recipe",
+          "id": "green_tea_steamed_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "honey_orange_black_tea"
+        }
+      ]
+    },
+    "family_tea_bittersweet_t4_08": {
+      "id": "family_tea_bittersweet_t4_08",
+      "display_name": "茶香苦甜 · T4-8",
+      "branch_id": "tea_bittersweet",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_tea_bittersweet_t4_07"
+      ],
+      "tags": [
+        "crisp",
+        "drink",
+        "fast",
+        "refreshing",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个茶香苦甜家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "lemon_honey_black_tea"
+        },
+        {
+          "type": "recipe",
+          "id": "nut_black_tea_crisp"
+        },
+        {
+          "type": "recipe",
+          "id": "oats_black_tea_cake"
+        }
+      ]
+    },
+    "family_crisp_bake_t2_01": {
+      "id": "family_crisp_bake_t2_01",
+      "display_name": "香脆烘焙 · T2-1",
+      "branch_id": "crisp_bake",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [],
+      "tags": [
+        "crisp",
+        "fruit",
+        "soft"
+      ],
+      "build_purpose": "解锁 3 个香脆烘焙家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "baked_rice_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "milk_crisp_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "apple_pie"
+        }
+      ]
+    },
+    "family_crisp_bake_t3_02": {
+      "id": "family_crisp_bake_t3_02",
+      "display_name": "香脆烘焙 · T3-2",
+      "branch_id": "crisp_bake",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_crisp_bake_t2_01"
+      ],
+      "tags": [
+        "crisp",
+        "rich"
+      ],
+      "build_purpose": "解锁 3 个香脆烘焙家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "black_sesame_crisp_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "almond_chocolate_tart"
+        },
+        {
+          "type": "recipe",
+          "id": "matcha_cookie"
+        }
+      ]
+    },
+    "family_crisp_bake_t3_03": {
+      "id": "family_crisp_bake_t3_03",
+      "display_name": "香脆烘焙 · T3-3",
+      "branch_id": "crisp_bake",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_crisp_bake_t3_02"
+      ],
+      "tags": [
+        "crisp",
+        "fast"
+      ],
+      "build_purpose": "解锁 1 个香脆烘焙家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "oats_cookie"
+        }
+      ]
+    },
+    "family_crisp_bake_t4_04": {
+      "id": "family_crisp_bake_t4_04",
+      "display_name": "香脆烘焙 · T4-4",
+      "branch_id": "crisp_bake",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_crisp_bake_t3_03"
+      ],
+      "tags": [
+        "crisp",
+        "fruit"
+      ],
+      "build_purpose": "解锁 3 个香脆烘焙家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "apple_crumble"
+        },
+        {
+          "type": "recipe",
+          "id": "blueberry_cream_tart"
+        },
+        {
+          "type": "recipe",
+          "id": "nut_pumpkin_cake"
+        }
+      ]
+    },
+    "family_crisp_bake_t4_05": {
+      "id": "family_crisp_bake_t4_05",
+      "display_name": "香脆烘焙 · T4-5",
+      "branch_id": "crisp_bake",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_crisp_bake_t4_04"
+      ],
+      "tags": [
+        "crisp",
+        "soft"
+      ],
+      "build_purpose": "解锁 1 个香脆烘焙家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "vanilla_cream_puff"
+        }
+      ]
+    },
+    "family_savory_hearty_t1_01": {
+      "id": "family_savory_hearty_t1_01",
+      "display_name": "咸香饱腹 · T1-1",
+      "branch_id": "savory_hearty",
+      "tier": 1,
+      "cost": 3,
+      "prerequisite_ids": [],
+      "tags": [
+        "hearty",
+        "rich",
+        "savory"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "butter_chicken_steamed_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "chicken_steamed_dumpling"
+        },
+        {
+          "type": "recipe",
+          "id": "chicken_wheat_porridge"
+        }
+      ]
+    },
+    "family_savory_hearty_t2_02": {
+      "id": "family_savory_hearty_t2_02",
+      "display_name": "咸香饱腹 · T2-2",
+      "branch_id": "savory_hearty",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_savory_hearty_t1_01"
+      ],
+      "tags": [
+        "crisp",
+        "rich",
+        "savory"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "beef_baked_pie"
+        },
+        {
+          "type": "recipe",
+          "id": "chicken_cream_soup"
+        },
+        {
+          "type": "recipe",
+          "id": "sea_salt_caramel_pudding"
+        }
+      ]
+    },
+    "family_savory_hearty_t3_03": {
+      "id": "family_savory_hearty_t3_03",
+      "display_name": "咸香饱腹 · T3-3",
+      "branch_id": "savory_hearty",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_savory_hearty_t2_02"
+      ],
+      "tags": [
+        "rich",
+        "savory",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "cheese_baked_pumpkin"
+        },
+        {
+          "type": "recipe",
+          "id": "cheese_duck_baked_rice"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_mutton_pastry"
+        }
+      ]
+    },
+    "family_savory_hearty_t3_04": {
+      "id": "family_savory_hearty_t3_04",
+      "display_name": "咸香饱腹 · T3-4",
+      "branch_id": "savory_hearty",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_savory_hearty_t3_03"
+      ],
+      "tags": [
+        "hearty",
+        "rich",
+        "savory"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "chestnut_mutton_baked_rice"
+        },
+        {
+          "type": "recipe",
+          "id": "pumpkin_duck_pancake"
+        },
+        {
+          "type": "recipe",
+          "id": "pumpkin_rice_drink"
+        }
+      ]
+    },
+    "family_savory_hearty_t3_05": {
+      "id": "family_savory_hearty_t3_05",
+      "display_name": "咸香饱腹 · T3-5",
+      "branch_id": "savory_hearty",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_savory_hearty_t3_04"
+      ],
+      "tags": [
+        "hearty",
+        "rich",
+        "savory"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "sea_salt_chocolate_cookie"
+        },
+        {
+          "type": "recipe",
+          "id": "sea_salt_duck_rice_cup"
+        },
+        {
+          "type": "recipe",
+          "id": "mutton_glutinous_shumai"
+        }
+      ]
+    },
+    "family_savory_hearty_t3_06": {
+      "id": "family_savory_hearty_t3_06",
+      "display_name": "咸香饱腹 · T3-6",
+      "branch_id": "savory_hearty",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_savory_hearty_t3_05"
+      ],
+      "tags": [
+        "crisp",
+        "hearty",
+        "rich"
+      ],
+      "build_purpose": "解锁 2 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "nut_oats_crisp"
+        },
+        {
+          "type": "recipe",
+          "id": "nuts_pound_cake"
+        }
+      ]
+    },
+    "family_savory_hearty_t4_07": {
+      "id": "family_savory_hearty_t4_07",
+      "display_name": "咸香饱腹 · T4-7",
+      "branch_id": "savory_hearty",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_savory_hearty_t3_06"
+      ],
+      "tags": [
+        "crisp",
+        "savory",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "beef_cheese_pie"
+        },
+        {
+          "type": "recipe",
+          "id": "beef_nut_pie"
+        },
+        {
+          "type": "recipe",
+          "id": "black_tea_chicken_baked_rice"
+        }
+      ]
+    },
+    "family_savory_hearty_t4_08": {
+      "id": "family_savory_hearty_t4_08",
+      "display_name": "咸香饱腹 · T4-8",
+      "branch_id": "savory_hearty",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_savory_hearty_t4_07"
+      ],
+      "tags": [
+        "hearty",
+        "savory",
+        "soft",
+        "tea"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "black_tea_light_cheesecake"
+        },
+        {
+          "type": "recipe",
+          "id": "butter_beef_baked_rice"
+        },
+        {
+          "type": "recipe",
+          "id": "cheese_chicken_baked_rice"
+        }
+      ]
+    },
+    "family_savory_hearty_t4_09": {
+      "id": "family_savory_hearty_t4_09",
+      "display_name": "咸香饱腹 · T4-9",
+      "branch_id": "savory_hearty",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_savory_hearty_t4_08"
+      ],
+      "tags": [
+        "hearty",
+        "savory"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "chestnut_chicken_baked_rice"
+        },
+        {
+          "type": "recipe",
+          "id": "chicken_rice_flour_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "nut_chicken_patty"
+        }
+      ]
+    },
+    "family_savory_hearty_t4_10": {
+      "id": "family_savory_hearty_t4_10",
+      "display_name": "咸香饱腹 · T4-10",
+      "branch_id": "savory_hearty",
+      "tier": 4,
+      "cost": 9,
+      "prerequisite_ids": [
+        "family_savory_hearty_t4_09"
+      ],
+      "tags": [
+        "crisp",
+        "fast",
+        "hearty",
+        "savory"
+      ],
+      "build_purpose": "解锁 3 个咸香饱腹家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "oats_milk_porridge"
+        },
+        {
+          "type": "recipe",
+          "id": "sea_salt_nuts_cookie"
+        },
+        {
+          "type": "recipe",
+          "id": "steamed_meat_rice_cup"
+        }
+      ]
+    },
+    "family_spatial_combo_t1_01": {
+      "id": "family_spatial_combo_t1_01",
+      "display_name": "空间联动 · T1-1",
+      "branch_id": "spatial_combo",
+      "tier": 1,
+      "cost": 3,
+      "prerequisite_ids": [],
+      "tags": [
+        "spatial"
+      ],
+      "build_purpose": "解锁 3 个空间联动家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "egg_rice_flour_custard"
+        },
+        {
+          "type": "recipe",
+          "id": "rice_flour_steamed_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "soft_steamed_egg_cake"
+        }
+      ]
+    },
+    "family_spatial_combo_t1_02": {
+      "id": "family_spatial_combo_t1_02",
+      "display_name": "空间联动 · T1-2",
+      "branch_id": "spatial_combo",
+      "tier": 1,
+      "cost": 3,
+      "prerequisite_ids": [
+        "family_spatial_combo_t1_01"
+      ],
+      "tags": [
+        "spatial"
+      ],
+      "build_purpose": "解锁 1 个空间联动家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "white_sugar_rice_porridge"
+        }
+      ]
+    },
+    "family_spatial_combo_t2_03": {
+      "id": "family_spatial_combo_t2_03",
+      "display_name": "空间联动 · T2-3",
+      "branch_id": "spatial_combo",
+      "tier": 2,
+      "cost": 5,
+      "prerequisite_ids": [
+        "family_spatial_combo_t1_02"
+      ],
+      "tags": [
+        "spatial"
+      ],
+      "build_purpose": "解锁 2 个空间联动家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "honey_redbean_steamed_cake"
+        },
+        {
+          "type": "recipe",
+          "id": "honey_sponge_cake"
+        }
+      ]
+    },
+    "family_spatial_combo_t3_04": {
+      "id": "family_spatial_combo_t3_04",
+      "display_name": "空间联动 · T3-4",
+      "branch_id": "spatial_combo",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_spatial_combo_t2_03"
+      ],
+      "tags": [
+        "spatial"
+      ],
+      "build_purpose": "解锁 3 个空间联动家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "banana_baked_pancake"
+        },
+        {
+          "type": "recipe",
+          "id": "pumpkin_pie"
+        },
+        {
+          "type": "recipe",
+          "id": "pumpkin_pudding"
+        }
+      ]
+    },
+    "family_spatial_combo_t3_05": {
+      "id": "family_spatial_combo_t3_05",
+      "display_name": "空间联动 · T3-5",
+      "branch_id": "spatial_combo",
+      "tier": 3,
+      "cost": 7,
+      "prerequisite_ids": [
+        "family_spatial_combo_t3_04"
+      ],
+      "tags": [
+        "spatial"
+      ],
+      "build_purpose": "解锁 1 个空间联动家族配方，在同主题下提供不同形状、周期和复制策略。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "redbean_pancake"
         }
       ]
     }

@@ -7,11 +7,252 @@
       "grid_columns": 8,
       "supply_budget": 16,
       "stages": [
-        {"stage_index": 0, "encounter_id": "morning_rush", "encounter_type": "normal"},
-        {"stage_index": 1, "encounter_id": "pairing_tasting", "encounter_type": "normal"},
-        {"stage_index": 2, "encounter_id": "afternoon_wave", "encounter_type": "normal"},
-        {"stage_index": 3, "encounter_id": "weekend_feature", "encounter_type": "elite"},
-        {"stage_index": 4, "encounter_id": "picky_food_critic", "encounter_type": "final_boss"}
+        {
+          "stage_index": 0,
+          "encounter_id": "morning_rush",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 1,
+          "encounter_id": "pairing_tasting",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 2,
+          "encounter_id": "afternoon_wave",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 3,
+          "encounter_id": "weekend_feature",
+          "encounter_type": "elite"
+        },
+        {
+          "stage_index": 4,
+          "encounter_id": "picky_food_critic",
+          "encounter_type": "final_boss"
+        }
+      ],
+      "description": "节奏、搭配和招牌的基础五场短链。",
+      "unlock_requirement_route_id": "",
+      "required_unlock_node_ids": [],
+      "guaranteed_recipe_pool": [
+        "butter_cookie",
+        "strawberry_jelly",
+        "milk_pudding",
+        "blueberry_muffin",
+        "sponge_cake",
+        "chocolate_lava_cake"
+      ],
+      "revealed_branch_ids": [
+        "tempo_display",
+        "fruit_set",
+        "signature_display"
+      ],
+      "recommended_build_roles": [
+        "tempo",
+        "pairing",
+        "signature"
+      ],
+      "validation_menus": [
+        [
+          "butter_cookie",
+          "strawberry_jelly",
+          "milk_pudding",
+          "blueberry_muffin"
+        ],
+        [
+          "butter_cookie",
+          "strawberry_jelly",
+          "milk_pudding",
+          "blueberry_muffin",
+          "sponge_cake",
+          "chocolate_lava_cake"
+        ]
+      ]
+    },
+    "flavor_texture_route": {
+      "id": "flavor_texture_route",
+      "display_name": "风味与质地路线",
+      "description": "以奶香软糯、茶香苦甜和香脆烘焙重组菜单。",
+      "unlock_requirement_route_id": "standard_short_chain",
+      "grid_rows": 6,
+      "grid_columns": 8,
+      "supply_budget": 16,
+      "required_unlock_node_ids": [],
+      "guaranteed_recipe_pool": [
+        "butter_cookie",
+        "strawberry_jelly",
+        "milk_pudding",
+        "blueberry_muffin",
+        "sponge_cake",
+        "chocolate_lava_cake"
+      ],
+      "revealed_branch_ids": [
+        "milk_soft",
+        "tea_bittersweet",
+        "crisp_bake"
+      ],
+      "recommended_build_roles": [
+        "softness",
+        "flavor",
+        "shape"
+      ],
+      "validation_menus": [
+        [
+          "butter_cookie",
+          "strawberry_jelly",
+          "milk_pudding",
+          "blueberry_muffin"
+        ],
+        [
+          "butter_cookie",
+          "strawberry_jelly",
+          "milk_pudding",
+          "blueberry_muffin",
+          "sponge_cake",
+          "chocolate_lava_cake"
+        ],
+        [
+          "egg_milk_custard",
+          "caramel_pudding_steamed",
+          "rich_rice_drink",
+          "milk_pudding"
+        ],
+        [
+          "black_tea_latte",
+          "lemon_honey_black_tea",
+          "black_tea_panna",
+          "butter_cookie",
+          "sponge_cake",
+          "strawberry_jelly"
+        ],
+        [
+          "oats_cookie",
+          "almond_chocolate_tart",
+          "blueberry_muffin",
+          "butter_cookie",
+          "cream_shortcake",
+          "milk_pudding"
+        ]
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "encounter_id": "route_b_soft_opening",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 1,
+          "encounter_id": "route_b_tea_salon",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 2,
+          "encounter_id": "route_b_crisp_festival",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 3,
+          "encounter_id": "route_b_texture_master",
+          "encounter_type": "elite"
+        },
+        {
+          "stage_index": 4,
+          "encounter_id": "route_b_patisserie_exam",
+          "encounter_type": "final_boss"
+        }
+      ]
+    },
+    "grand_composition_route": {
+      "id": "grand_composition_route",
+      "display_name": "复合经营路线",
+      "description": "以咸香饱腹、空间联动和晚期招牌完成终局构筑。",
+      "unlock_requirement_route_id": "flavor_texture_route",
+      "grid_rows": 6,
+      "grid_columns": 8,
+      "supply_budget": 16,
+      "required_unlock_node_ids": [],
+      "guaranteed_recipe_pool": [
+        "butter_cookie",
+        "strawberry_jelly",
+        "milk_pudding",
+        "blueberry_muffin",
+        "sponge_cake",
+        "chocolate_lava_cake"
+      ],
+      "revealed_branch_ids": [
+        "savory_hearty",
+        "spatial_combo",
+        "signature_display"
+      ],
+      "recommended_build_roles": [
+        "sustain",
+        "space",
+        "signature"
+      ],
+      "validation_menus": [
+        [
+          "butter_cookie",
+          "strawberry_jelly",
+          "milk_pudding",
+          "blueberry_muffin"
+        ],
+        [
+          "butter_cookie",
+          "strawberry_jelly",
+          "milk_pudding",
+          "blueberry_muffin",
+          "sponge_cake",
+          "chocolate_lava_cake"
+        ],
+        [
+          "beef_baked_pie",
+          "chicken_steamed_dumpling",
+          "sponge_cake",
+          "milk_pudding"
+        ],
+        [
+          "banana_pound_cake",
+          "blueberry_cream_tart",
+          "cream_shortcake",
+          "caramel_mousse"
+        ],
+        [
+          "chocolate_lava_cake",
+          "sponge_cake",
+          "butter_cookie",
+          "strawberry_jelly",
+          "milk_pudding",
+          "blueberry_muffin"
+        ]
+      ],
+      "stages": [
+        {
+          "stage_index": 0,
+          "encounter_id": "route_c_hearty_market",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 1,
+          "encounter_id": "route_c_space_architect",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 2,
+          "encounter_id": "route_c_savory_banquet",
+          "encounter_type": "normal"
+        },
+        {
+          "stage_index": 3,
+          "encounter_id": "route_c_combo_director",
+          "encounter_type": "elite"
+        },
+        {
+          "stage_index": 4,
+          "encounter_id": "route_c_grand_critic",
+          "encounter_type": "final_boss"
+        }
       ]
     }
   }

@@ -1,0 +1,53 @@
+{
+  "masteries": {
+    "route_a_first_clear": {
+      "id": "route_a_first_clear",
+      "display_name": "基础构筑毕业",
+      "description": "首次完成五场标准短链。",
+      "condition": {
+        "type": "route_first_clear",
+        "route_id": "standard_short_chain"
+      },
+      "reveal_node_ids": []
+    },
+    "route_b_first_clear": {
+      "id": "route_b_first_clear",
+      "display_name": "风味与质地毕业",
+      "description": "首次完成风味与质地路线。",
+      "condition": {
+        "type": "route_first_clear",
+        "route_id": "flavor_texture_route"
+      },
+      "reveal_node_ids": []
+    },
+    "route_triad": {
+      "id": "route_triad",
+      "display_name": "三路线陈列大师",
+      "description": "三条标准路线各完成至少一次。",
+      "condition": {
+        "type": "all_route_first_clears",
+        "route_ids": [
+          "standard_short_chain",
+          "flavor_texture_route",
+          "grand_composition_route"
+        ]
+      },
+      "reveal_node_ids": [
+        "family_signature_display_t4_07",
+        "family_spatial_combo_t3_05"
+      ]
+    },
+    "endless_20": {
+      "id": "endless_20",
+      "display_name": "无尽二十层",
+      "description": "无尽最高纪录达到 20 层。",
+      "condition": {
+        "type": "endless_best_floor",
+        "floor": 20
+      },
+      "reveal_node_ids": [
+        "family_savory_hearty_t4_10"
+      ]
+    }
+  }
+}

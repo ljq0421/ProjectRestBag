@@ -16,7 +16,161 @@
     "blueberry_mousse",
     "strawberry_mousse",
     "cream_shortcake",
-    "caramel_mousse"
+    "caramel_mousse",
+    "almond_chocolate_tart",
+    "apple_cinnamon_pie",
+    "apple_crumble",
+    "apple_pie",
+    "apple_steamed_rice_cake",
+    "baked_rice_cake",
+    "banana_baked_pancake",
+    "banana_milk_drink",
+    "banana_pancake",
+    "banana_pound_cake",
+    "banana_rice_pudding",
+    "beef_baked_pie",
+    "beef_cheese_pie",
+    "beef_nut_pie",
+    "berry_rice_drink",
+    "berry_rice_flour_cake",
+    "berry_yogurt_ice",
+    "black_sesame_crisp_cake",
+    "black_sesame_oats_soup",
+    "black_sesame_roll",
+    "black_sesame_soup",
+    "black_tea_brulee",
+    "black_tea_butter_cookie",
+    "black_tea_caramel_mousse",
+    "black_tea_chicken_baked_rice",
+    "black_tea_chiffon_cake",
+    "black_tea_cocoa_cookie",
+    "black_tea_latte",
+    "black_tea_light_cheesecake",
+    "black_tea_mousse",
+    "black_tea_mutton_pastry",
+    "black_tea_nut_brownie",
+    "black_tea_panna",
+    "black_tea_pound_cake",
+    "black_tea_rice_steamed_cake",
+    "blueberry_cream_tart",
+    "blueberry_jelly",
+    "butter_beef_baked_rice",
+    "butter_chicken_steamed_cake",
+    "caramel_brulee",
+    "caramel_pudding_steamed",
+    "cheese_baked_pumpkin",
+    "cheese_chicken_baked_rice",
+    "cheese_duck_baked_rice",
+    "cheesecake",
+    "chestnut_chicken_baked_rice",
+    "chestnut_glutinous_rice_cake",
+    "chestnut_mousse",
+    "chestnut_mutton_baked_rice",
+    "chestnut_pound_cake",
+    "chestnut_redbean_steamed_cake",
+    "chestnut_tart",
+    "chicken_cream_soup",
+    "chicken_rice_flour_cake",
+    "chicken_steamed_dumpling",
+    "chicken_wheat_porridge",
+    "chocolate_banana_roll",
+    "chocolate_mousse",
+    "cocoa_brownie",
+    "cocoa_glutinous_rice_cake",
+    "cocoa_panna_cotta",
+    "cocoa_steamed_cake",
+    "coffee_duck_egg_cake",
+    "coffee_mousse",
+    "coffee_muffin",
+    "coffee_pound_cake",
+    "community_parfait",
+    "duck_egg_banana_griddle_cake",
+    "duck_egg_pumpkin_pudding",
+    "egg_milk_custard",
+    "egg_rice_flour_custard",
+    "goat_milk_black_tea_jelly",
+    "goat_milk_oats_porridge",
+    "green_tea_latte",
+    "green_tea_lemon_jelly",
+    "green_tea_panna_cotta",
+    "green_tea_redbean_mochi",
+    "green_tea_rice_drink",
+    "green_tea_steamed_cake",
+    "green_tea_yogurt_cup",
+    "honey_lemon_drink",
+    "honey_lemon_jelly",
+    "honey_orange_black_tea",
+    "honey_peach_jelly",
+    "honey_redbean_steamed_cake",
+    "honey_sponge_cake",
+    "honey_yogurt",
+    "hot_cocoa_drink",
+    "lemon_honey_black_tea",
+    "lemon_madeleine",
+    "lemon_tart",
+    "lemon_yogurt_muffin",
+    "mango_cheese_cup",
+    "mango_cream_cup",
+    "mango_glutinous_rice_cake",
+    "mango_milk_drink",
+    "mango_yogurt_cup",
+    "matcha_cookie",
+    "matcha_goat_milk_mousse",
+    "matcha_mochi",
+    "matcha_pudding",
+    "matcha_redbean",
+    "matcha_redbean_mousse",
+    "milk_crisp_cake",
+    "milk_rice_dew",
+    "mint_chocolate_pudding",
+    "mint_cocoa_cup",
+    "mint_iced_green_tea",
+    "mint_lemon_drink",
+    "mint_mousse",
+    "mint_rice_drink",
+    "mint_yogurt_cup",
+    "mutton_glutinous_shumai",
+    "nut_black_tea_crisp",
+    "nut_chicken_patty",
+    "nut_oats_crisp",
+    "nut_pumpkin_cake",
+    "nuts_cocoa_brownie",
+    "nuts_pound_cake",
+    "oats_baked_pudding",
+    "oats_black_tea_cake",
+    "oats_cookie",
+    "oats_milk_porridge",
+    "oats_yogurt_bowl",
+    "orange_chiffon_cake",
+    "orange_crepe",
+    "peach_jelly",
+    "peach_mousse",
+    "pumpkin_duck_pancake",
+    "pumpkin_pie",
+    "pumpkin_pudding",
+    "pumpkin_rice_drink",
+    "pumpkin_steamed_cake",
+    "red_bean_glutinous_rice_ball",
+    "red_bean_milk_drink",
+    "red_bean_rice_cake",
+    "redbean_pancake",
+    "rice_flour_steamed_cake",
+    "rice_milk_drink",
+    "rich_rice_drink",
+    "sea_salt_caramel_pudding",
+    "sea_salt_chocolate_cookie",
+    "sea_salt_cream_coffee",
+    "sea_salt_duck_rice_cup",
+    "sea_salt_nuts_cookie",
+    "soft_steamed_egg_cake",
+    "steamed_meat_rice_cup",
+    "strawberry_cream_cake",
+    "sugar_roasted_chestnut",
+    "vanilla_cream_puff",
+    "vanilla_panna_cotta",
+    "white_sugar_rice_ball",
+    "white_sugar_rice_porridge",
+    "yogurt_cheesecake"
   ],
   "recipes": {
     "butter_cookie": {
@@ -335,6 +489,3999 @@
       "rotatable": true,
       "build_roles": [
         "signature"
+      ]
+    },
+    "almond_chocolate_tart": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 11,
+      "tags": [
+        "crisp",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "apple_cinnamon_pie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 11,
+      "tags": [
+        "fruit"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "apple_crumble": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 12,
+      "tags": [
+        "fruit",
+        "crisp"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "apple_pie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "fruit",
+        "crisp"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "apple_steamed_rice_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "fruit"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "baked_rice_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "crisp"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "banana_baked_pancake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "banana_milk_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 9,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "banana_pancake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "fruit"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "banana_pound_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 12,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "banana_rice_pudding": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 9,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "beef_baked_pie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 10,
+      "tags": [
+        "crisp",
+        "savory"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "beef_cheese_pie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 13,
+      "tags": [
+        "crisp",
+        "savory"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "beef_nut_pie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 14,
+      "tags": [
+        "crisp",
+        "savory"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "berry_rice_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "fruit",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "berry_rice_flour_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "fruit",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "berry_yogurt_ice": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "fruit",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "black_sesame_crisp_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "crisp",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "black_sesame_oats_soup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "fast",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "black_sesame_roll": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "black_sesame_soup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "fast",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "black_tea_brulee": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 16,
+      "tags": [
+        "soft",
+        "tea"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_butter_cookie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "tea",
+        "crisp"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_caramel_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 12,
+      "tags": [
+        "tea",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_chicken_baked_rice": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 16,
+      "tags": [
+        "tea",
+        "savory"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "black_tea_chiffon_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 14,
+      "tags": [
+        "tea"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_cocoa_cookie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 8000,
+      "satisfaction": 10,
+      "tags": [
+        "tea",
+        "crisp"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_latte": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "soft",
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_light_cheesecake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 16,
+      "tags": [
+        "tea",
+        "savory"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "black_tea_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 12,
+      "tags": [
+        "tea",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_mutton_pastry": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "tea",
+        "savory"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "black_tea_nut_brownie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 14,
+      "tags": [
+        "tea",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_panna": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "soft",
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_pound_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 13,
+      "tags": [
+        "tea",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "black_tea_rice_steamed_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "blueberry_cream_tart": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 14,
+      "tags": [
+        "fruit",
+        "crisp"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "blueberry_jelly": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 2,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 7,
+      "tags": [
+        "fruit",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "butter_beef_baked_rice": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 15,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "butter_chicken_steamed_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 7,
+      "tags": [
+        "savory",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "caramel_brulee": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 16,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "caramel_pudding_steamed": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "cheese_baked_pumpkin": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 13,
+      "tags": [
+        "savory",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "cheese_chicken_baked_rice": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 16,
+      "tags": [
+        "soft",
+        "savory"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "cheese_duck_baked_rice": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 14,
+      "tags": [
+        "savory",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "cheesecake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 12,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "chestnut_chicken_baked_rice": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 16,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "chestnut_glutinous_rice_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "chestnut_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "chestnut_mutton_baked_rice": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 14,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "chestnut_pound_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 13,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "chestnut_redbean_steamed_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "chestnut_tart": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 11,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "chicken_cream_soup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "savory",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "chicken_rice_flour_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 10,
+      "tags": [
+        "savory"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "chicken_steamed_dumpling": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 7,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "chicken_wheat_porridge": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 7,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "chocolate_banana_roll": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 12,
+      "tags": [
+        "fruit",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "chocolate_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 10,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "cocoa_brownie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 11,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "cocoa_glutinous_rice_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "cocoa_panna_cotta": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "cocoa_steamed_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "coffee_duck_egg_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 12,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "coffee_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "coffee_muffin": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "coffee_pound_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 13,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "community_parfait": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 10,
+      "tags": [
+        "fruit",
+        "drink",
+        "signature",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "duck_egg_banana_griddle_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "fruit"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "duck_egg_pumpkin_pudding": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "egg_milk_custard": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 12,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "egg_rice_flour_custard": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "goat_milk_black_tea_jelly": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "soft",
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "goat_milk_oats_porridge": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "fast",
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "green_tea_latte": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "soft",
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "green_tea_lemon_jelly": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 9,
+      "tags": [
+        "drink",
+        "tea",
+        "refreshing"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "green_tea_panna_cotta": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "soft",
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "green_tea_redbean_mochi": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "soft",
+        "tea"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "green_tea_rice_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "green_tea_steamed_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 12,
+      "tags": [
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "green_tea_yogurt_cup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "fast",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "honey_lemon_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "honey_lemon_jelly": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 2,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 2000,
+      "satisfaction": 6,
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "honey_orange_black_tea": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "fruit",
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "honey_peach_jelly": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "fruit",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "honey_redbean_steamed_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "honey_sponge_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 13,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "honey_yogurt": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "fruit",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "hot_cocoa_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "lemon_honey_black_tea": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "drink",
+        "tea",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "lemon_madeleine": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 10,
+      "tags": [
+        "drink",
+        "rich",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "lemon_tart": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 2000,
+      "satisfaction": 10,
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "lemon_yogurt_muffin": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "mango_cheese_cup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "fruit",
+        "rich",
+        "signature"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "mango_cream_cup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "fruit",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "mango_glutinous_rice_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "fruit",
+        "soft"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "mango_milk_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "fruit",
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "mango_yogurt_cup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "fruit",
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "matcha_cookie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "crisp",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "matcha_goat_milk_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "tea",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "matcha_mochi": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 2000,
+      "satisfaction": 7,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "matcha_pudding": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "drink",
+        "rich",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "matcha_redbean": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "matcha_redbean_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "milk_crisp_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 9,
+      "tags": [
+        "soft",
+        "crisp"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "milk_rice_dew": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "soft",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "mint_chocolate_pudding": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "drink",
+        "rich",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "mint_cocoa_cup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "drink",
+        "rich",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "mint_iced_green_tea": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "drink",
+        "tea",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "mint_lemon_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "mint_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "drink",
+        "soft",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "mint_rice_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "mint_yogurt_cup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "mutton_glutinous_shumai": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "nut_black_tea_crisp": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 12,
+      "tags": [
+        "tea",
+        "crisp"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "nut_chicken_patty": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 12,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "nut_oats_crisp": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 11,
+      "tags": [
+        "crisp",
+        "hearty"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "nut_pumpkin_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 11,
+      "tags": [
+        "crisp"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "nuts_cocoa_brownie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 14,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "nuts_pound_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 13,
+      "tags": [
+        "hearty",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "oats_baked_pudding": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 14,
+      "tags": [
+        "fast",
+        "soft"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "oats_black_tea_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 12,
+      "tags": [
+        "fast",
+        "tea"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "flavor"
+      ]
+    },
+    "oats_cookie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 8000,
+      "satisfaction": 9,
+      "tags": [
+        "fast",
+        "crisp"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "oats_milk_porridge": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 10,
+      "tags": [
+        "fast",
+        "hearty"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "oats_yogurt_bowl": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "fast",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "orange_chiffon_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 4000,
+      "satisfaction": 13,
+      "tags": [
+        "fruit"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "orange_crepe": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "fruit",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "peach_jelly": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 2,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 2000,
+      "satisfaction": 6,
+      "tags": [
+        "fruit",
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "peach_mousse": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 10,
+      "tags": [
+        "fruit",
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "pumpkin_duck_pancake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "savory"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "pumpkin_pie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 13,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "pumpkin_pudding": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "pumpkin_rice_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 10,
+      "tags": [
+        "hearty",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "pumpkin_steamed_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "red_bean_glutinous_rice_ball": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 2000,
+      "satisfaction": 7,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "red_bean_milk_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "red_bean_rice_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "redbean_pancake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "rice_flour_steamed_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 7,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "rice_milk_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 7,
+      "tags": [
+        "drink",
+        "refreshing"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "pairing"
+      ]
+    },
+    "rich_rice_drink": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 9,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "sea_salt_caramel_pudding": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "savory",
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "sea_salt_chocolate_cookie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 8000,
+      "satisfaction": 9,
+      "tags": [
+        "savory",
+        "rich"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "sea_salt_cream_coffee": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "rich"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "signature"
+      ]
+    },
+    "sea_salt_duck_rice_cup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 9,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "sea_salt_nuts_cookie": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 8000,
+      "satisfaction": 10,
+      "tags": [
+        "crisp",
+        "savory"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "soft_steamed_egg_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 7,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "steamed_meat_rice_cup": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "supply_cost": 4,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 2000,
+      "satisfaction": 10,
+      "tags": [
+        "savory",
+        "hearty"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "sustain"
+      ]
+    },
+    "strawberry_cream_cake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 14,
+      "tags": [
+        "fruit",
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "sugar_roasted_chestnut": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 2000,
+      "satisfaction": 8,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "vanilla_cream_puff": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 16,
+      "tags": [
+        "soft",
+        "crisp"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "tempo",
+        "shape"
+      ]
+    },
+    "vanilla_panna_cotta": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 8000,
+      "satisfaction": 10,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "white_sugar_rice_ball": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ]
+      ],
+      "supply_cost": 2,
+      "copy_limit": 3,
+      "virtual_stock": 6,
+      "cycle_ms": 2000,
+      "satisfaction": 5,
+      "tags": [
+        "soft"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "softness"
+      ]
+    },
+    "white_sugar_rice_porridge": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "supply_cost": 3,
+      "copy_limit": 2,
+      "virtual_stock": 4,
+      "cycle_ms": 4000,
+      "satisfaction": 8,
+      "tags": [
+        "spatial"
+      ],
+      "rotatable": true,
+      "build_roles": [
+        "space"
+      ]
+    },
+    "yogurt_cheesecake": {
+      "shape_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "supply_cost": 6,
+      "copy_limit": 1,
+      "virtual_stock": 2,
+      "cycle_ms": 8000,
+      "satisfaction": 15,
+      "tags": [
+        "drink",
+        "rich",
+        "refreshing"
+      ],
+      "rotatable": false,
+      "build_roles": [
+        "pairing"
       ]
     }
   }

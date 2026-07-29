@@ -397,4 +397,20 @@ func _tag_name(tag: String) -> String:
 			return "香气"
 		"cake":
 			return "蛋糕"
+		"soft":
+			return "软糯"
+		"tea":
+			return "茶香"
+		"crisp":
+			return "香脆"
+		"savory":
+			return "咸香"
+		"hearty":
+			return "饱腹"
+		"refreshing":
+			return "清爽"
+		"rich":
+			return "浓郁"
+		"spatial":
+			return "空间"
 	return tag

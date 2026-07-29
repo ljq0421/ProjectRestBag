@@ -24,8 +24,8 @@ func _init() -> void:
 		statuses[status] = int(statuses.get(status, 0)) + 1
 	_expect(entries.size() == 166, "manifest should cover all 166 catalog recipes")
 	_expect(batches == {"baseline": 12, "A": 18, "B": 34, "C": 48, "D": 54}, "migration batch counts should remain frozen")
-	_expect(int(statuses.get("released", 0)) == 12, "only the current 12 recipes should be released")
-	_expect(int(statuses.get("draft", 0)) == 154, "the remaining 154 recipes should stay draft")
+	_expect(int(statuses.get("released", 0)) == 166, "all 166 recipes should be released after batch D")
+	_expect(int(statuses.get("draft", 0)) == 0, "no migration draft should remain after stage 10")
 	_finish()
 
 

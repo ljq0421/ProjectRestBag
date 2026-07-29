@@ -27,6 +27,7 @@ var _stage_two_hint_id := ""
 var _binding_preparation := false
 var _last_saved_second := -1
 var _page := "hub"
+var _selected_route_id := ROUTE_ID
 
 
 func _ready() -> void:
@@ -63,7 +64,7 @@ func _process(_delta: float) -> void:
 
 func start_new_run(seed: int = 0) -> void:
 	var resolved_seed := seed if seed != 0 else int(Time.get_unix_time_from_system())
-	var result := _session.create_standard_run(_save_data, ROUTE_ID, resolved_seed)
+	var result := _session.create_standard_run(_save_data, _selected_route_id, resolved_seed)
 	if not bool(result.get("applied", false)):
 		_set_status(_error_text(result))
 		return
@@ -136,6 +137,7 @@ func _connect_signals() -> void:
 	hub.continue_requested.connect(continue_run)
 	hub.menu_requested.connect(_show_menu)
 	hub.research_requested.connect(_show_research)
+	hub.route_selected.connect(func(route_id: String) -> void: _selected_route_id = route_id)
 	var preparation = $Root/PageHost/PreparationHost/PreparationView
 	preparation.battle_requested.connect(_start_battle_with_draft)
 	preparation.draft_changed.connect(_on_draft_changed)
@@ -162,6 +164,8 @@ func _connect_signals() -> void:
 	$Root/PageHost/ResearchHost/ResearchView.back_requested.connect(_show_hub)
 	$Root/PageHost/MenuHost/MenuView.back_requested.connect(_show_hub)
 	$Root/PageHost/MenuHost/MenuView.save_requested.connect(_on_menu_save_requested)
+	$Root/PageHost/MenuHost/MenuView.preset_save_requested.connect(_on_menu_preset_save_requested)
+	$Root/PageHost/MenuHost/MenuView.preset_load_requested.connect(_on_menu_preset_load_requested)
 	$Root/PageHost/SummaryHost/RunSummaryView.reward_requested.connect(_on_reward_requested)
 	$Root/PageHost/SummaryHost/RunSummaryView.return_requested.connect(_on_return_requested)
 	$SettlementDialog.report_action_requested.connect(_on_report_action_requested)
@@ -208,7 +212,9 @@ func _show_hub() -> void:
 	_set_page("hub")
 	$Root/PageHost/HubHost/HubView.bind(
 		_save_data.get("meta", {}),
-		_save_data.get("active_run")
+		_save_data.get("active_run"),
+		_session.route_states(_save_data),
+		_session.mastery_states(_save_data)
 	)
 	_refresh_top_bar()
 	_refresh_tutorial()
@@ -301,7 +307,8 @@ func _show_menu() -> void:
 		_session.active_menu(_save_data),
 		_session.recipe_definitions(),
 		Catalog.new().get_recipes(),
-		default_ids
+		default_ids,
+		(_save_data.get("meta", {}) as Dictionary).get("saved_menus", [])
 	)
 	_set_page("menu")
 	_refresh_top_bar()
@@ -315,6 +322,30 @@ func _on_menu_save_requested(recipe_ids: Array[String]) -> void:
 	_adopt(saved)
 	_set_status("本局菜单已保存；开局后将冻结这份清单")
 	_show_hub()
+
+
+func _on_menu_preset_save_requested(
+	preset_id: String,
+	display_name: String,
+	recipe_ids: Array[String]
+) -> void:
+	var saved := _session.save_menu_preset(_save_data, preset_id, display_name, recipe_ids)
+	if bool(saved.get("applied", false)):
+		_adopt(saved)
+		_set_status("菜单预设已保存（最多 3 套）")
+	else:
+		_set_status(_error_text(saved))
+	_show_menu()
+
+
+func _on_menu_preset_load_requested(preset_id: String) -> void:
+	var loaded := _session.load_menu_preset(_save_data, preset_id)
+	if bool(loaded.get("applied", false)):
+		_adopt(loaded)
+		_set_status("菜单预设已载入")
+	else:
+		_set_status(_error_text(loaded))
+	_show_menu()
 
 
 func _show_summary() -> void:

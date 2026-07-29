@@ -22,7 +22,9 @@
       "mutual_exclusion_group": "bake_identity",
       "effect": {
         "type": "tag_add",
-        "target_tags": ["bake"],
+        "target_tags": [
+          "bake"
+        ],
         "tag": "set"
       }
     },
@@ -47,7 +49,9 @@
       "mutual_exclusion_group": "",
       "effect": {
         "type": "copy_limit_add",
-        "target_recipe_ids": ["butter_cookie"],
+        "target_recipe_ids": [
+          "butter_cookie"
+        ],
         "value": 1
       }
     },
@@ -60,7 +64,9 @@
       "mutual_exclusion_group": "relation_school",
       "effect": {
         "type": "relation_bonus_add",
-        "target_tags": ["fruit"],
+        "target_tags": [
+          "fruit"
+        ],
         "relation_id": "fruit_pairing",
         "value": 12
       }
@@ -74,7 +80,9 @@
       "mutual_exclusion_group": "",
       "effect": {
         "type": "cycle_pct",
-        "target_recipe_ids": ["strawberry_jelly"],
+        "target_recipe_ids": [
+          "strawberry_jelly"
+        ],
         "value": -20,
         "min_cycle_ms": 2000
       }
@@ -88,7 +96,9 @@
       "mutual_exclusion_group": "",
       "effect": {
         "type": "satisfaction_add",
-        "target_recipe_ids": ["chocolate_lava_cake"],
+        "target_recipe_ids": [
+          "chocolate_lava_cake"
+        ],
         "value": 8
       }
     },
@@ -101,8 +111,15 @@
       "mutual_exclusion_group": "blueberry_muffin_shape",
       "effect": {
         "type": "shape_variant",
-        "target_recipe_ids": ["blueberry_muffin"],
-        "shape_cells": [[0, 0]],
+        "target_recipe_ids": [
+          "blueberry_muffin"
+        ],
+        "shape_cells": [
+          [
+            0,
+            0
+          ]
+        ],
         "rotatable": false
       }
     },
@@ -127,7 +144,9 @@
       "mutual_exclusion_group": "",
       "effect": {
         "type": "virtual_stock_add",
-        "target_recipe_ids": ["milk_pudding"],
+        "target_recipe_ids": [
+          "milk_pudding"
+        ],
         "value": 2
       }
     },
@@ -153,8 +172,23 @@
       "mutual_exclusion_group": "sponge_cake_shape",
       "effect": {
         "type": "shape_variant",
-        "target_recipe_ids": ["sponge_cake"],
-        "shape_cells": [[0, 0], [0, 1], [1, 0]],
+        "target_recipe_ids": [
+          "sponge_cake"
+        ],
+        "shape_cells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
         "rotatable": true
       }
     },
@@ -167,7 +201,9 @@
       "mutual_exclusion_group": "pivot_route",
       "effect": {
         "type": "tag_add",
-        "target_recipe_ids": ["vanilla_scone"],
+        "target_recipe_ids": [
+          "vanilla_scone"
+        ],
         "tag": "fast"
       }
     },
@@ -180,8 +216,115 @@
       "mutual_exclusion_group": "pivot_route",
       "effect": {
         "type": "tag_add",
-        "target_recipe_ids": ["chocolate_cookie"],
+        "target_recipe_ids": [
+          "chocolate_cookie"
+        ],
         "tag": "set"
+      }
+    },
+    "soft_texture_boost": {
+      "id": "soft_texture_boost",
+      "display_name": "柔软质地加成",
+      "description": "带有 soft 标签的菜单配方满足力 +2。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "satisfaction_add",
+        "target_tags": [
+          "soft"
+        ],
+        "value": 2
+      }
+    },
+    "tea_aroma_boost": {
+      "id": "tea_aroma_boost",
+      "display_name": "茶香余韵",
+      "description": "带有 tea 标签的菜单配方满足力 +2。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "satisfaction_add",
+        "target_tags": [
+          "tea"
+        ],
+        "value": 2
+      }
+    },
+    "crisp_counter": {
+      "id": "crisp_counter",
+      "display_name": "香脆专柜",
+      "description": "带有 crisp 标签的菜单配方满足力 +2。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "satisfaction_add",
+        "target_tags": [
+          "crisp"
+        ],
+        "value": 2
+      }
+    },
+    "savory_service": {
+      "id": "savory_service",
+      "display_name": "咸香服务台",
+      "description": "带有 savory 标签的菜单配方满足力 +2。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "satisfaction_add",
+        "target_tags": [
+          "savory"
+        ],
+        "value": 2
+      }
+    },
+    "hearty_reserve": {
+      "id": "hearty_reserve",
+      "display_name": "饱腹备货",
+      "description": "带有 hearty 标签的菜单配方满足力 +2。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "satisfaction_add",
+        "target_tags": [
+          "hearty"
+        ],
+        "value": 2
+      }
+    },
+    "spatial_planning": {
+      "id": "spatial_planning",
+      "display_name": "空间规划",
+      "description": "带有 spatial 标签的菜单配方满足力 +2。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "satisfaction_add",
+        "target_tags": [
+          "spatial"
+        ],
+        "value": 2
+      }
+    },
+    "rich_finish": {
+      "id": "rich_finish",
+      "display_name": "浓郁收尾",
+      "description": "带有 rich 标签的菜单配方满足力 +2。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "satisfaction_add",
+        "target_tags": [
+          "rich"
+        ],
+        "value": 2
       }
     }
   }

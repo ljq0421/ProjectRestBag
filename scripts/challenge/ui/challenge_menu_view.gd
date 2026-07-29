@@ -6,6 +6,8 @@ const UiStyle = preload("res://scripts/challenge/ui/challenge_ui_style.gd")
 
 signal back_requested
 signal save_requested(recipe_ids: Array[String])
+signal preset_save_requested(preset_id: String, display_name: String, recipe_ids: Array[String])
+signal preset_load_requested(preset_id: String)
 
 const ROLE_NAMES := {
 	"tempo": "快速周转",
@@ -26,6 +28,7 @@ var _recipe_defs: Dictionary = {}
 var _catalog_recipes: Dictionary = {}
 var _manifest_recipes: Dictionary = {}
 var _default_ids: Array[String] = []
+var _saved_menus: Array = []
 var _role_filter := ""
 var _branch_filter := ""
 var _tag_filter := ""
@@ -36,11 +39,15 @@ func _ready() -> void:
 	UiStyle.apply_secondary($Content/Header/BackButton)
 	UiStyle.apply_secondary($Content/Body/MenuPanel/Menu/Actions/RestoreDefaultButton)
 	UiStyle.apply_primary($Content/Body/MenuPanel/Menu/Actions/SaveButton)
+	UiStyle.apply_secondary($Content/Body/MenuPanel/Menu/PresetRow/LoadPresetButton)
+	UiStyle.apply_secondary($Content/Body/MenuPanel/Menu/PresetRow/SavePresetButton)
 	$Content/Header/BackButton.pressed.connect(func() -> void: back_requested.emit())
 	$Content/Body/MenuPanel/Menu/Actions/SaveButton.pressed.connect(
 		func() -> void: save_requested.emit(_selected_ids.duplicate())
 	)
 	$Content/Body/MenuPanel/Menu/Actions/RestoreDefaultButton.pressed.connect(_restore_default)
+	$Content/Body/MenuPanel/Menu/PresetRow/LoadPresetButton.pressed.connect(_load_selected_preset)
+	$Content/Body/MenuPanel/Menu/PresetRow/SavePresetButton.pressed.connect(_save_selected_preset)
 	$Content/Body/CollectionPanel/Collection/Filters/Search.text_changed.connect(
 		func(_text: String) -> void: _rebuild_collection()
 	)
@@ -64,7 +71,8 @@ func bind(
 	selected_ids: Array[String],
 	recipe_defs: Dictionary,
 	catalog_recipes: Dictionary,
-	default_ids: Array[String] = []
+	default_ids: Array[String] = [],
+	saved_menus: Array = []
 ) -> void:
 	_available_ids = available_ids.duplicate()
 	_selected_ids = []
@@ -74,7 +82,9 @@ func bind(
 	_recipe_defs = recipe_defs.duplicate(true)
 	_catalog_recipes = catalog_recipes.duplicate(true)
 	_default_ids = default_ids.duplicate()
+	_saved_menus = saved_menus.duplicate(true)
 	_rebuild_filters()
+	_rebuild_presets()
 	_rebuild_all()
 
 
@@ -162,9 +172,11 @@ func _rebuild_collection() -> void:
 			String(ROLE_NAMES.get(role, role)),
 			int(recipe.get("cycle_ms", 0)) / 1000
 		]
-		button.tooltip_text = (
+		var role_summary := String(manifest.get("challenge_role_summary", ""))
+		var action_hint := (
 			"点击移出本局菜单" if _selected_ids.has(recipe_id) else "点击加入本局菜单"
 		)
+		button.tooltip_text = "%s\n%s" % [role_summary, action_hint]
 		if _selected_ids.has(recipe_id):
 			UiStyle.apply_primary(button, Color("#546BDD"))
 		else:
@@ -279,6 +291,37 @@ func _restore_default() -> void:
 		if _available_ids.has(recipe_id) and _selected_ids.size() < MenuService.MAX_RECIPES:
 			_selected_ids.append(recipe_id)
 	_rebuild_all()
+
+
+func _rebuild_presets() -> void:
+	var selector: OptionButton = $Content/Body/MenuPanel/Menu/PresetRow/PresetSelector
+	selector.clear()
+	for preset_value in _saved_menus:
+		if not preset_value is Dictionary:
+			continue
+		selector.add_item(String(preset_value.get("display_name", preset_value.get("id", ""))))
+		selector.set_item_metadata(selector.item_count - 1, String(preset_value.get("id", "")))
+	$Content/Body/MenuPanel/Menu/PresetRow/LoadPresetButton.disabled = selector.item_count == 0
+
+
+func _load_selected_preset() -> void:
+	var selector: OptionButton = $Content/Body/MenuPanel/Menu/PresetRow/PresetSelector
+	if selector.item_count > 0:
+		preset_load_requested.emit(String(selector.get_item_metadata(selector.selected)))
+
+
+func _save_selected_preset() -> void:
+	var selector: OptionButton = $Content/Body/MenuPanel/Menu/PresetRow/PresetSelector
+	var preset_id := ""
+	var display_name := ""
+	if selector.item_count > 0 and selector.selected >= 0:
+		preset_id = String(selector.get_item_metadata(selector.selected))
+		display_name = selector.get_item_text(selector.selected)
+	else:
+		var next_index := _saved_menus.size() + 1
+		preset_id = "menu_preset_%d" % next_index
+		display_name = "菜单方案 %d" % next_index
+	preset_save_requested.emit(preset_id, display_name, _selected_ids.duplicate())
 
 
 func _build_metadata_filter(filter: OptionButton, title: String, values: Array[String]) -> void:

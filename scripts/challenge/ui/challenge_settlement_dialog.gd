@@ -199,10 +199,14 @@ func _window_rows(windows: Array) -> String:
 			lines.append("— %02ds｜战斗提前结束，未触发" % int(row.get("at_ms", 0) / 1000))
 			continue
 		var passed := bool(row.get("passed", false))
+		var metric_text := _metric_name(String(row.get("metric", "")))
+		var tag_context := _window_tag_context(row)
+		if not tag_context.is_empty():
+			metric_text = "%s（%s）" % [metric_text, tag_context]
 		lines.append("%s %02ds｜%s｜%s / %s%s" % [
 			"[color=#72d6a0]✓[/color]" if passed else "[color=#ef476f]✕[/color]",
 			int(row.get("at_ms", 0) / 1000),
-			_metric_name(String(row.get("metric", ""))),
+			metric_text,
 			_display_value(row.get("actual")),
 			_display_value(row.get("target")),
 			"" if passed else "｜口碑 -%d" % int(row.get("reputation_damage", 0))
@@ -245,6 +249,29 @@ func _metric_name(metric: String) -> String:
 		"distinct_tag_count":
 			return "售出标签种类"
 	return "需求目标"
+
+
+func _window_tag_context(window: Dictionary) -> String:
+	var values: Variant = window.get("target_tags", [])
+	if not values is Array:
+		return ""
+	var names: Array[String] = []
+	for value in values:
+		var name := _tag_name(String(value))
+		if not name.is_empty() and not names.has(name):
+			names.append(name)
+	return " / ".join(names)
+
+
+func _tag_name(tag: String) -> String:
+	var names := {
+		"fast": "快速", "bake": "烘焙", "fruit": "水果", "drink": "饮品",
+		"set": "搭配", "signature": "招牌", "chocolate": "巧克力",
+		"aromatic": "香气", "soft": "软糯", "tea": "茶香", "crisp": "香脆",
+		"savory": "咸香", "hearty": "饱腹", "refreshing": "清爽",
+		"rich": "浓郁", "spatial": "空间"
+	}
+	return String(names.get(tag, tag))
 
 
 func _recipe_name(recipe_id: String) -> String:

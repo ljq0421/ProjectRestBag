@@ -27,7 +27,7 @@ func _run() -> void:
 	_expect((run.get("encounter_instances", []) as Array).size() == 1, "only current endless floor should be generated initially")
 
 	var last_pickiness_by_template := {}
-	for floor_number in range(1, 101):
+	for floor_number in range(1, 201):
 		var generated: Dictionary = endless.generate_floor_encounter(
 			"endless:31415", 31415, floor_number, pool, config, encounters
 		)
@@ -98,7 +98,7 @@ func _expect(condition: bool, message: String) -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("ENDLESS_CLIMB_SERVICE_SELF_CHECK_PASS floors=100")
+		print("ENDLESS_CLIMB_SERVICE_SELF_CHECK_PASS floors=200")
 		quit(0)
 		return
 	for failure in _failures:

@@ -171,6 +171,25 @@ columns = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 
+[node name="PresetRow" type="HBoxContainer" parent="Content/Body/MenuPanel/Menu"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PresetSelector" type="OptionButton" parent="Content/Body/MenuPanel/Menu/PresetRow"]
+custom_minimum_size = Vector2(250, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LoadPresetButton" type="Button" parent="Content/Body/MenuPanel/Menu/PresetRow"]
+custom_minimum_size = Vector2(130, 44)
+layout_mode = 2
+text = "载入预设"
+
+[node name="SavePresetButton" type="Button" parent="Content/Body/MenuPanel/Menu/PresetRow"]
+custom_minimum_size = Vector2(130, 44)
+layout_mode = 2
+text = "存为预设"
+
 [node name="Status" type="Label" parent="Content/Body/MenuPanel/Menu"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)

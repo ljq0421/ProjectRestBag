@@ -20,6 +20,7 @@ MANIFEST_PATH = ROOT / "doc/challenge/recipe_progression_manifest.json"
 TAXONOMY_PATH = ROOT / "doc/challenge/challenge_tag_taxonomy.json"
 TREE_PATH = ROOT / "doc/challenge/research_tree.json"
 OUTPUT_PATH = ROOT / "doc/challenge/recipe_migration_audit.md"
+ICON_ROOT = ROOT / "resources/recipe_icons"
 
 RUNTIME_FIELDS = {
     "shape_cells",
@@ -77,6 +78,10 @@ def main() -> None:
     research_ids = list(runtime.get("research_recipe_ids", []))
     if len(starter_ids) != 6:
         blockers.append(f"runtime starter count must be 6, found {len(starter_ids)}")
+    if len(research_ids) != 160:
+        blockers.append(f"runtime research count must be 160, found {len(research_ids)}")
+    if len(runtime_recipes) != 166:
+        blockers.append(f"runtime recipe count must be 166, found {len(runtime_recipes)}")
     if set(starter_ids) & set(research_ids):
         blockers.append("starter and research runtime pools overlap")
     if set(runtime_recipes) != set(starter_ids) | set(research_ids):
@@ -99,6 +104,14 @@ def main() -> None:
         unknown_roles = sorted(set(entry.get("build_roles", [])) - known_roles)
         if unknown_roles:
             blockers.append(f"{recipe_id}: unknown build roles {unknown_roles}")
+        if not entry.get("build_roles"):
+            blockers.append(f"{recipe_id}: missing challenge build role")
+        if not entry.get("combat_tags"):
+            blockers.append(f"{recipe_id}: missing challenge tags")
+        if not str(entry.get("challenge_role_summary", "")).strip():
+            blockers.append(f"{recipe_id}: missing player-facing challenge role summary")
+        if not (ICON_ROOT / f"{recipe_id}.png").exists():
+            blockers.append(f"{recipe_id}: missing base recipe icon")
         if status == "released":
             if recipe_id not in runtime_recipes:
                 blockers.append(f"{recipe_id}: released in manifest but absent from runtime")
@@ -110,6 +123,39 @@ def main() -> None:
             blockers.append(f"{recipe_id}: runtime recipe is not released in manifest")
 
     tree_owned: set[str] = set()
+    node_ids = set(tree.get("nodes", {}))
+    branch_node_ids: set[str] = set()
+    tree_branches = tree.get("branches", [])
+    if len(tree_branches) != 8:
+        blockers.append(f"research tree must define 8 branches, found {len(tree_branches)}")
+    for branch in tree_branches:
+        branch_id = str(branch.get("id", ""))
+        listed_nodes = [str(value) for value in branch.get("node_ids", [])]
+        for node_id in listed_nodes:
+            if node_id in branch_node_ids:
+                blockers.append(f"research node is listed by multiple branches: {node_id}")
+            branch_node_ids.add(node_id)
+            node = tree.get("nodes", {}).get(node_id, {})
+            if not node:
+                blockers.append(f"branch {branch_id} lists missing node {node_id}")
+            elif str(node.get("branch_id", "")) != branch_id:
+                blockers.append(f"research node {node_id} has mismatched branch_id")
+        reachable: set[str] = set()
+        while True:
+            before = len(reachable)
+            for node_id in listed_nodes:
+                node = tree.get("nodes", {}).get(node_id, {})
+                prerequisites = {str(value) for value in node.get("prerequisite_ids", [])}
+                if prerequisites <= reachable:
+                    reachable.add(node_id)
+            if len(reachable) == before:
+                break
+        unreachable = sorted(set(listed_nodes) - reachable)
+        if unreachable:
+            blockers.append(f"branch {branch_id} has unreachable nodes: {unreachable}")
+    if branch_node_ids != node_ids:
+        blockers.append("research branch node lists do not exactly cover research tree nodes")
+
     for node_id, node in tree.get("nodes", {}).items():
         for unlock in node.get("unlocks", []):
             if unlock.get("type") != "recipe":
@@ -120,8 +166,33 @@ def main() -> None:
             tree_owned.add(recipe_id)
             if recipe_id not in runtime_recipes:
                 blockers.append(f"research node {node_id} unlocks non-runtime recipe {recipe_id}")
+            manifest_node_id = str(
+                manifest_recipes.get(recipe_id, {}).get("research_node_id", "")
+            )
+            if manifest_node_id != node_id:
+                blockers.append(
+                    f"{recipe_id}: manifest research_node_id {manifest_node_id} != {node_id}"
+                )
     if tree_owned != set(research_ids):
         blockers.append("research tree recipe rewards do not match runtime research pool")
+    if set(tree.get("starter_recipe_ids", [])) != set(starter_ids):
+        blockers.append("research tree starters do not match runtime starter pool")
+
+    used_tags = {
+        str(tag)
+        for recipe in runtime_recipes.values()
+        for tag in recipe.get("tags", [])
+    }
+    unused_tags = sorted(known_tags - used_tags)
+    if unused_tags:
+        blockers.append(f"taxonomy has unused challenge tags: {unused_tags}")
+    unreleased_tags = sorted(
+        tag_id
+        for tag_id, definition in taxonomy.get("tags", {}).items()
+        if str(definition.get("status", "")) != "released"
+    )
+    if unreleased_tags:
+        blockers.append(f"taxonomy has non-released tags at stage 10: {unreleased_tags}")
 
     proposed = sum(
         count for batch, count in batch_counts.items() if batch in {"A", "B", "C", "D"}

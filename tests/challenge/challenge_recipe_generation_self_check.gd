@@ -16,8 +16,8 @@ func _init() -> void:
 		var entry_value: Variant = entries[recipe_id]
 		if entry_value is Dictionary and String(entry_value.get("content_status", "")) == "released":
 			released[String(recipe_id)] = entry_value
-	_expect(recipes.size() == 12, "runtime generation should keep exactly 12 released recipes")
-	_expect(released.size() == 12, "manifest should expose exactly 12 released recipes")
+	_expect(recipes.size() == 166, "runtime generation should expose all 166 released recipes")
+	_expect(released.size() == 166, "manifest should expose all 166 released recipes")
 	for recipe_id in recipes:
 		_expect(released.has(recipe_id), "runtime recipe should have a released manifest entry: %s" % recipe_id)
 		if released.has(recipe_id):

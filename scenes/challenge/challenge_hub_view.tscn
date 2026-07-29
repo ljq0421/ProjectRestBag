@@ -72,6 +72,36 @@ theme_override_font_sizes/font_size = 20
 text = "无尽爬升：完成第一条五场短链后解锁"
 horizontal_alignment = 1
 
+[node name="RouteRow" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 14
+
+[node name="RouteLabel" type="Label" parent="Content/RouteRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 19
+text = "标准路线"
+vertical_alignment = 1
+
+[node name="RouteSelector" type="OptionButton" parent="Content/RouteRow"]
+custom_minimum_size = Vector2(380, 48)
+layout_mode = 2
+
+[node name="RouteStatus" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 16
+text = "基础路线已开放"
+horizontal_alignment = 1
+
+[node name="LongGoals" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 15
+text = "长期目标：0 / 4"
+horizontal_alignment = 1
+
 [node name="Actions" type="HBoxContainer" parent="Content"]
 layout_mode = 2
 alignment = 1

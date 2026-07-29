@@ -4,8 +4,12 @@
       "id": "morning_rush",
       "display_name": "晨间赶潮",
       "encounter_type": "normal",
-      "rule_tags": ["early_tempo"],
-      "required_mechanism_tags": ["timed_sales"],
+      "rule_tags": [
+        "early_tempo"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales"
+      ],
       "blueprint_hint_id": "blueprint_fast_counter",
       "duration_ms": 30000,
       "supply_budget": 16,
@@ -42,11 +46,51 @@
       ],
       "validation_draft": {
         "placements": [
-          {"instance_id": "morning_cookie_1", "recipe_id": "butter_cookie", "origin": [0, 0], "rotation": 0},
-          {"instance_id": "morning_cookie_2", "recipe_id": "butter_cookie", "origin": [0, 2], "rotation": 0},
-          {"instance_id": "morning_cookie_3", "recipe_id": "butter_cookie", "origin": [0, 4], "rotation": 0},
-          {"instance_id": "morning_jelly_1", "recipe_id": "strawberry_jelly", "origin": [2, 0], "rotation": 0},
-          {"instance_id": "morning_jelly_2", "recipe_id": "strawberry_jelly", "origin": [2, 2], "rotation": 0}
+          {
+            "instance_id": "morning_cookie_1",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_cookie_2",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              2
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_cookie_3",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_jelly_1",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_jelly_2",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              2
+            ],
+            "rotation": 0
+          }
         ]
       }
     },
@@ -54,8 +98,13 @@
       "id": "pairing_tasting",
       "display_name": "搭配品鉴会",
       "encounter_type": "normal",
-      "rule_tags": ["pairing_focus"],
-      "required_mechanism_tags": ["adjacency_relation", "window_satisfaction"],
+      "rule_tags": [
+        "pairing_focus"
+      ],
+      "required_mechanism_tags": [
+        "adjacency_relation",
+        "window_satisfaction"
+      ],
       "blueprint_hint_id": "blueprint_pairing_set",
       "duration_ms": 30000,
       "supply_budget": 16,
@@ -93,9 +142,33 @@
       ],
       "validation_draft": {
         "placements": [
-          {"instance_id": "pairing_pudding", "recipe_id": "milk_pudding", "origin": [0, 0], "rotation": 0},
-          {"instance_id": "pairing_muffin", "recipe_id": "blueberry_muffin", "origin": [1, 0], "rotation": 0},
-          {"instance_id": "pairing_sponge", "recipe_id": "sponge_cake", "origin": [0, 4], "rotation": 0}
+          {
+            "instance_id": "pairing_pudding",
+            "recipe_id": "milk_pudding",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "pairing_muffin",
+            "recipe_id": "blueberry_muffin",
+            "origin": [
+              1,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "pairing_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          }
         ]
       }
     },
@@ -103,8 +176,13 @@
       "id": "afternoon_wave",
       "display_name": "午后连浪",
       "encounter_type": "normal",
-      "rule_tags": ["sustained_service"],
-      "required_mechanism_tags": ["timed_sales", "window_satisfaction"],
+      "rule_tags": [
+        "sustained_service"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "window_satisfaction"
+      ],
       "blueprint_hint_id": "blueprint_sustained_display",
       "duration_ms": 30000,
       "supply_budget": 15,
@@ -143,10 +221,42 @@
       ],
       "validation_draft": {
         "placements": [
-          {"instance_id": "afternoon_sponge", "recipe_id": "sponge_cake", "origin": [0, 0], "rotation": 0},
-          {"instance_id": "afternoon_lava", "recipe_id": "chocolate_lava_cake", "origin": [0, 4], "rotation": 0},
-          {"instance_id": "afternoon_cookie", "recipe_id": "butter_cookie", "origin": [3, 0], "rotation": 0},
-          {"instance_id": "afternoon_jelly", "recipe_id": "strawberry_jelly", "origin": [2, 0], "rotation": 0}
+          {
+            "instance_id": "afternoon_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_cookie",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              3,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_jelly",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          }
         ]
       }
     },
@@ -154,8 +264,16 @@
       "id": "weekend_feature",
       "display_name": "周末招牌日",
       "encounter_type": "elite",
-      "rule_tags": ["mixed_windows", "tight_budget"],
-      "required_mechanism_tags": ["timed_sales", "adjacency_relation", "window_satisfaction", "supply_budget"],
+      "rule_tags": [
+        "mixed_windows",
+        "tight_budget"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "adjacency_relation",
+        "window_satisfaction",
+        "supply_budget"
+      ],
       "blueprint_hint_id": "blueprint_signature_rotation",
       "duration_ms": 30000,
       "supply_budget": 12,
@@ -193,9 +311,33 @@
       ],
       "validation_draft": {
         "placements": [
-          {"instance_id": "weekend_sponge", "recipe_id": "sponge_cake", "origin": [0, 0], "rotation": 0},
-          {"instance_id": "weekend_cookie", "recipe_id": "butter_cookie", "origin": [2, 0], "rotation": 0},
-          {"instance_id": "weekend_lava", "recipe_id": "chocolate_lava_cake", "origin": [0, 4], "rotation": 0}
+          {
+            "instance_id": "weekend_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "weekend_cookie",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "weekend_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          }
         ]
       }
     },
@@ -203,8 +345,14 @@
       "id": "picky_food_critic",
       "display_name": "挑剔美食评论家",
       "encounter_type": "final_boss",
-      "rule_tags": ["combined_exam"],
-      "required_mechanism_tags": ["timed_sales", "adjacency_relation", "window_satisfaction"],
+      "rule_tags": [
+        "combined_exam"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "adjacency_relation",
+        "window_satisfaction"
+      ],
       "blueprint_hint_id": "blueprint_critic_signature",
       "duration_ms": 30000,
       "supply_budget": 16,
@@ -242,12 +390,1020 @@
       ],
       "validation_draft": {
         "placements": [
-          {"instance_id": "critic_pudding", "recipe_id": "milk_pudding", "origin": [0, 0], "rotation": 0},
-          {"instance_id": "critic_muffin", "recipe_id": "blueberry_muffin", "origin": [1, 0], "rotation": 0},
-          {"instance_id": "critic_sponge", "recipe_id": "sponge_cake", "origin": [0, 4], "rotation": 0},
-          {"instance_id": "critic_lava", "recipe_id": "chocolate_lava_cake", "origin": [3, 4], "rotation": 0}
+          {
+            "instance_id": "critic_pudding",
+            "recipe_id": "milk_pudding",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_muffin",
+            "recipe_id": "blueberry_muffin",
+            "origin": [
+              1,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              3,
+              4
+            ],
+            "rotation": 0
+          }
         ]
       }
+    },
+    "route_b_soft_opening": {
+      "id": "route_b_soft_opening",
+      "display_name": "柔软晨间席",
+      "encounter_type": "normal",
+      "rule_tags": [
+        "early_tempo"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales"
+      ],
+      "blueprint_hint_id": "blueprint_route_b_soft_opening",
+      "duration_ms": 30000,
+      "supply_budget": 16,
+      "initial_pickiness": 112,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 20,
+      "relation": {
+        "id": "fruit_bake_pair",
+        "left_tag": "fruit",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "doors_open",
+          "at_ms": 8000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 35,
+          "target_tags": [
+            "soft",
+            "drink",
+            "drink"
+          ],
+          "tag": "drink"
+        },
+        {
+          "id": "commuter_peak",
+          "at_ms": 16000,
+          "metric": "sales_count",
+          "target": 16,
+          "reputation_damage": 35
+        },
+        {
+          "id": "last_train",
+          "at_ms": 24000,
+          "metric": "sales_count",
+          "target": 28,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "morning_cookie_1",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_cookie_2",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              2
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_cookie_3",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_jelly_1",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_jelly_2",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              2
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "soft",
+        "drink"
+      ],
+      "theme_explanation": "本场优先检验 soft、drink 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_b_tea_salon": {
+      "id": "route_b_tea_salon",
+      "display_name": "茶香品鉴厅",
+      "encounter_type": "normal",
+      "rule_tags": [
+        "pairing_focus"
+      ],
+      "required_mechanism_tags": [
+        "adjacency_relation",
+        "window_satisfaction"
+      ],
+      "blueprint_hint_id": "blueprint_route_b_tea_salon",
+      "duration_ms": 30000,
+      "supply_budget": 16,
+      "initial_pickiness": 138,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 23,
+      "relation": {
+        "id": "drink_bake_pair",
+        "left_tag": "drink",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "pair_reveal",
+          "at_ms": 12000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 45,
+          "target_tags": [
+            "tea",
+            "rich",
+            "signature"
+          ],
+          "tag": "signature"
+        },
+        {
+          "id": "first_tasting",
+          "at_ms": 20000,
+          "from_ms": 8000,
+          "metric": "window_satisfaction",
+          "target": 58,
+          "reputation_damage": 35
+        },
+        {
+          "id": "pairing_finale",
+          "at_ms": 26000,
+          "metric": "sales_count",
+          "target": 10,
+          "reputation_damage": 30
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "pairing_pudding",
+            "recipe_id": "milk_pudding",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "pairing_muffin",
+            "recipe_id": "blueberry_muffin",
+            "origin": [
+              1,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "pairing_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "tea",
+        "rich"
+      ],
+      "theme_explanation": "本场优先检验 tea、rich 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_b_crisp_festival": {
+      "id": "route_b_crisp_festival",
+      "display_name": "香脆烘焙节",
+      "encounter_type": "normal",
+      "rule_tags": [
+        "sustained_service"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "window_satisfaction"
+      ],
+      "blueprint_hint_id": "blueprint_route_b_crisp_festival",
+      "duration_ms": 30000,
+      "supply_budget": 15,
+      "initial_pickiness": 194,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 26,
+      "relation": {
+        "id": "fruit_bake_pair",
+        "left_tag": "fruit",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "first_wave",
+          "at_ms": 10000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 30,
+          "target_tags": [
+            "crisp",
+            "bake",
+            "bake"
+          ],
+          "tag": "bake"
+        },
+        {
+          "id": "steady_counter",
+          "at_ms": 20000,
+          "from_ms": 8000,
+          "metric": "window_satisfaction",
+          "target": 72,
+          "reputation_damage": 35
+        },
+        {
+          "id": "late_wave",
+          "at_ms": 28000,
+          "from_ms": 20000,
+          "metric": "window_satisfaction",
+          "target": 35,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "afternoon_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_cookie",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              3,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_jelly",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "crisp",
+        "bake"
+      ],
+      "theme_explanation": "本场优先检验 crisp、bake 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_b_texture_master": {
+      "id": "route_b_texture_master",
+      "display_name": "质地校准师",
+      "encounter_type": "elite",
+      "rule_tags": [
+        "mixed_windows",
+        "tight_budget"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "adjacency_relation",
+        "window_satisfaction",
+        "supply_budget"
+      ],
+      "blueprint_hint_id": "blueprint_route_b_texture_master",
+      "duration_ms": 30000,
+      "supply_budget": 12,
+      "initial_pickiness": 188,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 29,
+      "relation": {
+        "id": "signature_fast_pair",
+        "left_tag": "signature",
+        "right_tag": "fast"
+      },
+      "windows": [
+        {
+          "id": "feature_launch",
+          "at_ms": 8000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 30,
+          "target_tags": [
+            "soft",
+            "crisp",
+            "drink",
+            "bake"
+          ],
+          "tag": "drink"
+        },
+        {
+          "id": "feature_pair",
+          "at_ms": 16000,
+          "metric": "active_relation_count",
+          "target": 1,
+          "reputation_damage": 35
+        },
+        {
+          "id": "feature_hold",
+          "at_ms": 28000,
+          "from_ms": 16000,
+          "metric": "window_satisfaction",
+          "target": 62,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "weekend_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "weekend_cookie",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "weekend_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "soft",
+        "crisp"
+      ],
+      "theme_explanation": "本场优先检验 soft、crisp 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_b_patisserie_exam": {
+      "id": "route_b_patisserie_exam",
+      "display_name": "风味甜点考核",
+      "encounter_type": "final_boss",
+      "rule_tags": [
+        "combined_exam"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "adjacency_relation",
+        "window_satisfaction"
+      ],
+      "blueprint_hint_id": "blueprint_route_b_patisserie_exam",
+      "duration_ms": 30000,
+      "supply_budget": 16,
+      "initial_pickiness": 197,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 32,
+      "relation": {
+        "id": "drink_bake_pair",
+        "left_tag": "drink",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "early_tempo",
+          "at_ms": 8000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 25,
+          "target_tags": [
+            "tea",
+            "rich",
+            "soft",
+            "signature",
+            "drink"
+          ],
+          "tag": "signature"
+        },
+        {
+          "id": "linked_display",
+          "at_ms": 16000,
+          "metric": "active_relation_count",
+          "target": 1,
+          "reputation_damage": 30
+        },
+        {
+          "id": "sustained_service",
+          "at_ms": 24000,
+          "from_ms": 16000,
+          "metric": "window_satisfaction",
+          "target": 74,
+          "reputation_damage": 45
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "critic_pudding",
+            "recipe_id": "milk_pudding",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_muffin",
+            "recipe_id": "blueberry_muffin",
+            "origin": [
+              1,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              3,
+              4
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "tea",
+        "rich",
+        "soft"
+      ],
+      "theme_explanation": "本场优先检验 tea、rich、soft 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_c_hearty_market": {
+      "id": "route_c_hearty_market",
+      "display_name": "饱腹市集",
+      "encounter_type": "normal",
+      "rule_tags": [
+        "early_tempo"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales"
+      ],
+      "blueprint_hint_id": "blueprint_route_c_hearty_market",
+      "duration_ms": 30000,
+      "supply_budget": 16,
+      "initial_pickiness": 112,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 20,
+      "relation": {
+        "id": "fruit_bake_pair",
+        "left_tag": "fruit",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "doors_open",
+          "at_ms": 8000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 35,
+          "target_tags": [
+            "savory",
+            "hearty",
+            "fast",
+            "signature"
+          ],
+          "tag": "fast"
+        },
+        {
+          "id": "commuter_peak",
+          "at_ms": 16000,
+          "metric": "sales_count",
+          "target": 16,
+          "reputation_damage": 35
+        },
+        {
+          "id": "last_train",
+          "at_ms": 24000,
+          "metric": "sales_count",
+          "target": 28,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "morning_cookie_1",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_cookie_2",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              2
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_cookie_3",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_jelly_1",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "morning_jelly_2",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              2
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "savory",
+        "hearty"
+      ],
+      "theme_explanation": "本场优先检验 savory、hearty 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_c_space_architect": {
+      "id": "route_c_space_architect",
+      "display_name": "橱窗建筑师",
+      "encounter_type": "normal",
+      "rule_tags": [
+        "pairing_focus"
+      ],
+      "required_mechanism_tags": [
+        "adjacency_relation",
+        "window_satisfaction"
+      ],
+      "blueprint_hint_id": "blueprint_route_c_space_architect",
+      "duration_ms": 30000,
+      "supply_budget": 16,
+      "initial_pickiness": 138,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 23,
+      "relation": {
+        "id": "drink_bake_pair",
+        "left_tag": "drink",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "pair_reveal",
+          "at_ms": 12000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 45,
+          "target_tags": [
+            "spatial",
+            "set"
+          ],
+          "tag": "set"
+        },
+        {
+          "id": "first_tasting",
+          "at_ms": 20000,
+          "from_ms": 8000,
+          "metric": "window_satisfaction",
+          "target": 58,
+          "reputation_damage": 35
+        },
+        {
+          "id": "pairing_finale",
+          "at_ms": 26000,
+          "metric": "sales_count",
+          "target": 10,
+          "reputation_damage": 30
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "pairing_pudding",
+            "recipe_id": "milk_pudding",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "pairing_muffin",
+            "recipe_id": "blueberry_muffin",
+            "origin": [
+              1,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "pairing_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "spatial"
+      ],
+      "theme_explanation": "本场优先检验 spatial 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_c_savory_banquet": {
+      "id": "route_c_savory_banquet",
+      "display_name": "咸甜宴会",
+      "encounter_type": "normal",
+      "rule_tags": [
+        "sustained_service"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "window_satisfaction"
+      ],
+      "blueprint_hint_id": "blueprint_route_c_savory_banquet",
+      "duration_ms": 30000,
+      "supply_budget": 15,
+      "initial_pickiness": 194,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 26,
+      "relation": {
+        "id": "fruit_bake_pair",
+        "left_tag": "fruit",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "first_wave",
+          "at_ms": 10000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 30,
+          "target_tags": [
+            "savory",
+            "signature",
+            "signature"
+          ],
+          "tag": "signature"
+        },
+        {
+          "id": "steady_counter",
+          "at_ms": 20000,
+          "from_ms": 8000,
+          "metric": "window_satisfaction",
+          "target": 72,
+          "reputation_damage": 35
+        },
+        {
+          "id": "late_wave",
+          "at_ms": 28000,
+          "from_ms": 20000,
+          "metric": "window_satisfaction",
+          "target": 35,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "afternoon_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_cookie",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              3,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "afternoon_jelly",
+            "recipe_id": "strawberry_jelly",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "savory",
+        "signature"
+      ],
+      "theme_explanation": "本场优先检验 savory、signature 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_c_combo_director": {
+      "id": "route_c_combo_director",
+      "display_name": "复合构筑总监",
+      "encounter_type": "elite",
+      "rule_tags": [
+        "mixed_windows",
+        "tight_budget"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "adjacency_relation",
+        "window_satisfaction",
+        "supply_budget"
+      ],
+      "blueprint_hint_id": "blueprint_route_c_combo_director",
+      "duration_ms": 30000,
+      "supply_budget": 12,
+      "initial_pickiness": 188,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 29,
+      "relation": {
+        "id": "signature_fast_pair",
+        "left_tag": "signature",
+        "right_tag": "fast"
+      },
+      "windows": [
+        {
+          "id": "feature_launch",
+          "at_ms": 8000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 30,
+          "target_tags": [
+            "spatial",
+            "hearty",
+            "set",
+            "signature"
+          ],
+          "tag": "set"
+        },
+        {
+          "id": "feature_pair",
+          "at_ms": 16000,
+          "metric": "active_relation_count",
+          "target": 1,
+          "reputation_damage": 35
+        },
+        {
+          "id": "feature_hold",
+          "at_ms": 28000,
+          "from_ms": 16000,
+          "metric": "window_satisfaction",
+          "target": 62,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "weekend_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "weekend_cookie",
+            "recipe_id": "butter_cookie",
+            "origin": [
+              2,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "weekend_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "spatial",
+        "hearty"
+      ],
+      "theme_explanation": "本场优先检验 spatial、hearty 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
+    },
+    "route_c_grand_critic": {
+      "id": "route_c_grand_critic",
+      "display_name": "终局陈列评论家",
+      "encounter_type": "final_boss",
+      "rule_tags": [
+        "combined_exam"
+      ],
+      "required_mechanism_tags": [
+        "timed_sales",
+        "adjacency_relation",
+        "window_satisfaction"
+      ],
+      "blueprint_hint_id": "blueprint_route_c_grand_critic",
+      "duration_ms": 30000,
+      "supply_budget": 16,
+      "initial_pickiness": 197,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 32,
+      "relation": {
+        "id": "drink_bake_pair",
+        "left_tag": "drink",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "early_tempo",
+          "at_ms": 8000,
+          "metric": "tag_sales_count",
+          "target": 1,
+          "reputation_damage": 25,
+          "target_tags": [
+            "signature",
+            "spatial",
+            "rich",
+            "signature",
+            "set",
+            "chocolate"
+          ],
+          "tag": "signature"
+        },
+        {
+          "id": "linked_display",
+          "at_ms": 16000,
+          "metric": "active_relation_count",
+          "target": 1,
+          "reputation_damage": 30
+        },
+        {
+          "id": "sustained_service",
+          "at_ms": 24000,
+          "from_ms": 16000,
+          "metric": "window_satisfaction",
+          "target": 74,
+          "reputation_damage": 45
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {
+            "instance_id": "critic_pudding",
+            "recipe_id": "milk_pudding",
+            "origin": [
+              0,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_muffin",
+            "recipe_id": "blueberry_muffin",
+            "origin": [
+              1,
+              0
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_sponge",
+            "recipe_id": "sponge_cake",
+            "origin": [
+              0,
+              4
+            ],
+            "rotation": 0
+          },
+          {
+            "instance_id": "critic_lava",
+            "recipe_id": "chocolate_lava_cake",
+            "origin": [
+              3,
+              4
+            ],
+            "rotation": 0
+          }
+        ]
+      },
+      "route_theme_tags": [
+        "signature",
+        "spatial",
+        "rich"
+      ],
+      "theme_explanation": "本场优先检验 signature、spatial、rich 标签；开局配方保留一组可达替代标签，高级菜单可用主题配方重构。"
     }
   }
 }

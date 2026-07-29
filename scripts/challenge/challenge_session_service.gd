@@ -7,6 +7,8 @@ const BossEncounterService = preload("res://scripts/challenge/boss_encounter_ser
 const RunUpgradeService = preload("res://scripts/challenge/run_upgrade_service.gd")
 const RecipeResearchService = preload("res://scripts/challenge/recipe_research_service.gd")
 const ChallengeMenuService = preload("res://scripts/challenge/challenge_menu_service.gd")
+const ChallengeRouteService = preload("res://scripts/challenge/challenge_route_service.gd")
+const ChallengeMasteryService = preload("res://scripts/challenge/challenge_mastery_service.gd")
 const ChallengeLoadoutService = preload("res://scripts/challenge/challenge_loadout_service.gd")
 const BossBattleService = preload("res://scripts/challenge/boss_battle_service.gd")
 const BossBattleReportService = preload("res://scripts/challenge/boss_battle_report_service.gd")
@@ -18,6 +20,7 @@ const ROUTE_CONFIG_PATH := "res://doc/challenge/standard_run.json"
 const UPGRADE_CONFIG_PATH := "res://doc/challenge/run_upgrades.json"
 const RESEARCH_TREE_PATH := "res://doc/challenge/research_tree.json"
 const ENDLESS_CONFIG_PATH := "res://doc/challenge/endless_run.json"
+const MASTERY_CONFIG_PATH := "res://doc/challenge/challenge_masteries.json"
 
 var save_path := ChallengeSaveService.SAVE_PATH
 
@@ -27,12 +30,15 @@ var _route_defs: Dictionary = {}
 var _upgrade_defs: Dictionary = {}
 var _research_tree: Dictionary = {}
 var _endless_config: Dictionary = {}
+var _mastery_defs: Dictionary = {}
 
 var _run_service = ChallengeRunService.new()
 var _encounter_service = BossEncounterService.new()
 var _upgrade_service = RunUpgradeService.new()
 var _research_service = RecipeResearchService.new()
 var _menu_service = ChallengeMenuService.new()
+var _route_service = ChallengeRouteService.new()
+var _mastery_service = ChallengeMasteryService.new()
 var _loadout_service = ChallengeLoadoutService.new()
 var _battle_service = BossBattleService.new()
 var _report_service = BossBattleReportService.new()
@@ -46,7 +52,8 @@ func configure(
 	upgrade_defs: Dictionary,
 	research_tree: Dictionary,
 	next_save_path: String = "",
-	endless_config: Dictionary = {}
+	endless_config: Dictionary = {},
+	mastery_defs: Dictionary = {}
 ) -> void:
 	_recipe_config = recipe_config.duplicate(true)
 	_encounter_defs = encounter_defs.duplicate(true)
@@ -54,6 +61,7 @@ func configure(
 	_upgrade_defs = upgrade_defs.duplicate(true)
 	_research_tree = research_tree.duplicate(true)
 	_endless_config = endless_config.duplicate(true)
+	_mastery_defs = mastery_defs.duplicate(true)
 	if not next_save_path.is_empty():
 		save_path = next_save_path
 
@@ -86,6 +94,9 @@ func create_standard_run(save_data: Dictionary, route_id: String, seed: int) -> 
 		return _result(false, next_save, "active_run_already_exists")
 	if not _route_defs.has(route_id) or not _route_defs[route_id] is Dictionary:
 		return _result(false, next_save, "unknown_route")
+	var route_state := _route_service.route_state(next_save.get("meta", {}), route_id, _route_defs)
+	if not bool(route_state.get("unlocked", false)):
+		return _result(false, next_save, String(route_state.get("lock_reason", "route_locked")))
 	var route: Dictionary = _route_defs[route_id]
 	var recipe_ids := active_menu(next_save)
 	var pool_snapshot := {
@@ -245,6 +256,14 @@ func settle_battle(save_data: Dictionary, battle_state: Dictionary) -> Dictionar
 		meta = (revealed.get("meta", meta) as Dictionary).duplicate(true)
 		if String(run.get("phase", "")) == "run_complete":
 			meta = _unlock_endless_for_standard_completion(meta, String(run.get("run_id", "")))
+			var route_clear := _route_service.record_first_clear(
+				meta,
+				String(run.get("route_id", "")),
+				_route_defs
+			)
+			meta = (route_clear.get("meta", meta) as Dictionary).duplicate(true)
+			var mastery_result := _mastery_service.evaluate(meta, _mastery_defs)
+			meta = (mastery_result.get("meta", meta) as Dictionary).duplicate(true)
 	var stored_battle := battle_state.duplicate(true)
 	if not stored_battle.has("snapshot"):
 		stored_battle["snapshot"] = (
@@ -263,6 +282,8 @@ func settle_battle(save_data: Dictionary, battle_state: Dictionary) -> Dictionar
 		var finalized := _finalize_endless_record(meta, run, key_report)
 		meta = (finalized.get("meta", meta) as Dictionary).duplicate(true)
 		run = (finalized.get("run", run) as Dictionary).duplicate(true)
+		var mastery_result := _mastery_service.evaluate(meta, _mastery_defs)
+		meta = (mastery_result.get("meta", meta) as Dictionary).duplicate(true)
 	next_save["meta"] = meta
 	next_save["active_run"] = run
 	next_save["active_battle"] = stored_battle
@@ -548,9 +569,71 @@ func set_active_menu(save_data: Dictionary, recipe_ids: Variant) -> Dictionary:
 	return _commit(next_save, {"recipe_ids": changed.get("recipe_ids", [])})
 
 
+func save_menu_preset(
+	save_data: Dictionary,
+	preset_id: String,
+	display_name: String,
+	recipe_ids: Variant
+) -> Dictionary:
+	_ensure_configured()
+	var next_save := _bootstrap_save(save_data)
+	if next_save.get("active_run") is Dictionary:
+		return _result(false, next_save, "active_run_menu_locked")
+	var changed := _menu_service.save_preset(
+		next_save.get("meta", {}),
+		preset_id,
+		display_name,
+		recipe_ids,
+		available_recipe_ids(next_save),
+		_recipe_config.get("recipes", {})
+	)
+	if not bool(changed.get("applied", false)):
+		var rejected := _result(false, next_save, "invalid_menu_preset")
+		rejected["errors"] = (changed.get("errors", []) as Array).duplicate()
+		return rejected
+	next_save["meta"] = (changed.get("meta", {}) as Dictionary).duplicate(true)
+	return _commit(next_save, {"preset": changed.get("preset", {})})
+
+
+func load_menu_preset(save_data: Dictionary, preset_id: String) -> Dictionary:
+	_ensure_configured()
+	var next_save := _bootstrap_save(save_data)
+	if next_save.get("active_run") is Dictionary:
+		return _result(false, next_save, "active_run_menu_locked")
+	var changed := _menu_service.load_preset(
+		next_save.get("meta", {}),
+		preset_id,
+		available_recipe_ids(next_save),
+		_recipe_config.get("recipes", {})
+	)
+	if not bool(changed.get("applied", false)):
+		var rejected := _result(false, next_save, "invalid_menu_preset")
+		rejected["errors"] = (changed.get("errors", []) as Array).duplicate()
+		return rejected
+	next_save["meta"] = (changed.get("meta", {}) as Dictionary).duplicate(true)
+	return _commit(next_save, {"recipe_ids": changed.get("recipe_ids", [])})
+
+
 func recipe_definitions() -> Dictionary:
 	_ensure_configured()
 	return (_recipe_config.get("recipes", {}) as Dictionary).duplicate(true)
+
+
+func route_states(save_data: Dictionary) -> Array[Dictionary]:
+	_ensure_configured()
+	var meta: Dictionary = (_bootstrap_save(save_data).get("meta", {}) as Dictionary)
+	return _route_service.all_states(meta, _route_defs)
+
+
+func route_definitions() -> Dictionary:
+	_ensure_configured()
+	return _route_defs.duplicate(true)
+
+
+func mastery_states(save_data: Dictionary) -> Array[Dictionary]:
+	_ensure_configured()
+	var meta: Dictionary = (_bootstrap_save(save_data).get("meta", {}) as Dictionary)
+	return _mastery_service.states(meta, _mastery_defs)
 
 
 func research_node_state(save_data: Dictionary, node_id: String) -> Dictionary:
@@ -637,13 +720,8 @@ func _bootstrap_save(save_data: Dictionary) -> Dictionary:
 	if next_save.is_empty():
 		next_save = ChallengeSaveService.empty_save()
 	var meta: Dictionary = _research_service.bootstrap_meta(next_save.get("meta", {}), _research_tree)
-	for field in [
-		"unlocked_route_ids",
-		"route_first_clear_ids",
-		"completed_mastery_ids"
-	]:
-		if not meta.get(field) is Array:
-			meta[field] = []
+	meta = _route_service.bootstrap_meta(meta, _route_defs)
+	meta = _mastery_service.bootstrap_meta(meta)
 	var available := _research_service.available_recipe_ids(meta, _research_tree)
 	var starters: Array[String] = []
 	for value in _research_tree.get("starter_recipe_ids", []):
@@ -729,6 +807,8 @@ func _ensure_configured() -> void:
 		_research_tree = _load_json(RESEARCH_TREE_PATH)
 	if _endless_config.is_empty():
 		_endless_config = _load_json(ENDLESS_CONFIG_PATH)
+	if _mastery_defs.is_empty():
+		_mastery_defs = _load_json(MASTERY_CONFIG_PATH).get("masteries", {})
 
 
 func _load_json(path: String) -> Dictionary:
