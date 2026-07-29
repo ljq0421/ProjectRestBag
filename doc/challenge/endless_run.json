@@ -1,0 +1,23 @@
+{
+  "id": "endless_climb",
+  "display_name": "无尽爬升",
+  "grid_rows": 6,
+  "grid_columns": 8,
+  "starting_confidence": 2,
+  "maximum_confidence": 2,
+  "minimum_supply_budget": 10,
+  "pickiness_per_floor": 8,
+  "window_target_growth_percent_per_floor": 2,
+  "window_target_growth_cap_percent": 50,
+  "reputation_damage_per_tier": 2,
+  "budget_pressure_interval": 4,
+  "recovery_interval": 5,
+  "elite_interval": 5,
+  "boss_interval": 10,
+  "normal_encounter_cycle": ["morning_rush", "pairing_tasting", "afternoon_wave"],
+  "elite_encounter_id": "weekend_feature",
+  "boss_encounter_id": "picky_food_critic",
+  "research_milestone_interval": 5,
+  "research_points_per_milestone": 1,
+  "research_points_run_cap": 3
+}

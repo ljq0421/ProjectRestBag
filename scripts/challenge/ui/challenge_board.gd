@@ -22,12 +22,14 @@ const ChallengeLoadoutServiceClass = preload("res://scripts/challenge/challenge_
 const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
 
 var _recipe_defs: Dictionary = {}
+var _effective_context: Dictionary = {}
 var _loadout_service: RefCounted
 var _encounter: Dictionary = {}
 var _budget := 16
 var _draft := {"placements": []}
 var _analysis: Dictionary = {}
 var _locked := false
+var _requires_rearrange := false
 var _instance_serial := 0
 var _risk_summary := "稳定覆盖：待评估"
 var _showcase_icons = ShowcaseIconService.new()
@@ -47,10 +49,32 @@ func bind(
 	budget: int
 ) -> void:
 	_recipe_defs = recipe_defs.duplicate(true)
+	_effective_context = {}
 	_loadout_service = loadout_service
 	_encounter = encounter.duplicate(true)
 	_budget = budget
+	_requires_rearrange = false
 	_refresh()
+
+
+func bind_effective_context(
+	effective_context: Dictionary,
+	loadout_service: RefCounted,
+	encounter: Dictionary
+) -> void:
+	_recipe_defs = (
+		effective_context.get("recipe_defs", {}) as Dictionary
+	).duplicate(true)
+	_effective_context = effective_context.duplicate(true)
+	_loadout_service = loadout_service
+	_encounter = encounter.duplicate(true)
+	var rules: Dictionary = effective_context.get("rules", {})
+	_budget = int(rules.get("supply_budget", 0))
+	_refresh()
+	_requires_rearrange = not bool(_analysis.get("valid", false))
+	if _requires_rearrange:
+		_risk_summary = "强化改变了当前构筑，请重新摆放后再战斗"
+		_refresh_header()
 
 
 func set_draft(draft: Dictionary) -> void:
@@ -169,6 +193,14 @@ func is_current_draft_valid() -> bool:
 	return bool(_analysis.get("valid", false))
 
 
+func needs_rearrange() -> bool:
+	return _requires_rearrange
+
+
+func effective_recipe_defs() -> Dictionary:
+	return _recipe_defs.duplicate(true)
+
+
 func get_tutorial_target_rects(kind: String, instance_id: String = "") -> Array[Rect2]:
 	match kind:
 		"board":
@@ -192,20 +224,13 @@ func _commit_candidate(candidate: Dictionary) -> bool:
 	if _loadout_service == null:
 		_reject(["board: loadout service is not bound"])
 		return false
-	var analyzed: Dictionary = _loadout_service.call(
-		"analyze",
-		candidate,
-		_recipe_defs,
-		ROWS,
-		COLUMNS,
-		_budget,
-		_encounter
-	)
+	var analyzed := _analyze_draft(candidate)
 	if not bool(analyzed.get("valid", false)):
 		_reject(_string_array(analyzed.get("errors", [])))
 		return false
 	_draft = candidate.duplicate(true)
 	_analysis = analyzed.duplicate(true)
+	_requires_rearrange = false
 	_refresh()
 	draft_changed.emit(get_draft())
 	return true
@@ -219,15 +244,7 @@ func _reject(reasons: Array[String]) -> void:
 
 func _refresh() -> void:
 	if _loadout_service != null:
-		_analysis = _loadout_service.call(
-			"analyze",
-			_draft,
-			_recipe_defs,
-			ROWS,
-			COLUMNS,
-			_budget,
-			_encounter
-		)
+		_analysis = _analyze_draft(_draft)
 	else:
 		_analysis = {
 			"valid": true,
@@ -240,6 +257,27 @@ func _refresh() -> void:
 	_refresh_header()
 	_refresh_cells()
 	_refresh_relations()
+
+
+func _analyze_draft(draft: Dictionary) -> Dictionary:
+	if not _effective_context.is_empty():
+		return _loadout_service.call(
+			"analyze_context",
+			draft,
+			_effective_context,
+			ROWS,
+			COLUMNS,
+			_encounter
+		)
+	return _loadout_service.call(
+		"analyze",
+		draft,
+		_recipe_defs,
+		ROWS,
+		COLUMNS,
+		_budget,
+		_encounter
+	)
 
 
 func _refresh_header() -> void:

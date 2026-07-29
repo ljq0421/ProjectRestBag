@@ -25,6 +25,7 @@ func _run() -> void:
 	_expect(int(run.get("confidence", 0)) == 2, "run should start with two confidence")
 	_expect(run.get("phase") == "preparation", "run should start in preparation")
 	_expect(int(run.get("reward_seed", 0)) == 1042, "reward seed should be derived once")
+	_expect(run.get("mode") == "vertical_slice", "single encounter wrapper should preserve vertical slice mode")
 
 	var first_loss: Dictionary = service.register_result(run, {
 		"settlement_id": "settlement-1",

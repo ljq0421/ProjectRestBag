@@ -19,12 +19,24 @@ func _run() -> void:
 	root.add_child(main)
 	await process_frame
 	await process_frame
+	main.start_new_run_for_test(42)
+	await process_frame
+	await process_frame
 
-	var overlay: Control = main.get_node("TutorialCanvasLayer/TutorialOverlay")
-	var board: Control = main.get_node("Root/Body/PreparationPanel/MainColumns/ChallengeBoard")
-	var pudding_card: Control = main.get_node("Root/Body/PreparationPanel/SupplyStrip/MilkPudding")
+	var overlay: Control = main.get_node("TutorialLayer/TutorialOverlay")
+	var preparation: Control = main.get_node("Root/PageHost/PreparationHost/PreparationView")
+	var board: Control = preparation.get_node("MainColumns/ChallengeBoard")
+	var pudding_card: Control = _find_supply_card(preparation, "milk_pudding")
 	var observed := {"source_drag_started": false}
-	pudding_card.recipe_drag_started.connect(func(_recipe_id: String) -> void: observed["source_drag_started"] = true)
+	_expect(pudding_card != null, "dynamic supply strip should contain milk pudding")
+	if pudding_card == null:
+		main.queue_free()
+		await process_frame
+		_finish()
+		return
+	pudding_card.recipe_drag_started.connect(
+		func(_recipe_id: String) -> void: observed["source_drag_started"] = true
+	)
 	_expect(main.get_tutorial_state_for_test()["step_id"] == "boss_brief", "new input path starts at boss brief")
 	_expect(overlay.visible, "root overlay is visible before input")
 	_expect(overlay.mouse_filter == Control.MOUSE_FILTER_IGNORE, "root overlay ignores pointer input")
@@ -65,6 +77,13 @@ func _run() -> void:
 	main.queue_free()
 	await process_frame
 	_finish()
+
+
+func _find_supply_card(preparation: Control, recipe_id: String) -> Control:
+	for card in preparation.get_node("SupplyScroll/SupplyStrip").get_children():
+		if String(card.get_meta("recipe_id", "")) == recipe_id:
+			return card
+	return null
 
 
 func _click(position: Vector2) -> void:

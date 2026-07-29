@@ -74,6 +74,62 @@ func _run() -> void:
 	var pudding_sale := _first_sale(related_state.get("events", []), "pudding")
 	_expect(int(pudding_sale.get("relation_bonus", -1)) == 1, "25 percent relation bonus should floor the bonus value")
 	_expect(int(pudding_sale.get("final_satisfaction", -1)) == 8, "relation sale should use floor(base * 125 / 100)")
+	_expect(pudding_sale.get("tags", []) == ["drink"], "sale events should carry frozen sorted tags")
+
+	var tagged_snapshot := _snapshot([
+		_instance("mixed", "fruit_bake", 2000, 7, 3, ["fruit", "bake", "fruit"]),
+		_instance("drink", "iced_drink", 4000, 11, 1, ["drink", "fast"])
+	])
+	var tagged_encounter := _encounter(8000, 999)
+	tagged_encounter["windows"] = [
+		{
+			"id": "bake_sales",
+			"at_ms": 4000,
+			"metric": "tag_sales_count",
+			"tag": "bake",
+			"target": 2,
+			"reputation_damage": 10
+		},
+		{
+			"id": "fruit_power",
+			"at_ms": 6000,
+			"from_ms": 2000,
+			"metric": "tag_satisfaction",
+			"tag": "fruit",
+			"target": 14,
+			"reputation_damage": 10
+		},
+		{
+			"id": "served_variety",
+			"at_ms": 8000,
+			"metric": "distinct_tag_count",
+			"target_tags": ["fruit", "drink", "signature"],
+			"target": 2,
+			"reputation_damage": 10
+		}
+	]
+	var tagged_created: Dictionary = service.create_state(tagged_snapshot, tagged_encounter, 17)
+	var frozen_instances: Array = (tagged_created.get("_snapshot", {}) as Dictionary).get("instances", [])
+	_expect(frozen_instances[0].get("tags", []) == ["bake", "fruit"], "battle snapshot should freeze sorted unique tags")
+	_expect(
+		((tagged_created.get("item_states", {}) as Dictionary).get("drink", {}) as Dictionary).get("tags", [])
+			== ["drink", "fast"],
+		"item state should freeze sorted tags"
+	)
+	var tagged_result: Dictionary = service.simulate(tagged_snapshot, tagged_encounter, 17)
+	var tagged_windows: Dictionary = tagged_result.get("resolved_windows", {})
+	_expect(
+		int((tagged_windows.get("bake_sales", {}) as Dictionary).get("actual", -1)) == 2,
+		"tag_sales_count should include matching sales at the deadline"
+	)
+	_expect(
+		int((tagged_windows.get("fruit_power", {}) as Dictionary).get("actual", -1)) == 14,
+		"tag_satisfaction should use final satisfaction in the open-closed interval"
+	)
+	_expect(
+		int((tagged_windows.get("served_variety", {}) as Dictionary).get("actual", -1)) == 2,
+		"distinct_tag_count should count sold target tags once each"
+	)
 
 	var damage_encounter := _encounter(3000, 999)
 	damage_encounter["windows"] = [
@@ -117,6 +173,20 @@ func _run() -> void:
 	_expect(configured_result.get("outcome") == "victory", "committed six-recipe data should retain its proven winning loadout")
 	_expect(int(configured_result.get("elapsed_ms", 0)) == 30000, "sale at the final deadline should resolve before timeout")
 	_expect(int(configured_result.get("total_satisfaction", 0)) == 212, "proven winning loadout should produce 212 satisfaction")
+
+	var legacy_windows: Dictionary = configured_result.get("resolved_windows", {})
+	_expect(
+		int((legacy_windows.get("early_tempo", {}) as Dictionary).get("actual", -1)) == 8,
+		"stage 1 sales_count result should remain unchanged"
+	)
+	_expect(
+		int((legacy_windows.get("linked_display", {}) as Dictionary).get("actual", -1)) == 2,
+		"stage 1 active_relation_count result should remain unchanged"
+	)
+	_expect(
+		int((legacy_windows.get("sustained_service", {}) as Dictionary).get("actual", -1)) == 72,
+		"stage 1 window_satisfaction result should remain unchanged"
+	)
 
 	var forward: Dictionary = service.advance(service.create_state(no_sales, _encounter(5000, 10), 11), 2000)
 	var backward: Dictionary = service.advance(forward, 1000)

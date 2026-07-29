@@ -1,0 +1,178 @@
+{
+  "id": "initial_recipe_research",
+  "display_name": "甜点陈列研究",
+  "completion_reward_points": 3,
+  "starter_recipe_ids": [
+    "butter_cookie",
+    "strawberry_jelly",
+    "milk_pudding",
+    "blueberry_muffin",
+    "sponge_cake",
+    "chocolate_lava_cake"
+  ],
+  "branches": [
+    {
+      "id": "tempo_display",
+      "display_name": "节奏陈列",
+      "description": "用快速出餐与多副本持续争夺压力条。",
+      "node_ids": [
+        "vanilla_scone",
+        "chocolate_cookie"
+      ]
+    },
+    {
+      "id": "fruit_set",
+      "display_name": "水果套装",
+      "description": "通过水果、饮品与套装标签覆盖复合客潮。",
+      "node_ids": [
+        "blueberry_mousse",
+        "strawberry_mousse"
+      ]
+    },
+    {
+      "id": "signature_display",
+      "display_name": "招牌展示",
+      "description": "用高满足力招牌承担空间取舍并压制关键窗口。",
+      "node_ids": [
+        "cream_shortcake",
+        "caramel_mousse"
+      ]
+    }
+  ],
+  "boss_reveals": {
+    "morning_rush": [
+      "vanilla_scone",
+      "chocolate_cookie"
+    ],
+    "pairing_tasting": [
+      "blueberry_mousse",
+      "strawberry_mousse"
+    ],
+    "picky_food_critic": [
+      "cream_shortcake",
+      "caramel_mousse"
+    ]
+  },
+  "nodes": {
+    "vanilla_scone": {
+      "id": "vanilla_scone",
+      "branch_id": "tempo_display",
+      "tier": 1,
+      "cost": 3,
+      "prerequisite_ids": [],
+      "tags": [
+        "fast",
+        "bake",
+        "aromatic"
+      ],
+      "build_purpose": "快速出餐入口，为多副本节奏构筑提供三格核心。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "vanilla_scone"
+        }
+      ]
+    },
+    "chocolate_cookie": {
+      "id": "chocolate_cookie",
+      "branch_id": "tempo_display",
+      "tier": 2,
+      "cost": 7,
+      "prerequisite_ids": [
+        "vanilla_scone"
+      ],
+      "tags": [
+        "fast",
+        "bake",
+        "chocolate"
+      ],
+      "build_purpose": "低占格多副本终点，强化高频售卖与巧克力覆盖。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "chocolate_cookie"
+        }
+      ]
+    },
+    "blueberry_mousse": {
+      "id": "blueberry_mousse",
+      "branch_id": "fruit_set",
+      "tier": 1,
+      "cost": 3,
+      "prerequisite_ids": [],
+      "tags": [
+        "fruit",
+        "drink",
+        "set"
+      ],
+      "build_purpose": "用紧凑双格同时补足水果、饮品与套装标签。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "blueberry_mousse"
+        }
+      ]
+    },
+    "strawberry_mousse": {
+      "id": "strawberry_mousse",
+      "branch_id": "fruit_set",
+      "tier": 2,
+      "cost": 7,
+      "prerequisite_ids": [
+        "blueberry_mousse"
+      ],
+      "tags": [
+        "fruit",
+        "drink",
+        "set"
+      ],
+      "build_purpose": "提供可旋转的第二套标签件，支撑套装关系与窗口覆盖。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "strawberry_mousse"
+        }
+      ]
+    },
+    "cream_shortcake": {
+      "id": "cream_shortcake",
+      "branch_id": "signature_display",
+      "tier": 1,
+      "cost": 3,
+      "prerequisite_ids": [],
+      "tags": [
+        "signature",
+        "bake",
+        "fruit"
+      ],
+      "build_purpose": "三格高满足力招牌，要求围绕形状规划核心展示区。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "cream_shortcake"
+        }
+      ]
+    },
+    "caramel_mousse": {
+      "id": "caramel_mousse",
+      "branch_id": "signature_display",
+      "tier": 2,
+      "cost": 7,
+      "prerequisite_ids": [
+        "cream_shortcake"
+      ],
+      "tags": [
+        "drink",
+        "signature",
+        "chocolate"
+      ],
+      "build_purpose": "以双格招牌补充饮品与巧克力覆盖，缓解大型件空间压力。",
+      "unlocks": [
+        {
+          "type": "recipe",
+          "id": "caramel_mousse"
+        }
+      ]
+    }
+  }
+}

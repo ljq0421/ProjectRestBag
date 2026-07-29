@@ -63,6 +63,49 @@ func _run() -> void:
 		_expect(int(contributions[0].get("relation_bonus", 0)) == 2, "contribution should total relation bonus")
 		_expect(int(contributions[0].get("total_satisfaction", 0)) == 16, "contribution should total final satisfaction")
 
+	var tag_encounter := {
+		"windows": [
+			{
+				"id": "fruit_service",
+				"at_ms": 12000,
+				"metric": "tag_sales_count",
+				"tag": "fruit",
+				"target": 3,
+				"reputation_damage": 20
+			},
+			{
+				"id": "variety",
+				"at_ms": 20000,
+				"metric": "distinct_tag_count",
+				"target_tags": ["fruit", "bake", "drink"],
+				"target": 3,
+				"reputation_damage": 20
+			}
+		]
+	}
+	var tag_battle := {
+		"outcome": "loss_reputation",
+		"elapsed_ms": 20000,
+		"pickiness": 50,
+		"reputation": 0,
+		"resolved_windows": {
+			"fruit_service": _window_result("fruit_service", "tag_sales_count", 2, 3, false, 20, 20),
+			"variety": _window_result("variety", "distinct_tag_count", 2, 3, false, 20, 0)
+		},
+		"events": []
+	}
+	var tag_report: Dictionary = service.build(tag_battle, tag_encounter)
+	var tag_rows: Array = tag_report.get("windows", [])
+	_expect(tag_rows[0].get("tag") == "fruit", "report should preserve the requested single tag")
+	_expect(tag_rows[1].get("target_tags") == ["bake", "drink", "fruit"], "report should preserve sorted target tags")
+	var tag_suggestions: Array = tag_report.get("suggestions", [])
+	_expect(
+		tag_suggestions.size() == 2
+		and tag_suggestions[0].get("code") == "increase_tag_variety"
+		and tag_suggestions[1].get("code") == "increase_tag_sales",
+		"report should provide deterministic suggestions for new tag metrics"
+	)
+
 	_finish()
 
 

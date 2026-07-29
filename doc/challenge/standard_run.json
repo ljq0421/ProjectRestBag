@@ -1,0 +1,18 @@
+{
+  "routes": {
+    "standard_short_chain": {
+      "id": "standard_short_chain",
+      "display_name": "五场标准短链",
+      "grid_rows": 6,
+      "grid_columns": 8,
+      "supply_budget": 16,
+      "stages": [
+        {"stage_index": 0, "encounter_id": "morning_rush", "encounter_type": "normal"},
+        {"stage_index": 1, "encounter_id": "pairing_tasting", "encounter_type": "normal"},
+        {"stage_index": 2, "encounter_id": "afternoon_wave", "encounter_type": "normal"},
+        {"stage_index": 3, "encounter_id": "weekend_feature", "encounter_type": "elite"},
+        {"stage_index": 4, "encounter_id": "picky_food_critic", "encounter_type": "final_boss"}
+      ]
+    }
+  }
+}

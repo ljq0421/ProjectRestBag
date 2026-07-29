@@ -5,7 +5,16 @@ extends RefCounted
 func create_state(snapshot: Dictionary, encounter: Dictionary, seed: int) -> Dictionary:
 	var snapshot_copy := snapshot.duplicate(true)
 	var encounter_copy := encounter.duplicate(true)
+	var normalized_instances: Array = snapshot_copy.get("instances", [])
+	for index in normalized_instances.size():
+		if not normalized_instances[index] is Dictionary:
+			continue
+		var normalized_instance: Dictionary = normalized_instances[index]
+		normalized_instance["tags"] = _sorted_tags(normalized_instance.get("tags", []))
+		normalized_instances[index] = normalized_instance
+	snapshot_copy["instances"] = normalized_instances
 	var relation_bonus_by_instance := {}
+	var relation_upgrade_sources_by_instance := {}
 	for relation_value in snapshot_copy.get("relations", []):
 		if not relation_value is Dictionary:
 			continue
@@ -18,6 +27,10 @@ func create_state(snapshot: Dictionary, encounter: Dictionary, seed: int) -> Dic
 			relation_bonus_by_instance[instance_id] = maxi(
 				int(relation_bonus_by_instance.get(instance_id, 0)),
 				bonus_pct
+			)
+			relation_upgrade_sources_by_instance[instance_id] = _merged_tags(
+				relation_upgrade_sources_by_instance.get(instance_id, []),
+				relation.get("upgrade_source_ids", [])
 			)
 
 	var item_states := {}
@@ -36,9 +49,15 @@ func create_state(snapshot: Dictionary, encounter: Dictionary, seed: int) -> Dic
 			"satisfaction": 0,
 			"cycle_ms": cycle_ms,
 			"base_satisfaction": int(instance.get("base_satisfaction", 0)),
-			"relation_bonus_pct": int(relation_bonus_by_instance.get(instance_id, 0))
+			"relation_bonus_pct": int(relation_bonus_by_instance.get(instance_id, 0)),
+			"tags": _sorted_tags(instance.get("tags", [])),
+			"upgrade_source_ids": _sorted_tags(instance.get("upgrade_source_ids", [])),
+			"relation_upgrade_source_ids": _sorted_tags(
+				relation_upgrade_sources_by_instance.get(instance_id, [])
+			)
 		}
 
+	var effective_rules: Dictionary = snapshot_copy.get("effective_rules", {})
 	return {
 		"phase": "running",
 		"elapsed_ms": 0,
@@ -52,6 +71,10 @@ func create_state(snapshot: Dictionary, encounter: Dictionary, seed: int) -> Dic
 		"total_satisfaction": 0,
 		"next_event_seq": 0,
 		"seed": seed,
+		"first_window_guard_remaining": int(effective_rules.get("first_window_guard", 0)),
+		"first_window_guard_source_ids": _sorted_tags(
+			effective_rules.get("first_window_guard_source_ids", [])
+		),
 		"_snapshot": snapshot_copy,
 		"_encounter": encounter_copy
 	}
@@ -164,9 +187,14 @@ func _resolve_sales(state: Dictionary, event_time: int) -> void:
 			"type": "sale",
 			"source_id": instance_id,
 			"recipe_id": String(item.get("recipe_id", "")),
+			"tags": _sorted_tags(item.get("tags", [])),
 			"base_satisfaction": base_satisfaction,
 			"relation_bonus": relation_bonus,
-			"final_satisfaction": final_satisfaction
+			"final_satisfaction": final_satisfaction,
+			"upgrade_source_ids": _merged_tags(
+				item.get("upgrade_source_ids", []),
+				item.get("relation_upgrade_source_ids", [])
+			)
 		})
 		if relation_bonus > 0:
 			relation_events.append({
@@ -174,7 +202,10 @@ func _resolve_sales(state: Dictionary, event_time: int) -> void:
 				"type": "relation_trigger",
 				"source_id": instance_id,
 				"bonus_pct": relation_bonus_pct,
-				"bonus_satisfaction": relation_bonus
+				"bonus_satisfaction": relation_bonus,
+				"upgrade_source_ids": _sorted_tags(
+					item.get("relation_upgrade_source_ids", [])
+				)
 			})
 
 	for relation_event in relation_events:
@@ -196,7 +227,18 @@ func _resolve_demand_windows(state: Dictionary, event_time: int) -> void:
 		var actual := _window_metric(state, window)
 		var target := int(window.get("target", 0))
 		var passed := actual >= target
-		var reputation_damage := 0 if passed else int(window.get("reputation_damage", 0))
+		var base_reputation_damage := 0 if passed else int(window.get("reputation_damage", 0))
+		var guard_absorbed := 0
+		var guard_source_ids: Array[String] = []
+		if resolved_windows.is_empty():
+			var guard_remaining := int(state.get("first_window_guard_remaining", 0))
+			guard_absorbed = mini(base_reputation_damage, guard_remaining)
+			state["first_window_guard_remaining"] = 0
+			if guard_absorbed > 0:
+				guard_source_ids = _sorted_tags(
+					state.get("first_window_guard_source_ids", [])
+				)
+		var reputation_damage := maxi(0, base_reputation_damage - guard_absorbed)
 		state["reputation"] = maxi(0, int(state.get("reputation", 0)) - reputation_damage)
 		var demand_event := {
 			"at_ms": event_time,
@@ -206,8 +248,11 @@ func _resolve_demand_windows(state: Dictionary, event_time: int) -> void:
 			"actual": actual,
 			"target": target,
 			"passed": passed,
+			"base_reputation_damage": base_reputation_damage,
+			"guard_absorbed": guard_absorbed,
 			"reputation_damage": reputation_damage,
-			"reputation_after": int(state.get("reputation", 0))
+			"reputation_after": int(state.get("reputation", 0)),
+			"upgrade_source_ids": guard_source_ids
 		}
 		_append_event(state, demand_event)
 		resolved_windows[window_id] = demand_event.duplicate(true)
@@ -224,16 +269,115 @@ func _window_metric(state: Dictionary, window: Dictionary) -> int:
 		"window_satisfaction":
 			var from_ms := int(window.get("from_ms", 0))
 			var to_ms := int(window.get("at_ms", 0))
-			var total := 0
-			for event_value in state.get("events", []):
-				if not event_value is Dictionary:
-					continue
-				var event: Dictionary = event_value
-				var at_ms := int(event.get("at_ms", -1))
-				if event.get("type") == "sale" and from_ms < at_ms and at_ms <= to_ms:
-					total += int(event.get("final_satisfaction", 0))
-			return total
+			return _sale_satisfaction_in_range(state.get("events", []), from_ms, to_ms)
+		"tag_sales_count":
+			return _tag_sales_count(
+				state.get("events", []),
+				String(window.get("tag", "")),
+				int(window.get("at_ms", 0))
+			)
+		"tag_satisfaction":
+			return _tag_satisfaction(
+				state.get("events", []),
+				String(window.get("tag", "")),
+				int(window.get("from_ms", 0)),
+				int(window.get("at_ms", 0))
+			)
+		"distinct_tag_count":
+			return _distinct_tag_count(
+				state.get("events", []),
+				_window_target_tags(window),
+				int(window.get("at_ms", 0))
+			)
 	return 0
+
+
+func _sale_satisfaction_in_range(events: Array, from_ms: int, to_ms: int) -> int:
+	var total := 0
+	for event_value in events:
+		if not event_value is Dictionary:
+			continue
+		var event: Dictionary = event_value
+		var at_ms := int(event.get("at_ms", -1))
+		if event.get("type") == "sale" and from_ms < at_ms and at_ms <= to_ms:
+			total += int(event.get("final_satisfaction", 0))
+	return total
+
+
+func _tag_sales_count(events: Array, tag: String, to_ms: int) -> int:
+	if tag.is_empty():
+		return 0
+	var count := 0
+	for event_value in events:
+		if not event_value is Dictionary:
+			continue
+		var event: Dictionary = event_value
+		if (
+			event.get("type") == "sale"
+			and int(event.get("at_ms", -1)) <= to_ms
+			and _event_has_tag(event, tag)
+		):
+			count += 1
+	return count
+
+
+func _tag_satisfaction(events: Array, tag: String, from_ms: int, to_ms: int) -> int:
+	if tag.is_empty():
+		return 0
+	var total := 0
+	for event_value in events:
+		if not event_value is Dictionary:
+			continue
+		var event: Dictionary = event_value
+		var at_ms := int(event.get("at_ms", -1))
+		if (
+			event.get("type") == "sale"
+			and from_ms < at_ms
+			and at_ms <= to_ms
+			and _event_has_tag(event, tag)
+		):
+			total += int(event.get("final_satisfaction", 0))
+	return total
+
+
+func _distinct_tag_count(events: Array, target_tags: Array[String], to_ms: int) -> int:
+	var sold_tags := {}
+	for event_value in events:
+		if not event_value is Dictionary:
+			continue
+		var event: Dictionary = event_value
+		if event.get("type") != "sale" or int(event.get("at_ms", -1)) > to_ms:
+			continue
+		for tag in _sorted_tags(event.get("tags", [])):
+			if target_tags.is_empty() or target_tags.has(tag):
+				sold_tags[tag] = true
+	return sold_tags.size()
+
+
+func _window_target_tags(window: Dictionary) -> Array[String]:
+	if window.has("target_tags"):
+		return _sorted_tags(window.get("target_tags", []))
+	if window.has("tags"):
+		return _sorted_tags(window.get("tags", []))
+	var tag := String(window.get("tag", ""))
+	return [] if tag.is_empty() else [tag]
+
+
+func _event_has_tag(event: Dictionary, tag: String) -> bool:
+	return _sorted_tags(event.get("tags", [])).has(tag)
+
+
+func _sorted_tags(tags_value: Variant) -> Array[String]:
+	var tags: Array[String] = []
+	if not tags_value is Array:
+		return tags
+	for tag_value in tags_value:
+		var tag := String(tag_value)
+		if tag.is_empty() or tags.has(tag):
+			continue
+		tags.append(tag)
+	tags.sort()
+	return tags
 
 
 func _finish_battle(state: Dictionary, outcome: String) -> void:
@@ -257,3 +401,12 @@ func _append_event(state: Dictionary, event: Dictionary) -> void:
 	state["next_event_seq"] = int(state.get("next_event_seq", 0)) + 1
 	events.append(stored_event)
 	state["events"] = events
+
+
+func _merged_tags(left_values: Variant, right_values: Variant) -> Array[String]:
+	var result := _sorted_tags(left_values)
+	for value in _sorted_tags(right_values):
+		if not result.has(value):
+			result.append(value)
+	result.sort()
+	return result

@@ -4,6 +4,7 @@ extends Control
 signal battle_finished(final_state: Dictionary)
 
 const BossBattleService = preload("res://scripts/challenge/boss_battle_service.gd")
+const Catalog = preload("res://scripts/catalog.gd")
 const RecipeIconService = preload("res://scripts/recipe_icon_service.gd")
 const ROWS := 6
 const COLUMNS := 8
@@ -16,26 +17,44 @@ var _snapshot: Dictionary = {}
 var _service = BossBattleService.new()
 var _event_cursor := 0
 var _finished_emitted := false
+var _window_labels_by_id: Dictionary = {}
+var _catalog_recipes: Dictionary = Catalog.new().get_recipes()
 
 
 func _ready() -> void:
+	$TopStatus/PickinessBar.fill_mode = 1
+	$TopStatus/ReputationBar.tooltip_text = "口碑防线受需求失败影响，从左侧向中央退缩"
+	$TopStatus/PickinessBar.tooltip_text = "Boss 挑剔值从右侧向中央施压；售卖会把它向右推回"
 	$BattleFooter/PauseButton.pressed.connect(_toggle_pause)
+	_build_boss_pressure_visual()
 	_build_snapshot_grid()
 	set_process(false)
 
 
+func _build_boss_pressure_visual() -> void:
+	var portrait: ColorRect = $BossPanel/BossPortrait
+	portrait.color = Color("#E34B72").lightened(0.72)
+	var copy := Label.new()
+	copy.name = "PressureCopy"
+	copy.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	copy.text = "◆ 客潮压力演算中 ◆\n需求窗口将按时间自动触发"
+	copy.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	copy.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	copy.add_theme_color_override("font_color", Color("#8F294C"))
+	copy.add_theme_font_size_override("font_size", 22)
+	copy.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	portrait.add_child(copy)
+
+
 func bind_encounter(encounter: Dictionary) -> void:
 	_encounter = encounter.duplicate(true)
-	$BossPanel/BossName.text = "挑剔的美食评论家"
-	$BossPanel/BossRule.text = "30 秒内清空挑剔值。售卖全自动；需求窗口失败会削减口碑防线。"
+	var duration_seconds := int(ceil(float(_encounter.get("duration_ms", 30000)) / 1000.0))
+	var encounter_name := String(_encounter.get("display_name", "挑剔的美食评论家"))
+	$BossPanel/BossName.text = encounter_name
+	$BossPanel/BossPortrait/PressureCopy.text = "◆ %s正在施压 ◆\n需求窗口将按时间自动触发" % encounter_name
+	$BossPanel/BossRule.text = "%d 秒内清空挑剔值。售卖全自动；需求窗口失败会削减口碑防线。" % duration_seconds
 	var windows: Array = _encounter.get("windows", [])
-	for index in 3:
-		var label: Label = $BossPanel/DemandTimeline.get_child(index)
-		label.add_theme_color_override("font_color", Color("#655a82"))
-		label.text = _window_text(windows[index]) if index < windows.size() else "%02ds｜等待需求" % ((index + 1) * 8)
-	var deadline: Label = $BossPanel/DemandTimeline/Window30
-	deadline.add_theme_color_override("font_color", Color("#655a82"))
-	deadline.text = "%02ds｜清空挑剔值，否则挑战超时" % int(_encounter.get("duration_ms", 30000) / 1000)
+	_rebuild_demand_timeline(windows, duration_seconds)
 	_refresh_status()
 
 
@@ -114,7 +133,7 @@ func _apply_event(event: Dictionary, animate: bool) -> void:
 	match String(event.get("type", "")):
 		"sale":
 			$BattleFooter/CurrentDemandLabel.text = "%s 售出｜满足力 +%d" % [
-				String(event.get("recipe_id", "")),
+				_recipe_name(String(event.get("recipe_id", ""))),
 				int(event.get("final_satisfaction", 0))
 			]
 			_pulse_instance(String(event.get("source_id", "")), Color("#ffc857"), animate)
@@ -132,18 +151,16 @@ func _apply_event(event: Dictionary, animate: bool) -> void:
 
 
 func _resolve_window_visual(event: Dictionary) -> void:
-	var at_ms := int(event.get("at_ms", 0))
-	var label_name := "Window%02d" % int(at_ms / 1000)
-	var label := $BossPanel/DemandTimeline.get_node_or_null(label_name) as Label
+	var window_id := String(event.get("window_id", ""))
+	var label := _window_labels_by_id.get(window_id) as Label
 	if label == null:
 		return
 	var passed := bool(event.get("passed", false))
 	label.add_theme_color_override("font_color", Color("#72d6a0") if passed else Color("#ef476f"))
-	label.text = "%s %s｜%d / %d" % [
+	label.text = "%s %s｜实际 %d" % [
 		"✓" if passed else "✕",
-		String(event.get("window_id", "")),
-		int(event.get("actual", 0)),
-		int(event.get("target", 0))
+		String(label.get_meta("display_text", "需求窗口")),
+		int(event.get("actual", 0))
 	]
 
 
@@ -152,13 +169,13 @@ func _refresh_status() -> void:
 	var reputation := int(battle_state.get("reputation", initial_reputation))
 	$TopStatus/ReputationBar.max_value = initial_reputation
 	$TopStatus/ReputationBar.value = reputation
-	$TopStatus/ReputationLabel.text = "口碑防线 %d" % reputation
+	$TopStatus/ReputationLabel.text = "口碑防线 %d →" % reputation
 
 	var initial_pickiness := int(_encounter.get("initial_pickiness", 0))
 	var pickiness := int(battle_state.get("pickiness", initial_pickiness))
 	$TopStatus/PickinessBar.max_value = maxi(1, initial_pickiness)
-	$TopStatus/PickinessBar.value = initial_pickiness - pickiness
-	$TopStatus/PickinessLabel.text = "Boss 挑剔值 %d" % pickiness
+	$TopStatus/PickinessBar.value = pickiness
+	$TopStatus/PickinessLabel.text = "← Boss 挑剔 %d" % pickiness
 	_refresh_next_window()
 
 
@@ -262,14 +279,23 @@ func _highlight_relation(source_id: String, animate: bool) -> void:
 		_pulse_instance(String(instance_id), Color("#72d6a0"), animate)
 
 
+func _recipe_name(recipe_id: String) -> String:
+	return String((_catalog_recipes.get(recipe_id, {}) as Dictionary).get("name", recipe_id))
+
+
 func _toggle_pause() -> void:
 	set_paused(not battle_paused)
 
 
 func _window_text(window: Dictionary) -> String:
+	var metric := String(window.get("metric", ""))
+	var metric_text := _metric_name(metric)
+	var tag_context := _window_tag_context(window)
+	if not tag_context.is_empty():
+		metric_text = "%s（%s）" % [metric_text, tag_context]
 	return "%02ds｜%s ≥ %d" % [
-		int(window.get("at_ms", 0) / 1000),
-		_metric_name(String(window.get("metric", ""))),
+		int(ceil(float(window.get("at_ms", 0)) / 1000.0)),
+		metric_text,
 		int(window.get("target", 0))
 	]
 
@@ -282,4 +308,93 @@ func _metric_name(metric: String) -> String:
 			return "有效联动"
 		"window_satisfaction":
 			return "区间满足力"
+		"tag_sales_count":
+			return "标签出餐"
+		"tag_satisfaction":
+			return "标签满足力"
+		"distinct_tag_count":
+			return "售出标签种类"
 	return metric
+
+
+func _rebuild_demand_timeline(windows: Array, duration_seconds: int) -> void:
+	var timeline: VBoxContainer = $BossPanel/DemandTimeline
+	for child in timeline.get_children():
+		timeline.remove_child(child)
+		child.queue_free()
+	_window_labels_by_id.clear()
+
+	for index in windows.size():
+		if not windows[index] is Dictionary:
+			continue
+		var window: Dictionary = windows[index]
+		var label := _new_timeline_label()
+		var window_id := String(window.get("id", ""))
+		label.name = "DemandWindow%d" % index
+		label.text = _window_text(window)
+		label.set_meta("display_text", label.text)
+		label.set_meta("timeline_kind", "demand_window")
+		label.set_meta("window_id", window_id)
+		label.set_meta("at_ms", int(window.get("at_ms", 0)))
+		label.set_meta("metric", String(window.get("metric", "")))
+		timeline.add_child(label)
+		if not window_id.is_empty():
+			_window_labels_by_id[window_id] = label
+
+	var deadline := _new_timeline_label()
+	deadline.name = "FinalDeadline"
+	deadline.text = "%02ds｜清空挑剔值，否则挑战超时" % duration_seconds
+	deadline.set_meta("timeline_kind", "deadline")
+	deadline.set_meta("at_ms", int(_encounter.get("duration_ms", 30000)))
+	timeline.add_child(deadline)
+
+
+func _new_timeline_label() -> Label:
+	var label := Label.new()
+	label.add_theme_color_override("font_color", Color("#655a82"))
+	label.add_theme_font_size_override("font_size", 21)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	return label
+
+
+func _window_tag_context(window: Dictionary) -> String:
+	var tag := String(window.get("tag", ""))
+	if not tag.is_empty():
+		return _tag_name(tag)
+	var tags_value: Variant = window.get("target_tags", window.get("tags", []))
+	if not tags_value is Array:
+		return ""
+	var tags: Array[String] = []
+	for value in tags_value:
+		var candidate := _tag_name(String(value))
+		if not candidate.is_empty() and not tags.has(candidate):
+			tags.append(candidate)
+	tags.sort()
+	return " / ".join(tags)
+
+
+func _tag_name(tag: String) -> String:
+	match tag:
+		"fast":
+			return "快速"
+		"bake":
+			return "烘焙"
+		"fruit":
+			return "水果"
+		"drink":
+			return "饮品"
+		"set":
+			return "套装"
+		"signature":
+			return "招牌"
+		"chocolate":
+			return "巧克力"
+		"cold":
+			return "冷饮"
+		"milk":
+			return "奶香"
+		"aromatic":
+			return "香气"
+		"cake":
+			return "蛋糕"
+	return tag

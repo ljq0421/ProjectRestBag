@@ -12,7 +12,7 @@ func _init() -> void:
 func _run() -> void:
 	var service = TutorialProgress.new()
 	var state := service.normalize(null, "preparation")
-	_expect(state["version"] == 1, "tutorial version defaults to 1")
+	_expect(state["version"] == 2, "tutorial version defaults to 2")
 	_expect(state["status"] == "active", "missing state auto activates")
 	_expect(state["step_id"] == "boss_brief", "preparation starts at boss brief")
 
@@ -80,7 +80,7 @@ func _run() -> void:
 	_expect(resumed_settlement["status"] == "active", "help resumes dismissed tutorial")
 	_expect(resumed_settlement["step_id"] == "read_report", "resume coerces to current surface")
 
-	var future_raw := {"version": 2, "future_field": {"keep": true}}
+	var future_raw := {"version": 3, "future_field": {"keep": true}}
 	var newer_state := service.normalize(future_raw)
 	_expect(newer_state.get("future_field", {}) == {"keep": true}, "newer version fields survive normalization")
 	_expect(newer_state.get("unsupported_newer_version", false), "newer version gains runtime marker")
@@ -95,7 +95,7 @@ func _run() -> void:
 		"unknown_nested": {"keep": [1, {"value": true}]}
 	}
 	var sanitized := service.normalize(malformed_raw, "settlement")
-	_expect(sanitized["version"] == 1, "malformed version falls back without conversion")
+	_expect(sanitized["version"] == 2, "malformed version falls back without conversion")
 	_expect(sanitized["status"] == "active", "malformed status falls back without conversion")
 	_expect(sanitized["step_id"] == "read_report", "malformed step falls back to current surface")
 	_expect(sanitized["completed_step_ids"] == [], "non-array completed steps sanitize without iteration")

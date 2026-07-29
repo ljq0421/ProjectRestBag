@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_research_view.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="Style_research"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.447059, 0.839216, 0.627451, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+content_margin_left = 44.0
+content_margin_top = 38.0
+content_margin_right = 44.0
+content_margin_bottom = 38.0
+
+[node name="ChallengeResearchView" type="PanelContainer"]
+custom_minimum_size = Vector2(1500, 820)
+theme_override_styles/panel = SubResource("Style_research")
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 38
+text = "配方研究树"
+horizontal_alignment = 1
+
+[node name="ResearchPoints" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
+theme_override_font_sizes/font_size = 24
+text = "可用研究点 0"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 17
+text = "击败客潮揭示路线；完整短链获得 3 点。解锁不会污染当前活动局。"
+horizontal_alignment = 1
+
+[node name="Branches" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 22
+
+[node name="TempoBranch" type="VBoxContainer" parent="Content/Branches"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="FruitBranch" type="VBoxContainer" parent="Content/Branches"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="SignatureBranch" type="VBoxContainer" parent="Content/Branches"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="BackButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "返回挑战大厅"

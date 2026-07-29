@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "upgrades": {
+    "always_fresh": {
+      "id": "always_fresh",
+      "display_name": "常备鲜货",
+      "description": "所有配方的虚拟库存 +1。",
+      "category": "universal",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "virtual_stock_add",
+        "value": 1
+      }
+    },
+    "bakers_badge": {
+      "id": "bakers_badge",
+      "display_name": "烘焙师徽章",
+      "description": "为当前使用的烘焙配方增加 set 标签。",
+      "category": "compatible",
+      "max_stacks": 1,
+      "mutual_exclusion_group": "bake_identity",
+      "effect": {
+        "type": "tag_add",
+        "target_tags": ["bake"],
+        "tag": "set"
+      }
+    },
+    "bigger_pantry": {
+      "id": "bigger_pantry",
+      "display_name": "加宽备货架",
+      "description": "本局挑战备货预算 +2。",
+      "category": "universal",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "supply_budget_add",
+        "value": 2
+      }
+    },
+    "cookie_tin": {
+      "id": "cookie_tin",
+      "display_name": "曲奇铁盒",
+      "description": "黄油曲奇复制上限 +1。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "copy_limit_add",
+        "target_recipe_ids": ["butter_cookie"],
+        "value": 1
+      }
+    },
+    "fruit_pairing": {
+      "id": "fruit_pairing",
+      "display_name": "鲜果搭配",
+      "description": "水果配方的相邻关系奖励 +12。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "relation_school",
+      "effect": {
+        "type": "relation_bonus_add",
+        "target_tags": ["fruit"],
+        "relation_id": "fruit_pairing",
+        "value": 12
+      }
+    },
+    "jelly_quick_set": {
+      "id": "jelly_quick_set",
+      "display_name": "果冻速凝",
+      "description": "草莓果冻售卖周期缩短 20%。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "cycle_pct",
+        "target_recipe_ids": ["strawberry_jelly"],
+        "value": -20,
+        "min_cycle_ms": 2000
+      }
+    },
+    "lava_encore": {
+      "id": "lava_encore",
+      "display_name": "熔岩返场",
+      "description": "巧克力熔岩蛋糕满足力 +8。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "satisfaction_add",
+        "target_recipe_ids": ["chocolate_lava_cake"],
+        "value": 8
+      }
+    },
+    "muffin_fold": {
+      "id": "muffin_fold",
+      "display_name": "松饼折叠陈列",
+      "description": "蓝莓松饼变为单格形状，需要重新整理橱窗。",
+      "category": "compatible",
+      "max_stacks": 1,
+      "mutual_exclusion_group": "blueberry_muffin_shape",
+      "effect": {
+        "type": "shape_variant",
+        "target_recipe_ids": ["blueberry_muffin"],
+        "shape_cells": [[0, 0]],
+        "rotatable": false
+      }
+    },
+    "opening_buffer": {
+      "id": "opening_buffer",
+      "display_name": "开场缓冲",
+      "description": "首个需求窗口获得 6 点保护。",
+      "category": "universal",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "first_window_guard",
+        "value": 6
+      }
+    },
+    "pudding_reserve": {
+      "id": "pudding_reserve",
+      "display_name": "布丁冷藏柜",
+      "description": "牛奶布丁虚拟库存 +2。",
+      "category": "compatible",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "virtual_stock_add",
+        "target_recipe_ids": ["milk_pudding"],
+        "value": 2
+      }
+    },
+    "service_rhythm": {
+      "id": "service_rhythm",
+      "display_name": "服务节奏",
+      "description": "所有配方售卖周期缩短 8%。",
+      "category": "universal",
+      "max_stacks": 2,
+      "mutual_exclusion_group": "",
+      "effect": {
+        "type": "cycle_pct",
+        "value": -8,
+        "min_cycle_ms": 2000
+      }
+    },
+    "sponge_corner_cut": {
+      "id": "sponge_corner_cut",
+      "display_name": "海绵蛋糕切角",
+      "description": "海绵蛋糕由四格变为 L 形三格。",
+      "category": "compatible",
+      "max_stacks": 1,
+      "mutual_exclusion_group": "sponge_cake_shape",
+      "effect": {
+        "type": "shape_variant",
+        "target_recipe_ids": ["sponge_cake"],
+        "shape_cells": [[0, 0], [0, 1], [1, 0]],
+        "rotatable": true
+      }
+    },
+    "aromatic_expansion": {
+      "id": "aromatic_expansion",
+      "display_name": "香气新路线",
+      "description": "围绕已解锁但尚未上阵的香草司康转型，并赋予 aromatic 配方 fast 标签。",
+      "category": "pivot",
+      "max_stacks": 1,
+      "mutual_exclusion_group": "pivot_route",
+      "effect": {
+        "type": "tag_add",
+        "target_recipe_ids": ["vanilla_scone"],
+        "tag": "fast"
+      }
+    },
+    "chocolate_expansion": {
+      "id": "chocolate_expansion",
+      "display_name": "巧克力新路线",
+      "description": "围绕已解锁但尚未上阵的巧克力曲奇转型，并赋予其 set 标签。",
+      "category": "pivot",
+      "max_stacks": 1,
+      "mutual_exclusion_group": "pivot_route",
+      "effect": {
+        "type": "tag_add",
+        "target_recipe_ids": ["chocolate_cookie"],
+        "tag": "set"
+      }
+    }
+  }
+}

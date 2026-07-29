@@ -93,7 +93,10 @@ func analyze(
 			"virtual_stock": int(definition.get("virtual_stock", 0)),
 			"cycle_ms": int(definition.get("cycle_ms", 0)),
 			"base_satisfaction": int(definition.get("satisfaction", 0)),
-			"tags": (definition.get("tags", []) as Array).duplicate()
+			"tags": (definition.get("tags", []) as Array).duplicate(),
+			"upgrade_source_ids": (
+				definition.get("_upgrade_source_ids", []) as Array
+			).duplicate()
 		})
 
 	var relations := _find_relations(instances, encounter)
@@ -132,6 +135,61 @@ func build_snapshot(
 	return {
 		"ok": true,
 		"snapshot": snapshot.duplicate(true)
+	}
+
+
+func analyze_context(
+	draft: Dictionary,
+	effective_context: Dictionary,
+	rows: int,
+	columns: int,
+	encounter: Dictionary
+) -> Dictionary:
+	var recipe_defs: Dictionary = effective_context.get("recipe_defs", {})
+	var rules: Dictionary = effective_context.get("rules", {})
+	var budget := int(rules.get("supply_budget", 0))
+	var effective_encounter := _encounter_with_rules(encounter, rules)
+	var result := analyze(draft, recipe_defs, rows, columns, budget, effective_encounter)
+	result["effective_budget"] = budget
+	result["effective_rules"] = rules.duplicate(true)
+	result["applied_upgrades"] = (
+		effective_context.get("applied_upgrades", []) as Array
+	).duplicate(true)
+	return result
+
+
+func build_snapshot_from_context(
+	draft: Dictionary,
+	effective_context: Dictionary,
+	encounter: Dictionary,
+	rows: int,
+	columns: int
+) -> Dictionary:
+	var analysis := analyze_context(draft, effective_context, rows, columns, encounter)
+	if not bool(analysis.get("valid", false)):
+		return {
+			"ok": false,
+			"errors": (analysis.get("errors", []) as Array).duplicate(),
+			"requires_rearrange": true
+		}
+	var rules: Dictionary = analysis.get("effective_rules", {})
+	var snapshot := {
+		"grid_rows": rows,
+		"grid_columns": columns,
+		"spent_budget": int(analysis.get("spent_budget", 0)),
+		"supply_budget": int(analysis.get("effective_budget", 0)),
+		"instances": (analysis.get("instances", []) as Array).duplicate(true),
+		"relations": (analysis.get("relations", []) as Array).duplicate(true),
+		"encounter_id": String(encounter.get("id", "picky_food_critic")),
+		"effective_rules": rules.duplicate(true),
+		"applied_upgrades": (
+			analysis.get("applied_upgrades", []) as Array
+		).duplicate(true)
+	}
+	return {
+		"ok": true,
+		"snapshot": snapshot.duplicate(true),
+		"requires_rearrange": false
 	}
 
 
@@ -197,6 +255,7 @@ func _find_relations(instances: Array[Dictionary], encounter: Dictionary) -> Arr
 	if relation_id.is_empty() or left_tag.is_empty() or right_tag.is_empty():
 		return []
 	var bonus_pct := int(encounter.get("relation_bonus_pct", 0))
+	var upgrade_source_ids: Array = encounter.get("_relation_upgrade_source_ids", [])
 	var relations: Array[Dictionary] = []
 	for left_instance in instances:
 		var left_tags: Array = left_instance.get("tags", [])
@@ -214,9 +273,34 @@ func _find_relations(instances: Array[Dictionary], encounter: Dictionary) -> Arr
 				"relation_id": relation_id,
 				"left_instance_id": String(left_instance.get("instance_id", "")),
 				"right_instance_id": String(right_instance.get("instance_id", "")),
-				"bonus_pct": bonus_pct
+				"bonus_pct": bonus_pct,
+				"upgrade_source_ids": upgrade_source_ids.duplicate()
 			})
 	return relations
+
+
+func _encounter_with_rules(encounter: Dictionary, rules: Dictionary) -> Dictionary:
+	var effective := encounter.duplicate(true)
+	var relation: Dictionary = effective.get("relation", {})
+	var relation_id := String(relation.get("id", ""))
+	var bonuses: Dictionary = rules.get("relation_bonus_add", {})
+	var bonus_add := int(bonuses.get("global", 0))
+	if not relation_id.is_empty():
+		bonus_add += int(bonuses.get(relation_id, 0))
+	effective["relation_bonus_pct"] = int(effective.get("relation_bonus_pct", 0)) + bonus_add
+	var source_map: Dictionary = rules.get("relation_bonus_source_ids", {})
+	var source_ids: Array[String] = []
+	for source_value in source_map.get("global", []):
+		var source_id := String(source_value)
+		if not source_id.is_empty() and not source_ids.has(source_id):
+			source_ids.append(source_id)
+	for source_value in source_map.get(relation_id, []):
+		var source_id := String(source_value)
+		if not source_id.is_empty() and not source_ids.has(source_id):
+			source_ids.append(source_id)
+	source_ids.sort()
+	effective["_relation_upgrade_source_ids"] = source_ids
+	return effective
 
 
 func _instances_touch(left_instance: Dictionary, right_instance: Dictionary) -> bool:

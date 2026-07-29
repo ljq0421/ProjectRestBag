@@ -1,0 +1,103 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_hub_view.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="Style_hub"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+content_margin_left = 72.0
+content_margin_top = 52.0
+content_margin_right = 72.0
+content_margin_bottom = 52.0
+shadow_color = Color(0.160784, 0.129412, 0.239216, 0.25)
+shadow_size = 18
+
+[node name="ChallengeHubView" type="PanelContainer"]
+custom_minimum_size = Vector2(1200, 700)
+theme_override_styles/panel = SubResource("Style_hub")
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 20
+
+[node name="Eyebrow" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 18
+text = "BOSS RUSH · 独立挑战备货"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 46
+text = "客潮构筑挑战"
+horizontal_alignment = 1
+
+[node name="ActiveRun" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 23
+text = "五场短链构筑成长 · 无尽爬升纪录挑战"
+horizontal_alignment = 1
+
+[node name="ResearchPoints" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
+theme_override_font_sizes/font_size = 28
+text = "研究点 0"
+horizontal_alignment = 1
+
+[node name="PoolSummary" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 18
+text = "永久配方 6 种 · 新解锁在下一局生效"
+horizontal_alignment = 1
+
+[node name="EndlessRecord" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 20
+text = "无尽爬升：完成第一条五场短链后解锁"
+horizontal_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 18
+
+[node name="StartButton" type="Button" parent="Content/Actions"]
+custom_minimum_size = Vector2(220, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "开始五场短链"
+
+[node name="EndlessButton" type="Button" parent="Content/Actions"]
+custom_minimum_size = Vector2(220, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+disabled = true
+text = "无尽爬升（未解锁）"
+
+[node name="ContinueButton" type="Button" parent="Content/Actions"]
+custom_minimum_size = Vector2(220, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "继续当前挑战"
+
+[node name="ResearchButton" type="Button" parent="Content/Actions"]
+custom_minimum_size = Vector2(220, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "查看配方研究"

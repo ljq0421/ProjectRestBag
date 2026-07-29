@@ -1,7 +1,6 @@
 extends SceneTree
 
 const SERVICE_PATH := "res://scripts/challenge/challenge_save_service.gd"
-const TUTORIAL_PROGRESS_PATH := "res://scripts/challenge/challenge_tutorial_progress.gd"
 
 var _failures: Array[String] = []
 var _save_path := OS.get_temp_dir().path_join("project_rest_two_challenge_save_test.json")
@@ -23,34 +22,36 @@ func _run() -> void:
 		return
 	_expect(service.SAVE_PATH == "user://project_rest_two_save_v1.json", "save path should use project-rest-two namespace")
 	_expect(service.BROKEN_SAVE_PATH == "user://project_rest_two_save_v1.broken.json", "broken path should use project-rest-two namespace")
-	_expect(service.SAVE_PATH.find("project_rest_new") == -1, "save path must not mention project-rest-new")
+	_expect(service.SCHEMA_VERSION == 1, "development schema marker should remain 1")
 
 	_cleanup()
 	var source: Dictionary = service.empty_save()
-	var default_onboarding: Dictionary = source.get("onboarding", {})
-	_expect(int(default_onboarding.get("version", 0)) == 1, "empty save should start onboarding at version 1")
-	_expect(String(default_onboarding.get("status", "")) == "active", "empty save should activate onboarding")
-	_expect(String(default_onboarding.get("step_id", "")) == "boss_brief", "empty save should start onboarding at boss brief")
-	_expect(default_onboarding.get("completed_step_ids", []) == [], "empty save should start with no completed onboarding steps")
-	_expect(String(default_onboarding.get("pre_battle_draft_fingerprint", "")) == "", "empty save should start without a draft fingerprint")
-	source["meta"]["unlocked_recipe_ids"] = ["butter_cookie"]
-	source["onboarding"] = {
-		"version": 1,
-		"status": "dismissed",
-		"step_id": "read_report",
-		"completed_step_ids": ["boss_brief", "place_recipe"],
-		"pre_battle_draft_fingerprint": "draft-fingerprint"
-	}
+	var source_meta: Dictionary = source.get("meta", {})
+	var default_onboarding: Dictionary = source_meta.get("onboarding", {})
+	_expect(not source.has("active_draft"), "current save should not retain deprecated top-level active_draft")
+	_expect(source_meta.get("applied_reward_transaction_ids", []) == [], "new save should start with an empty permanent reward ledger")
+	_expect(int(default_onboarding.get("version", 0)) == 2, "new save should start onboarding at version 2")
+	_expect(
+		default_onboarding.get("seen_stage_two_hint_ids", []) == [],
+		"new save should start with no contextual hints consumed"
+	)
+	source_meta["unlocked_recipe_ids"] = ["butter_cookie"]
+	source_meta["applied_reward_transaction_ids"] = ["standard:1:42:research-complete"]
+	source["meta"] = source_meta
+
 	var saved: Dictionary = service.save_to_path(_save_path, source)
 	_expect(bool(saved.get("ok", false)), "save should succeed")
 	var loaded: Dictionary = service.load_from_path(_save_path)
 	_expect(bool(loaded.get("ok", false)), "load should succeed")
+	_expect(String(loaded.get("source", "")) == "current", "load should identify current save")
 	var loaded_data: Dictionary = loaded.get("data", {})
 	var loaded_meta: Dictionary = loaded_data.get("meta", {})
 	_expect(loaded_meta.get("unlocked_recipe_ids", []) == ["butter_cookie"], "loaded recipes should match saved data")
-	_expect_onboarding(loaded_data, source["onboarding"], "loaded")
+	_expect(
+		loaded_meta.get("applied_reward_transaction_ids", []) == ["standard:1:42:research-complete"],
+		"permanent reward ledger should survive round trip"
+	)
 	_expect(loaded_data.get("active_run", "missing") == null, "loaded active run should keep empty-save contract")
-	_expect(loaded_data.get("active_draft", {}) == {"placements": []}, "loaded active draft should keep empty-save contract")
 	_expect(loaded_data.get("active_battle", "missing") == null, "loaded active battle should keep empty-save contract")
 
 	var replacement: Dictionary = service.empty_save()
@@ -73,55 +74,21 @@ func _run() -> void:
 	_expect(String(recovered.get("source", "")) == "previous", "recovery should report previous source")
 	var recovered_meta: Dictionary = (recovered.get("data", {}) as Dictionary).get("meta", {})
 	_expect(recovered_meta.get("unlocked_recipe_ids", []) == ["butter_cookie"], "recovery should load previous data")
-	var recovered_data: Dictionary = recovered.get("data", {})
-	_expect_onboarding(recovered_data, source["onboarding"], "recovery")
-	_expect(recovered_data.get("active_run", "missing") == null, "recovery should keep active run contract")
-	_expect(recovered_data.get("active_draft", {}) == {"placements": []}, "recovery should keep active draft contract")
-	_expect(recovered_data.get("active_battle", "missing") == null, "recovery should keep active battle contract")
+	_expect(
+		recovered_meta.get("applied_reward_transaction_ids", []) == ["standard:1:42:research-complete"],
+		"recovery should preserve the permanent reward ledger"
+	)
 	_expect(FileAccess.file_exists(_save_path + ".broken"), "malformed save should be preserved as broken")
 
-	var future_source: Dictionary = service.empty_save()
-	future_source["onboarding"] = {
-		"version": 2,
-		"status": "future-status",
-		"step_id": "future-step",
-		"unknown_nested": {"keep": [1, {"value": true}]}
-	}
-	_expect(bool(service.save_to_path(_save_path, future_source).get("ok", false)), "future onboarding save should succeed")
-	var future_loaded: Dictionary = service.load_from_path(_save_path)
-	var future_onboarding: Dictionary = (future_loaded.get("data", {}) as Dictionary).get("onboarding", {})
-	_expect(int(future_onboarding.get("version", 0)) == 2, "save service should not downgrade a future onboarding version")
-	_expect(future_onboarding.get("unknown_nested", {}) == {"keep": [1.0, {"value": true}]}, "save service should preserve unknown future onboarding fields")
-
-	var malformed_source: Dictionary = service.empty_save()
-	malformed_source["meta"] = {"research_points": 13, "custom_meta": {"keep": true}}
-	malformed_source["active_run"] = {"run_id": "keep-run", "phase": "battle", "custom": [1, 2]}
-	malformed_source["active_draft"] = {"placements": [{"instance_id": "keep-draft"}], "custom": "draft"}
-	malformed_source["active_battle"] = {"phase": "running", "elapsed_ms": 1234, "custom": "battle"}
-	malformed_source["unrelated_business"] = {"ledger": [{"id": "keep-ledger"}]}
-	malformed_source["onboarding"] = {
-		"version": {},
-		"status": null,
-		"step_id": 42,
-		"completed_step_ids": {"not": "an array"},
-		"pre_battle_draft_fingerprint": false,
-		"unknown_nested": {"keep": ["unknown", {"field": true}]}
-	}
-	var tutorial = load(TUTORIAL_PROGRESS_PATH).new()
-	malformed_source["onboarding"] = tutorial.normalize(malformed_source["onboarding"], "battle")
-	var expected_business := malformed_source.duplicate(true)
-	expected_business.erase("onboarding")
-	expected_business = JSON.parse_string(JSON.stringify(expected_business))
-	_expect(bool(service.save_to_path(_save_path, malformed_source).get("ok", false)), "sanitized malformed onboarding save should succeed")
-	var malformed_loaded: Dictionary = (service.load_from_path(_save_path).get("data", {}) as Dictionary)
-	var loaded_business := malformed_loaded.duplicate(true)
-	loaded_business.erase("onboarding")
-	_expect(loaded_business == expected_business, "onboarding sanitization preserves all unrelated save business data")
+	var invalid: Dictionary = service.empty_save()
+	invalid.erase("active_battle")
+	var rejected: Dictionary = service.save_to_path(_save_path, invalid)
+	_expect(not bool(rejected.get("ok", true)), "save should reject an incomplete current structure")
 	_expect(
-		(malformed_loaded.get("onboarding", {}) as Dictionary).get("unknown_nested", {})
-			== {"keep": ["unknown", {"field": true}]},
-		"onboarding sanitization preserves unknown nested onboarding fields"
+		String(rejected.get("error", "")) == service.INCOMPATIBLE_ERROR,
+		"invalid save should return the explicit development incompatibility error"
 	)
+	_expect(not FileAccess.file_exists(_save_path + ".tmp"), "rejected save should not leave a temporary file")
 
 	_cleanup()
 	_finish()
@@ -137,19 +104,6 @@ func _cleanup() -> void:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		_fail(message)
-
-
-func _expect_onboarding(data: Dictionary, expected: Dictionary, context: String) -> void:
-	var onboarding: Dictionary = data.get("onboarding", {})
-	_expect(int(onboarding.get("version", 0)) == int(expected.get("version", 0)), context + " onboarding version should survive")
-	_expect(String(onboarding.get("status", "")) == String(expected.get("status", "")), context + " onboarding status should survive")
-	_expect(String(onboarding.get("step_id", "")) == String(expected.get("step_id", "")), context + " onboarding step should survive")
-	_expect(onboarding.get("completed_step_ids", []) == expected.get("completed_step_ids", []), context + " onboarding completed steps should survive")
-	_expect(
-		String(onboarding.get("pre_battle_draft_fingerprint", ""))
-			== String(expected.get("pre_battle_draft_fingerprint", "")),
-		context + " onboarding draft fingerprint should survive"
-	)
 
 
 func _fail(message: String) -> void:

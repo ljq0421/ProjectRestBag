@@ -29,7 +29,17 @@ func _run() -> void:
 	var validator = validator_script.new()
 
 	var missing_recipe: Dictionary = validator.validate(
-		{"grid_rows": 6, "grid_columns": 8, "supply_budget": 16, "recipes": {"not_in_catalog": _valid_recipe()}},
+		{
+			"grid_rows": 6,
+			"grid_columns": 8,
+			"supply_budget": 16,
+			"starter_recipe_ids": ["not_in_catalog"],
+			"research_recipe_ids": ["also_not_in_catalog"],
+			"recipes": {
+				"not_in_catalog": _valid_recipe(),
+				"also_not_in_catalog": _valid_recipe()
+			}
+		},
 		{"encounters": {"critic": _valid_encounter()}},
 		{}
 	)
@@ -40,9 +50,64 @@ func _run() -> void:
 	var bad_order: Dictionary = validator.validate(
 		_valid_recipe_config(),
 		{"encounters": {"critic": bad_window}},
-		{"butter_cookie": {}}
+		{"butter_cookie": {}, "strawberry_jelly": {}}
 	)
 	_expect(not bool(bad_order.get("valid", true)), "demand windows should be strictly ordered")
+
+	var tag_metrics_encounter: Dictionary = _valid_encounter()
+	tag_metrics_encounter["windows"] = [
+		{
+			"id": "fast_sales",
+			"at_ms": 8000,
+			"metric": "tag_sales_count",
+			"tag": "fast",
+			"target": 1,
+			"reputation_damage": 25
+		},
+		{
+			"id": "fast_satisfaction",
+			"at_ms": 16000,
+			"from_ms": 8000,
+			"metric": "tag_satisfaction",
+			"tag": "fast",
+			"target": 4,
+			"reputation_damage": 30
+		},
+		{
+			"id": "tag_variety",
+			"at_ms": 24000,
+			"metric": "distinct_tag_count",
+			"target_tags": ["fast", "bake"],
+			"target": 2,
+			"reputation_damage": 45
+		}
+	]
+	var tag_metrics_result: Dictionary = validator.validate(
+		_valid_recipe_config(),
+		{"encounters": {"critic": tag_metrics_encounter}},
+		{"butter_cookie": {}, "strawberry_jelly": {}}
+	)
+	for error in tag_metrics_result.get("errors", []):
+		_fail("valid tag metric encounter should validate: %s" % String(error))
+	_expect(bool(tag_metrics_result.get("valid", false)), "new tag metrics should be theoretically reachable")
+
+	var missing_tag_encounter: Dictionary = tag_metrics_encounter.duplicate(true)
+	missing_tag_encounter["windows"][0].erase("tag")
+	var missing_tag_result: Dictionary = validator.validate(
+		_valid_recipe_config(),
+		{"encounters": {"critic": missing_tag_encounter}},
+		{"butter_cookie": {}, "strawberry_jelly": {}}
+	)
+	_expect(not bool(missing_tag_result.get("valid", true)), "tag metric without tag should be invalid")
+
+	var duplicate_target_tags: Dictionary = tag_metrics_encounter.duplicate(true)
+	duplicate_target_tags["windows"][2]["target_tags"] = ["fast", "fast"]
+	var duplicate_tags_result: Dictionary = validator.validate(
+		_valid_recipe_config(),
+		{"encounters": {"critic": duplicate_target_tags}},
+		{"butter_cookie": {}, "strawberry_jelly": {}}
+	)
+	_expect(not bool(duplicate_tags_result.get("valid", true)), "distinct tag metric should reject duplicate target tags")
 
 	var recipe_config: Dictionary = _load_json(RECIPE_CONFIG_PATH)
 	var encounter_config: Dictionary = _load_json(ENCOUNTER_CONFIG_PATH)
@@ -53,7 +118,9 @@ func _run() -> void:
 	_expect(bool(result.get("valid", false)), "committed challenge config should be valid")
 
 	var recipes: Dictionary = recipe_config.get("recipes", {})
-	_expect(recipes.size() == 6, "committed challenge config should contain exactly six recipes")
+	_expect(recipes.size() == 12, "committed challenge config should contain exactly twelve recipes")
+	_expect((recipe_config.get("starter_recipe_ids", []) as Array).size() == 6, "challenge config should contain six starter recipes")
+	_expect((recipe_config.get("research_recipe_ids", []) as Array).size() == 6, "challenge config should contain six research recipes")
 	_expect(int(recipe_config.get("grid_rows", 0)) == 6, "challenge grid should have six rows")
 	_expect(int(recipe_config.get("grid_columns", 0)) == 8, "challenge grid should have eight columns")
 	_expect(int(recipe_config.get("supply_budget", 0)) == 16, "challenge supply budget should be 16")
@@ -61,6 +128,7 @@ func _run() -> void:
 		_expect(catalog_recipes.has(recipe_id), "challenge recipe should exist in Catalog: %s" % String(recipe_id))
 
 	var encounters: Dictionary = encounter_config.get("encounters", {})
+	_expect(encounters.size() == 5, "committed challenge config should contain exactly five encounters")
 	var critic: Dictionary = encounters.get("picky_food_critic", {})
 	var window_times: Array[int] = []
 	for window in critic.get("windows", []):
@@ -89,13 +157,25 @@ func _valid_recipe_config() -> Dictionary:
 		"grid_rows": 6,
 		"grid_columns": 8,
 		"supply_budget": 16,
-		"recipes": {"butter_cookie": _valid_recipe()}
+		"starter_recipe_ids": ["butter_cookie"],
+		"research_recipe_ids": ["strawberry_jelly"],
+		"recipes": {
+			"butter_cookie": _valid_recipe(),
+			"strawberry_jelly": _valid_recipe()
+		}
 	}
 
 
 func _valid_encounter() -> Dictionary:
 	return {
+		"id": "critic",
+		"display_name": "Test Critic",
+		"encounter_type": "normal",
+		"rule_tags": ["early_tempo"],
+		"required_mechanism_tags": ["timed_sales"],
+		"blueprint_hint_id": "blueprint_test",
 		"duration_ms": 30000,
+		"supply_budget": 16,
 		"initial_pickiness": 4,
 		"initial_reputation": 100,
 		"relation_bonus_pct": 25,
@@ -108,7 +188,12 @@ func _valid_encounter() -> Dictionary:
 			{"id": "early_tempo", "at_ms": 8000, "metric": "sales_count", "target": 1, "reputation_damage": 25},
 			{"id": "linked_display", "at_ms": 16000, "metric": "active_relation_count", "target": 0, "reputation_damage": 30},
 			{"id": "sustained_service", "at_ms": 24000, "from_ms": 16000, "metric": "window_satisfaction", "target": 1, "reputation_damage": 45}
-		]
+		],
+		"validation_draft": {
+			"placements": [
+				{"instance_id": "cookie", "recipe_id": "butter_cookie", "origin": [0, 0], "rotation": 0}
+			]
+		}
 	}
 
 

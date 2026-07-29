@@ -4,7 +4,25 @@ extends RefCounted
 const KNOWN_METRICS := [
 	"sales_count",
 	"active_relation_count",
-	"window_satisfaction"
+	"window_satisfaction",
+	"tag_sales_count",
+	"tag_satisfaction",
+	"distinct_tag_count"
+]
+const KNOWN_ENCOUNTER_TYPES := ["normal", "elite", "final_boss"]
+const KNOWN_RULE_TAGS := [
+	"early_tempo",
+	"pairing_focus",
+	"sustained_service",
+	"mixed_windows",
+	"tight_budget",
+	"combined_exam"
+]
+const KNOWN_MECHANISM_TAGS := [
+	"timed_sales",
+	"adjacency_relation",
+	"window_satisfaction",
+	"supply_budget"
 ]
 
 
@@ -15,6 +33,23 @@ func validate(recipe_config: Dictionary, encounter_config: Dictionary, catalog_r
 	var supply_budget := _positive_int(recipe_config, "supply_budget", "recipe_config", errors)
 	var recipe_defs := _dictionary_value(recipe_config, "recipes", "recipe_config", errors)
 	var encounters := _dictionary_value(encounter_config, "encounters", "encounter_config", errors)
+	var starter_recipe_ids := _recipe_pool_ids(
+		recipe_config,
+		"starter_recipe_ids",
+		recipe_defs,
+		"recipe_config",
+		errors
+	)
+	var research_recipe_ids := _recipe_pool_ids(
+		recipe_config,
+		"research_recipe_ids",
+		recipe_defs,
+		"recipe_config",
+		errors
+	)
+	for recipe_id in research_recipe_ids:
+		if starter_recipe_ids.has(recipe_id):
+			errors.append("recipe_config: recipe %s cannot be in both starter and research pools" % recipe_id)
 
 	for recipe_id_variant in recipe_defs:
 		var recipe_id := String(recipe_id_variant)
@@ -36,10 +71,12 @@ func validate(recipe_config: Dictionary, encounter_config: Dictionary, catalog_r
 		for encounter_id_variant in encounters:
 			var encounter_id := String(encounter_id_variant)
 			var encounter_value = encounters[encounter_id_variant]
+			var encounter_budget := int(encounter_value.get("supply_budget", supply_budget)) if encounter_value is Dictionary else supply_budget
 			if encounter_value is Dictionary and not _has_theoretical_loadout(
 				recipe_defs,
+				starter_recipe_ids,
 				encounter_value,
-				supply_budget,
+				encounter_budget,
 				grid_rows * grid_columns
 			):
 				errors.append("%s: no theoretical loadout satisfies all demand windows and final pickiness" % encounter_id)
@@ -105,6 +142,30 @@ func _validate_recipe(
 
 
 func _validate_encounter(encounter_id: String, encounter: Dictionary, errors: Array[String]) -> void:
+	if String(encounter.get("id", "")) != encounter_id:
+		errors.append("%s: id must match its dictionary key" % encounter_id)
+	if String(encounter.get("display_name", "")).strip_edges().is_empty():
+		errors.append("%s: display_name must be a non-empty string" % encounter_id)
+	var encounter_type := String(encounter.get("encounter_type", ""))
+	if not KNOWN_ENCOUNTER_TYPES.has(encounter_type):
+		errors.append("%s: unknown encounter_type %s" % [encounter_id, encounter_type])
+	_validate_known_string_array(encounter, "rule_tags", KNOWN_RULE_TAGS, encounter_id, errors)
+	_validate_known_string_array(
+		encounter,
+		"required_mechanism_tags",
+		KNOWN_MECHANISM_TAGS,
+		encounter_id,
+		errors
+	)
+	if String(encounter.get("blueprint_hint_id", "")).strip_edges().is_empty():
+		errors.append("%s: blueprint_hint_id must be a non-empty string" % encounter_id)
+	_positive_int(encounter, "supply_budget", encounter_id, errors)
+	var validation_draft = encounter.get("validation_draft")
+	if not validation_draft is Dictionary:
+		errors.append("%s: validation_draft must be a dictionary" % encounter_id)
+	elif not validation_draft.get("placements") is Array or validation_draft.get("placements", []).is_empty():
+		errors.append("%s: validation_draft.placements must be a non-empty array" % encounter_id)
+
 	var duration_ms := _positive_int(encounter, "duration_ms", encounter_id, errors)
 	_positive_int(encounter, "initial_pickiness", encounter_id, errors)
 	_positive_int(encounter, "initial_reputation", encounter_id, errors)
@@ -148,20 +209,37 @@ func _validate_encounter(encounter_id: String, encounter: Dictionary, errors: Ar
 		if duration_ms > 0 and at_ms >= duration_ms:
 			errors.append("%s: demand window must occur before duration" % prefix)
 		previous_at = at_ms
-		if metric == "window_satisfaction":
+		if metric == "window_satisfaction" or metric == "tag_satisfaction":
 			var from_ms := _positive_int(window, "from_ms", prefix, errors, true)
 			if from_ms >= at_ms:
 				errors.append("%s: from_ms must be earlier than at_ms" % prefix)
+		if metric == "tag_sales_count" or metric == "tag_satisfaction":
+			if String(window.get("tag", "")).strip_edges().is_empty():
+				errors.append("%s: tag must be a non-empty string" % prefix)
+		if metric == "distinct_tag_count":
+			var target_tags = window.get("target_tags")
+			if not target_tags is Array or target_tags.is_empty():
+				errors.append("%s: target_tags must be a non-empty array" % prefix)
+			else:
+				var known_tags := {}
+				for tag_value in target_tags:
+					var tag := String(tag_value).strip_edges()
+					if tag.is_empty():
+						errors.append("%s: target_tags entries must be non-empty strings" % prefix)
+					elif known_tags.has(tag):
+						errors.append("%s: target_tags entries must be unique" % prefix)
+					known_tags[tag] = true
 
 
 func _has_theoretical_loadout(
 	recipe_defs: Dictionary,
+	available_recipe_ids: Array[String],
 	encounter: Dictionary,
 	supply_budget: int,
 	cell_budget: int
 ) -> bool:
 	var recipe_ids: Array[String] = []
-	for recipe_id in recipe_defs:
+	for recipe_id in available_recipe_ids:
 		if recipe_defs[recipe_id] is Dictionary and _recipe_is_simulatable(recipe_defs[recipe_id]):
 			recipe_ids.append(String(recipe_id))
 	if recipe_ids.is_empty():
@@ -245,6 +323,35 @@ func _loadout_satisfies(
 					relation_count > 0,
 					bonus_pct
 				)
+			"tag_sales_count":
+				actual = _sales_count_at(
+					recipe_ids,
+					recipe_defs,
+					counts,
+					int(window.get("at_ms", 0)),
+					String(window.get("tag", ""))
+				)
+			"tag_satisfaction":
+				actual = _satisfaction_between(
+					recipe_ids,
+					recipe_defs,
+					counts,
+					int(window.get("from_ms", 0)),
+					int(window.get("at_ms", 0)),
+					left_tag,
+					right_tag,
+					relation_count > 0,
+					bonus_pct,
+					String(window.get("tag", ""))
+				)
+			"distinct_tag_count":
+				actual = _distinct_sold_tag_count(
+					recipe_ids,
+					recipe_defs,
+					counts,
+					int(window.get("at_ms", 0)),
+					window.get("target_tags", [])
+				)
 			_:
 				return false
 		if actual < target:
@@ -269,7 +376,8 @@ func _sales_count_at(
 	recipe_ids: Array[String],
 	recipe_defs: Dictionary,
 	counts: Dictionary,
-	at_ms: int
+	at_ms: int,
+	required_tag: String = ""
 ) -> int:
 	var total := 0
 	for recipe_id in recipe_ids:
@@ -277,6 +385,8 @@ func _sales_count_at(
 		if count <= 0:
 			continue
 		var definition: Dictionary = recipe_defs[recipe_id]
+		if not required_tag.is_empty() and not (definition.get("tags", []) as Array).has(required_tag):
+			continue
 		var sales_per_instance := mini(int(definition["virtual_stock"]), at_ms / int(definition["cycle_ms"]))
 		total += count * sales_per_instance
 	return total
@@ -291,7 +401,8 @@ func _satisfaction_between(
 	left_tag: String,
 	right_tag: String,
 	relation_active: bool,
-	bonus_pct: int
+	bonus_pct: int,
+	required_tag: String = ""
 ) -> int:
 	var total := 0
 	for recipe_id in recipe_ids:
@@ -299,17 +410,47 @@ func _satisfaction_between(
 		if count <= 0:
 			continue
 		var definition: Dictionary = recipe_defs[recipe_id]
+		var tags: Array = definition["tags"]
+		if not required_tag.is_empty() and not tags.has(required_tag):
+			continue
 		var cycle_ms := int(definition["cycle_ms"])
 		var stock := int(definition["virtual_stock"])
 		var sales_to := mini(stock, to_ms / cycle_ms)
 		var sales_from := mini(stock, from_ms / cycle_ms)
 		var sales := maxi(0, sales_to - sales_from)
 		var satisfaction := int(definition["satisfaction"])
-		var tags: Array = definition["tags"]
 		if relation_active and (tags.has(left_tag) or tags.has(right_tag)):
 			satisfaction = satisfaction * (100 + bonus_pct) / 100
 		total += count * sales * satisfaction
 	return total
+
+
+func _distinct_sold_tag_count(
+	recipe_ids: Array[String],
+	recipe_defs: Dictionary,
+	counts: Dictionary,
+	at_ms: int,
+	target_tag_values: Array
+) -> int:
+	var target_tags := {}
+	for tag_value in target_tag_values:
+		target_tags[String(tag_value)] = true
+	var sold_tags := {}
+	for recipe_id in recipe_ids:
+		if int(counts.get(recipe_id, 0)) <= 0:
+			continue
+		var definition: Dictionary = recipe_defs[recipe_id]
+		var sales_per_instance := mini(
+			int(definition["virtual_stock"]),
+			at_ms / int(definition["cycle_ms"])
+		)
+		if sales_per_instance <= 0:
+			continue
+		for tag_value in definition.get("tags", []):
+			var tag := String(tag_value)
+			if target_tags.has(tag):
+				sold_tags[tag] = true
+	return sold_tags.size()
 
 
 func _tagged_instance_count(
@@ -336,6 +477,54 @@ func _recipe_is_simulatable(definition: Dictionary) -> bool:
 		if not _is_positive_int(definition.get(key)):
 			return false
 	return definition.get("tags") is Array
+
+
+func _recipe_pool_ids(
+	source: Dictionary,
+	key: String,
+	recipe_defs: Dictionary,
+	prefix: String,
+	errors: Array[String]
+) -> Array[String]:
+	var result: Array[String] = []
+	var value = source.get(key)
+	if not value is Array or value.is_empty():
+		errors.append("%s: %s must be a non-empty array" % [prefix, key])
+		return result
+	for recipe_id_value in value:
+		var recipe_id := String(recipe_id_value).strip_edges()
+		if recipe_id.is_empty():
+			errors.append("%s: %s entries must be non-empty strings" % [prefix, key])
+		elif result.has(recipe_id):
+			errors.append("%s: %s entries must be unique" % [prefix, key])
+		elif not recipe_defs.has(recipe_id):
+			errors.append("%s: %s contains unknown recipe %s" % [prefix, key, recipe_id])
+		else:
+			result.append(recipe_id)
+	return result
+
+
+func _validate_known_string_array(
+	source: Dictionary,
+	key: String,
+	known_values: Array,
+	prefix: String,
+	errors: Array[String]
+) -> void:
+	var value = source.get(key)
+	if not value is Array or value.is_empty():
+		errors.append("%s: %s must be a non-empty array" % [prefix, key])
+		return
+	var seen := {}
+	for entry_value in value:
+		var entry := String(entry_value).strip_edges()
+		if entry.is_empty():
+			errors.append("%s: %s entries must be non-empty strings" % [prefix, key])
+		elif seen.has(entry):
+			errors.append("%s: %s entries must be unique" % [prefix, key])
+		elif not known_values.has(entry):
+			errors.append("%s: unknown %s value %s" % [prefix, key, entry])
+		seen[entry] = true
 
 
 func _dictionary_value(

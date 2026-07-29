@@ -1,7 +1,213 @@
 {
   "encounters": {
-    "picky_food_critic": {
+    "morning_rush": {
+      "id": "morning_rush",
+      "display_name": "晨间赶潮",
+      "encounter_type": "normal",
+      "rule_tags": ["early_tempo"],
+      "required_mechanism_tags": ["timed_sales"],
+      "blueprint_hint_id": "blueprint_fast_counter",
       "duration_ms": 30000,
+      "supply_budget": 16,
+      "initial_pickiness": 112,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 15,
+      "relation": {
+        "id": "fruit_bake_pair",
+        "left_tag": "fruit",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "doors_open",
+          "at_ms": 8000,
+          "metric": "sales_count",
+          "target": 8,
+          "reputation_damage": 35
+        },
+        {
+          "id": "commuter_peak",
+          "at_ms": 16000,
+          "metric": "sales_count",
+          "target": 16,
+          "reputation_damage": 35
+        },
+        {
+          "id": "last_train",
+          "at_ms": 24000,
+          "metric": "sales_count",
+          "target": 28,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {"instance_id": "morning_cookie_1", "recipe_id": "butter_cookie", "origin": [0, 0], "rotation": 0},
+          {"instance_id": "morning_cookie_2", "recipe_id": "butter_cookie", "origin": [0, 2], "rotation": 0},
+          {"instance_id": "morning_cookie_3", "recipe_id": "butter_cookie", "origin": [0, 4], "rotation": 0},
+          {"instance_id": "morning_jelly_1", "recipe_id": "strawberry_jelly", "origin": [2, 0], "rotation": 0},
+          {"instance_id": "morning_jelly_2", "recipe_id": "strawberry_jelly", "origin": [2, 2], "rotation": 0}
+        ]
+      }
+    },
+    "pairing_tasting": {
+      "id": "pairing_tasting",
+      "display_name": "搭配品鉴会",
+      "encounter_type": "normal",
+      "rule_tags": ["pairing_focus"],
+      "required_mechanism_tags": ["adjacency_relation", "window_satisfaction"],
+      "blueprint_hint_id": "blueprint_pairing_set",
+      "duration_ms": 30000,
+      "supply_budget": 16,
+      "initial_pickiness": 138,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 25,
+      "relation": {
+        "id": "drink_bake_pair",
+        "left_tag": "drink",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "pair_reveal",
+          "at_ms": 12000,
+          "metric": "active_relation_count",
+          "target": 1,
+          "reputation_damage": 45
+        },
+        {
+          "id": "first_tasting",
+          "at_ms": 20000,
+          "from_ms": 8000,
+          "metric": "window_satisfaction",
+          "target": 58,
+          "reputation_damage": 35
+        },
+        {
+          "id": "pairing_finale",
+          "at_ms": 26000,
+          "metric": "sales_count",
+          "target": 10,
+          "reputation_damage": 30
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {"instance_id": "pairing_pudding", "recipe_id": "milk_pudding", "origin": [0, 0], "rotation": 0},
+          {"instance_id": "pairing_muffin", "recipe_id": "blueberry_muffin", "origin": [1, 0], "rotation": 0},
+          {"instance_id": "pairing_sponge", "recipe_id": "sponge_cake", "origin": [0, 4], "rotation": 0}
+        ]
+      }
+    },
+    "afternoon_wave": {
+      "id": "afternoon_wave",
+      "display_name": "午后连浪",
+      "encounter_type": "normal",
+      "rule_tags": ["sustained_service"],
+      "required_mechanism_tags": ["timed_sales", "window_satisfaction"],
+      "blueprint_hint_id": "blueprint_sustained_display",
+      "duration_ms": 30000,
+      "supply_budget": 15,
+      "initial_pickiness": 194,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 20,
+      "relation": {
+        "id": "fruit_bake_pair",
+        "left_tag": "fruit",
+        "right_tag": "bake"
+      },
+      "windows": [
+        {
+          "id": "first_wave",
+          "at_ms": 10000,
+          "metric": "sales_count",
+          "target": 6,
+          "reputation_damage": 30
+        },
+        {
+          "id": "steady_counter",
+          "at_ms": 20000,
+          "from_ms": 8000,
+          "metric": "window_satisfaction",
+          "target": 72,
+          "reputation_damage": 35
+        },
+        {
+          "id": "late_wave",
+          "at_ms": 28000,
+          "from_ms": 20000,
+          "metric": "window_satisfaction",
+          "target": 35,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {"instance_id": "afternoon_sponge", "recipe_id": "sponge_cake", "origin": [0, 0], "rotation": 0},
+          {"instance_id": "afternoon_lava", "recipe_id": "chocolate_lava_cake", "origin": [0, 4], "rotation": 0},
+          {"instance_id": "afternoon_cookie", "recipe_id": "butter_cookie", "origin": [3, 0], "rotation": 0},
+          {"instance_id": "afternoon_jelly", "recipe_id": "strawberry_jelly", "origin": [2, 0], "rotation": 0}
+        ]
+      }
+    },
+    "weekend_feature": {
+      "id": "weekend_feature",
+      "display_name": "周末招牌日",
+      "encounter_type": "elite",
+      "rule_tags": ["mixed_windows", "tight_budget"],
+      "required_mechanism_tags": ["timed_sales", "adjacency_relation", "window_satisfaction", "supply_budget"],
+      "blueprint_hint_id": "blueprint_signature_rotation",
+      "duration_ms": 30000,
+      "supply_budget": 12,
+      "initial_pickiness": 188,
+      "initial_reputation": 100,
+      "relation_bonus_pct": 25,
+      "relation": {
+        "id": "signature_fast_pair",
+        "left_tag": "signature",
+        "right_tag": "fast"
+      },
+      "windows": [
+        {
+          "id": "feature_launch",
+          "at_ms": 8000,
+          "metric": "sales_count",
+          "target": 3,
+          "reputation_damage": 30
+        },
+        {
+          "id": "feature_pair",
+          "at_ms": 16000,
+          "metric": "active_relation_count",
+          "target": 1,
+          "reputation_damage": 35
+        },
+        {
+          "id": "feature_hold",
+          "at_ms": 28000,
+          "from_ms": 16000,
+          "metric": "window_satisfaction",
+          "target": 62,
+          "reputation_damage": 40
+        }
+      ],
+      "validation_draft": {
+        "placements": [
+          {"instance_id": "weekend_sponge", "recipe_id": "sponge_cake", "origin": [0, 0], "rotation": 0},
+          {"instance_id": "weekend_cookie", "recipe_id": "butter_cookie", "origin": [2, 0], "rotation": 0},
+          {"instance_id": "weekend_lava", "recipe_id": "chocolate_lava_cake", "origin": [0, 4], "rotation": 0}
+        ]
+      }
+    },
+    "picky_food_critic": {
+      "id": "picky_food_critic",
+      "display_name": "挑剔美食评论家",
+      "encounter_type": "final_boss",
+      "rule_tags": ["combined_exam"],
+      "required_mechanism_tags": ["timed_sales", "adjacency_relation", "window_satisfaction"],
+      "blueprint_hint_id": "blueprint_critic_signature",
+      "duration_ms": 30000,
+      "supply_budget": 16,
       "initial_pickiness": 197,
       "initial_reputation": 100,
       "relation_bonus_pct": 25,
@@ -30,10 +236,18 @@
           "at_ms": 24000,
           "from_ms": 16000,
           "metric": "window_satisfaction",
-          "target": 30,
+          "target": 74,
           "reputation_damage": 45
         }
-      ]
+      ],
+      "validation_draft": {
+        "placements": [
+          {"instance_id": "critic_pudding", "recipe_id": "milk_pudding", "origin": [0, 0], "rotation": 0},
+          {"instance_id": "critic_muffin", "recipe_id": "blueberry_muffin", "origin": [1, 0], "rotation": 0},
+          {"instance_id": "critic_sponge", "recipe_id": "sponge_cake", "origin": [0, 4], "rotation": 0},
+          {"instance_id": "critic_lava", "recipe_id": "chocolate_lava_cake", "origin": [3, 4], "rotation": 0}
+        ]
+      }
     }
   }
 }

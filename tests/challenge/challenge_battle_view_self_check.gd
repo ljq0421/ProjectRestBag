@@ -26,11 +26,15 @@ func _run() -> void:
 
 	_expect(view.get_node("TopStatus/ReputationBar") is ProgressBar, "reputation bar should exist")
 	_expect(view.get_node("TopStatus/PickinessBar") is ProgressBar, "pickiness bar should exist")
-	_expect(view.get_node("BossPanel/DemandTimeline").get_child_count() == 4, "timeline should show 8/16/24/30")
+	_expect(view.get_node("TopStatus/PickinessBar").fill_mode == 1, "boss pressure should fill from the opposite direction")
+	_expect(not view.get_node("BossPanel/BossPortrait/PressureCopy").text.is_empty(), "boss panel should explain the active pressure instead of showing an empty placeholder")
+	_expect(view.get_node("BossPanel/DemandTimeline").get_child_count() == 0, "timeline should not ship fixed window rows")
 
 	var encounter := _encounter()
 	var snapshot := _snapshot()
 	view.call("bind_encounter", encounter)
+	var timeline: Node = view.get_node("BossPanel/DemandTimeline")
+	_expect(timeline.get_child_count() == 4, "timeline should build three encounter windows plus the deadline")
 	var finished_count := {"value": 0}
 	view.connect("battle_finished", func(_final_state: Dictionary) -> void:
 		finished_count["value"] = int(finished_count["value"]) + 1
@@ -38,7 +42,10 @@ func _run() -> void:
 	view.call("start_battle", snapshot, 42)
 	_expect(bool(view.get("battle_locked")), "battle should lock immediately")
 	view.call("advance_for_test", 16000)
-	_expect(view.get_node("BossPanel/DemandTimeline/Window16").has_theme_color_override("font_color"), "current window should be visually resolved")
+	var current_window := _timeline_window(timeline, "linked_display")
+	_expect(current_window != null and current_window.text.begins_with("✓"), "current dynamic window should show event resolution")
+	_expect(current_window != null and not "linked_display" in current_window.text, "resolved windows should not expose internal IDs")
+	_expect(not "butter_cookie" in view.get_node("BattleFooter/CurrentDemandLabel").text, "sale feedback should use the player-facing recipe name")
 
 	var saved_state: Dictionary = (view.get("battle_state") as Dictionary).duplicate(true)
 	view.call("restore_battle", saved_state, encounter)
@@ -99,6 +106,13 @@ func _encounter() -> Dictionary:
 func _expect(condition: bool, message: String) -> void:
 	if not condition:
 		_fail(message)
+
+
+func _timeline_window(timeline: Node, window_id: String) -> Label:
+	for child in timeline.get_children():
+		if String(child.get_meta("window_id", "")) == window_id:
+			return child as Label
+	return null
 
 
 func _fail(message: String) -> void:

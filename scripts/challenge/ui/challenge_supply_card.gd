@@ -22,11 +22,15 @@ func bind(next_recipe_id: String, definition: Dictionary, display_name: String =
 	recipe_definition = definition.duplicate(true)
 	$NameLabel.text = display_name if not display_name.is_empty() else next_recipe_id
 	$CostBadge.text = "备货 %d" % int(recipe_definition.get("supply_cost", 0))
+	var source_ids: Array = recipe_definition.get("_upgrade_source_ids", [])
+	$EffectBadge.text = "强化 ×%d" % source_ids.size() if not source_ids.is_empty() else ""
 	tooltip_text = "%s\n挑战备货 %d · 最多 %d 份\n不消耗经营库存" % [
 		$NameLabel.text,
 		int(recipe_definition.get("supply_cost", 0)),
 		int(recipe_definition.get("copy_limit", 0))
 	]
+	if not source_ids.is_empty():
+		tooltip_text += "\n本局强化：" + "、".join(source_ids)
 	_refresh_icon()
 	set_selected_count(selected_count)
 

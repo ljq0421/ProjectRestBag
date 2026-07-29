@@ -1,0 +1,116 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_preparation_view.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/challenge/challenge_board.tscn" id="2_board"]
+
+[sub_resource type="StyleBoxFlat" id="Style_boss"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.937255, 0.278431, 0.435294, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+content_margin_left = 26.0
+content_margin_top = 24.0
+content_margin_right = 26.0
+content_margin_bottom = 24.0
+
+[node name="ChallengePreparationView" type="VBoxContainer"]
+custom_minimum_size = Vector2(1500, 890)
+theme_override_constants/separation = 10
+script = ExtResource("1_script")
+
+[node name="StageRail" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 23
+text = "订单票据  ◆ 1  ─  ○ 2  ─  ○ 3  ─  ○ 4  ─  ○ 5"
+horizontal_alignment = 1
+
+[node name="StageMeta" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 17
+text = "第 1 / 5 场 · 信心 2 / 2 · 本局强化 0"
+horizontal_alignment = 1
+
+[node name="MainColumns" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="ChallengeBoard" parent="MainColumns" instance=ExtResource("2_board")]
+layout_mode = 2
+
+[node name="BossBrief" type="PanelContainer" parent="MainColumns"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Style_boss")
+
+[node name="Content" type="VBoxContainer" parent="MainColumns/BossBrief"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Eyebrow" type="Label" parent="MainColumns/BossBrief/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 16
+text = "本场完整需求 · 开战后全自动"
+
+[node name="BossName" type="Label" parent="MainColumns/BossBrief/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 34
+text = "早高峰客潮"
+autowrap_mode = 2
+
+[node name="BossStats" type="Label" parent="MainColumns/BossBrief/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 19
+text = "挑剔 100 · 口碑 100 · 自动战斗 30 秒"
+
+[node name="TimelineTitle" type="Label" parent="MainColumns/BossBrief/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
+theme_override_font_sizes/font_size = 20
+text = "需求时间轴"
+
+[node name="Timeline" type="Label" parent="MainColumns/BossBrief/Content"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 18
+text = "08 秒  累计售卖 ≥ 2\n16 秒  标签覆盖 ≥ 2\n30 秒  清空挑剔值"
+autowrap_mode = 2
+
+[node name="RuleHint" type="Label" parent="MainColumns/BossBrief/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 17
+text = "先读完需求，再安排形状、周期、标签与相邻关系。"
+autowrap_mode = 2
+
+[node name="SupplyScroll" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(0, 124)
+layout_mode = 2
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+
+[node name="SupplyStrip" type="HBoxContainer" parent="SupplyScroll"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BattleButton" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+disabled = true
+text = "先把配方放进挑战橱窗"

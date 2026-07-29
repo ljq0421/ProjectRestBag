@@ -1,7 +1,7 @@
 class_name ChallengeTutorialProgress
 extends RefCounted
 
-const VERSION := 1
+const VERSION := 2
 const VALID_STATUSES := ["active", "dismissed", "completed"]
 const STEPS := [
 	"boss_brief",
@@ -15,6 +15,14 @@ const STEPS := [
 	"complete"
 ]
 const ROTATABLE_RECIPE_IDS := ["milk_pudding", "blueberry_muffin"]
+const STAGE_TWO_HINTS := [
+	"five_stage_route",
+	"upgrade_choice",
+	"upgrade_prediction",
+	"completion_reward",
+	"research_unlock",
+	"next_run_recipe"
+]
 
 
 static func default_state(start_step: String = "boss_brief") -> Dictionary:
@@ -23,7 +31,8 @@ static func default_state(start_step: String = "boss_brief") -> Dictionary:
 		"status": "active",
 		"step_id": start_step if STEPS.has(start_step) else "boss_brief",
 		"completed_step_ids": [],
-		"pre_battle_draft_fingerprint": ""
+		"pre_battle_draft_fingerprint": "",
+		"seen_stage_two_hint_ids": []
 	}
 
 
@@ -53,7 +62,38 @@ func normalize(raw: Variant, context_surface: String = "preparation") -> Diction
 	value["completed_step_ids"] = completed
 	var raw_fingerprint: Variant = value.get("pre_battle_draft_fingerprint")
 	value["pre_battle_draft_fingerprint"] = raw_fingerprint if raw_fingerprint is String else ""
+	var seen_stage_two_hint_ids: Array[String] = []
+	var raw_seen_stage_two_hint_ids: Variant = value.get("seen_stage_two_hint_ids")
+	if raw_seen_stage_two_hint_ids is Array:
+		for hint_value in raw_seen_stage_two_hint_ids:
+			if (
+				hint_value is String
+				and STAGE_TWO_HINTS.has(hint_value)
+				and not seen_stage_two_hint_ids.has(hint_value)
+			):
+				seen_stage_two_hint_ids.append(hint_value)
+	value["seen_stage_two_hint_ids"] = seen_stage_two_hint_ids
 	return value
+
+
+func can_offer_stage_two_hint(state: Dictionary, hint_id: String) -> bool:
+	var normalized := normalize(state)
+	return (
+		STAGE_TWO_HINTS.has(hint_id)
+		and String(normalized.get("status", "")) == "completed"
+		and not (normalized.get("seen_stage_two_hint_ids", []) as Array).has(hint_id)
+	)
+
+
+func mark_stage_two_hint_seen(state: Dictionary, hint_id: String) -> Dictionary:
+	var next := normalize(state)
+	if not STAGE_TWO_HINTS.has(hint_id):
+		return next
+	var seen: Array = next.get("seen_stage_two_hint_ids", [])
+	if not seen.has(hint_id):
+		seen.append(hint_id)
+	next["seen_stage_two_hint_ids"] = seen
+	return next
 
 
 func apply_event(state: Dictionary, event_id: String, context: Dictionary = {}) -> Dictionary:

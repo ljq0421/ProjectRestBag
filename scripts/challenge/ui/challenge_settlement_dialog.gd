@@ -8,14 +8,20 @@ signal tutorial_help_requested
 signal tutorial_dismiss_requested
 signal tutorial_next_requested
 
+const Catalog = preload("res://scripts/catalog.gd")
 const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
+const UiStyle = preload("res://scripts/challenge/ui/challenge_ui_style.gd")
 
 var _report_open := false
 var _report_action_committed := false
 var _unexpected_hide_restore_pending := false
+var _report_victory := false
+var _catalog_recipes: Dictionary = Catalog.new().get_recipes()
 
 
 func _ready() -> void:
+	UiStyle.apply_primary($Margin/Content/ActionRow/RetryButton, Color("#E34B72"))
+	UiStyle.apply_secondary($Margin/Content/ActionRow/BackButton)
 	$Margin/Content/ActionRow/RetryButton.pressed.connect(func() -> void:
 		_request_report_action("retry")
 	)
@@ -144,6 +150,7 @@ func hide_tutorial_report() -> void:
 
 func bind_report(report: Dictionary) -> void:
 	var victory := String(report.get("outcome", "")) == "victory"
+	_report_victory = victory
 	$Margin/Content/ResultTitle.text = "挑战成功｜评论家认可了你的展示柜" if victory else "挑战失利｜调整备货后再战"
 	$Margin/Content/ResultTitle.add_theme_color_override(
 		"font_color",
@@ -163,20 +170,29 @@ func bind_report(report: Dictionary) -> void:
 		$Margin/Content/PrimaryFailure.text = "关键结论：所有已触发需求均已覆盖。"
 	else:
 		$Margin/Content/PrimaryFailure.text = "主要缺口：%s 实际 %s / 目标 %s" % [
-			String(failure.get("window_id", "")),
+			_metric_name(String(failure.get("metric", ""))),
 			_display_value(failure.get("actual")),
 			_display_value(failure.get("target"))
 		]
 	$Margin/Content/SuggestionList.text = _suggestion_rows(report.get("suggestions", []))
 
 
-func set_retry_enabled(enabled: bool) -> void:
+func set_retry_enabled(enabled: bool, final_stage: bool = false) -> void:
+	$Margin/Content/ActionRow/RetryButton.visible = enabled
 	$Margin/Content/ActionRow/RetryButton.disabled = not enabled
-	$Margin/Content/ActionRow/RetryButton.text = "调整备货，再战同一 Boss" if enabled else "本局已结束"
+	$Margin/Content/ActionRow/RetryButton.text = "调整备货，再战同一 Boss"
+	if enabled:
+		UiStyle.apply_secondary($Margin/Content/ActionRow/BackButton)
+		$Margin/Content/ActionRow/BackButton.text = "返回备战"
+	else:
+		UiStyle.apply_primary($Margin/Content/ActionRow/BackButton, Color("#546BDD"))
+		$Margin/Content/ActionRow/BackButton.text = (
+			"查看短链总结" if final_stage or not _report_victory else "选择本局强化"
+		)
 
 
 func _window_rows(windows: Array) -> String:
-	var lines: Array[String] = ["[b]需求窗口[/b]"]
+	var lines: Array[String] = ["[color=#29213d]需求窗口[/color]"]
 	for row_value in windows:
 		var row: Dictionary = row_value
 		if not bool(row.get("resolved", false)):
@@ -186,7 +202,7 @@ func _window_rows(windows: Array) -> String:
 		lines.append("%s %02ds｜%s｜%s / %s%s" % [
 			"[color=#72d6a0]✓[/color]" if passed else "[color=#ef476f]✕[/color]",
 			int(row.get("at_ms", 0) / 1000),
-			String(row.get("window_id", "")),
+			_metric_name(String(row.get("metric", ""))),
 			_display_value(row.get("actual")),
 			_display_value(row.get("target")),
 			"" if passed else "｜口碑 -%d" % int(row.get("reputation_damage", 0))
@@ -199,11 +215,11 @@ func _display_value(value: Variant) -> String:
 
 
 func _contribution_rows(rows: Array) -> String:
-	var lines: Array[String] = ["[b]配方贡献[/b]"]
+	var lines: Array[String] = ["[color=#29213d]配方贡献[/color]"]
 	for row_value in rows:
 		var row: Dictionary = row_value
 		lines.append("%s｜%d 次｜基础 %d + 联动 %d = %d" % [
-			String(row.get("recipe_id", "")),
+			_recipe_name(String(row.get("recipe_id", ""))),
 			int(row.get("sales_count", 0)),
 			int(row.get("base_satisfaction", 0)),
 			int(row.get("relation_bonus", 0)),
@@ -214,8 +230,29 @@ func _contribution_rows(rows: Array) -> String:
 	return "\n".join(lines)
 
 
+func _metric_name(metric: String) -> String:
+	match metric:
+		"sales_count":
+			return "累计出餐"
+		"active_relation_count":
+			return "有效联动"
+		"window_satisfaction":
+			return "区间满足力"
+		"tag_sales_count":
+			return "标签出餐"
+		"tag_satisfaction":
+			return "标签满足力"
+		"distinct_tag_count":
+			return "售出标签种类"
+	return "需求目标"
+
+
+func _recipe_name(recipe_id: String) -> String:
+	return String((_catalog_recipes.get(recipe_id, {}) as Dictionary).get("name", recipe_id))
+
+
 func _suggestion_rows(suggestions: Array) -> String:
-	var lines: Array[String] = ["[b]下次调整[/b]"]
+	var lines: Array[String] = ["[color=#29213d]下次调整[/color]"]
 	for suggestion_value in suggestions:
 		var suggestion: Dictionary = suggestion_value
 		lines.append("• %s" % String(suggestion.get("text", "")))

@@ -13,63 +13,75 @@ func _init() -> void:
 func _run() -> void:
 	root.size = Vector2i(1920, 1080)
 	_cleanup()
-	if not ResourceLoader.exists(MAIN_PATH):
-		_fail("challenge main scene should exist")
+	var packed: PackedScene = load(MAIN_PATH)
+	_expect(packed != null, "challenge main scene should load")
+	if packed == null:
 		_finish()
 		return
-	var main_scene = load(MAIN_PATH)
-	_expect(main_scene != null, "challenge main scene should load")
-	if main_scene == null:
-		_finish()
-		return
-	var view = main_scene.instantiate()
-	view.set("save_path", _save_path)
+	var view = packed.instantiate()
+	view.save_path = _save_path
 	root.add_child(view)
 	await process_frame
 	await process_frame
 
-	_expect(view.get_node("Root/TopBar/ConfidenceLabel").text.find("2") >= 0, "run should start with two confidence")
-	_expect(view.get_node("Root/Body/PreparationPanel").visible, "preparation should be visible first")
-	_expect(not view.get_node("Root/Body/BattlePanel").visible, "battle should be hidden before start")
-	_expect(view.has_node("Root/TopBar/TutorialHelpButton"), "main scene should include a stable tutorial help entry")
-	_expect(view.has_node("TutorialCanvasLayer/TutorialOverlay"), "main scene should include the packed root tutorial overlay")
-	_expect(view.get_node("TutorialCanvasLayer/TutorialOverlay").visible, "new save should show preparation tutorial")
+	_expect(view.get_node("Root/PageHost/HubHost").visible, "new save should open challenge hub")
+	_expect(view.has_node("Root/GlobalTopBar/TutorialHelpButton"), "global top bar should keep tutorial entry")
+	_expect(view.has_node("Root/PageHost/PreparationHost/PreparationView"), "main scene should own preparation view")
+	_expect(view.has_node("Root/PageHost/BattleView"), "main scene should own battle view")
+	_expect(view.has_node("Root/PageHost/UpgradeHost/UpgradeSelectView"), "main scene should own upgrade view")
+	_expect(view.has_node("Root/PageHost/ResearchHost/ResearchView"), "main scene should own research view")
+	_expect(view.has_node("Root/PageHost/SummaryHost/RunSummaryView"), "main scene should own summary view")
+	_expect(view.has_node("SettlementDialog"), "main scene should keep settlement dialog")
+	_expect(view.has_node("TutorialLayer/TutorialOverlay"), "main scene should keep tutorial layer")
 
-	var failing_draft := {"placements": [
-		{"instance_id": "cookie_only", "recipe_id": "butter_cookie", "origin": [0, 0], "rotation": 0}
-	]}
-	view.call("set_draft_for_test", failing_draft)
-	view.call("start_battle")
-	_expect(view.get_node("Root/Body/BattlePanel").visible, "battle should become visible")
-	view.call("advance_battle_for_test", 30000)
+	view.start_new_run_for_test(42)
 	await process_frame
-	_expect(view.get_node("SettlementDialog").visible, "settlement should open")
+	_expect(view.get_node("Root/PageHost/PreparationHost").visible, "starting run should open preparation")
+	var preparation = view.get_node("Root/PageHost/PreparationHost/PreparationView")
+	_expect(
+		preparation.get_node("SupplyScroll/SupplyStrip").get_child_count() == 6,
+		"first run should dynamically show six starter recipes"
+	)
+	var run: Dictionary = view.run_state
+	_expect((run.get("encounter_instances", []) as Array).size() == 5, "root flow should freeze five encounters")
+	_expect(int(run.get("confidence", 0)) == 2, "root flow should start with two confidence")
 
-	var run_before_retry: Dictionary = view.get("run_state")
-	var encounter_before := String(run_before_retry.get("encounter_id", ""))
-	view.get_node("SettlementDialog/Margin/Content/ActionRow/RetryButton").emit_signal("pressed")
+	var encounters: Array = run.get("encounter_instances", [])
+	var encounter: Dictionary = encounters[0]
+	view.set_draft_for_test(encounter.get("validation_draft", {}))
+	view.start_battle()
+	_expect(view.get_node("Root/PageHost/BattleView").visible, "battle page should become visible")
+	view.advance_battle_for_test(int(encounter.get("duration_ms", 0)))
 	await process_frame
-	var run_after_retry: Dictionary = view.get("run_state")
-	_expect(int(run_after_retry.get("confidence", 0)) == 1, "retry should retain one confidence")
-	_expect(String(run_after_retry.get("encounter_id", "")) == encounter_before, "retry should preserve encounter")
-	_expect(view.get_node("Root/Body/PreparationPanel").visible, "retry should return to preparation")
+	await process_frame
+	_expect(view.get_node("SettlementDialog").visible, "finished battle should open settlement report")
+	_expect(String(view.battle_state.get("outcome", "")) == "victory", "stage validation draft should win")
 
-	var passing_draft := {"placements": [
-		{"instance_id": "pudding_1", "recipe_id": "milk_pudding", "origin": [0, 0], "rotation": 0},
-		{"instance_id": "muffin_1", "recipe_id": "blueberry_muffin", "origin": [1, 0], "rotation": 0},
-		{"instance_id": "pudding_2", "recipe_id": "milk_pudding", "origin": [0, 3], "rotation": 0},
-		{"instance_id": "muffin_2", "recipe_id": "blueberry_muffin", "origin": [1, 3], "rotation": 0},
-		{"instance_id": "cookie_1", "recipe_id": "butter_cookie", "origin": [4, 0], "rotation": 0},
-		{"instance_id": "cookie_2", "recipe_id": "butter_cookie", "origin": [4, 1], "rotation": 0}
-	]}
-	view.call("set_draft_for_test", passing_draft)
-	view.call("start_battle")
-	view.call("advance_battle_for_test", 30000)
+	view.get_node("SettlementDialog/Margin/Content/ActionRow/BackButton").emit_signal("pressed")
 	await process_frame
-	var final_battle: Dictionary = view.get("battle_state")
-	_expect(String(final_battle.get("outcome", "")) == "victory", "reworked draft should win")
-	_expect(int(final_battle.get("total_satisfaction", 0)) == 212, "winning draft should produce 212 total satisfaction")
-	_expect(int(final_battle.get("pickiness", -1)) == 0, "winning draft should clear Boss pickiness")
+	_expect(view.get_node("Root/PageHost/UpgradeHost").visible, "first victory should open persisted upgrade choice")
+	var upgrade_view = view.get_node("Root/PageHost/UpgradeHost/UpgradeSelectView")
+	_expect(
+		upgrade_view.get_node("Content/Candidates/Candidate0").visible
+		and upgrade_view.get_node("Content/Candidates/Candidate2").visible,
+		"upgrade page should show three candidates"
+	)
+	upgrade_view.get_node("Content/Candidates/Candidate0").emit_signal("pressed")
+	await process_frame
+	_expect(view.get_node("Root/PageHost/PreparationHost").visible, "upgrade choice should advance to next preparation")
+	_expect(int(view.run_state.get("stage_index", -1)) == 1, "upgrade choice should advance exactly one stage")
+	_expect((view.run_state.get("run_upgrades", []) as Array).size() == 1, "chosen upgrade should be stored as structured run effect")
+
+	var main_text := FileAccess.get_file_as_string("res://scripts/challenge/challenge_main_view.gd")
+	_expect(
+		main_text.find("run_state[\"phase\"] =") == -1,
+		"main view must not write run phases directly"
+	)
+	_expect(
+		main_text.find("settlement_id :=") == -1
+		and main_text.find("reward_transaction_id :=") == -1,
+		"main view must not manufacture transaction identities"
+	)
 
 	view.queue_free()
 	await process_frame
@@ -85,12 +97,7 @@ func _cleanup() -> void:
 
 
 func _expect(condition: bool, message: String) -> void:
-	if not condition:
-		_fail(message)
-
-
-func _fail(message: String) -> void:
-	if not _failures.has(message):
+	if not condition and not _failures.has(message):
 		_failures.append(message)
 
 
@@ -100,6 +107,6 @@ func _finish() -> void:
 		print("CHALLENGE_MAIN_SCENE_SELF_CHECK_PASS")
 		quit(0)
 		return
-	for message in _failures:
-		push_error(message)
+	for failure in _failures:
+		push_error(failure)
 	quit(1)
