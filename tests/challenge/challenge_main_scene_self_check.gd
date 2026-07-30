@@ -39,6 +39,14 @@ func _run() -> void:
 	_expect(view.get_node("Root/PageHost/PreparationHost").visible, "starting run should open preparation")
 	var preparation = view.get_node("Root/PageHost/PreparationHost/PreparationView")
 	_expect(
+		preparation.has_node("MainColumns/BossBrief/Content/BuildGuide/RelationRule"),
+		"preparation should keep the build rule in the scene"
+	)
+	_expect(
+		(preparation.get_node("MainColumns/BossBrief/Content/BuildGuide/RelationRule") as Label).text.find("上下左右贴边") >= 0,
+		"preparation should explain how the encounter bonus activates"
+	)
+	_expect(
 		preparation.supply_cards().size() == 6,
 		"first run should dynamically show six starter recipes"
 	)

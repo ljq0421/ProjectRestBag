@@ -20,6 +20,24 @@ const RecipeIconService = preload("res://scripts/recipe_icon_service.gd")
 const ShowcaseIconService = preload("res://scripts/ui/storefront/showcase_icon_service.gd")
 const ChallengeLoadoutServiceClass = preload("res://scripts/challenge/challenge_loadout_service.gd")
 const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
+const TAG_NAMES := {
+	"fast": "快速",
+	"bake": "烘焙",
+	"fruit": "水果",
+	"drink": "饮品",
+	"set": "搭配",
+	"signature": "招牌",
+	"chocolate": "巧克力",
+	"aromatic": "香气",
+	"soft": "软糯",
+	"tea": "茶香",
+	"crisp": "香脆",
+	"savory": "咸香",
+	"hearty": "饱腹",
+	"refreshing": "清爽",
+	"rich": "浓郁",
+	"spatial": "空间"
+}
 
 var _recipe_defs: Dictionary = {}
 var _effective_context: Dictionary = {}
@@ -201,15 +219,52 @@ func effective_recipe_defs() -> Dictionary:
 	return _recipe_defs.duplicate(true)
 
 
+func get_build_summary() -> Dictionary:
+	var cycle_min_ms := 0
+	var cycle_max_ms := 0
+	var boosted_instances := {}
+	var relation_bonus_pct := 0
+	for value in _analysis.get("instances", []):
+		if not value is Dictionary:
+			continue
+		var cycle_ms := int(value.get("cycle_ms", 0))
+		if cycle_ms > 0:
+			cycle_min_ms = cycle_ms if cycle_min_ms == 0 else mini(cycle_min_ms, cycle_ms)
+			cycle_max_ms = maxi(cycle_max_ms, cycle_ms)
+	for value in _analysis.get("relations", []):
+		if not value is Dictionary:
+			continue
+		boosted_instances[String(value.get("left_instance_id", ""))] = true
+		boosted_instances[String(value.get("right_instance_id", ""))] = true
+		relation_bonus_pct = maxi(relation_bonus_pct, int(value.get("bonus_pct", 0)))
+	return {
+		"instance_count": (_analysis.get("instances", []) as Array).size(),
+		"cycle_min_ms": cycle_min_ms,
+		"cycle_max_ms": cycle_max_ms,
+		"relation_count": (_analysis.get("relations", []) as Array).size(),
+		"boosted_instance_count": boosted_instances.size(),
+		"relation_bonus_pct": relation_bonus_pct
+	}
+
+
 func get_tutorial_target_rects(kind: String, instance_id: String = "") -> Array[Rect2]:
 	match kind:
 		"board":
 			return [ChallengeTutorialOverlay.control_screen_rect($BoardFrame)]
 		"risk":
+			var header_rect := ChallengeTutorialOverlay.control_screen_rect(
+				$Header/BudgetLabel
+			).merge(
+				ChallengeTutorialOverlay.control_screen_rect($Header/CoverageLabel)
+			)
 			return [
-				ChallengeTutorialOverlay.control_screen_rect($Header),
-				ChallengeTutorialOverlay.control_screen_rect($RiskLabel),
-				ChallengeTutorialOverlay.control_screen_rect($RelationSummary)
+				header_rect,
+				ChallengeTutorialOverlay.control_content_screen_rect($RiskLabel),
+				ChallengeTutorialOverlay.control_content_screen_rect($RelationSummary)
+			]
+		"relation":
+			return [
+				ChallengeTutorialOverlay.control_content_screen_rect($RelationSummary)
 			]
 		"instance":
 			var rects: Array[Rect2] = []
@@ -289,10 +344,28 @@ func _refresh_header() -> void:
 
 func _refresh_relations() -> void:
 	var relations: Array = _analysis.get("relations", [])
+	var relation: Dictionary = _encounter.get("relation", {})
+	var left_tag := _tag_name(String(relation.get("left_tag", "")))
+	var right_tag := _tag_name(String(relation.get("right_tag", "")))
+	var pair_text := "%s × %s" % [left_tag, right_tag]
 	if relations.is_empty():
-		$RelationSummary.text = "[color=#9e94b6]组合联动：尚未激活｜让饮品与烘焙配方上下左右相邻[/color]"
+		$RelationSummary.text = (
+			"[color=#9e94b6]相邻加成：未触发｜把「%s」和「%s」上下左右贴边[/color]" % [
+				left_tag,
+				right_tag
+			]
+			if not left_tag.is_empty() and not right_tag.is_empty()
+			else "[color=#9e94b6]相邻加成：本场无标签配对规则[/color]"
+		)
 	else:
-		$RelationSummary.text = "[color=#72d6a0][b]组合联动：饮品 × 烘焙 × %d[/b][/color]  每个参与配方获得一次 25%% 满意度加成" % relations.size()
+		var bonus_pct := int(relations[0].get("bonus_pct", 0))
+		$RelationSummary.text = (
+			"[color=#72d6a0][b]相邻加成：%s 已触发 %d 组[/b][/color]  两边配方每次售卖 +%d%% 满足力" % [
+				pair_text,
+				relations.size(),
+				bonus_pct
+			]
+		)
 
 
 func _build_cells() -> void:
@@ -454,3 +527,7 @@ func _string_array(values: Array) -> Array[String]:
 	for value in values:
 		result.append(String(value))
 	return result
+
+
+func _tag_name(tag: String) -> String:
+	return String(TAG_NAMES.get(tag, tag))

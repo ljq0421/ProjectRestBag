@@ -111,13 +111,13 @@ func _run() -> void:
 	await process_frame
 	var offset_material := offset_overlay.get_node("VisualOverlay").material as ShaderMaterial
 	var offset_uniform: Vector4 = offset_material.get_shader_parameter("target_0")
-	_expect(is_equal_approx(offset_uniform.x, 112.0 / 900.0), "offset overlay normalizes target x locally")
-	_expect(is_equal_approx(offset_uniform.y, 112.0 / 500.0), "offset overlay normalizes target y locally")
-	_expect(is_equal_approx(offset_uniform.z, 196.0 / 900.0), "offset overlay normalizes target width locally")
-	_expect(is_equal_approx(offset_uniform.w, 116.0 / 500.0), "offset overlay normalizes target height locally")
+	_expect(is_equal_approx(offset_uniform.x, 120.0 / 900.0), "offset overlay normalizes target x locally")
+	_expect(is_equal_approx(offset_uniform.y, 120.0 / 500.0), "offset overlay normalizes target y locally")
+	_expect(is_equal_approx(offset_uniform.z, 180.0 / 900.0), "offset overlay normalizes target width locally")
+	_expect(is_equal_approx(offset_uniform.w, 100.0 / 500.0), "offset overlay normalizes target height locally")
 	var offset_outline := offset_overlay.get_node("OutlineHost/TargetOutline0") as Control
-	_expect(offset_outline.position.is_equal_approx(Vector2(112, 112)), "offset overlay places outline locally")
-	_expect(offset_outline.size.is_equal_approx(Vector2(196, 116)), "offset overlay keeps padded outline size")
+	_expect(offset_outline.position.is_equal_approx(Vector2(120, 120)), "offset overlay places outline exactly")
+	_expect(offset_outline.size.is_equal_approx(Vector2(180, 100)), "offset overlay keeps exact target size")
 	_expect(
 		Rect2(Vector2(600, 300), Vector2(900, 500)).encloses(offset_overlay.get_hint_rect_for_test()),
 		"offset overlay keeps hint inside its visible bounds"
@@ -125,6 +125,7 @@ func _run() -> void:
 
 	var below_targets: Array[Rect2] = [Rect2(630, 680, 840, 80)]
 	offset_overlay.show_step(4, 9, "下方目标", "箭头应从提示卡边缘指向下方。", below_targets)
+	await process_frame
 	await process_frame
 	var below_arrow := offset_overlay.get_node("Arrow") as Control
 	_expect(below_arrow.text == "↓", "arrow points downward toward a below target")
@@ -154,10 +155,10 @@ func _run() -> void:
 	await process_frame
 	var stretched_material := stretched_overlay.get_node("VisualOverlay").material as ShaderMaterial
 	var stretched_uniform: Vector4 = stretched_material.get_shader_parameter("target_0")
-	_expect(is_equal_approx(stretched_uniform.x, 92.0 / 800.0), "canvas transform keeps target x in containing canvas")
-	_expect(is_equal_approx(stretched_uniform.y, 92.0 / 440.0), "canvas transform keeps target y in containing canvas")
-	_expect(is_equal_approx(stretched_uniform.z, 176.0 / 800.0), "canvas transform keeps target width local")
-	_expect(is_equal_approx(stretched_uniform.w, 96.0 / 440.0), "canvas transform keeps target height local")
+	_expect(is_equal_approx(stretched_uniform.x, 100.0 / 800.0), "canvas transform keeps target x in containing canvas")
+	_expect(is_equal_approx(stretched_uniform.y, 100.0 / 440.0), "canvas transform keeps target y in containing canvas")
+	_expect(is_equal_approx(stretched_uniform.z, 160.0 / 800.0), "canvas transform keeps target width local")
+	_expect(is_equal_approx(stretched_uniform.w, 80.0 / 440.0), "canvas transform keeps target height local")
 	viewport.canvas_transform = original_canvas_transform
 
 	var report_popup := PopupPanel.new()

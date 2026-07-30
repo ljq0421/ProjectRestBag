@@ -130,6 +130,19 @@ func _bind_boss(encounter: Dictionary) -> void:
 			])
 	lines.append("%02d 秒  清空挑剔值" % (int(encounter.get("duration_ms", 0)) / 1000))
 	$MainColumns/BossBrief/Content/Timeline.text = "\n".join(lines)
+	var relation: Dictionary = encounter.get("relation", {})
+	var left_tag := _tag_name(String(relation.get("left_tag", "")))
+	var right_tag := _tag_name(String(relation.get("right_tag", "")))
+	var bonus_pct := int(encounter.get("relation_bonus_pct", 0))
+	$MainColumns/BossBrief/Content/BuildGuide/RelationRule.text = (
+		"本场联动：%s × %s，上下左右贴边后，两边每次售卖 +%d%% 满足力" % [
+			left_tag,
+			right_tag,
+			bonus_pct
+		]
+		if not left_tag.is_empty() and not right_tag.is_empty()
+		else "本场没有相邻联动，优先按需求选择周期、满足力和标签。"
+	)
 
 
 func _rebuild_supply_cards() -> void:
@@ -169,6 +182,7 @@ func _rebuild_supply_cards() -> void:
 
 func _on_draft_changed(draft: Dictionary) -> void:
 	_update_counts(draft)
+	_refresh_build_guide()
 	$BattleButton.disabled = (
 		(draft.get("placements", []) as Array).is_empty()
 		or not $MainColumns/ChallengeBoard.is_current_draft_valid()
@@ -179,6 +193,47 @@ func _on_draft_changed(draft: Dictionary) -> void:
 		else "锁定橱窗，开始自动战斗"
 	)
 	draft_changed.emit(draft.duplicate(true))
+
+
+func _refresh_build_guide() -> void:
+	var summary: Dictionary = $MainColumns/ChallengeBoard.get_build_summary()
+	var instance_count := int(summary.get("instance_count", 0))
+	if instance_count <= 0:
+		$MainColumns/BossBrief/Content/BuildGuide/LiveBuild.text = (
+			"当前构筑：尚未摆放配方。先从卡面比较“秒/次、满足、标签”。"
+		)
+		return
+	var cycle_min_ms := int(summary.get("cycle_min_ms", 0))
+	var cycle_max_ms := int(summary.get("cycle_max_ms", 0))
+	var relation_count := int(summary.get("relation_count", 0))
+	var boosted_count := int(summary.get("boosted_instance_count", 0))
+	var relation_bonus_pct := int(summary.get("relation_bonus_pct", 0))
+	var cycle_text := (
+		"%s 秒" % _seconds_text(cycle_min_ms)
+		if cycle_min_ms == cycle_max_ms
+		else "%s～%s 秒" % [
+			_seconds_text(cycle_min_ms),
+			_seconds_text(cycle_max_ms)
+		]
+	)
+	$MainColumns/BossBrief/Content/BuildGuide/LiveBuild.text = (
+		"当前构筑：%d 份 · 售卖周期 %s · 联动 %d 组（%d 份获得 +%d%%）" % [
+			instance_count,
+			cycle_text,
+			relation_count,
+			boosted_count,
+			relation_bonus_pct if relation_count > 0 else 0
+		]
+	)
+
+
+func _seconds_text(milliseconds: int) -> String:
+	var seconds := float(milliseconds) / 1000.0
+	return (
+		"%d" % int(seconds)
+		if is_equal_approx(seconds, float(int(seconds)))
+		else "%.1f" % seconds
+	)
 
 
 func _update_counts(draft: Dictionary) -> void:

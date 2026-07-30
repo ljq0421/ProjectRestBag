@@ -25,6 +25,7 @@ var _tutorial_replay_mode := false
 var _tutorial_replay_step_index := 0
 var _stage_two_hint_id := ""
 var _binding_preparation := false
+var _tutorial_refresh_queued := false
 var _last_saved_second := -1
 var _page := "hub"
 var _selected_route_id := ROUTE_ID
@@ -131,6 +132,9 @@ func start_new_run_for_test(seed: int = 42) -> void:
 
 
 func _connect_signals() -> void:
+	get_viewport().size_changed.connect(
+		func() -> void: call_deferred("_refresh_tutorial_after_layout")
+	)
 	var hub = $Root/PageHost/HubHost/HubView
 	hub.start_requested.connect(func() -> void: start_new_run())
 	hub.endless_requested.connect(func() -> void: start_endless_run())
@@ -479,6 +483,7 @@ func _on_draft_changed(draft: Dictionary) -> void:
 			"draft": draft,
 			"draft_valid": board.is_current_draft_valid()
 		})
+	call_deferred("_refresh_tutorial_after_layout")
 
 
 func _set_page(page: String) -> void:
@@ -561,7 +566,12 @@ func _apply_tutorial_event(event_id: String, context: Dictionary = {}) -> void:
 
 
 func _refresh_tutorial_after_layout() -> void:
+	if _tutorial_refresh_queued:
+		return
+	_tutorial_refresh_queued = true
 	await get_tree().process_frame
+	await get_tree().process_frame
+	_tutorial_refresh_queued = false
 	if is_inside_tree():
 		_refresh_tutorial()
 
@@ -708,7 +718,11 @@ func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
 		"rotate_recipe", "rearrange":
 			return board.get_tutorial_target_rects("board")
 		"read_risk":
-			return board.get_tutorial_target_rects("risk")
+			var result: Array[Rect2] = board.get_tutorial_target_rects("relation")
+			result.append_array(_visible_target_rects([
+				preparation.get_node("MainColumns/BossBrief/Content/BuildGuide")
+			]))
+			return result
 		"start_battle":
 			return _visible_target_rects([preparation.get_node("BattleButton")])
 		"observe_battle":
@@ -837,11 +851,21 @@ func _tutorial_copy(step_id: String) -> Dictionary:
 		"boss_brief":
 			return {"title": "先读懂本场客潮", "body": "每场都有完整时间轴；开战后橱窗会全自动售卖。", "confirm": "看懂了"}
 		"place_recipe":
-			return {"title": "安排挑战备货", "body": "把配方拖进橱窗。本模式使用独立备货，不消耗经营库存。"}
+			return {
+				"title": "先读卡面，再拖进橱窗",
+				"body": "卡面直接显示售卖周期、每次满足力、库存和标签。先挑一对符合本场联动标签的配方。"
+			}
 		"rotate_recipe":
-			return {"title": "旋转与重排", "body": "右键旋转可旋转配方；形状和相邻关系会改变构筑。"}
+			return {
+				"title": "让联动标签上下左右贴边",
+				"body": "右键旋转、拖动重排；斜角不算相邻。贴边成功后，棋盘下方会立即显示加成组数。"
+			}
 		"read_risk":
-			return {"title": "看覆盖预测", "body": "预算、窗口、标签和关系风险会随布局变化。", "confirm": "继续"}
+			return {
+				"title": "确认当前构筑真的获得加成",
+				"body": "右侧“当前构筑”会汇总周期和生效配方；棋盘下方会写明本场标签配对、组数与加成百分比。",
+				"confirm": "继续"
+			}
 		"start_battle":
 			return {"title": "锁定后自动战斗", "body": "开战后不能移动配方，直到本场战报确认。"}
 		"observe_battle":

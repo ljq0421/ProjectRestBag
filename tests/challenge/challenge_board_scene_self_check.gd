@@ -48,6 +48,9 @@ func _run() -> void:
 	var rotated_draft: Dictionary = board.call("get_draft")
 	_expect(rotated_draft["placements"][0]["rotation"] == 90, "rotation intent should advance by 90 degrees")
 	_expect(int(board.call("get_occupied_cell_count")) == 2, "rotated milk pudding should still occupy two cells")
+	var single_summary: Dictionary = board.call("get_build_summary")
+	_expect(int(single_summary.get("instance_count", 0)) == 1, "board should expose live build count")
+	_expect(int(single_summary.get("cycle_min_ms", 0)) == 5000, "board should expose build cycle range")
 
 	board.call("set_locked", true)
 	var locked_before := JSON.stringify(board.call("get_draft"))
@@ -65,6 +68,10 @@ func _run() -> void:
 	supply.call("set_selected_count", 2)
 	_expect((supply.get_node("CountBadge") as Label).text.find("2") >= 0, "supply card should show selected count")
 	_expect((supply.get_node("CostBadge") as Label).text.find("2") >= 0, "supply card should show challenge cost")
+	_expect((supply.get_node("StatsLabel") as Label).text.find("4 秒/次") >= 0, "supply card should show sale cycle")
+	_expect((supply.get_node("StatsLabel") as Label).text.find("满足 4") >= 0, "supply card should show satisfaction")
+	_expect((supply.get_node("TagsLabel") as Label).text.find("快速") >= 0, "supply card should show localized tags")
+	_expect(supply.tooltip_text.find("上下左右贴边") >= 0, "supply tooltip should explain adjacency")
 
 	supply.queue_free()
 	board.queue_free()

@@ -6,14 +6,17 @@ signal dismiss_requested
 signal next_requested
 
 const SAFE_MARGIN := 24.0
-const TARGET_PADDING := 8.0
+const TARGET_PADDING := 0.0
+const TARGET_AVOIDANCE_PADDING := 8.0
 const ARROW_GAP := 6.0
 const MAX_TARGETS := 4
 
 var _targets: Array[Rect2] = []
+var _screen_targets: Array[Rect2] = []
 
 
 func _ready() -> void:
+	resized.connect(_reapply_targets_after_resize)
 	$HintHost/HintPanel.resized.connect(_layout_hint)
 	$HintHost/HintPanel/Margin/Content/ActionRow/DismissButton.pressed.connect(func() -> void: dismiss_requested.emit())
 	$HintHost/HintPanel/Margin/Content/ActionRow/ConfirmButton.pressed.connect(func() -> void: confirm_requested.emit())
@@ -33,11 +36,18 @@ func show_step(step_number: int, total_steps: int, title: String, body: String, 
 
 
 func set_targets(targets: Array[Rect2]) -> void:
+	_screen_targets = targets.duplicate()
+	_apply_targets()
+
+
+func _apply_targets() -> void:
 	_targets.clear()
 	var visible_rect := Rect2(Vector2.ZERO, size)
-	for target in targets.slice(0, MAX_TARGETS):
+	for target in _screen_targets.slice(0, MAX_TARGETS):
 		var local_target := _screen_rect_to_local(target)
-		var padded: Rect2 = local_target.grow(TARGET_PADDING).intersection(visible_rect)
+		var padded := _pixel_aligned_rect(
+			local_target.grow(TARGET_PADDING).intersection(visible_rect)
+		)
 		if padded.has_area():
 			_targets.append(padded)
 	var material := $VisualOverlay.material as ShaderMaterial
@@ -60,6 +70,7 @@ func set_targets(targets: Array[Rect2]) -> void:
 func hide_step() -> void:
 	visible = false
 	_targets.clear()
+	_screen_targets.clear()
 	$Arrow.visible = false
 
 
@@ -88,6 +99,7 @@ func _layout_hint() -> void:
 		target_union = _targets[0]
 		for target in _targets.slice(1):
 			target_union = target_union.merge(target)
+		target_union = target_union.grow(TARGET_AVOIDANCE_PADDING)
 	var candidates := [Vector2(target_union.end.x + 24.0, target_union.position.y), Vector2(target_union.position.x - hint.size.x - 24.0, target_union.position.y), Vector2(target_union.position.x, target_union.end.y + 24.0), Vector2(target_union.position.x, target_union.position.y - hint.size.y - 24.0)]
 	var chosen := safe.get_center() - hint.size * 0.5
 	for candidate in candidates:
@@ -118,11 +130,40 @@ func _layout_hint() -> void:
 
 
 static func control_screen_rect(control: Control) -> Rect2:
+	control.force_update_transform()
 	return _transform_rect(control.get_screen_transform(), Rect2(Vector2.ZERO, control.size))
 
 
+static func control_content_screen_rect(control: Control) -> Rect2:
+	control.force_update_transform()
+	var content_size := control.get_combined_minimum_size()
+	if control is RichTextLabel:
+		content_size.x = float(control.call("get_content_width"))
+		content_size.y = float(control.call("get_content_height"))
+	content_size.x = clampf(content_size.x, 1.0, control.size.x)
+	content_size.y = clampf(content_size.y, 1.0, control.size.y)
+	return _transform_rect(
+		control.get_screen_transform(),
+		Rect2(Vector2.ZERO, content_size)
+	)
+
+
 func _screen_rect_to_local(screen_rect: Rect2) -> Rect2:
+	force_update_transform()
 	return _transform_rect(get_screen_transform().affine_inverse(), screen_rect)
+
+
+func _reapply_targets_after_resize() -> void:
+	if visible and not _screen_targets.is_empty():
+		call_deferred("_apply_targets")
+
+
+func _pixel_aligned_rect(rect: Rect2) -> Rect2:
+	if not rect.has_area():
+		return rect
+	var start := rect.position.floor()
+	var finish := rect.end.ceil()
+	return Rect2(start, finish - start)
 
 
 static func _transform_rect(transform: Transform2D, rect: Rect2) -> Rect2:

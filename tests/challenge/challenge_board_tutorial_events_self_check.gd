@@ -50,7 +50,12 @@ func _run() -> void:
 	_expect(events.size() == event_count, "rejected placement emits no success event")
 	_expect(board.is_current_draft_valid(), "committed draft remains valid")
 	_expect(not board.get_tutorial_target_rects("board").is_empty(), "board target resolves")
-	_expect(not board.get_tutorial_target_rects("risk").is_empty(), "risk target resolves")
+	var risk_targets: Array[Rect2] = board.get_tutorial_target_rects("risk")
+	_expect(not risk_targets.is_empty(), "risk target resolves")
+	_expect(
+		risk_targets[0].size.x < board.size.x,
+		"risk highlight should hug the visible header chips instead of the full row"
+	)
 	_expect(not board.get_tutorial_target_rects("instance", "pudding_1").is_empty(), "instance cells resolve")
 
 	board.queue_free()
