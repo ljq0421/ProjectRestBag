@@ -141,6 +141,10 @@ func fragment(recipe_id: String, variant_id: String, rotation: int, local_cell: 
 	return atlas
 
 
+func layout_texture(layout: Dictionary) -> Texture2D:
+	return _texture(String(layout.get("texture_path", "")))
+
+
 func texture_cache_size() -> int:
 	return _texture_cache.size()
 

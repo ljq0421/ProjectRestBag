@@ -29,11 +29,17 @@ func _run() -> void:
 
 	var valid_draft := {"placements": [
 		{"instance_id": "pudding_1", "recipe_id": "milk_pudding", "origin": [2, 2], "rotation": 0},
-		{"instance_id": "muffin_1", "recipe_id": "blueberry_muffin", "origin": [2, 4], "rotation": 0}
+		{"instance_id": "muffin_1", "recipe_id": "blueberry_muffin", "origin": [2, 3], "rotation": 0}
 	]}
 	var valid: Dictionary = service.analyze(valid_draft, defs, 6, 8, 16, encounter)
 	_expect(bool(valid.get("valid", false)), "adjacent set pair should be valid")
 	_expect((valid.get("relations", []) as Array).size() == 1, "drink and bake pair should form one relation")
+	var valid_instances: Array = valid.get("instances", [])
+	if not valid_instances.is_empty():
+		_expect(
+			valid_instances[0].get("cells", []) == [[2, 2], [3, 2]],
+			"shape coordinates (0,0),(0,1) should resolve as a vertical two-cell recipe"
+		)
 	var built: Dictionary = service.build_snapshot(valid_draft, defs, encounter, 6, 8, 16)
 	_expect(bool(built.get("ok", false)), "valid draft should build a battle snapshot")
 	var snapshot_text := JSON.stringify(built.get("snapshot", {}))
@@ -45,12 +51,22 @@ func _run() -> void:
 		{"instance_id": "a", "recipe_id": "sponge_cake", "origin": [0, 0], "rotation": 0},
 		{"instance_id": "b", "recipe_id": "butter_cookie", "origin": [1, 1], "rotation": 0}
 	]}
-	_expect(not bool(service.analyze(overlap, defs, 6, 8, 16, encounter).get("valid", true)), "overlap should be invalid")
+	var overlap_result: Dictionary = service.analyze(overlap, defs, 6, 8, 16, encounter)
+	_expect(not bool(overlap_result.get("valid", true)), "overlap should be invalid")
+	_expect(
+		(overlap_result.get("errors", []) as Array).has("无法放置：目标格子已被其他配方占用"),
+		"overlap placement error should be user-facing Chinese"
+	)
 
 	var out_of_bounds := {"placements": [
 		{"instance_id": "edge", "recipe_id": "sponge_cake", "origin": [5, 7], "rotation": 0}
 	]}
-	_expect(not bool(service.analyze(out_of_bounds, defs, 6, 8, 16, encounter).get("valid", true)), "out-of-bounds placement should be invalid")
+	var out_of_bounds_result: Dictionary = service.analyze(out_of_bounds, defs, 6, 8, 16, encounter)
+	_expect(not bool(out_of_bounds_result.get("valid", true)), "out-of-bounds placement should be invalid")
+	_expect(
+		(out_of_bounds_result.get("errors", []) as Array).has("无法放置：配方会超出展示柜边界"),
+		"out-of-bounds placement error should be user-facing Chinese"
+	)
 
 	var unknown := {"placements": [
 		{"instance_id": "mystery", "recipe_id": "not_a_recipe", "origin": [0, 0], "rotation": 0}
@@ -86,7 +102,7 @@ func _run() -> void:
 	_expect(bool(rotated_result.get("valid", false)), "90-degree milk pudding rotation should be valid")
 	var rotated_instances: Array = rotated_result.get("instances", [])
 	if not rotated_instances.is_empty():
-		_expect(rotated_instances[0].get("cells", []) == [[1, 1], [2, 1]], "rotation should normalize to a vertical two-cell shape")
+		_expect(rotated_instances[0].get("cells", []) == [[1, 1], [1, 2]], "90-degree rotation should produce a horizontal two-cell shape")
 
 	var forbidden_rotation := {"placements": [
 		{"instance_id": "square", "recipe_id": "sponge_cake", "origin": [0, 0], "rotation": 90}

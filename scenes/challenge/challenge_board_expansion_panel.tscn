@@ -1,0 +1,108 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/challenge/ui/challenge_board_expansion_panel.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+bg_color = Color(0.968627, 0.956863, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+content_margin_left = 22.0
+content_margin_top = 20.0
+content_margin_right = 22.0
+content_margin_bottom = 20.0
+
+[node name="ExpansionPanel" type="PanelContainer"]
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("Style_panel")
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 28
+text = "扩建展示柜"
+
+[node name="TicketLabel" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
+theme_override_font_sizes/font_size = 20
+text = "持有扩建券：0 张"
+
+[node name="HelpLabel" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 15
+text = "选形状 → 可旋转 → 在棋盘预览 → 点击确认。新格必须与现有区域上下左右相连。"
+autowrap_mode = 2
+
+[node name="ProductGrid" type="GridContainer" parent="Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Product0" type="Button" parent="Content/ProductGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+toggle_mode = true
+
+[node name="Product1" type="Button" parent="Content/ProductGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+toggle_mode = true
+
+[node name="Product2" type="Button" parent="Content/ProductGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+toggle_mode = true
+
+[node name="Product3" type="Button" parent="Content/ProductGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+toggle_mode = true
+
+[node name="Product4" type="Button" parent="Content/ProductGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+toggle_mode = true
+
+[node name="Product5" type="Button" parent="Content/ProductGrid"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+toggle_mode = true
+
+[node name="SelectedLabel" type="Label" parent="Content"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 16
+text = "请选择扩建形状。"
+autowrap_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RotateButton" type="Button" parent="Content/Actions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "旋转 90°"
+
+[node name="CloseButton" type="Button" parent="Content/Actions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "返回备战"

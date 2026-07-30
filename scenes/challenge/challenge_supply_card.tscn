@@ -39,7 +39,7 @@ corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
 
 [node name="ChallengeSupplyCard" type="Button"]
-custom_minimum_size = Vector2(220, 148)
+custom_minimum_size = Vector2(190, 148)
 theme_override_styles/normal = SubResource("Style_card")
 theme_override_styles/hover = SubResource("Style_card_hover")
 theme_override_styles/pressed = SubResource("Style_card_hover")
@@ -50,29 +50,29 @@ script = ExtResource("1_script")
 layout_mode = 0
 offset_left = 10.0
 offset_top = 12.0
-offset_right = 78.0
-offset_bottom = 80.0
+offset_right = 70.0
+offset_bottom = 72.0
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 84.0
+offset_left = 76.0
 offset_top = 10.0
-offset_right = 210.0
+offset_right = 180.0
 offset_bottom = 50.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 16
 text = "配方"
 autowrap_mode = 2
 
 [node name="CostBadge" type="Label" parent="."]
 layout_mode = 0
-offset_left = 84.0
+offset_left = 76.0
 offset_top = 54.0
-offset_right = 210.0
+offset_right = 180.0
 offset_bottom = 78.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
@@ -81,9 +81,9 @@ text = "备货 0"
 
 [node name="CountBadge" type="Label" parent="."]
 layout_mode = 0
-offset_left = 150.0
+offset_left = 132.0
 offset_top = 126.0
-offset_right = 210.0
+offset_right = 180.0
 offset_bottom = 145.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
@@ -95,7 +95,7 @@ horizontal_alignment = 2
 layout_mode = 0
 offset_left = 10.0
 offset_top = 126.0
-offset_right = 144.0
+offset_right = 126.0
 offset_bottom = 145.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
@@ -106,7 +106,7 @@ text = ""
 layout_mode = 0
 offset_left = 10.0
 offset_top = 84.0
-offset_right = 210.0
+offset_right = 180.0
 offset_bottom = 104.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
@@ -117,7 +117,7 @@ text = "4 秒/次 · 满足 4 · 库存 6"
 layout_mode = 0
 offset_left = 10.0
 offset_top = 105.0
-offset_right = 210.0
+offset_right = 180.0
 offset_bottom = 125.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)

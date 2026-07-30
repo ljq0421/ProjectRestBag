@@ -161,6 +161,100 @@ func _run() -> void:
 	_expect(is_equal_approx(stretched_uniform.w, 80.0 / 440.0), "canvas transform keeps target height local")
 	viewport.canvas_transform = original_canvas_transform
 
+	root.size = Vector2i(1172, 1055)
+	viewport.canvas_transform = Transform2D(
+		Vector2(0.61, 0.0),
+		Vector2(0.0, 0.97),
+		Vector2(18.0, 7.0)
+	)
+	var default_canvas_target := Control.new()
+	default_canvas_target.position = Vector2(700, 144)
+	default_canvas_target.size = Vector2(1100, 640)
+	root.add_child(default_canvas_target)
+	var tutorial_layer := CanvasLayer.new()
+	root.add_child(tutorial_layer)
+	var layered_overlay = packed.instantiate()
+	layered_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	tutorial_layer.add_child(layered_overlay)
+	await process_frame
+	await process_frame
+	var layered_targets: Array[Rect2] = [
+		ChallengeTutorialOverlay.control_screen_rect(default_canvas_target)
+	]
+	layered_overlay.show_step(
+		1,
+		9,
+		"layer target",
+		"default-canvas targets and CanvasLayer overlays share logical coordinates",
+		layered_targets
+	)
+	await process_frame
+	var layered_outlines: Array[Rect2] = layered_overlay.get_target_rects_for_test()
+	_expect(layered_outlines.size() == 1, "CanvasLayer target remains visible after conversion")
+	if layered_outlines.size() == 1:
+		_expect(
+			layered_outlines[0].position.is_equal_approx(Vector2(700, 144)),
+			"CanvasLayer conversion does not shift a right-side target to the left"
+		)
+		_expect(
+			layered_outlines[0].size.is_equal_approx(Vector2(1100, 640)),
+			"CanvasLayer conversion keeps target size in logical UI coordinates"
+		)
+
+	root.size = Vector2i(1832, 697)
+	viewport.canvas_transform = original_canvas_transform
+	await process_frame
+	await process_frame
+	var wide_targets: Array[Rect2] = [
+		Rect2(20, 610, 390, 22),
+		Rect2(729, 465, 1075, 171)
+	]
+	layered_overlay.show_step(
+		4,
+		9,
+		"wide targets",
+		"the hint must not cover either highlighted region",
+		wide_targets
+	)
+	await process_frame
+	await process_frame
+	var wide_union := wide_targets[0].merge(wide_targets[1])
+	_expect(
+		not layered_overlay.get_hint_rect_for_test().intersects(wide_union),
+		"wide target unions place the hint in remaining free space"
+	)
+
+	var bottom_target := Rect2(20, 667, 1784, 39)
+	var bottom_targets: Array[Rect2] = [bottom_target]
+	layered_overlay.show_step(
+		5,
+		9,
+		"bottom target",
+		"the arrow must stay attached to the hint edge",
+		bottom_targets
+	)
+	await process_frame
+	await process_frame
+	var layered_hint: Rect2 = layered_overlay.get_hint_rect_for_test()
+	var layered_arrow: Rect2 = layered_overlay.get_arrow_rect_for_test()
+	var arrow_edge_gap: float = minf(
+		minf(
+			absf(layered_arrow.end.x - layered_hint.position.x),
+			absf(layered_arrow.position.x - layered_hint.end.x)
+		),
+		minf(
+			absf(layered_arrow.end.y - layered_hint.position.y),
+			absf(layered_arrow.position.y - layered_hint.end.y)
+		)
+	)
+	_expect(
+		arrow_edge_gap <= 4.0,
+		"arrow stays attached to the hint card edge"
+	)
+
+	root.size = Vector2i(1920, 1080)
+	await process_frame
+
 	var report_popup := PopupPanel.new()
 	report_popup.min_size = Vector2i(900, 520)
 	root.add_child(report_popup)
@@ -211,6 +305,8 @@ func _run() -> void:
 	second.queue_free()
 	popup_host.queue_free()
 	stretched_host.queue_free()
+	default_canvas_target.queue_free()
+	tutorial_layer.queue_free()
 	report_popup.queue_free()
 	await process_frame
 	_finish()

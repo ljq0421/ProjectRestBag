@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/challenge/ui/challenge_battle_view.gd" id="1_script"]
 
@@ -93,6 +93,22 @@ content_margin_top = 10.0
 content_margin_right = 20.0
 content_margin_bottom = 10.0
 
+[sub_resource type="StyleBoxFlat" id="Style_board_event"]
+bg_color = Color(0.137255, 0.105882, 0.207843, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.329412, 0.403922, 0.835294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+
 [node name="ChallengeBattleView" type="Control"]
 custom_minimum_size = Vector2(1760, 900)
 layout_mode = 3
@@ -156,28 +172,77 @@ show_percentage = false
 layout_mode = 0
 offset_left = 50.0
 offset_top = 125.0
-offset_right = 675.0
-offset_bottom = 730.0
+offset_right = 1140.0
+offset_bottom = 793.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("Style_board")
 
-[node name="SnapshotGrid" type="GridContainer" parent="BoardPresentation"]
+[node name="BoardContent" type="VBoxContainer" parent="BoardPresentation"]
 layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BoardHeader" type="HBoxContainer" parent="BoardPresentation/BoardContent"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="BoardTitle" type="Label" parent="BoardPresentation/BoardContent/BoardHeader"]
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.784314, 0.341176, 1)
+theme_override_font_sizes/font_size = 13
+text = "自动结算｜格内标记见右侧速查"
+vertical_alignment = 1
+
+[node name="BoardLegend" type="Label" parent="BoardPresentation/BoardContent/BoardHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.721569, 0.690196, 0.835294, 1)
+theme_override_font_sizes/font_size = 13
+text = "中央=实际挑剔扣除 / 全局需求结果"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SnapshotGrid" type="GridContainer" parent="BoardPresentation/BoardContent"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 2
-columns = 8
+columns = 4
+
+[node name="BoardEvent" type="PanelContainer" parent="BoardPresentation/BoardContent"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_board_event")
+
+[node name="BoardEventLabel" type="Label" parent="BoardPresentation/BoardContent/BoardEvent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.956863, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "等待出售：每张配方周期到点自动卖 1 份；库存为 0 后停止。"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BossPanelBackground" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1170.0
+offset_top = 125.0
+offset_right = 1710.0
+offset_bottom = 793.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_boss")
 
 [node name="BossPanel" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 720.0
-offset_top = 125.0
-offset_right = 1710.0
-offset_bottom = 730.0
-theme_override_constants/separation = 14
-theme_override_styles/panel = SubResource("Style_boss")
+offset_left = 1194.0
+offset_top = 145.0
+offset_right = 1686.0
+offset_bottom = 773.0
+theme_override_constants/separation = 10
 
 [node name="BossPortrait" type="ColorRect" parent="BossPanel"]
-custom_minimum_size = Vector2(0, 118)
+custom_minimum_size = Vector2(0, 112)
 layout_mode = 2
 color = Color(0.937255, 0.278431, 0.435294, 0.16)
 
@@ -196,26 +261,63 @@ text = "30 秒内清空挑剔值。需求失败会削减口碑防线。"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="CurrentWindowProgress" type="Label" parent="BossPanel"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 19
+text = "需求进度：开战后实时显示"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MechanicGuide" type="PanelContainer" parent="BossPanel"]
+custom_minimum_size = Vector2(0, 142)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_board_event")
+
+[node name="GuideContent" type="VBoxContainer" parent="BossPanel/MechanicGuide"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="GuideTitle" type="Label" parent="BossPanel/MechanicGuide/GuideContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.784314, 0.341176, 1)
+theme_override_font_sizes/font_size = 17
+text = "战斗标记速查"
+
+[node name="GuideBody" type="Label" parent="BossPanel/MechanicGuide/GuideContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.956863, 1, 1)
+theme_override_constants/line_spacing = 3
+theme_override_font_sizes/font_size = 14
+text = "左上 倒计时｜右上 剩余可售份数
+挑剔-X  本次实际扣除 X；溢出满足力不计入
+需求达标 / 需求缺X  全局结果，多格重复不相加
+联动值+X  本次额外满足力
+金边 联动｜青边 强化｜红边 失败需求相关"
+autowrap_mode = 2
+
 [node name="DemandTimeline" type="VBoxContainer" parent="BossPanel"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 10
+theme_override_constants/separation = 6
 
 [node name="BattleFooterBackground" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 50.0
-offset_top = 770.0
+offset_top = 815.0
 offset_right = 1710.0
-offset_bottom = 850.0
+offset_bottom = 895.0
 mouse_filter = 2
 color = Color(0.160784, 0.129412, 0.239216, 0.96)
 
 [node name="BattleFooter" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 50.0
-offset_top = 770.0
+offset_top = 815.0
 offset_right = 1710.0
-offset_bottom = 850.0
+offset_bottom = 895.0
 theme_override_constants/separation = 24
 theme_override_styles/panel = SubResource("Style_footer")
 

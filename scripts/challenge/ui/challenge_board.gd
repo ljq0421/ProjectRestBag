@@ -12,14 +12,18 @@ signal instance_rotated(
 	shape_changed: bool
 )
 signal instance_removed(instance_id: String)
+signal expansion_placement_requested(product_id: String, rotation: int, anchor: Vector2i)
 
-const ROWS := 6
-const COLUMNS := 8
-const CELL_SIZE := 80
+const ROWS := 8
+const COLUMNS := 14
+const CELL_SIZE := 64
 const RecipeIconService = preload("res://scripts/recipe_icon_service.gd")
 const ShowcaseIconService = preload("res://scripts/ui/storefront/showcase_icon_service.gd")
 const ChallengeLoadoutServiceClass = preload("res://scripts/challenge/challenge_loadout_service.gd")
 const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
+const ChallengeBoardExpansionService = preload(
+	"res://scripts/challenge/challenge_board_expansion_service.gd"
+)
 const TAG_NAMES := {
 	"fast": "快速",
 	"bake": "烘焙",
@@ -52,10 +56,24 @@ var _instance_serial := 0
 var _risk_summary := "稳定覆盖：待评估"
 var _showcase_icons = ShowcaseIconService.new()
 var _dragged_instance_id := ""
+var _layout_refresh_queued := false
+var _unlocked_cells: Array = []
+var _unlocked_keys := {}
+var _expansion_service = ChallengeBoardExpansionService.new()
+var _expansion_meta: Dictionary = {}
+var _expansion_product_id := ""
+var _expansion_rotation := 0
+var _expansion_anchor := Vector2i(-1, -1)
+var _expansion_preview: Dictionary = {}
 
 
 func _ready() -> void:
 	_showcase_icons.load_manifest()
+	var default_meta := _expansion_service.bootstrap_meta({})
+	_unlocked_cells = _expansion_service.unlocked_cells(default_meta)
+	_unlocked_keys = _cell_keys(_unlocked_cells)
+	_expansion_meta = default_meta
+	$BoardFrame/BoardGrid.resized.connect(_queue_layout_refresh)
 	_build_cells()
 	_refresh()
 
@@ -84,6 +102,19 @@ func bind_effective_context(
 		effective_context.get("recipe_defs", {}) as Dictionary
 	).duplicate(true)
 	_effective_context = effective_context.duplicate(true)
+	_unlocked_cells = (
+		effective_context.get("unlocked_cells", []) as Array
+	).duplicate(true)
+	_unlocked_keys = _cell_keys(_unlocked_cells)
+	_expansion_meta = {
+		"board_expansion": {
+			"max_rows": ROWS,
+			"max_columns": COLUMNS,
+			"unlocked_cells": _unlocked_cells.duplicate(true)
+		},
+		"expansion_tickets": 0,
+		"expansion_ticket_reward_ids": []
+	}
 	_loadout_service = loadout_service
 	_encounter = encounter.duplicate(true)
 	var rules: Dictionary = effective_context.get("rules", {})
@@ -99,6 +130,30 @@ func set_draft(draft: Dictionary) -> void:
 	_draft = draft.duplicate(true)
 	_refresh()
 	draft_changed.emit(get_draft())
+
+
+func begin_expansion_preview(product_id: String, rotation: int = 0) -> void:
+	_expansion_product_id = product_id
+	_expansion_rotation = posmod(rotation, 360)
+	_expansion_anchor = Vector2i(-1, -1)
+	_expansion_preview = {}
+	_refresh_cells()
+
+
+func set_expansion_rotation(rotation: int) -> void:
+	_expansion_rotation = posmod(rotation, 360)
+	_update_expansion_preview(_expansion_anchor)
+
+
+func cancel_expansion_preview() -> void:
+	_expansion_product_id = ""
+	_expansion_anchor = Vector2i(-1, -1)
+	_expansion_preview = {}
+	_refresh_cells()
+
+
+func is_expansion_preview_active() -> bool:
+	return not _expansion_product_id.is_empty()
 
 
 func get_draft() -> Dictionary:
@@ -337,7 +392,10 @@ func _analyze_draft(draft: Dictionary) -> Dictionary:
 
 func _refresh_header() -> void:
 	$Header/BudgetLabel.text = "挑战备货 %d / %d" % [int(_analysis.get("spent_budget", 0)), _budget]
-	$Header/CoverageLabel.text = "展示柜占格 %d / %d" % [get_occupied_cell_count(), ROWS * COLUMNS]
+	$Header/CoverageLabel.text = "展示柜占格 %d / %d" % [
+		get_occupied_cell_count(),
+		_unlocked_cells.size()
+	]
 	var errors: Array = _analysis.get("errors", [])
 	$RiskLabel.text = String(errors[0]) if not errors.is_empty() else _risk_summary
 
@@ -380,23 +438,48 @@ func _build_cells() -> void:
 			cell.set_meta("row", row)
 			cell.set_meta("column", column)
 			cell.set_meta("instance_id", "")
+			var icon_host := Control.new()
+			icon_host.name = "IconHost"
+			icon_host.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			icon_host.clip_contents = false
+			cell.add_child(icon_host)
 			var icon := TextureRect.new()
 			icon.name = "Icon"
 			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 			icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			cell.add_child(icon)
+			icon.z_index = 5
+			icon_host.add_child(icon)
 			$BoardFrame/BoardGrid.add_child(cell)
 
 
 func _refresh_cells() -> void:
+	_layout_refresh_queued = false
 	var grid: GridContainer = $BoardFrame/BoardGrid
 	for child in grid.get_children():
 		var row := int(child.get_meta("row", 0))
 		var column := int(child.get_meta("column", 0))
 		child.set_meta("instance_id", "")
-		child.get_node("Icon").texture = null
-		child.add_theme_stylebox_override("panel", _cell_style(row, column, false, false))
+		var icon: TextureRect = child.get_node("IconHost/Icon")
+		icon.texture = null
+		icon.position = Vector2.ZERO
+		icon.size = Vector2.ZERO
+		var unlocked := _unlocked_keys.has(_cell_key(row, column))
+		child.add_theme_stylebox_override(
+			"panel",
+			_cell_style(row, column, false, false) if unlocked else _hidden_cell_style()
+		)
+
+	var preview_cells := _cell_keys(_expansion_preview.get("cells", []))
+	if not preview_cells.is_empty():
+		for child in grid.get_children():
+			var row := int(child.get_meta("row", 0))
+			var column := int(child.get_meta("column", 0))
+			if preview_cells.has(_cell_key(row, column)):
+				child.add_theme_stylebox_override(
+					"panel",
+					_expansion_preview_style(bool(_expansion_preview.get("valid", false)))
+				)
 
 	var relation_instances := {}
 	for relation in _analysis.get("relations", []):
@@ -405,29 +488,47 @@ func _refresh_cells() -> void:
 	for instance_value in _analysis.get("instances", []):
 		var instance: Dictionary = instance_value
 		var instance_id := String(instance.get("instance_id", ""))
-		var origin_value: Array = instance.get("origin", [0, 0])
-		var origin := Vector2i(int(origin_value[0]), int(origin_value[1]))
-		var rotation := int(instance.get("rotation", 0))
+		var absolute_cells: Array[Vector2i] = []
+		var icon_origin := Vector2i(ROWS, COLUMNS)
 		for cell_value in instance.get("cells", []):
-			var row := int(cell_value[0])
-			var column := int(cell_value[1])
+			var absolute_cell := Vector2i(int(cell_value[0]), int(cell_value[1]))
+			absolute_cells.append(absolute_cell)
+			icon_origin.x = mini(icon_origin.x, absolute_cell.x)
+			icon_origin.y = mini(icon_origin.y, absolute_cell.y)
+		var local_cells: Array[Vector2i] = []
+		for absolute_cell in absolute_cells:
+			local_cells.append(absolute_cell - icon_origin)
+		var icon_layout := _showcase_icons.layout_for_shape(
+			String(instance.get("recipe_id", "")),
+			"standard",
+			local_cells,
+			0
+		)
+		var full_texture: Texture2D = _showcase_icons.layout_texture(icon_layout)
+		if full_texture == null:
+			full_texture = RecipeIconService.texture(
+			String(instance.get("recipe_id", "")),
+			0,
+			"base"
+		)
+		for absolute_cell in absolute_cells:
+			var row := absolute_cell.x
+			var column := absolute_cell.y
 			var cell_index := row * COLUMNS + column
 			if cell_index < 0 or cell_index >= grid.get_child_count():
 				continue
 			var cell: PanelContainer = grid.get_child(cell_index)
 			cell.set_meta("instance_id", instance_id)
-			var local_cell := Vector2i(row, column) - origin
-			var texture: Texture2D = _showcase_icons.fragment(
-				String(instance.get("recipe_id", "")),
-				"standard",
-				rotation,
-				local_cell,
-				0
-			)
-			if texture == null:
-				texture = RecipeIconService.texture(String(instance.get("recipe_id", "")), 0, "base")
-			cell.get_node("Icon").texture = texture
 			cell.add_theme_stylebox_override("panel", _cell_style(row, column, true, relation_instances.has(instance_id)))
+		var origin_index := icon_origin.x * COLUMNS + icon_origin.y
+		if origin_index < 0 or origin_index >= grid.get_child_count():
+			continue
+		var origin_cell: PanelContainer = grid.get_child(origin_index)
+		var icon_host: Control = origin_cell.get_node("IconHost")
+		var full_icon: TextureRect = icon_host.get_node("Icon")
+		full_icon.texture = full_texture
+		full_icon.position = Vector2.ZERO
+		full_icon.size = _full_icon_size(icon_origin, local_cells)
 
 
 func _cell_style(row: int, column: int, occupied: bool, related: bool) -> StyleBoxFlat:
@@ -446,8 +547,87 @@ func _cell_style(row: int, column: int, occupied: bool, related: bool) -> StyleB
 	return style
 
 
+func _hidden_cell_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0)
+	style.border_color = Color(0, 0, 0, 0)
+	style.set_border_width_all(0)
+	return style
+
+
+func _expansion_preview_style(valid: bool) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color("#3EB48988") if valid else Color("#EF476F88")
+	style.border_color = Color("#72D6A0") if valid else Color("#EF476F")
+	style.set_border_width_all(3)
+	style.corner_radius_top_left = 8
+	style.corner_radius_top_right = 8
+	style.corner_radius_bottom_left = 8
+	style.corner_radius_bottom_right = 8
+	return style
+
+
+func _full_icon_size(
+	icon_origin: Vector2i,
+	local_cells: Array[Vector2i]
+) -> Vector2:
+	var max_row := 0
+	var max_column := 0
+	for cell in local_cells:
+		max_row = maxi(max_row, cell.x)
+		max_column = maxi(max_column, cell.y)
+	var grid: GridContainer = $BoardFrame/BoardGrid
+	var origin_index := icon_origin.x * COLUMNS + icon_origin.y
+	var far_index := (
+		(icon_origin.x + max_row) * COLUMNS
+		+ icon_origin.y
+		+ max_column
+	)
+	if (
+		origin_index < 0
+		or far_index < 0
+		or origin_index >= grid.get_child_count()
+		or far_index >= grid.get_child_count()
+	):
+		return Vector2(CELL_SIZE - 10, CELL_SIZE - 10)
+	var origin_cell := grid.get_child(origin_index) as Control
+	var far_cell := grid.get_child(far_index) as Control
+	if origin_cell == null or far_cell == null:
+		return Vector2(CELL_SIZE - 10, CELL_SIZE - 10)
+	return (
+		far_cell.position
+		+ far_cell.size
+		- origin_cell.position
+		- Vector2(10, 10)
+	)
+
+
+func _queue_layout_refresh() -> void:
+	if _layout_refresh_queued or not is_node_ready():
+		return
+	_layout_refresh_queued = true
+	_refresh_cells.call_deferred()
+
+
 func _gui_input(event: InputEvent) -> void:
 	if _locked:
+		return
+	if not _expansion_product_id.is_empty():
+		if event is InputEventMouseMotion:
+			_update_expansion_preview(_cell_at_global(get_global_mouse_position()))
+		elif (
+			event is InputEventMouseButton
+			and event.button_index == MOUSE_BUTTON_LEFT
+			and event.pressed
+		):
+			_update_expansion_preview(_cell_at_global(get_global_mouse_position()))
+			if bool(_expansion_preview.get("valid", false)):
+				expansion_placement_requested.emit(
+					_expansion_product_id,
+					_expansion_rotation,
+					_expansion_anchor
+				)
+			accept_event()
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		var instance_id := _instance_at_global(get_global_mouse_position())
@@ -457,7 +637,7 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _get_drag_data(_at_position: Vector2) -> Variant:
-	if _locked:
+	if _locked or not _expansion_product_id.is_empty():
 		return null
 	var instance_id := _instance_at_global(get_global_mouse_position())
 	if instance_id.is_empty():
@@ -473,11 +653,12 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
-	if _locked or not data is Dictionary:
+	if _locked or not _expansion_product_id.is_empty() or not data is Dictionary:
 		return false
 	if not ["challenge_recipe", "challenge_instance"].has(String(data.get("kind", ""))):
 		return false
-	return _cell_at_global(global_position + at_position) != Vector2i(-1, -1)
+	var cell := _cell_at_global(global_position + at_position)
+	return cell != Vector2i(-1, -1) and _unlocked_keys.has(_cell_key(cell.x, cell.y))
 
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
@@ -512,6 +693,32 @@ func _cell_at_global(global_mouse: Vector2) -> Vector2i:
 		if child.get_global_rect().has_point(global_mouse):
 			return Vector2i(int(child.get_meta("row", -1)), int(child.get_meta("column", -1)))
 	return Vector2i(-1, -1)
+
+
+func _update_expansion_preview(anchor: Vector2i) -> void:
+	_expansion_anchor = anchor
+	if anchor == Vector2i(-1, -1) or _expansion_product_id.is_empty():
+		_expansion_preview = {}
+	else:
+		_expansion_preview = _expansion_service.preview(
+			_expansion_meta,
+			_expansion_product_id,
+			_expansion_rotation,
+			anchor
+		)
+	_refresh_cells()
+
+
+func _cell_keys(cells: Array) -> Dictionary:
+	var result := {}
+	for value in cells:
+		if value is Array and value.size() >= 2:
+			result[_cell_key(int(value[0]), int(value[1]))] = true
+	return result
+
+
+func _cell_key(row: int, column: int) -> String:
+	return "%d:%d" % [row, column]
 
 
 func _origin_array(origin: Variant) -> Array:

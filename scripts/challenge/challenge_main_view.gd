@@ -144,6 +144,7 @@ func _connect_signals() -> void:
 	hub.route_selected.connect(func(route_id: String) -> void: _selected_route_id = route_id)
 	var preparation = $Root/PageHost/PreparationHost/PreparationView
 	preparation.battle_requested.connect(_start_battle_with_draft)
+	preparation.expansion_purchase_requested.connect(_on_expansion_purchase_requested)
 	preparation.draft_changed.connect(_on_draft_changed)
 	preparation.placement_rejected.connect(
 		func(reasons: Array[String]) -> void:
@@ -227,14 +228,17 @@ func _show_hub() -> void:
 func _show_preparation() -> void:
 	run_state = (_save_data.get("active_run", {}) as Dictionary).duplicate(true)
 	var encounter := _session.current_encounter(_save_data)
-	var effective := _session.effective_context_for_run(run_state)
+	var meta: Dictionary = _save_data.get("meta", {})
+	var effective := _session.effective_context_for_run(run_state, meta)
 	_binding_preparation = true
 	$Root/PageHost/PreparationHost/PreparationView.bind(
 		run_state,
 		encounter,
 		effective,
 		_loadout_service,
-		Catalog.new().get_recipes()
+		Catalog.new().get_recipes(),
+		meta,
+		_session.expansion_products()
 	)
 	_binding_preparation = false
 	_set_page("preparation")
@@ -385,7 +389,28 @@ func _on_battle_finished(final_state: Dictionary) -> void:
 		_set_status(_error_text(settled))
 		return
 	_adopt(settled)
+	if int(settled.get("expansion_tickets_granted", 0)) > 0:
+		_set_status("首次击败精英或 Boss：获得 1 张扩建券")
 	_show_saved_report()
+
+
+func _on_expansion_purchase_requested(
+	product_id: String,
+	rotation: int,
+	anchor: Vector2i
+) -> void:
+	var purchased := _session.purchase_board_expansion(
+		_save_data,
+		product_id,
+		rotation,
+		anchor
+	)
+	if not bool(purchased.get("applied", false)):
+		_set_status(_error_text(purchased))
+		return
+	_adopt(purchased)
+	_set_status("扩建完成：消耗 %d 张扩建券" % int(purchased.get("price", 0)))
+	_show_preparation()
 
 
 func _on_report_action_requested(_action: String) -> void:
@@ -495,6 +520,7 @@ func _set_page(page: String) -> void:
 	$Root/PageHost/ResearchHost.visible = page == "research"
 	$Root/PageHost/MenuHost.visible = page == "menu"
 	$Root/PageHost/SummaryHost.visible = page == "summary"
+	call_deferred("_refresh_tutorial_after_layout")
 
 
 func _adopt(result: Dictionary) -> void:
@@ -510,6 +536,9 @@ func _adopt(result: Dictionary) -> void:
 func _refresh_top_bar() -> void:
 	var meta: Dictionary = _save_data.get("meta", {})
 	$Root/GlobalTopBar/ResearchLabel.text = "研究点 %d" % int(meta.get("research_points", 0))
+	$Root/GlobalTopBar/ExpansionTicketLabel.text = "扩建券 %d" % int(
+		meta.get("expansion_tickets", 0)
+	)
 	if run_state.is_empty():
 		$Root/GlobalTopBar/StageLabel.text = "五场客潮挑战"
 		$Root/GlobalTopBar/ConfidenceLabel.text = "信心待开局"
@@ -708,10 +737,16 @@ func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
 	var board = preparation.board()
 	match step_id:
 		"boss_brief":
-			return _visible_target_rects([preparation.get_node("MainColumns/BossBrief")])
+			return _visible_target_rects([
+				preparation.get_node("MainColumns/RightSidebar/BossBrief/Content/TimelineBlock")
+			])
 		"place_recipe":
 			var result: Array[Rect2] = [
-				ChallengeTutorialOverlay.control_screen_rect(preparation.get_node("SupplyScroll"))
+				ChallengeTutorialOverlay.control_screen_rect(
+					preparation.get_node(
+						"MainColumns/RecipeLibrary/Content/SupplyScroll"
+					)
+				)
 			]
 			result.append_array(board.get_tutorial_target_rects("board"))
 			return result
@@ -720,11 +755,13 @@ func resolve_tutorial_targets(step_id: String) -> Array[Rect2]:
 		"read_risk":
 			var result: Array[Rect2] = board.get_tutorial_target_rects("relation")
 			result.append_array(_visible_target_rects([
-				preparation.get_node("MainColumns/BossBrief/Content/BuildGuide")
+				preparation.get_node("MainColumns/RightSidebar/BossBrief/Content/BuildGuide")
 			]))
 			return result
 		"start_battle":
-			return _visible_target_rects([preparation.get_node("BattleButton")])
+			return _visible_target_rects([
+				preparation.get_node("MainColumns/RightSidebar/BattleButton")
+			])
 		"observe_battle":
 			return _visible_target_rects([
 				$Root/PageHost/BattleView/TopStatus,
@@ -806,7 +843,7 @@ func resolve_stage_two_tutorial_targets(hint_id: String) -> Array[Rect2]:
 			])
 		"next_run_recipe":
 			return _visible_target_rects([
-				$Root/PageHost/PreparationHost/PreparationView/SupplyScroll
+				$Root/PageHost/PreparationHost/PreparationView/MainColumns/RecipeLibrary
 			])
 	return []
 
@@ -849,7 +886,11 @@ func _stage_two_tutorial_copy(hint_id: String) -> Dictionary:
 func _tutorial_copy(step_id: String) -> Dictionary:
 	match step_id:
 		"boss_brief":
-			return {"title": "先读懂本场客潮", "body": "每场都有完整时间轴；开战后橱窗会全自动售卖。", "confirm": "看懂了"}
+			return {
+				"title": "先读右侧的需求时间轴",
+				"body": "黄色边框只圈住需求时间轴：先看每个检查时点和目标。开战后橱窗会按卡面周期自动售卖。",
+				"confirm": "看懂了"
+			}
 		"place_recipe":
 			return {
 				"title": "先读卡面，再拖进橱窗",
@@ -869,7 +910,10 @@ func _tutorial_copy(step_id: String) -> Dictionary:
 		"start_battle":
 			return {"title": "锁定后自动战斗", "body": "开战后不能移动配方，直到本场战报确认。"}
 		"observe_battle":
-			return {"title": "双向压力条", "body": "满足力压低 Boss 挑剔值；需求失败会损伤口碑防线。"}
+			return {
+				"title": "无需操作：配方会自动售出",
+				"body": "不用点击出售。每张配方按卡面周期卖 1 份；基础满足力加上联动加成，会直接降低 Boss 挑剔值。时间轴到点自动检查需求，未达标才扣口碑。"
+			}
 		"read_report":
 			return {"title": "从战报找到缺口", "body": "确认失败窗口、配方贡献和强化来源。"}
 		"rearrange":

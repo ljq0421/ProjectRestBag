@@ -4,6 +4,7 @@ extends VBoxContainer
 signal battle_requested(draft: Dictionary)
 signal draft_changed(draft: Dictionary)
 signal placement_rejected(reasons: Array[String])
+signal expansion_purchase_requested(product_id: String, rotation: int, anchor: Vector2i)
 
 const SupplyCardScene = preload("res://scenes/challenge/challenge_supply_card.tscn")
 const UiStyle = preload("res://scripts/challenge/ui/challenge_ui_style.gd")
@@ -23,16 +24,30 @@ const ROLE_NAMES := {
 var _catalog_recipes: Dictionary = {}
 var _effective_recipe_defs: Dictionary = {}
 var _pool_recipe_ids: Array[String] = []
+var _expansion_open := false
 
 
 func _ready() -> void:
-	UiStyle.apply_primary($BattleButton)
+	UiStyle.apply_primary($MainColumns/RightSidebar/BattleButton)
+	UiStyle.apply_secondary($MainColumns/RightSidebar/ExpansionButton)
 	$MainColumns/ChallengeBoard.draft_changed.connect(_on_draft_changed)
 	$MainColumns/ChallengeBoard.placement_rejected.connect(
 		func(reasons: Array[String]) -> void: placement_rejected.emit(reasons)
 	)
-	$BattleButton.pressed.connect(
+	$MainColumns/RightSidebar/BattleButton.pressed.connect(
 		func() -> void: battle_requested.emit($MainColumns/ChallengeBoard.get_draft())
+	)
+	$MainColumns/RightSidebar/ExpansionButton.pressed.connect(_open_expansion)
+	$MainColumns/RightSidebar/ExpansionPanel.product_selected.connect(
+		_on_expansion_product_selected
+	)
+	$MainColumns/RightSidebar/ExpansionPanel.rotate_requested.connect(
+		_on_expansion_rotate_requested
+	)
+	$MainColumns/RightSidebar/ExpansionPanel.close_requested.connect(_close_expansion)
+	$MainColumns/ChallengeBoard.expansion_placement_requested.connect(
+		func(product_id: String, rotation: int, anchor: Vector2i) -> void:
+			expansion_purchase_requested.emit(product_id, rotation, anchor)
 	)
 
 
@@ -41,7 +56,9 @@ func bind(
 	encounter: Dictionary,
 	effective_context: Dictionary,
 	loadout_service: RefCounted,
-	catalog_recipes: Dictionary
+	catalog_recipes: Dictionary,
+	meta: Dictionary = {},
+	expansion_products: Array = []
 ) -> void:
 	_catalog_recipes = catalog_recipes.duplicate(true)
 	_effective_recipe_defs = (
@@ -57,6 +74,14 @@ func bind(
 	_bind_stage_rail(run)
 	_bind_boss(encounter)
 	_rebuild_supply_cards()
+	$MainColumns/RightSidebar/ExpansionPanel.bind(
+		expansion_products,
+		int(meta.get("expansion_tickets", 0))
+	)
+	$MainColumns/RightSidebar/ExpansionButton.text = "扩建展示柜 · 扩建券 %d" % int(
+		meta.get("expansion_tickets", 0)
+	)
+	_close_expansion()
 	set_draft(run.get("loadout_draft", {"placements": []}))
 
 
@@ -74,7 +99,51 @@ func set_draft(draft: Dictionary) -> void:
 
 func set_locked(locked: bool) -> void:
 	$MainColumns/ChallengeBoard.set_locked(locked)
-	$BattleButton.disabled = locked or not $MainColumns/ChallengeBoard.is_current_draft_valid()
+	$MainColumns/RightSidebar/BattleButton.disabled = (
+		locked or not $MainColumns/ChallengeBoard.is_current_draft_valid()
+	)
+
+
+func _open_expansion() -> void:
+	_expansion_open = true
+	_set_normal_sidebar_visible(false)
+	$MainColumns/RightSidebar/ExpansionPanel.show()
+	var product_id := String(
+		$MainColumns/RightSidebar/ExpansionPanel.selected_product_id()
+	)
+	if not product_id.is_empty():
+		$MainColumns/ChallengeBoard.begin_expansion_preview(
+			product_id,
+			int($MainColumns/RightSidebar/ExpansionPanel.rotation())
+		)
+
+
+func _close_expansion() -> void:
+	_expansion_open = false
+	$MainColumns/RightSidebar/ExpansionPanel.hide()
+	_set_normal_sidebar_visible(true)
+	$MainColumns/ChallengeBoard.cancel_expansion_preview()
+
+
+func _on_expansion_product_selected(product_id: String) -> void:
+	if not _expansion_open:
+		return
+	$MainColumns/ChallengeBoard.begin_expansion_preview(product_id, 0)
+
+
+func _on_expansion_rotate_requested() -> void:
+	if not _expansion_open:
+		return
+	$MainColumns/ChallengeBoard.set_expansion_rotation(
+		int($MainColumns/RightSidebar/ExpansionPanel.rotation())
+	)
+
+
+func _set_normal_sidebar_visible(value: bool) -> void:
+	$MainColumns/RecipeLibrary.visible = value
+	$MainColumns/RightSidebar/BossBrief.visible = value
+	$MainColumns/RightSidebar/ExpansionButton.visible = value
+	$MainColumns/RightSidebar/BattleButton.visible = value
 
 
 func _bind_stage_rail(run: Dictionary) -> void:
@@ -107,10 +176,10 @@ func _bind_stage_rail(run: Dictionary) -> void:
 
 
 func _bind_boss(encounter: Dictionary) -> void:
-	$MainColumns/BossBrief/Content/BossName.text = String(
+	$MainColumns/RightSidebar/BossBrief/Content/BossName.text = String(
 		encounter.get("display_name", encounter.get("encounter_id", "客潮"))
 	)
-	$MainColumns/BossBrief/Content/BossStats.text = "挑剔 %d · 口碑 %d · 自动战斗 %d 秒" % [
+	$MainColumns/RightSidebar/BossBrief/Content/BossStats.text = "挑剔 %d · 口碑 %d · 自动战斗 %d 秒" % [
 		int(encounter.get("initial_pickiness", 0)),
 		int(encounter.get("initial_reputation", 0)),
 		int(encounter.get("duration_ms", 0)) / 1000
@@ -129,12 +198,12 @@ func _bind_boss(encounter: Dictionary) -> void:
 				int(value.get("reputation_damage", 0))
 			])
 	lines.append("%02d 秒  清空挑剔值" % (int(encounter.get("duration_ms", 0)) / 1000))
-	$MainColumns/BossBrief/Content/Timeline.text = "\n".join(lines)
+	$MainColumns/RightSidebar/BossBrief/Content/TimelineBlock/Timeline.text = "\n".join(lines)
 	var relation: Dictionary = encounter.get("relation", {})
 	var left_tag := _tag_name(String(relation.get("left_tag", "")))
 	var right_tag := _tag_name(String(relation.get("right_tag", "")))
 	var bonus_pct := int(encounter.get("relation_bonus_pct", 0))
-	$MainColumns/BossBrief/Content/BuildGuide/RelationRule.text = (
+	$MainColumns/RightSidebar/BossBrief/Content/BuildGuide/RelationRule.text = (
 		"本场联动：%s × %s，上下左右贴边后，两边每次售卖 +%d%% 满足力" % [
 			left_tag,
 			right_tag,
@@ -146,48 +215,35 @@ func _bind_boss(encounter: Dictionary) -> void:
 
 
 func _rebuild_supply_cards() -> void:
-	for child in $SupplyScroll/SupplyStrip.get_children():
+	var supply_grid: GridContainer = (
+		$MainColumns/RecipeLibrary/Content/SupplyScroll/SupplyGrid
+	)
+	for child in supply_grid.get_children():
 		child.queue_free()
-	for role in ROLE_ORDER:
-		var role_recipe_ids: Array[String] = []
-		for recipe_id in _pool_recipe_ids:
-			if _primary_role(_effective_recipe_defs.get(recipe_id, {})) == role:
-				role_recipe_ids.append(recipe_id)
-		if role_recipe_ids.is_empty():
-			continue
-		var group := VBoxContainer.new()
-		group.set_meta("build_role", role)
-		group.add_theme_constant_override("separation", 5)
-		var title := Label.new()
-		title.text = String(ROLE_NAMES.get(role, role))
-		title.add_theme_font_size_override("font_size", 14)
-		title.add_theme_color_override("font_color", Color("#665A82"))
-		group.add_child(title)
-		var cards := HBoxContainer.new()
-		cards.add_theme_constant_override("separation", 10)
-		group.add_child(cards)
-		$SupplyScroll/SupplyStrip.add_child(group)
-		for recipe_id in role_recipe_ids:
-			var card = SupplyCardScene.instantiate()
-			card.set_meta("recipe_id", recipe_id)
-			cards.add_child(card)
-			var catalog_entry: Dictionary = _catalog_recipes.get(recipe_id, {})
-			card.bind(
-				recipe_id,
-				_effective_recipe_defs.get(recipe_id, {}),
-				String(catalog_entry.get("name", recipe_id))
-			)
+	$MainColumns/RecipeLibrary/Content/Header/CountLabel.text = (
+		"%d 个" % _pool_recipe_ids.size()
+	)
+	for recipe_id in _pool_recipe_ids:
+		var card = SupplyCardScene.instantiate()
+		card.set_meta("recipe_id", recipe_id)
+		supply_grid.add_child(card)
+		var catalog_entry: Dictionary = _catalog_recipes.get(recipe_id, {})
+		card.bind(
+			recipe_id,
+			_effective_recipe_defs.get(recipe_id, {}),
+			String(catalog_entry.get("name", recipe_id))
+		)
 	_update_counts(get_draft())
 
 
 func _on_draft_changed(draft: Dictionary) -> void:
 	_update_counts(draft)
 	_refresh_build_guide()
-	$BattleButton.disabled = (
+	$MainColumns/RightSidebar/BattleButton.disabled = (
 		(draft.get("placements", []) as Array).is_empty()
 		or not $MainColumns/ChallengeBoard.is_current_draft_valid()
 	)
-	$BattleButton.text = (
+	$MainColumns/RightSidebar/BattleButton.text = (
 		"重新摆放后开始自动战斗"
 		if $MainColumns/ChallengeBoard.needs_rearrange()
 		else "锁定橱窗，开始自动战斗"
@@ -199,7 +255,7 @@ func _refresh_build_guide() -> void:
 	var summary: Dictionary = $MainColumns/ChallengeBoard.get_build_summary()
 	var instance_count := int(summary.get("instance_count", 0))
 	if instance_count <= 0:
-		$MainColumns/BossBrief/Content/BuildGuide/LiveBuild.text = (
+		$MainColumns/RightSidebar/BossBrief/Content/BuildGuide/LiveBuild.text = (
 			"当前构筑：尚未摆放配方。先从卡面比较“秒/次、满足、标签”。"
 		)
 		return
@@ -216,7 +272,7 @@ func _refresh_build_guide() -> void:
 			_seconds_text(cycle_max_ms)
 		]
 	)
-	$MainColumns/BossBrief/Content/BuildGuide/LiveBuild.text = (
+	$MainColumns/RightSidebar/BossBrief/Content/BuildGuide/LiveBuild.text = (
 		"当前构筑：%d 份 · 售卖周期 %s · 联动 %d 组（%d 份获得 +%d%%）" % [
 			instance_count,
 			cycle_text,
@@ -248,7 +304,10 @@ func _update_counts(draft: Dictionary) -> void:
 
 func supply_cards() -> Array[Control]:
 	var result: Array[Control] = []
-	_collect_supply_cards($SupplyScroll/SupplyStrip, result)
+	_collect_supply_cards(
+		$MainColumns/RecipeLibrary/Content/SupplyScroll/SupplyGrid,
+		result
+	)
 	return result
 
 

@@ -32,8 +32,8 @@ func _run() -> void:
 	await process_frame
 
 	var board_grid: GridContainer = board.get_node("BoardFrame/BoardGrid")
-	_expect(board_grid.columns == 8, "board should use eight columns")
-	_expect(board_grid.get_child_count() == 48, "board should expose 6x8 cells")
+	_expect(board_grid.columns == 14, "board should reserve fourteen columns")
+	_expect(board_grid.get_child_count() == 112, "board should reserve 8x14 fixed cells")
 	_expect(board.has_method("place_recipe"), "board should expose placement intent")
 	_expect(board.has_method("set_locked"), "board should expose battle lock")
 
@@ -44,10 +44,32 @@ func _run() -> void:
 	board.call("bind", defs, LOADOUT_SERVICE.new(), encounter, 16)
 	_expect(bool(board.call("place_recipe", "milk_pudding", [1, 1], 0, "pudding_1")), "board should place milk pudding")
 	_expect(int(board.call("get_occupied_cell_count")) == 2, "milk pudding should occupy two cells")
+	var pudding_top_icon: TextureRect = board_grid.get_child(1 * 14 + 1).get_node("IconHost/Icon")
+	var pudding_bottom_icon: TextureRect = board_grid.get_child(2 * 14 + 1).get_node("IconHost/Icon")
+	_expect(
+		pudding_top_icon.texture != null
+			and not pudding_top_icon.texture is AtlasTexture
+			and pudding_bottom_icon.texture == null
+			and pudding_top_icon.size.y > (
+				(board_grid.get_child(1 * 14 + 1) as Control).size.y * 1.5
+			),
+		"default milk pudding should be one complete vertical image spanning two cells"
+	)
 	_expect(bool(board.call("rotate_instance", "pudding_1")), "board should rotate a rotatable recipe")
 	var rotated_draft: Dictionary = board.call("get_draft")
 	_expect(rotated_draft["placements"][0]["rotation"] == 90, "rotation intent should advance by 90 degrees")
 	_expect(int(board.call("get_occupied_cell_count")) == 2, "rotated milk pudding should still occupy two cells")
+	var pudding_left_icon: TextureRect = board_grid.get_child(1 * 14 + 1).get_node("IconHost/Icon")
+	var pudding_right_icon: TextureRect = board_grid.get_child(1 * 14 + 2).get_node("IconHost/Icon")
+	_expect(
+		pudding_left_icon.texture != null
+			and not pudding_left_icon.texture is AtlasTexture
+			and pudding_right_icon.texture == null
+			and pudding_left_icon.size.x > (
+				(board_grid.get_child(1 * 14 + 1) as Control).size.x * 1.5
+			),
+		"rotated milk pudding should be one complete horizontal image spanning two cells"
+	)
 	var single_summary: Dictionary = board.call("get_build_summary")
 	_expect(int(single_summary.get("instance_count", 0)) == 1, "board should expose live build count")
 	_expect(int(single_summary.get("cycle_min_ms", 0)) == 5000, "board should expose build cycle range")

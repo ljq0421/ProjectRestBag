@@ -23,6 +23,18 @@ static func empty_save() -> Dictionary:
 			"revealed_research_node_ids": [],
 			"boss_first_clear_ids": [],
 			"applied_reward_transaction_ids": [],
+			"expansion_tickets": 0,
+			"expansion_ticket_reward_ids": [],
+			"board_expansion": {
+				"max_rows": 8,
+				"max_columns": 14,
+				"unlocked_cells": [
+					[2, 5], [2, 6], [2, 7], [2, 8],
+					[3, 5], [3, 6], [3, 7], [3, 8],
+					[4, 5], [4, 6], [4, 7], [4, 8],
+					[5, 5], [5, 6], [5, 7], [5, 8]
+				]
+			},
 			"endless_records": {},
 			"onboarding": {
 				"version": 2,
@@ -208,9 +220,57 @@ static func _validate_meta(meta: Dictionary) -> String:
 			return "meta.%s %s" % [field, type_error]
 	if int(meta["research_points"]) < 0:
 		return "meta.research_points must not be negative"
+	if meta.has("expansion_tickets"):
+		if not _is_integer_number(meta["expansion_tickets"]) or int(meta["expansion_tickets"]) < 0:
+			return "meta.expansion_tickets must be a non-negative integer"
+	if meta.has("expansion_ticket_reward_ids"):
+		var ticket_ids_error := _validate_named_type(
+			meta["expansion_ticket_reward_ids"],
+			"string_array"
+		)
+		if not ticket_ids_error.is_empty():
+			return "meta.expansion_ticket_reward_ids %s" % ticket_ids_error
+	if meta.has("board_expansion"):
+		var expansion_error := _validate_board_expansion(meta["board_expansion"])
+		if not expansion_error.is_empty():
+			return expansion_error
 	var onboarding_error := _validate_onboarding(meta["onboarding"])
 	if not onboarding_error.is_empty():
 		return onboarding_error
+	return ""
+
+
+static func _validate_board_expansion(value: Variant) -> String:
+	if not value is Dictionary:
+		return "meta.board_expansion must be a dictionary"
+	var expansion: Dictionary = value
+	for field in ["max_rows", "max_columns", "unlocked_cells"]:
+		if not expansion.has(field):
+			return "meta.board_expansion missing required field: %s" % field
+	if (
+		not _is_integer_number(expansion["max_rows"])
+		or not _is_integer_number(expansion["max_columns"])
+		or int(expansion["max_rows"]) != 8
+		or int(expansion["max_columns"]) != 14
+	):
+		return "meta.board_expansion bounds must equal 8 x 14"
+	if not expansion["unlocked_cells"] is Array or expansion["unlocked_cells"].is_empty():
+		return "meta.board_expansion.unlocked_cells must be a non-empty array"
+	var seen := {}
+	for cell in expansion["unlocked_cells"]:
+		if (
+			not cell is Array
+			or cell.size() != 2
+			or not _is_integer_number(cell[0])
+			or not _is_integer_number(cell[1])
+		):
+			return "meta.board_expansion contains an invalid cell"
+		var row := int(cell[0])
+		var column := int(cell[1])
+		var key := "%d:%d" % [row, column]
+		if row < 0 or row >= 8 or column < 0 or column >= 14 or seen.has(key):
+			return "meta.board_expansion contains an out-of-range or duplicate cell"
+		seen[key] = true
 	return ""
 
 

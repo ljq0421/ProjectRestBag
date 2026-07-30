@@ -8,7 +8,7 @@ signal next_requested
 const SAFE_MARGIN := 24.0
 const TARGET_PADDING := 0.0
 const TARGET_AVOIDANCE_PADDING := 8.0
-const ARROW_GAP := 6.0
+const ARROW_GAP := 3.0
 const MAX_TARGETS := 4
 
 var _targets: Array[Rect2] = []
@@ -100,13 +100,36 @@ func _layout_hint() -> void:
 		for target in _targets.slice(1):
 			target_union = target_union.merge(target)
 		target_union = target_union.grow(TARGET_AVOIDANCE_PADDING)
-	var candidates := [Vector2(target_union.end.x + 24.0, target_union.position.y), Vector2(target_union.position.x - hint.size.x - 24.0, target_union.position.y), Vector2(target_union.position.x, target_union.end.y + 24.0), Vector2(target_union.position.x, target_union.position.y - hint.size.y - 24.0)]
+	var centered_x := clampf(
+		target_union.get_center().x - hint.size.x * 0.5,
+		safe.position.x,
+		maxf(safe.position.x, safe.end.x - hint.size.x)
+	)
+	var centered_y := clampf(
+		target_union.get_center().y - hint.size.y * 0.5,
+		safe.position.y,
+		maxf(safe.position.y, safe.end.y - hint.size.y)
+	)
+	var candidates := [
+		Vector2(target_union.end.x + 24.0, centered_y),
+		Vector2(target_union.position.x - hint.size.x - 24.0, centered_y),
+		Vector2(centered_x, target_union.end.y + 24.0),
+		Vector2(centered_x, target_union.position.y - hint.size.y - 24.0)
+	]
 	var chosen := safe.get_center() - hint.size * 0.5
+	var smallest_overlap := INF
 	for candidate in candidates:
 		var candidate_rect := Rect2(candidate, hint.size)
-		if safe.encloses(candidate_rect) and not candidate_rect.intersects(target_union):
+		if not safe.encloses(candidate_rect):
+			continue
+		var overlap := candidate_rect.intersection(target_union).get_area()
+		if overlap < smallest_overlap:
+			smallest_overlap = overlap
 			chosen = candidate
+		if is_zero_approx(overlap):
 			break
+	chosen.x = clampf(chosen.x, safe.position.x, maxf(safe.position.x, safe.end.x - hint.size.x))
+	chosen.y = clampf(chosen.y, safe.position.y, maxf(safe.position.y, safe.end.y - hint.size.y))
 	hint.position = chosen
 	if _targets.is_empty():
 		$Arrow.visible = false
@@ -117,21 +140,48 @@ func _layout_hint() -> void:
 	var glyph := _direction_glyph(target_center - hint_center)
 	$Arrow.text = glyph
 	$Arrow.size = $Arrow.get_combined_minimum_size()
-	var hint_edge := _hint_edge_toward(hint_rect, target_center)
 	match glyph:
 		"→":
-			$Arrow.position = hint_edge + Vector2(ARROW_GAP, -$Arrow.size.y * 0.5)
+			$Arrow.position = Vector2(
+				hint_rect.end.x + ARROW_GAP,
+				clampf(
+					target_center.y - $Arrow.size.y * 0.5,
+					hint_rect.position.y,
+					hint_rect.end.y - $Arrow.size.y
+				)
+			)
 		"←":
-			$Arrow.position = hint_edge - Vector2($Arrow.size.x + ARROW_GAP, $Arrow.size.y * 0.5)
+			$Arrow.position = Vector2(
+				hint_rect.position.x - $Arrow.size.x - ARROW_GAP,
+				clampf(
+					target_center.y - $Arrow.size.y * 0.5,
+					hint_rect.position.y,
+					hint_rect.end.y - $Arrow.size.y
+				)
+			)
 		"↓":
-			$Arrow.position = hint_edge + Vector2(-$Arrow.size.x * 0.5, ARROW_GAP)
+			$Arrow.position = Vector2(
+				clampf(
+					target_center.x - $Arrow.size.x * 0.5,
+					hint_rect.position.x,
+					hint_rect.end.x - $Arrow.size.x
+				),
+				hint_rect.end.y + ARROW_GAP
+			)
 		"↑":
-			$Arrow.position = hint_edge - Vector2($Arrow.size.x * 0.5, $Arrow.size.y + ARROW_GAP)
+			$Arrow.position = Vector2(
+				clampf(
+					target_center.x - $Arrow.size.x * 0.5,
+					hint_rect.position.x,
+					hint_rect.end.x - $Arrow.size.x
+				),
+				hint_rect.position.y - $Arrow.size.y - ARROW_GAP
+			)
 
 
 static func control_screen_rect(control: Control) -> Rect2:
 	control.force_update_transform()
-	return _transform_rect(control.get_screen_transform(), Rect2(Vector2.ZERO, control.size))
+	return _transform_rect(control.get_global_transform(), Rect2(Vector2.ZERO, control.size))
 
 
 static func control_content_screen_rect(control: Control) -> Rect2:
@@ -143,14 +193,14 @@ static func control_content_screen_rect(control: Control) -> Rect2:
 	content_size.x = clampf(content_size.x, 1.0, control.size.x)
 	content_size.y = clampf(content_size.y, 1.0, control.size.y)
 	return _transform_rect(
-		control.get_screen_transform(),
+		control.get_global_transform(),
 		Rect2(Vector2.ZERO, content_size)
 	)
 
 
 func _screen_rect_to_local(screen_rect: Rect2) -> Rect2:
 	force_update_transform()
-	return _transform_rect(get_screen_transform().affine_inverse(), screen_rect)
+	return _transform_rect(get_global_transform().affine_inverse(), screen_rect)
 
 
 func _reapply_targets_after_resize() -> void:
@@ -181,16 +231,3 @@ func _direction_glyph(direction: Vector2) -> String:
 	if abs(direction.x) >= abs(direction.y):
 		return "→" if direction.x >= 0.0 else "←"
 	return "↓" if direction.y >= 0.0 else "↑"
-
-
-func _hint_edge_toward(hint_rect: Rect2, target_center: Vector2) -> Vector2:
-	var hint_center := hint_rect.get_center()
-	var direction := target_center - hint_center
-	if direction.is_zero_approx():
-		return hint_center
-	var half_size := hint_rect.size * 0.5
-	var scale: float = max(
-		abs(direction.x) / max(half_size.x, 1.0),
-		abs(direction.y) / max(half_size.y, 1.0)
-	)
-	return hint_center + direction / scale

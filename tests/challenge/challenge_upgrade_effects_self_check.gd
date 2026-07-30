@@ -38,7 +38,7 @@ func _run() -> void:
 		[_entry("wide_display", {
 			"type": "shape_variant",
 			"target_recipe_ids": ["test_recipe"],
-			"shape_cells": [[0, 0], [0, 1]],
+			"shape_cells": [[0, 0], [1, 0]],
 			"rotatable": false
 		})]
 	)

@@ -1,8 +1,8 @@
 {
   "id": "endless_climb",
   "display_name": "无尽爬升",
-  "grid_rows": 6,
-  "grid_columns": 8,
+  "grid_rows": 8,
+  "grid_columns": 14,
   "starting_confidence": 2,
   "maximum_confidence": 2,
   "minimum_supply_budget": 10,

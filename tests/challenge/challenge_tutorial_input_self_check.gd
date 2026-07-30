@@ -22,6 +22,7 @@ func _run() -> void:
 	main.start_new_run_for_test(42)
 	await process_frame
 	await process_frame
+	await process_frame
 
 	var overlay: Control = main.get_node("TutorialLayer/TutorialOverlay")
 	var preparation: Control = main.get_node("Root/PageHost/PreparationHost/PreparationView")
@@ -46,11 +47,20 @@ func _run() -> void:
 	await _click(_viewport_center(confirm))
 	_expect(main.get_tutorial_state_for_test()["step_id"] == "place_recipe", "real confirm press advances boss brief")
 	_expect(overlay.visible, "overlay remains visible for placement")
+	var supply_scroll: ScrollContainer = preparation.get_node(
+		"MainColumns/RecipeLibrary/Content/SupplyScroll"
+	)
+	supply_scroll.ensure_control_visible(pudding_card)
+	await process_frame
+	await process_frame
 
 	var board_cells: Array = board.get_node("BoardFrame/BoardGrid").get_children()
 	_expect(not board_cells.is_empty(), "board exposes real drop cells")
 	if not board_cells.is_empty():
-		await _drag(_viewport_center(pudding_card), _viewport_center(board_cells[0]))
+		await _drag(
+			_viewport_center(pudding_card),
+			_viewport_center(board_cells[2 * 14 + 5])
+		)
 	await process_frame
 	await process_frame
 	var draft: Dictionary = board.get_draft()

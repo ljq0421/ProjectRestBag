@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/challenge/ui/challenge_preparation_view.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://scenes/challenge/challenge_board.tscn" id="2_board"]
+[ext_resource type="PackedScene" path="res://scenes/challenge/challenge_board_expansion_panel.tscn" id="3_expansion"]
 
 [sub_resource type="StyleBoxFlat" id="Style_boss"]
 bg_color = Color(0.968627, 0.956863, 1, 1)
@@ -18,6 +19,22 @@ content_margin_left = 26.0
 content_margin_top = 24.0
 content_margin_right = 26.0
 content_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxFlat" id="Style_recipe_library"]
+bg_color = Color(0.94902, 0.937255, 0.992157, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.756863, 0.713726, 0.87451, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+content_margin_left = 14.0
+content_margin_top = 16.0
+content_margin_right = 14.0
+content_margin_bottom = 16.0
 
 [node name="ChallengePreparationView" type="VBoxContainer"]
 custom_minimum_size = Vector2(1500, 890)
@@ -42,112 +59,172 @@ horizontal_alignment = 1
 [node name="MainColumns" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 24
+theme_override_constants/separation = 18
+
+[node name="RecipeLibrary" type="PanelContainer" parent="MainColumns"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("Style_recipe_library")
+
+[node name="Content" type="VBoxContainer" parent="MainColumns/RecipeLibrary"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="MainColumns/RecipeLibrary/Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainColumns/RecipeLibrary/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
+theme_override_font_sizes/font_size = 22
+text = "已解锁配方"
+
+[node name="CountLabel" type="Label" parent="MainColumns/RecipeLibrary/Content/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 16
+text = "0 个"
+vertical_alignment = 1
+
+[node name="Guide" type="Label" parent="MainColumns/RecipeLibrary/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
+theme_override_font_sizes/font_size = 14
+text = "比较周期、满足与标签，再拖入展示柜"
+autowrap_mode = 2
+
+[node name="RoleLegend" type="Label" parent="MainColumns/RecipeLibrary/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
+theme_override_font_sizes/font_size = 13
+text = "周转 · 联动 · 招牌，按构筑优先级排列"
+autowrap_mode = 2
+
+[node name="SupplyScroll" type="ScrollContainer" parent="MainColumns/RecipeLibrary/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 1
+
+[node name="SupplyGrid" type="GridContainer" parent="MainColumns/RecipeLibrary/Content/SupplyScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
 
 [node name="ChallengeBoard" parent="MainColumns" instance=ExtResource("2_board")]
 layout_mode = 2
-
-[node name="BossBrief" type="PanelContainer" parent="MainColumns"]
-custom_minimum_size = Vector2(520, 0)
-layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RightSidebar" type="VBoxContainer" parent="MainColumns"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="BossBrief" type="PanelContainer" parent="MainColumns/RightSidebar"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("Style_boss")
 
-[node name="Content" type="VBoxContainer" parent="MainColumns/BossBrief"]
+[node name="Content" type="VBoxContainer" parent="MainColumns/RightSidebar/BossBrief"]
 layout_mode = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 12
 
-[node name="Eyebrow" type="Label" parent="MainColumns/BossBrief/Content"]
+[node name="Eyebrow" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
 theme_override_font_sizes/font_size = 16
 text = "本场完整需求 · 开战后全自动"
 
-[node name="BossName" type="Label" parent="MainColumns/BossBrief/Content"]
+[node name="BossName" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.160784, 0.129412, 0.239216, 1)
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 30
 text = "早高峰客潮"
 autowrap_mode = 2
 
-[node name="BossStats" type="Label" parent="MainColumns/BossBrief/Content"]
+[node name="BossStats" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 17
 text = "挑剔 100 · 口碑 100 · 自动战斗 30 秒"
+autowrap_mode = 2
 
-[node name="TimelineTitle" type="Label" parent="MainColumns/BossBrief/Content"]
+[node name="TimelineBlock" type="VBoxContainer" parent="MainColumns/RightSidebar/BossBrief/Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TimelineTitle" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content/TimelineBlock"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "需求时间轴"
 
-[node name="Timeline" type="Label" parent="MainColumns/BossBrief/Content"]
-custom_minimum_size = Vector2(0, 190)
+[node name="Timeline" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content/TimelineBlock"]
+custom_minimum_size = Vector2(0, 116)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "08 秒  累计售卖 ≥ 2\n16 秒  标签覆盖 ≥ 2\n30 秒  清空挑剔值"
 autowrap_mode = 2
 
-[node name="BuildGuide" type="VBoxContainer" parent="MainColumns/BossBrief/Content"]
+[node name="BuildGuide" type="VBoxContainer" parent="MainColumns/RightSidebar/BossBrief/Content"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 6
 
-[node name="Title" type="Label" parent="MainColumns/BossBrief/Content/BuildGuide"]
+[node name="Title" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content/BuildGuide"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "构筑只看三件事"
 
-[node name="Steps" type="Label" parent="MainColumns/BossBrief/Content/BuildGuide"]
+[node name="Steps" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content/BuildGuide"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 15
 text = "① 周期决定出餐次数  ② 满足力压低挑剔值\n③ 标签配对并贴边，才会获得本场加成"
 autowrap_mode = 2
 
-[node name="RelationRule" type="Label" parent="MainColumns/BossBrief/Content/BuildGuide"]
+[node name="RelationRule" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content/BuildGuide"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 15
 text = "本场联动：饮品 × 烘焙，上下左右贴边后，两边每次售卖 +25% 满足力"
 autowrap_mode = 2
 
-[node name="LiveBuild" type="Label" parent="MainColumns/BossBrief/Content/BuildGuide"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
-theme_override_font_sizes/font_size = 17
-text = "当前构筑：尚未摆放配方"
-autowrap_mode = 2
-
-[node name="RuleHint" type="Label" parent="MainColumns/BossBrief/Content/BuildGuide"]
+[node name="LiveBuild" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content/BuildGuide"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
 theme_override_font_sizes/font_size = 15
+text = "当前构筑：尚未摆放配方"
+autowrap_mode = 2
+
+[node name="RuleHint" type="Label" parent="MainColumns/RightSidebar/BossBrief/Content/BuildGuide"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.278431, 0.435294, 1)
+theme_override_font_sizes/font_size = 14
 text = "新手建议：先放一对可联动配方，再用低周期配方补售卖次数。"
 autowrap_mode = 2
 
-[node name="SupplyLegend" type="Label" parent="."]
-custom_minimum_size = Vector2(0, 24)
+[node name="ExpansionPanel" parent="MainColumns/RightSidebar" instance=ExtResource("3_expansion")]
+visible = false
 layout_mode = 2
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.396078, 0.352941, 0.509804, 1)
-theme_override_font_sizes/font_size = 14
-text = "菜单按构筑方向排列：快速周转 → 搭配联动 → 招牌输出"
 
-[node name="SupplyScroll" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(0, 164)
+[node name="ExpansionButton" type="Button" parent="MainColumns/RightSidebar"]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-horizontal_scroll_mode = 2
-vertical_scroll_mode = 0
+theme_override_font_sizes/font_size = 18
+text = "扩建展示柜 · 扩建券 0"
 
-[node name="SupplyStrip" type="HBoxContainer" parent="SupplyScroll"]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="BattleButton" type="Button" parent="."]
+[node name="BattleButton" type="Button" parent="MainColumns/RightSidebar"]
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22

@@ -2,6 +2,7 @@ extends SceneTree
 
 const MAIN_PATH := "res://scenes/challenge/challenge_main.tscn"
 const ChallengeSaveService = preload("res://scripts/challenge/challenge_save_service.gd")
+const ChallengeTutorialOverlay = preload("res://scripts/challenge/ui/challenge_tutorial_overlay.gd")
 
 var _failures: Array[String] = []
 var _save_path := OS.get_temp_dir().path_join(
@@ -14,7 +15,7 @@ func _init() -> void:
 
 
 func _run() -> void:
-	root.size = Vector2i(1920, 1080)
+	root.size = Vector2i(1172, 1055)
 	_cleanup()
 	var main = load(MAIN_PATH).instantiate()
 	main.save_path = _save_path
@@ -23,18 +24,56 @@ func _run() -> void:
 	await process_frame
 	main.start_new_run_for_test(42)
 	await process_frame
+	await process_frame
+	await process_frame
 
 	var overlay = main.get_node("TutorialLayer/TutorialOverlay")
 	var preparation = main.get_node("Root/PageHost/PreparationHost/PreparationView")
 	var board = preparation.board()
 	_expect(main.get_tutorial_state_for_test()["step_id"] == "boss_brief", "new run starts core tutorial")
 	_expect(overlay.visible, "core tutorial is visible in preparation")
+	var timeline_block := preparation.get_node(
+		"MainColumns/RightSidebar/BossBrief/Content/TimelineBlock"
+	) as Control
+	var boss_brief := preparation.get_node("MainColumns/RightSidebar/BossBrief") as Control
+	var boss_targets: Array[Rect2] = main.resolve_tutorial_targets("boss_brief")
+	var expected_timeline_rect := ChallengeTutorialOverlay.control_screen_rect(timeline_block)
+	_expect(boss_targets.size() == 1, "boss brief step highlights one precise target")
+	if boss_targets.size() == 1:
+		_expect(
+			boss_targets[0].position.is_equal_approx(expected_timeline_rect.position)
+				and boss_targets[0].size.is_equal_approx(expected_timeline_rect.size),
+			"boss brief step targets the demand timeline block exactly"
+		)
+		_expect(
+			boss_targets[0].size.y
+				< ChallengeTutorialOverlay.control_screen_rect(boss_brief).size.y * 0.5,
+			"boss brief step does not frame the entire right panel"
+		)
+	var rendered_targets: Array[Rect2] = overlay.get_target_rects_for_test()
+	_expect(
+		rendered_targets.size() == 1,
+		"boss brief step renders one outline: targets=%s expected=%s overlay_size=%s overlay_transform=%s timeline_transform=%s"
+			% [
+				rendered_targets,
+				expected_timeline_rect,
+				overlay.size,
+				overlay.get_global_transform(),
+				timeline_block.get_global_transform()
+			]
+	)
+	if rendered_targets.size() == 1:
+		_expect(
+			rendered_targets[0].position.is_equal_approx(expected_timeline_rect.position.floor())
+				and rendered_targets[0].size.is_equal_approx(expected_timeline_rect.size.ceil()),
+			"rendered 1/9 outline stays on the demand timeline at the narrow window size"
+		)
 	main.acknowledge_tutorial_for_test()
 	_expect(main.get_tutorial_state_for_test()["step_id"] == "place_recipe", "boss acknowledgement advances")
 
-	_expect(board.place_recipe("butter_cookie", [0, 0], 0, "cookie_1"), "real placement succeeds")
+	_expect(board.place_recipe("butter_cookie", [2, 5], 0, "cookie_1"), "real placement succeeds")
 	_expect(main.get_tutorial_state_for_test()["step_id"] == "rotate_recipe", "real placement advances")
-	_expect(board.place_recipe("milk_pudding", [2, 0], 0, "pudding_1"), "rotatable recipe placement succeeds")
+	_expect(board.place_recipe("milk_pudding", [4, 5], 0, "pudding_1"), "rotatable recipe placement succeeds")
 	_expect(board.rotate_instance("pudding_1"), "real rotation succeeds")
 	_expect(main.get_tutorial_state_for_test()["step_id"] == "read_risk", "shape-changing rotation advances")
 

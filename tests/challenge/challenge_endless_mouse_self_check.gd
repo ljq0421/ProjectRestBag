@@ -48,7 +48,9 @@ func _run() -> void:
 	var arranged := await _arrange_draft_with_mouse(preparation, encounter.get("validation_draft", {}))
 	_expect(arranged, "floor 1 should be assembled with real mouse drags")
 	_expect(preparation.board().is_current_draft_valid(), "mouse-built endless draft should validate")
-	var battle_button: Button = preparation.get_node("BattleButton")
+	var battle_button: Button = preparation.get_node(
+		"MainColumns/RightSidebar/BattleButton"
+	)
 	await _click(_viewport_center(battle_button))
 	await process_frame
 	_expect(main._page == "battle", "mouse click should start automatic endless battle")
@@ -92,6 +94,12 @@ func _arrange_draft_with_mouse(preparation: Control, target_draft: Dictionary) -
 		var origin: Array = placement.get("origin", [])
 		if card == null or origin.size() != 2:
 			return false
+		var supply_scroll: ScrollContainer = preparation.get_node(
+			"MainColumns/RecipeLibrary/Content/SupplyScroll"
+		)
+		supply_scroll.ensure_control_visible(card)
+		await process_frame
+		await process_frame
 		var cell := _board_cell(board, int(origin[0]), int(origin[1]))
 		if cell == null:
 			return false

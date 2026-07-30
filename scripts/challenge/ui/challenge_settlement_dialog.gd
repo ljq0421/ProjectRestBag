@@ -167,12 +167,27 @@ func bind_report(report: Dictionary) -> void:
 
 	var failure: Dictionary = report.get("primary_failure", {})
 	if failure.is_empty():
-		$Margin/Content/PrimaryFailure.text = "关键结论：所有已触发需求均已覆盖。"
+		match String(report.get("outcome", "")):
+			"victory":
+				$Margin/Content/PrimaryFailure.text = "通过原因：Boss 挑剔值已清空；所有已触发需求均已覆盖。"
+			"loss_timeout":
+				$Margin/Content/PrimaryFailure.text = (
+					"失败原因：时间到时 Boss 仍有 %d 挑剔值；需求虽已覆盖，但总满足力不足。"
+					% int(report.get("pickiness_remaining", 0))
+				)
+			"loss_reputation":
+				$Margin/Content/PrimaryFailure.text = "失败原因：需求失败累计扣光了口碑防线。"
+			_:
+				$Margin/Content/PrimaryFailure.text = "关键结论：所有已触发需求均已覆盖。"
 	else:
-		$Margin/Content/PrimaryFailure.text = "主要缺口：%s 实际 %s / 目标 %s" % [
+		var actual := int(failure.get("actual", 0))
+		var target := int(failure.get("target", 0))
+		$Margin/Content/PrimaryFailure.text = "失败原因：%s 实际 %d / 目标 %d，差 %d；本次口碑 -%d。" % [
 			_metric_name(String(failure.get("metric", ""))),
-			_display_value(failure.get("actual")),
-			_display_value(failure.get("target"))
+			actual,
+			target,
+			maxi(0, target - actual),
+			int(failure.get("reputation_damage", 0))
 		]
 	$Margin/Content/SuggestionList.text = _suggestion_rows(report.get("suggestions", []))
 
@@ -201,6 +216,7 @@ func _window_rows(windows: Array) -> String:
 		var passed := bool(row.get("passed", false))
 		var metric_text := _metric_name(String(row.get("metric", "")))
 		var tag_context := _window_tag_context(row)
+		var guard_absorbed := int(row.get("guard_absorbed", 0))
 		if not tag_context.is_empty():
 			metric_text = "%s（%s）" % [metric_text, tag_context]
 		lines.append("%s %02ds｜%s｜%s / %s%s" % [
@@ -209,7 +225,10 @@ func _window_rows(windows: Array) -> String:
 			metric_text,
 			_display_value(row.get("actual")),
 			_display_value(row.get("target")),
-			"" if passed else "｜口碑 -%d" % int(row.get("reputation_damage", 0))
+			"" if passed else "｜口碑 -%d%s" % [
+				int(row.get("reputation_damage", 0)),
+				"｜开场缓冲吸收 %d" % guard_absorbed if guard_absorbed > 0 else ""
+			]
 		])
 	return "\n".join(lines)
 

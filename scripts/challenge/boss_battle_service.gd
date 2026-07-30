@@ -120,6 +120,32 @@ func simulate(snapshot: Dictionary, encounter: Dictionary, seed: int) -> Diction
 	return advance(create_state(snapshot, encounter, seed), int(encounter.get("duration_ms", 0)))
 
 
+func next_window_progress(state: Dictionary) -> Dictionary:
+	if state.is_empty():
+		return {}
+	var encounter: Dictionary = state.get("_encounter", {})
+	var resolved_windows: Dictionary = state.get("resolved_windows", {})
+	var elapsed_ms := int(state.get("elapsed_ms", 0))
+	for window_value in encounter.get("windows", []):
+		if not window_value is Dictionary:
+			continue
+		var window: Dictionary = window_value
+		if resolved_windows.has(String(window.get("id", ""))):
+			continue
+		var progress := window.duplicate(true)
+		progress["actual"] = _window_metric_at(
+			state,
+			window,
+			mini(elapsed_ms, int(window.get("at_ms", elapsed_ms)))
+		)
+		progress["remaining"] = maxi(
+			0,
+			int(window.get("target", 0)) - int(progress.get("actual", 0))
+		)
+		return progress
+	return {}
+
+
 func _next_event_time(state: Dictionary, target_ms: int) -> int:
 	var elapsed_ms := int(state.get("elapsed_ms", 0))
 	var candidate := target_ms + 1
@@ -164,13 +190,16 @@ func _resolve_sales(state: Dictionary, event_time: int) -> void:
 	due_instance_ids.sort()
 
 	var relation_events: Array[Dictionary] = []
-	var satisfaction_at_time := 0
+	var pickiness_after_sales := int(state.get("pickiness", 0))
 	for instance_id in due_instance_ids:
 		var item: Dictionary = item_states[instance_id]
 		var base_satisfaction := int(item.get("base_satisfaction", 0))
 		var relation_bonus_pct := int(item.get("relation_bonus_pct", 0))
 		var relation_bonus := base_satisfaction * relation_bonus_pct / 100
 		var final_satisfaction := base_satisfaction + relation_bonus
+		var pickiness_before := pickiness_after_sales
+		var pickiness_reduction := mini(final_satisfaction, pickiness_before)
+		pickiness_after_sales = maxi(0, pickiness_before - pickiness_reduction)
 		item["remaining_stock"] = int(item.get("remaining_stock", 0)) - 1
 		item["sales_count"] = int(item.get("sales_count", 0)) + 1
 		item["satisfaction"] = int(item.get("satisfaction", 0)) + final_satisfaction
@@ -181,7 +210,6 @@ func _resolve_sales(state: Dictionary, event_time: int) -> void:
 		item_states[instance_id] = item
 		state["sales_count"] = int(state.get("sales_count", 0)) + 1
 		state["total_satisfaction"] = int(state.get("total_satisfaction", 0)) + final_satisfaction
-		satisfaction_at_time += final_satisfaction
 		_append_event(state, {
 			"at_ms": event_time,
 			"type": "sale",
@@ -191,6 +219,9 @@ func _resolve_sales(state: Dictionary, event_time: int) -> void:
 			"base_satisfaction": base_satisfaction,
 			"relation_bonus": relation_bonus,
 			"final_satisfaction": final_satisfaction,
+			"pickiness_before": pickiness_before,
+			"pickiness_reduction": pickiness_reduction,
+			"pickiness_after": pickiness_after_sales,
 			"upgrade_source_ids": _merged_tags(
 				item.get("upgrade_source_ids", []),
 				item.get("relation_upgrade_source_ids", [])
@@ -211,7 +242,7 @@ func _resolve_sales(state: Dictionary, event_time: int) -> void:
 	for relation_event in relation_events:
 		_append_event(state, relation_event)
 	state["item_states"] = item_states
-	state["pickiness"] = maxi(0, int(state.get("pickiness", 0)) - satisfaction_at_time)
+	state["pickiness"] = pickiness_after_sales
 
 
 func _resolve_demand_windows(state: Dictionary, event_time: int) -> void:
@@ -260,6 +291,10 @@ func _resolve_demand_windows(state: Dictionary, event_time: int) -> void:
 
 
 func _window_metric(state: Dictionary, window: Dictionary) -> int:
+	return _window_metric_at(state, window, int(window.get("at_ms", 0)))
+
+
+func _window_metric_at(state: Dictionary, window: Dictionary, to_ms: int) -> int:
 	match String(window.get("metric", "")):
 		"sales_count":
 			return int(state.get("sales_count", 0))
@@ -268,26 +303,25 @@ func _window_metric(state: Dictionary, window: Dictionary) -> int:
 			return (snapshot.get("relations", []) as Array).size()
 		"window_satisfaction":
 			var from_ms := int(window.get("from_ms", 0))
-			var to_ms := int(window.get("at_ms", 0))
 			return _sale_satisfaction_in_range(state.get("events", []), from_ms, to_ms)
 		"tag_sales_count":
 			return _tag_sales_count(
 				state.get("events", []),
 				String(window.get("tag", "")),
-				int(window.get("at_ms", 0))
+				to_ms
 			)
 		"tag_satisfaction":
 			return _tag_satisfaction(
 				state.get("events", []),
 				String(window.get("tag", "")),
 				int(window.get("from_ms", 0)),
-				int(window.get("at_ms", 0))
+				to_ms
 			)
 		"distinct_tag_count":
 			return _distinct_tag_count(
 				state.get("events", []),
 				_window_target_tags(window),
-				int(window.get("at_ms", 0))
+				to_ms
 			)
 	return 0
 

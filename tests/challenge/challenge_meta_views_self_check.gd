@@ -9,7 +9,8 @@ const VIEW_PATHS := [
 	"res://scenes/challenge/challenge_preparation_view.tscn",
 	"res://scenes/challenge/challenge_upgrade_select_view.tscn",
 	"res://scenes/challenge/challenge_research_view.tscn",
-	"res://scenes/challenge/challenge_run_summary_view.tscn"
+	"res://scenes/challenge/challenge_run_summary_view.tscn",
+	"res://scenes/challenge/challenge_settlement_dialog.tscn"
 ]
 
 var _failures: Array[String] = []
@@ -45,8 +46,21 @@ func _run() -> void:
 	var preparation = instances.get("ChallengePreparationView")
 	if preparation != null:
 		_expect(
-			preparation.get_node("SupplyScroll/SupplyStrip").get_child_count() == 0,
+			preparation.get_node(
+				"MainColumns/RecipeLibrary/Content/SupplyScroll/SupplyGrid"
+			).get_child_count() == 0,
 			"preparation scene should not contain hard-coded supply cards"
+		)
+		var recipe_library: Control = preparation.get_node(
+			"MainColumns/RecipeLibrary"
+		)
+		var board: Control = preparation.get_node("MainColumns/ChallengeBoard")
+		var sidebar: Control = preparation.get_node("MainColumns/RightSidebar")
+		_expect(
+			recipe_library.custom_minimum_size.x == 420.0
+				and board.custom_minimum_size.x == 942.0
+				and sidebar.custom_minimum_size.x == 470.0,
+			"preparation should keep the approved recipe, board, and encounter columns"
 		)
 		var recipe_defs := _recipe_defs()
 		var effective := RunUpgradeService.new().resolve_context(
@@ -158,6 +172,46 @@ func _run() -> void:
 		_expect(
 			"获得强化 4 个" in summary.get_node("Content/History").text,
 			"summary should count stacked upgrades instead of merged upgrade entries"
+		)
+
+	var settlement = instances.get("ChallengeSettlementDialog")
+	if settlement != null:
+		settlement.bind_report({
+			"outcome": "loss_reputation",
+			"reputation_remaining": 0,
+			"pickiness_remaining": 30,
+			"total_sales": 4,
+			"total_satisfaction": 20,
+			"windows": [],
+			"recipe_contributions": [],
+			"suggestions": [],
+			"primary_failure": {
+				"metric": "window_satisfaction",
+				"actual": 22,
+				"target": 30,
+				"reputation_damage": 45
+			}
+		})
+		_expect(
+			"差 8" in settlement.get_node("Margin/Content/PrimaryFailure").text
+				and "口碑 -45" in settlement.get_node("Margin/Content/PrimaryFailure").text,
+			"settlement should state the exact failed-demand gap and damage"
+		)
+		settlement.bind_report({
+			"outcome": "loss_timeout",
+			"reputation_remaining": 100,
+			"pickiness_remaining": 17,
+			"total_sales": 8,
+			"total_satisfaction": 80,
+			"windows": [],
+			"recipe_contributions": [],
+			"suggestions": [],
+			"primary_failure": {}
+		})
+		_expect(
+			"Boss 仍有 17 挑剔值" in settlement.get_node("Margin/Content/PrimaryFailure").text
+				and "总满足力不足" in settlement.get_node("Margin/Content/PrimaryFailure").text,
+			"settlement should distinguish timeout from a failed demand window"
 		)
 
 	for instance in instances.values():

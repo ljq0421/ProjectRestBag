@@ -13,6 +13,12 @@ const ChallengeLoadoutService = preload("res://scripts/challenge/challenge_loado
 const BossBattleService = preload("res://scripts/challenge/boss_battle_service.gd")
 const BossBattleReportService = preload("res://scripts/challenge/boss_battle_report_service.gd")
 const EndlessClimbService = preload("res://scripts/challenge/endless_climb_service.gd")
+const ChallengeBoardExpansionService = preload(
+	"res://scripts/challenge/challenge_board_expansion_service.gd"
+)
+const Stage11PlaytestTelemetryService = preload(
+	"res://scripts/challenge/stage11_playtest_telemetry_service.gd"
+)
 
 const RECIPE_CONFIG_PATH := "res://doc/challenge/challenge_recipes.json"
 const ENCOUNTER_CONFIG_PATH := "res://doc/challenge/boss_encounters.json"
@@ -43,6 +49,8 @@ var _loadout_service = ChallengeLoadoutService.new()
 var _battle_service = BossBattleService.new()
 var _report_service = BossBattleReportService.new()
 var _endless_service = EndlessClimbService.new()
+var _board_expansion_service = ChallengeBoardExpansionService.new()
+var _stage11_telemetry = Stage11PlaytestTelemetryService.new()
 
 
 func configure(
@@ -114,11 +122,22 @@ func create_standard_run(save_data: Dictionary, route_id: String, seed: int) -> 
 	)
 	if not bool(created.get("ok", false)):
 		return _result(false, next_save, _first_error(created, "encounter_creation_failed"))
-	var locked := _run_service.lock_encounters(run, created.get("encounter_instances", []))
+	var packed_instances := _pack_encounter_instances(
+		created.get("encounter_instances", []),
+		pool_snapshot.get("recipe_defs", {}),
+		next_save.get("meta", {})
+	)
+	var locked := _run_service.lock_encounters(run, packed_instances)
 	if not bool(locked.get("applied", false)):
 		return _result(false, next_save, String(locked.get("error", "encounter_lock_failed")))
 	next_save["active_run"] = (locked.get("run", {}) as Dictionary).duplicate(true)
 	next_save["active_battle"] = null
+	next_save = _record_stage11(next_save, "run_started", {
+		"mode": "standard",
+		"run_id": run_id,
+		"route_id": route_id,
+		"recipe_ids": recipe_ids.duplicate()
+	})
 	return _commit(next_save, {
 		"run_id": run_id,
 		"route_id": route_id,
@@ -154,8 +173,16 @@ func create_endless_run(save_data: Dictionary, seed: int) -> Dictionary:
 	)
 	if not bool(created.get("ok", false)):
 		return _result(false, next_save, _first_error(created, "endless_creation_failed"))
-	next_save["active_run"] = (created.get("run", {}) as Dictionary).duplicate(true)
+	var endless_run := (created.get("run", {}) as Dictionary).duplicate(true)
+	endless_run = _pack_run_validation_drafts(endless_run, next_save.get("meta", {}))
+	next_save["active_run"] = endless_run
 	next_save["active_battle"] = null
+	next_save = _record_stage11(next_save, "run_started", {
+		"mode": "endless",
+		"run_id": run_id,
+		"route_id": String(_endless_config.get("id", "endless_climb")),
+		"recipe_ids": recipe_ids.duplicate()
+	})
 	return _commit(next_save, {
 		"run_id": run_id,
 		"route_id": String(_endless_config.get("id", "endless_climb")),
@@ -172,14 +199,14 @@ func start_battle(save_data: Dictionary, draft: Dictionary) -> Dictionary:
 	var encounter := _run_service.current_encounter(run)
 	if encounter.is_empty():
 		return _result(false, next_save, "current_encounter_missing")
-	var effective_context := effective_context_for_run(run)
+	var effective_context := effective_context_for_run(run, next_save.get("meta", {}))
 	var route := _route_for_run(run)
 	var built := _loadout_service.build_snapshot_from_context(
 		draft,
 		effective_context,
 		encounter,
-		int(route.get("grid_rows", _recipe_config.get("grid_rows", 6))),
-		int(route.get("grid_columns", _recipe_config.get("grid_columns", 8)))
+		int(route.get("grid_rows", _recipe_config.get("grid_rows", 8))),
+		int(route.get("grid_columns", _recipe_config.get("grid_columns", 14)))
 	)
 	if not bool(built.get("ok", false)):
 		var rejected := _result(false, next_save, _first_error(built, "invalid_loadout"))
@@ -203,6 +230,14 @@ func start_battle(save_data: Dictionary, draft: Dictionary) -> Dictionary:
 	battle["snapshot"] = snapshot.duplicate(true)
 	next_save["active_run"] = run
 	next_save["active_battle"] = battle
+	next_save = _record_stage11(next_save, "battle_started", {
+		"mode": String(run.get("mode", "")),
+		"route_id": String(run.get("route_id", "")),
+		"stage_index": int(run.get("stage_index", 0)),
+		"encounter_id": String(encounter.get("encounter_id", "")),
+		"battle_attempt_id": String(battle.get("battle_attempt_id", "")),
+		"draft": draft.duplicate(true)
+	})
 	return _commit(next_save, {
 		"battle_attempt_id": battle["battle_attempt_id"],
 		"snapshot": snapshot.duplicate(true),
@@ -239,6 +274,14 @@ func settle_battle(save_data: Dictionary, battle_state: Dictionary) -> Dictionar
 	var mode := String(run.get("mode", ""))
 	var meta: Dictionary = next_save.get("meta", {})
 	var encounter := _run_service.current_encounter(run)
+	var tickets_granted := 0
+	if outcome == "victory" and String(encounter.get("encounter_type", "")) in ["elite", "final_boss"]:
+		var ticket_reward := _board_expansion_service.grant_ticket(
+			meta,
+			"encounter-first-clear:%s" % String(encounter.get("encounter_id", ""))
+		)
+		meta = (ticket_reward.get("meta", meta) as Dictionary).duplicate(true)
+		tickets_granted = int(ticket_reward.get("tickets_granted", 0))
 	if outcome == "victory" and mode == "standard":
 		var encounter_id := String(encounter.get("encounter_id", ""))
 		var reveal_ids: Array = (
@@ -287,11 +330,21 @@ func settle_battle(save_data: Dictionary, battle_state: Dictionary) -> Dictionar
 	next_save["meta"] = meta
 	next_save["active_run"] = run
 	next_save["active_battle"] = stored_battle
+	next_save = _record_stage11(next_save, "battle_settled", {
+		"mode": mode,
+		"route_id": String(run.get("route_id", "")),
+		"stage_index": int(battle_state.get("stage_index", run.get("stage_index", 0))),
+		"encounter_id": String(encounter.get("encounter_id", "")),
+		"outcome": outcome,
+		"failed_window_ids": _failed_window_ids(battle_state),
+		"expansion_tickets_granted": tickets_granted
+	})
 	return _commit(next_save, {
 		"settlement_id": settlement_id,
 		"outcome": outcome,
 		"phase": String(run.get("phase", "")),
-		"confidence_recovered": confidence_recovered
+		"confidence_recovered": confidence_recovered,
+		"expansion_tickets_granted": tickets_granted
 	})
 
 
@@ -382,7 +435,7 @@ func choose_upgrade(save_data: Dictionary, offer_id: String, upgrade_id: String)
 	var offer: Dictionary = run.get("pending_upgrade_offer", {})
 	if String(offer.get("offer_id", "")) != offer_id:
 		return _result(false, next_save, "upgrade_offer_mismatch")
-	var before_context := effective_context_for_run(run)
+	var before_context := effective_context_for_run(run, next_save.get("meta", {}))
 	var applied := _upgrade_service.apply_choice(run, offer, upgrade_id)
 	if not bool(applied.get("applied", false)):
 		return _result(false, next_save, String(applied.get("error", "upgrade_choice_rejected")))
@@ -402,10 +455,18 @@ func choose_upgrade(save_data: Dictionary, offer_id: String, upgrade_id: String)
 		if not bool(ensured.get("ok", false)):
 			return _result(false, next_save, String(ensured.get("error", "floor_generation_failed")))
 		run = (ensured.get("run", run) as Dictionary).duplicate(true)
-	var after_context := effective_context_for_run(run)
+		run = _pack_run_validation_drafts(run, next_save.get("meta", {}))
+	var after_context := effective_context_for_run(run, next_save.get("meta", {}))
 	var summary := _upgrade_service.describe_effect(before_context, after_context, upgrade_id)
 	next_save["active_run"] = run
 	next_save["active_battle"] = null
+	next_save = _record_stage11(next_save, "upgrade_chosen", {
+		"mode": String(run.get("mode", "")),
+		"route_id": String(run.get("route_id", "")),
+		"stage_index": int(run.get("stage_index", 0)),
+		"offer_id": offer_id,
+		"upgrade_id": upgrade_id
+	})
 	return _commit(next_save, {
 		"upgrade_id": upgrade_id,
 		"reward_transaction_id": reward_tx,
@@ -455,6 +516,11 @@ func unlock_research(save_data: Dictionary, node_id: String) -> Dictionary:
 	if not bool(unlocked.get("applied", false)):
 		return _result(false, next_save, String(unlocked.get("error", "")))
 	next_save["meta"] = (unlocked.get("meta", {}) as Dictionary).duplicate(true)
+	next_save = _record_stage11(next_save, "research_unlocked", {
+		"node_id": node_id,
+		"spent_points": int(unlocked.get("spent_points", 0)),
+		"granted_unlocks": (unlocked.get("granted_unlocks", []) as Array).duplicate(true)
+	})
 	return _commit(next_save, {
 		"node_id": node_id,
 		"spent_points": int(unlocked.get("spent_points", 0)),
@@ -473,6 +539,12 @@ func return_to_hub(save_data: Dictionary) -> Dictionary:
 	var summary: Dictionary = returned.get("run", {})
 	next_save["active_run"] = null
 	next_save["active_battle"] = null
+	next_save = _record_stage11(next_save, "run_returned_to_hub", {
+		"mode": String(summary.get("mode", "")),
+		"route_id": String(summary.get("route_id", "")),
+		"phase": String(summary.get("phase", "")),
+		"highest_cleared_floor": int(summary.get("highest_cleared_floor", 0))
+	})
 	return _commit(next_save, {"completed_run": summary.duplicate(true)})
 
 
@@ -502,7 +574,7 @@ func recover(save_data: Dictionary) -> Dictionary:
 	return _result(false, next_save)
 
 
-func effective_context_for_run(run: Dictionary) -> Dictionary:
+func effective_context_for_run(run: Dictionary, meta: Dictionary = {}) -> Dictionary:
 	var pool: Dictionary = run.get("permanent_pool_snapshot", {})
 	var base_recipe_defs: Dictionary = pool.get("recipe_defs", {})
 	var encounter := _run_service.current_encounter(run)
@@ -511,11 +583,52 @@ func effective_context_for_run(run: Dictionary) -> Dictionary:
 			encounter.get("supply_budget", _recipe_config.get("supply_budget", 16))
 		)
 	}
-	return _upgrade_service.resolve_context(
+	var context := _upgrade_service.resolve_context(
 		base_recipe_defs,
 		base_rules,
 		run.get("run_upgrades", [])
 	)
+	context["unlocked_cells"] = _board_expansion_service.unlocked_cells(meta)
+	context["grid_rows"] = ChallengeBoardExpansionService.MAX_ROWS
+	context["grid_columns"] = ChallengeBoardExpansionService.MAX_COLUMNS
+	return context
+
+
+func expansion_products() -> Array[Dictionary]:
+	return _board_expansion_service.products()
+
+
+func purchase_board_expansion(
+	save_data: Dictionary,
+	product_id: String,
+	rotation: int,
+	anchor: Vector2i
+) -> Dictionary:
+	var next_save := _bootstrap_save(save_data)
+	var run := _active_run(next_save)
+	if run.is_empty() or String(run.get("phase", "")) != "preparation":
+		return _result(false, next_save, "board_expansion_requires_preparation")
+	var purchased := _board_expansion_service.purchase(
+		next_save.get("meta", {}),
+		product_id,
+		rotation,
+		anchor
+	)
+	if not bool(purchased.get("applied", false)):
+		return _result(false, next_save, String(purchased.get("error", "board_expansion_failed")))
+	next_save["meta"] = (purchased.get("meta", {}) as Dictionary).duplicate(true)
+	next_save = _record_stage11(next_save, "board_expanded", {
+		"product_id": product_id,
+		"price": int(purchased.get("price", 0)),
+		"rotation": rotation,
+		"anchor": [anchor.x, anchor.y],
+		"unlocked_cells": (purchased.get("cells", []) as Array).duplicate(true)
+	})
+	return _commit(next_save, {
+		"product_id": product_id,
+		"price": int(purchased.get("price", 0)),
+		"unlocked_cells": (purchased.get("cells", []) as Array).duplicate(true)
+	})
 
 
 func current_encounter(save_data: Dictionary) -> Dictionary:
@@ -554,6 +667,7 @@ func set_active_menu(save_data: Dictionary, recipe_ids: Variant) -> Dictionary:
 	var next_save := _bootstrap_save(save_data)
 	if next_save.get("active_run") is Dictionary:
 		return _result(false, next_save, "active_run_menu_locked")
+	var before_recipe_ids := active_menu(next_save)
 	var available := available_recipe_ids(next_save)
 	var changed := _menu_service.set_active_menu(
 		next_save.get("meta", {}),
@@ -566,6 +680,10 @@ func set_active_menu(save_data: Dictionary, recipe_ids: Variant) -> Dictionary:
 		rejected["errors"] = (changed.get("errors", []) as Array).duplicate()
 		return rejected
 	next_save["meta"] = (changed.get("meta", {}) as Dictionary).duplicate(true)
+	next_save = _record_stage11(next_save, "menu_saved", {
+		"before_recipe_ids": before_recipe_ids,
+		"after_recipe_ids": (changed.get("recipe_ids", []) as Array).duplicate(true)
+	})
 	return _commit(next_save, {"recipe_ids": changed.get("recipe_ids", [])})
 
 
@@ -600,6 +718,7 @@ func load_menu_preset(save_data: Dictionary, preset_id: String) -> Dictionary:
 	var next_save := _bootstrap_save(save_data)
 	if next_save.get("active_run") is Dictionary:
 		return _result(false, next_save, "active_run_menu_locked")
+	var before_recipe_ids := active_menu(next_save)
 	var changed := _menu_service.load_preset(
 		next_save.get("meta", {}),
 		preset_id,
@@ -611,6 +730,12 @@ func load_menu_preset(save_data: Dictionary, preset_id: String) -> Dictionary:
 		rejected["errors"] = (changed.get("errors", []) as Array).duplicate()
 		return rejected
 	next_save["meta"] = (changed.get("meta", {}) as Dictionary).duplicate(true)
+	next_save = _record_stage11(next_save, "menu_saved", {
+		"source": "preset",
+		"preset_id": preset_id,
+		"before_recipe_ids": before_recipe_ids,
+		"after_recipe_ids": (changed.get("recipe_ids", []) as Array).duplicate(true)
+	})
 	return _commit(next_save, {"recipe_ids": changed.get("recipe_ids", [])})
 
 
@@ -719,9 +844,12 @@ func _bootstrap_save(save_data: Dictionary) -> Dictionary:
 	var next_save := save_data.duplicate(true)
 	if next_save.is_empty():
 		next_save = ChallengeSaveService.empty_save()
-	var meta: Dictionary = _research_service.bootstrap_meta(next_save.get("meta", {}), _research_tree)
+	var source_meta: Dictionary = next_save.get("meta", {})
+	var missing_expansion_state := not source_meta.has("board_expansion")
+	var meta: Dictionary = _research_service.bootstrap_meta(source_meta, _research_tree)
 	meta = _route_service.bootstrap_meta(meta, _route_defs)
 	meta = _mastery_service.bootstrap_meta(meta)
+	meta = _board_expansion_service.bootstrap_meta(meta)
 	var available := _research_service.available_recipe_ids(meta, _research_tree)
 	var starters: Array[String] = []
 	for value in _research_tree.get("starter_recipe_ids", []):
@@ -745,7 +873,39 @@ func _bootstrap_save(save_data: Dictionary) -> Dictionary:
 		records["standard_completion_run_ids"] = []
 	meta["endless_records"] = records
 	next_save["meta"] = meta
+	if missing_expansion_state:
+		next_save["active_run"] = null
+		next_save["active_battle"] = null
 	return next_save
+
+
+func _record_stage11(
+	save_data: Dictionary,
+	event_type: String,
+	payload: Dictionary = {}
+) -> Dictionary:
+	var next_save := save_data.duplicate(true)
+	var meta: Dictionary = next_save.get("meta", {})
+	next_save["meta"] = _stage11_telemetry.record(meta, event_type, payload)
+	return next_save
+
+
+func _failed_window_ids(battle_state: Dictionary) -> Array[String]:
+	var result: Array[String] = []
+	var windows_value: Variant = battle_state.get("resolved_windows", [])
+	if windows_value is Array:
+		for value in windows_value:
+			if not value is Dictionary or bool(value.get("passed", false)):
+				continue
+			var window_id := String(value.get("window_id", value.get("id", "")))
+			if not window_id.is_empty() and not result.has(window_id):
+				result.append(window_id)
+	elif windows_value is Dictionary:
+		for key in windows_value:
+			var value: Variant = windows_value[key]
+			if value is Dictionary and not bool(value.get("passed", false)):
+				result.append(String(key))
+	return result
 
 
 func _commit(data: Dictionary, payload: Dictionary = {}) -> Dictionary:
@@ -791,6 +951,37 @@ func _recipe_subset(recipe_ids: Array[String]) -> Dictionary:
 	for recipe_id in recipe_ids:
 		if source.has(recipe_id) and source[recipe_id] is Dictionary:
 			result[recipe_id] = (source[recipe_id] as Dictionary).duplicate(true)
+	return result
+
+
+func _pack_run_validation_drafts(run: Dictionary, meta: Dictionary) -> Dictionary:
+	var result := run.duplicate(true)
+	var pool: Dictionary = result.get("permanent_pool_snapshot", {})
+	result["encounter_instances"] = _pack_encounter_instances(
+		result.get("encounter_instances", []),
+		pool.get("recipe_defs", {}),
+		meta
+	)
+	return result
+
+
+func _pack_encounter_instances(
+	instances: Array,
+	recipe_defs: Dictionary,
+	meta: Dictionary
+) -> Array:
+	var result: Array = []
+	for value in instances:
+		if not value is Dictionary:
+			continue
+		var encounter: Dictionary = value.duplicate(true)
+		if encounter.get("validation_draft") is Dictionary:
+			encounter["validation_draft"] = _board_expansion_service.pack_draft(
+				encounter.get("validation_draft", {}),
+				recipe_defs,
+				meta
+			)
+		result.append(encounter)
 	return result
 
 

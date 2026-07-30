@@ -39,7 +39,6 @@ const FORBIDDEN_TOKENS := [
 	"refill_item(",
 	"production_queue",
 	"RecipeBook.research",
-	"purchase",
 	"production",
 	"crafting",
 	"inventory"

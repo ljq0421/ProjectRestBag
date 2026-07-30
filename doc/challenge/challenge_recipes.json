@@ -1,6 +1,6 @@
 {
-  "grid_rows": 6,
-  "grid_columns": 8,
+  "grid_rows": 8,
+  "grid_columns": 14,
   "supply_budget": 16,
   "starter_recipe_ids": [
     "butter_cookie",

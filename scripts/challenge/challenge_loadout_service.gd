@@ -8,21 +8,23 @@ func analyze(
 	rows: int,
 	columns: int,
 	budget: int,
-	encounter: Dictionary
+	encounter: Dictionary,
+	unlocked_cells: Array = []
 ) -> Dictionary:
 	var errors: Array[String] = []
 	var placements_value = draft.get("placements")
 	if not placements_value is Array:
-		errors.append("draft: placements must be an array")
+		errors.append("备战方案格式错误：配方摆放列表应为数组")
 		placements_value = []
 	var placements: Array = placements_value
 	if rows <= 0 or columns <= 0:
-		errors.append("board: rows and columns must be positive")
+		errors.append("展示柜配置错误：行数和列数必须大于 0")
 	if budget <= 0:
-		errors.append("board: supply budget must be positive")
+		errors.append("备货预算配置错误：预算必须大于 0")
 
 	var instances: Array[Dictionary] = []
 	var occupied_cells := {}
+	var unlocked_cell_keys := _cell_keys(unlocked_cells)
 	var seen_instance_ids := {}
 	var recipe_counts := {}
 	var spent_budget := 0
@@ -30,7 +32,7 @@ func analyze(
 	for index in placements.size():
 		var placement_value = placements[index]
 		if not placement_value is Dictionary:
-			errors.append("placement_%d: placement must be a dictionary" % index)
+			errors.append("第 %d 个配方的摆放数据格式错误" % (index + 1))
 			continue
 		var placement: Dictionary = placement_value
 		var instance_id := String(placement.get("instance_id", "")).strip_edges()
@@ -38,24 +40,24 @@ func analyze(
 		var prefix := instance_id if not instance_id.is_empty() else "placement_%d" % index
 
 		if instance_id.is_empty():
-			errors.append("%s: instance_id must be a non-empty string" % prefix)
+			errors.append("配方摆放标识不能为空")
 		elif seen_instance_ids.has(instance_id):
-			errors.append("%s: instance_id must be unique" % prefix)
+			errors.append("配方摆放标识重复：%s" % instance_id)
 		seen_instance_ids[instance_id] = true
 
 		if not recipe_defs.has(recipe_id) or not recipe_defs[recipe_id] is Dictionary:
-			errors.append("%s: unknown recipe %s" % [prefix, recipe_id])
+			errors.append("未找到配方：%s" % recipe_id)
 			continue
 		var definition: Dictionary = recipe_defs[recipe_id]
 		recipe_counts[recipe_id] = int(recipe_counts.get(recipe_id, 0)) + 1
 		var copy_limit := int(definition.get("copy_limit", 0))
 		if int(recipe_counts[recipe_id]) > copy_limit:
-			errors.append("%s: %s exceeds copy limit %d" % [prefix, recipe_id, copy_limit])
+			errors.append("该配方已达到摆放上限（最多 %d 份）" % copy_limit)
 
 		var supply_cost := int(definition.get("supply_cost", 0))
 		spent_budget += supply_cost
 		if spent_budget > budget:
-			errors.append("%s: supply budget exceeded (%d/%d)" % [prefix, spent_budget, budget])
+			errors.append("备货点不足（需要 %d，当前上限 %d）" % [spent_budget, budget])
 
 		var origin_result := _parse_origin(placement.get("origin"), prefix, errors)
 		if not bool(origin_result.get("ok", false)):
@@ -68,17 +70,22 @@ func analyze(
 		var rotation := int(rotation_result["rotation"])
 		var shape_value = definition.get("shape_cells", [])
 		if not shape_value is Array or shape_value.is_empty():
-			errors.append("%s: recipe shape is missing" % prefix)
+			errors.append("配方形状数据缺失：%s" % recipe_id)
 			continue
+		# Recipe shape coordinates are [x, y]. Board instance cells remain
+		# [row, column], so convert only at this boundary.
 		var shape_cells: Array[Vector2i] = rotated_cells(shape_value, rotation)
 		var resolved_cells: Array = []
 		for relative_cell in shape_cells:
-			var cell := origin + relative_cell
+			var board_offset := Vector2i(relative_cell.y, relative_cell.x)
+			var cell := origin + board_offset
 			var cell_key := "%d:%d" % [cell.x, cell.y]
 			if cell.x < 0 or cell.x >= rows or cell.y < 0 or cell.y >= columns:
-				errors.append("%s: cell %s is out of bounds" % [prefix, cell_key])
+				errors.append("无法放置：配方会超出展示柜边界")
+			elif not unlocked_cell_keys.is_empty() and not unlocked_cell_keys.has(cell_key):
+				errors.append("无法放置：目标格子尚未扩建")
 			elif occupied_cells.has(cell_key):
-				errors.append("%s: cell %s overlaps %s" % [prefix, cell_key, String(occupied_cells[cell_key])])
+				errors.append("无法放置：目标格子已被其他配方占用")
 			else:
 				occupied_cells[cell_key] = instance_id
 			resolved_cells.append([cell.x, cell.y])
@@ -116,9 +123,10 @@ func build_snapshot(
 	encounter: Dictionary,
 	rows: int,
 	columns: int,
-	budget: int
+	budget: int,
+	unlocked_cells: Array = []
 ) -> Dictionary:
-	var analysis := analyze(draft, recipe_defs, rows, columns, budget, encounter)
+	var analysis := analyze(draft, recipe_defs, rows, columns, budget, encounter, unlocked_cells)
 	if not bool(analysis.get("valid", false)):
 		return {
 			"ok": false,
@@ -127,6 +135,7 @@ func build_snapshot(
 	var snapshot := {
 		"grid_rows": rows,
 		"grid_columns": columns,
+		"unlocked_cells": unlocked_cells.duplicate(true),
 		"spent_budget": int(analysis.get("spent_budget", 0)),
 		"instances": (analysis.get("instances", []) as Array).duplicate(true),
 		"relations": (analysis.get("relations", []) as Array).duplicate(true),
@@ -148,8 +157,17 @@ func analyze_context(
 	var recipe_defs: Dictionary = effective_context.get("recipe_defs", {})
 	var rules: Dictionary = effective_context.get("rules", {})
 	var budget := int(rules.get("supply_budget", 0))
+	var unlocked_cells: Array = effective_context.get("unlocked_cells", [])
 	var effective_encounter := _encounter_with_rules(encounter, rules)
-	var result := analyze(draft, recipe_defs, rows, columns, budget, effective_encounter)
+	var result := analyze(
+		draft,
+		recipe_defs,
+		rows,
+		columns,
+		budget,
+		effective_encounter,
+		unlocked_cells
+	)
 	result["effective_budget"] = budget
 	result["effective_rules"] = rules.duplicate(true)
 	result["applied_upgrades"] = (
@@ -176,6 +194,9 @@ func build_snapshot_from_context(
 	var snapshot := {
 		"grid_rows": rows,
 		"grid_columns": columns,
+		"unlocked_cells": (
+			effective_context.get("unlocked_cells", []) as Array
+		).duplicate(true),
 		"spent_budget": int(analysis.get("spent_budget", 0)),
 		"supply_budget": int(analysis.get("effective_budget", 0)),
 		"instances": (analysis.get("instances", []) as Array).duplicate(true),
@@ -193,13 +214,22 @@ func build_snapshot_from_context(
 	}
 
 
+func _cell_keys(cells: Array) -> Dictionary:
+	var result := {}
+	for value in cells:
+		if value is Array and value.size() >= 2:
+			result["%d:%d" % [int(value[0]), int(value[1])]] = true
+	return result
+
+
 static func rotated_cells(shape_cells: Array, rotation: int) -> Array[Vector2i]:
 	var turns := int(posmod(rotation, 360) / 90)
 	var cells: Array[Vector2i] = []
 	for value in shape_cells:
+		# Shape data is [x, y], with +x right and +y down.
 		var cell := Vector2i(int(value[0]), int(value[1]))
 		for _turn in range(turns):
-			cell = Vector2i(cell.y, -cell.x)
+			cell = Vector2i(-cell.y, cell.x)
 		cells.append(cell)
 	if cells.is_empty():
 		return cells
@@ -211,17 +241,17 @@ static func rotated_cells(shape_cells: Array, rotation: int) -> Array[Vector2i]:
 	for index in range(cells.size()):
 		cells[index] -= Vector2i(min_row, min_column)
 	cells.sort_custom(func(left: Vector2i, right: Vector2i) -> bool:
-		return left.x < right.x or (left.x == right.x and left.y < right.y)
+		return left.y < right.y or (left.y == right.y and left.x < right.x)
 	)
 	return cells
 
 
 func _parse_origin(value: Variant, prefix: String, errors: Array[String]) -> Dictionary:
 	if not value is Array or value.size() != 2:
-		errors.append("%s: origin must be [row, column]" % prefix)
+		errors.append("配方位置格式错误：应为 [行, 列]")
 		return {"ok": false}
 	if not _is_integer_number(value[0]) or not _is_integer_number(value[1]):
-		errors.append("%s: origin coordinates must be integers" % prefix)
+		errors.append("配方位置格式错误：行列坐标必须是整数")
 		return {"ok": false}
 	return {
 		"ok": true,
@@ -231,15 +261,15 @@ func _parse_origin(value: Variant, prefix: String, errors: Array[String]) -> Dic
 
 func _parse_rotation(value: Variant, rotatable: bool, prefix: String, errors: Array[String]) -> Dictionary:
 	if not _is_integer_number(value):
-		errors.append("%s: rotation must be an integer" % prefix)
+		errors.append("配方旋转角度必须是整数")
 		return {"ok": false}
 	var rotation := int(value)
 	if rotation % 90 != 0:
-		errors.append("%s: rotation must be divisible by 90" % prefix)
+		errors.append("配方旋转角度必须是 90 度的倍数")
 		return {"ok": false}
 	var normalized := int(posmod(rotation, 360))
 	if not rotatable and normalized != 0:
-		errors.append("%s: recipe does not allow rotation" % prefix)
+		errors.append("该配方不支持旋转")
 		return {"ok": false}
 	return {
 		"ok": true,

@@ -3,8 +3,8 @@
     "standard_short_chain": {
       "id": "standard_short_chain",
       "display_name": "五场标准短链",
-      "grid_rows": 6,
-      "grid_columns": 8,
+      "grid_rows": 8,
+      "grid_columns": 14,
       "supply_budget": 16,
       "stages": [
         {
@@ -76,8 +76,8 @@
       "display_name": "风味与质地路线",
       "description": "以奶香软糯、茶香苦甜和香脆烘焙重组菜单。",
       "unlock_requirement_route_id": "standard_short_chain",
-      "grid_rows": 6,
-      "grid_columns": 8,
+      "grid_rows": 8,
+      "grid_columns": 14,
       "supply_budget": 16,
       "required_unlock_node_ids": [],
       "guaranteed_recipe_pool": [
@@ -169,8 +169,8 @@
       "display_name": "复合经营路线",
       "description": "以咸香饱腹、空间联动和晚期招牌完成终局构筑。",
       "unlock_requirement_route_id": "flavor_texture_route",
-      "grid_rows": 6,
-      "grid_columns": 8,
+      "grid_rows": 8,
+      "grid_columns": 14,
       "supply_budget": 16,
       "required_unlock_node_ids": [],
       "guaranteed_recipe_pool": [

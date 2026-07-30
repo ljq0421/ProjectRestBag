@@ -146,9 +146,40 @@ func _run() -> void:
 	var lethal := _snapshot([
 		_instance("finisher", "butter_cookie", 1000, 10, 1)
 	])
-	var victory: Dictionary = service.simulate(lethal, _encounter(5000, 10), 7)
+	var victory: Dictionary = service.simulate(lethal, _encounter(5000, 3), 7)
 	_expect(victory.get("outcome") == "victory", "battle should end in immediate victory when pickiness reaches zero")
 	_expect(int(victory.get("elapsed_ms", 0)) == 1000, "immediate victory should stop at the lethal sale timestamp")
+	var lethal_sale := _first_sale(victory.get("events", []), "finisher")
+	_expect(
+		int(lethal_sale.get("final_satisfaction", 0)) == 10
+			and int(lethal_sale.get("pickiness_before", -1)) == 3
+			and int(lethal_sale.get("pickiness_reduction", -1)) == 3
+			and int(lethal_sale.get("pickiness_after", -1)) == 0,
+		"lethal sale should preserve satisfaction while reporting only the actual pickiness reduction"
+	)
+	var simultaneous_finishers := _snapshot([
+		_instance("finisher_a", "butter_cookie", 1000, 4, 1),
+		_instance("finisher_b", "strawberry_jelly", 1000, 4, 1)
+	])
+	var simultaneous_victory: Dictionary = service.simulate(
+		simultaneous_finishers,
+		_encounter(5000, 6),
+		8
+	)
+	var first_finisher := _first_sale(
+		simultaneous_victory.get("events", []),
+		"finisher_a"
+	)
+	var second_finisher := _first_sale(
+		simultaneous_victory.get("events", []),
+		"finisher_b"
+	)
+	_expect(
+		int(first_finisher.get("pickiness_reduction", -1)) == 4
+			and int(second_finisher.get("pickiness_reduction", -1)) == 2
+			and int(simultaneous_victory.get("total_satisfaction", 0)) == 8,
+		"same-timestamp sales should allocate actual reductions without losing total satisfaction"
+	)
 
 	var timeout_result: Dictionary = service.simulate(no_sales, _encounter(30000, 10), 8)
 	_expect(timeout_result.get("outcome") == "loss_timeout", "battle should lose by timeout at 30 seconds")

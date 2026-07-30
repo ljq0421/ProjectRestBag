@@ -36,19 +36,42 @@ func _run() -> void:
 
 	view.start_new_run_for_test(42)
 	await process_frame
+	await process_frame
 	_expect(view.get_node("Root/PageHost/PreparationHost").visible, "starting run should open preparation")
 	var preparation = view.get_node("Root/PageHost/PreparationHost/PreparationView")
+	var recipe_library: Control = preparation.get_node("MainColumns/RecipeLibrary")
+	var board: Control = preparation.get_node("MainColumns/ChallengeBoard")
+	var encounter_sidebar: Control = preparation.get_node("MainColumns/RightSidebar")
 	_expect(
-		preparation.has_node("MainColumns/BossBrief/Content/BuildGuide/RelationRule"),
+		recipe_library.global_position.x < board.global_position.x
+			and board.global_position.x < encounter_sidebar.global_position.x,
+		"preparation should place recipe library, board, and encounter brief in three columns"
+	)
+	_expect(
+		preparation.has_node("MainColumns/RightSidebar/BossBrief/Content/BuildGuide/RelationRule"),
 		"preparation should keep the build rule in the scene"
 	)
 	_expect(
-		(preparation.get_node("MainColumns/BossBrief/Content/BuildGuide/RelationRule") as Label).text.find("上下左右贴边") >= 0,
+		(preparation.get_node("MainColumns/RightSidebar/BossBrief/Content/BuildGuide/RelationRule") as Label).text.find("上下左右贴边") >= 0,
 		"preparation should explain how the encounter bonus activates"
 	)
 	_expect(
 		preparation.supply_cards().size() == 6,
 		"first run should dynamically show six starter recipes"
+	)
+	var supply_scroll: ScrollContainer = preparation.get_node(
+		"MainColumns/RecipeLibrary/Content/SupplyScroll"
+	)
+	var visible_recipe_rect := supply_scroll.get_global_rect().grow(1.0)
+	var all_starter_cards_visible := true
+	for card: Control in preparation.supply_cards():
+		all_starter_cards_visible = (
+			all_starter_cards_visible
+			and visible_recipe_rect.encloses(card.get_global_rect())
+		)
+	_expect(
+		all_starter_cards_visible,
+		"all six starter recipes should be visible without scrolling"
 	)
 	var run: Dictionary = view.run_state
 	_expect((run.get("encounter_instances", []) as Array).size() == 5, "root flow should freeze five encounters")

@@ -41,6 +41,10 @@ func _run() -> void:
 		if not await _play_stage_with_mouse(main, stage_index):
 			break
 	if _failures.is_empty():
+		_expect(
+			int((main._save_data.get("meta", {}) as Dictionary).get("expansion_tickets", 0)) == 2,
+			"first elite and final boss victories should grant two expansion tickets"
+		)
 		await _complete_meta_loop_with_mouse(main)
 	main.queue_free()
 	await process_frame
@@ -62,7 +66,9 @@ func _play_stage_with_mouse(main: Control, stage_index: int) -> bool:
 	if not arranged:
 		return false
 	_expect(preparation.board().is_current_draft_valid(), "stage %d mouse draft should validate" % stage_index)
-	var battle_button: Button = preparation.get_node("BattleButton")
+	var battle_button: Button = preparation.get_node(
+		"MainColumns/RightSidebar/BattleButton"
+	)
 	_expect(not battle_button.disabled, "stage %d battle button should enable after mouse arrangement" % stage_index)
 	if battle_button.disabled:
 		return false
@@ -183,7 +189,10 @@ func _arrange_draft_with_mouse(preparation: Control, target_draft: Dictionary) -
 			_fail("board draft contains placements but no occupied cell")
 			return false
 		var before_count := (board.get_draft().get("placements", []) as Array).size()
-		await _drag(_viewport_center(occupied), _viewport_center(preparation.get_node("MainColumns/BossBrief")))
+		await _drag(
+			_viewport_center(occupied),
+			_viewport_center(preparation.get_node("MainColumns/RightSidebar/BossBrief"))
+		)
 		await process_frame
 		var after_count := (board.get_draft().get("placements", []) as Array).size()
 		if after_count != before_count - 1:
@@ -200,6 +209,12 @@ func _arrange_draft_with_mouse(preparation: Control, target_draft: Dictionary) -
 		if card == null:
 			_fail("supply strip should contain %s" % recipe_id)
 			return false
+		var supply_scroll: ScrollContainer = preparation.get_node(
+			"MainColumns/RecipeLibrary/Content/SupplyScroll"
+		)
+		supply_scroll.ensure_control_visible(card)
+		await process_frame
+		await process_frame
 		var origin: Array = placement.get("origin", [])
 		if origin.size() != 2:
 			_fail("validation placement %s should have a two-value origin" % recipe_id)

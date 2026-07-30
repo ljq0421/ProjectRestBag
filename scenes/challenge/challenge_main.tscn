@@ -64,11 +64,19 @@ text = "信心 --"
 vertical_alignment = 1
 
 [node name="ResearchLabel" type="Label" parent="Root/GlobalTopBar"]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.176471, 0.541176, 0.376471, 1)
 theme_override_font_sizes/font_size = 19
 text = "研究点 0"
+vertical_alignment = 1
+
+[node name="ExpansionTicketLabel" type="Label" parent="Root/GlobalTopBar"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.329412, 0.403922, 0.835294, 1)
+theme_override_font_sizes/font_size = 19
+text = "扩建券 0"
 vertical_alignment = 1
 
 [node name="SaveStatusLabel" type="Label" parent="Root/GlobalTopBar"]

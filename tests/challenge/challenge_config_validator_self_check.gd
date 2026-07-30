@@ -121,8 +121,8 @@ func _run() -> void:
 	_expect(recipes.size() == 166, "committed challenge config should contain all 166 recipes")
 	_expect((recipe_config.get("starter_recipe_ids", []) as Array).size() == 6, "challenge config should contain six starter recipes")
 	_expect((recipe_config.get("research_recipe_ids", []) as Array).size() == 160, "challenge config should contain 160 research recipes")
-	_expect(int(recipe_config.get("grid_rows", 0)) == 6, "challenge grid should have six rows")
-	_expect(int(recipe_config.get("grid_columns", 0)) == 8, "challenge grid should have eight columns")
+	_expect(int(recipe_config.get("grid_rows", 0)) == 8, "challenge grid should reserve eight rows")
+	_expect(int(recipe_config.get("grid_columns", 0)) == 14, "challenge grid should reserve fourteen columns")
 	_expect(int(recipe_config.get("supply_budget", 0)) == 16, "challenge supply budget should be 16")
 	for recipe_id in recipes:
 		_expect(catalog_recipes.has(recipe_id), "challenge recipe should exist in Catalog: %s" % String(recipe_id))
