@@ -1,0 +1,188 @@
+{
+  "generator": "tools/generate_audio.py",
+  "generator_version": "1.0.0",
+  "master_seed": 31072026,
+  "sample_rate_hz": 32000,
+  "channels": 2,
+  "sample_format": "signed 16-bit PCM little-endian WAV",
+  "third_party_samples": [],
+  "assets": [
+    {
+      "path": "resources/audio/sfx/ui_confirm.wav",
+      "kind": "sfx",
+      "profile": "ui_confirm",
+      "cue_ids": [
+        "ui_confirm"
+      ],
+      "duration_ms": 110,
+      "seed": 31072026,
+      "sha256": "986f15375b33701ecd52ef4ab0b564bc27a927a3fc797c065dc3d50ba6cd3bcf"
+    },
+    {
+      "path": "resources/audio/sfx/page_transition.wav",
+      "kind": "sfx",
+      "profile": "page_transition",
+      "cue_ids": [
+        "page_transition"
+      ],
+      "duration_ms": 320,
+      "seed": 31072127,
+      "sha256": "d1d3d0034addaa794d2ddfb74fb5a9d656381776516838152de5d6522f33471d"
+    },
+    {
+      "path": "resources/audio/sfx/recipe_place.wav",
+      "kind": "sfx",
+      "profile": "recipe_place",
+      "cue_ids": [
+        "recipe_place",
+        "recipe_move"
+      ],
+      "duration_ms": 220,
+      "seed": 31072228,
+      "sha256": "f5d4272a952c04b81621871cd5666c398ec1386a44853f1aded3bbdd4e3bd4b7"
+    },
+    {
+      "path": "resources/audio/sfx/recipe_rotate.wav",
+      "kind": "sfx",
+      "profile": "recipe_rotate",
+      "cue_ids": [
+        "recipe_rotate"
+      ],
+      "duration_ms": 180,
+      "seed": 31072329,
+      "sha256": "082f7c36c724efb8c50e0cf73c77b9d94bf0d293ad80859565156cc942d22fc0"
+    },
+    {
+      "path": "resources/audio/sfx/action_rejected.wav",
+      "kind": "sfx",
+      "profile": "action_rejected",
+      "cue_ids": [
+        "action_rejected"
+      ],
+      "duration_ms": 240,
+      "seed": 31072430,
+      "sha256": "51cc803754c10c6cf12de96324f4def5904e1e274e0c9539f2b0f7958adcd1bb"
+    },
+    {
+      "path": "resources/audio/sfx/battle_start.wav",
+      "kind": "sfx",
+      "profile": "battle_start",
+      "cue_ids": [
+        "battle_start"
+      ],
+      "duration_ms": 720,
+      "seed": 31072531,
+      "sha256": "cab40adc2960549192856e90db1fb29ee32727a7bad426df2d0bffd904c4f7fb"
+    },
+    {
+      "path": "resources/audio/sfx/sale.wav",
+      "kind": "sfx",
+      "profile": "sale",
+      "cue_ids": [
+        "sale"
+      ],
+      "duration_ms": 190,
+      "seed": 31072632,
+      "sha256": "2a78a55b39a1124c6f766c1ace29de5db64fb14abc9d8b2015e331e714b36ccf"
+    },
+    {
+      "path": "resources/audio/sfx/relation_bonus.wav",
+      "kind": "sfx",
+      "profile": "relation_bonus",
+      "cue_ids": [
+        "relation_bonus"
+      ],
+      "duration_ms": 420,
+      "seed": 31072733,
+      "sha256": "436e2c76573c74205f6564ffed4fd9819911dcebcb198b650d34484ceb4221f1"
+    },
+    {
+      "path": "resources/audio/sfx/demand_success.wav",
+      "kind": "sfx",
+      "profile": "demand_success",
+      "cue_ids": [
+        "demand_success"
+      ],
+      "duration_ms": 340,
+      "seed": 31072834,
+      "sha256": "628529640b643302a7645bf212f57ad9a8f717b5ce03d019a472215e64591f8f"
+    },
+    {
+      "path": "resources/audio/sfx/demand_failure.wav",
+      "kind": "sfx",
+      "profile": "demand_failure",
+      "cue_ids": [
+        "demand_failure"
+      ],
+      "duration_ms": 420,
+      "seed": 31072935,
+      "sha256": "a406dc7d154d2ecc381e5da96c512e44755f5648adbe03ac615c6468f86da72f"
+    },
+    {
+      "path": "resources/audio/sfx/victory.wav",
+      "kind": "sfx",
+      "profile": "victory",
+      "cue_ids": [
+        "victory"
+      ],
+      "duration_ms": 1200,
+      "seed": 31073036,
+      "sha256": "0e02bc9393e9b7cbb23f027c70a494298ff1c6cdadaa9f2af1f20bcd454a746a"
+    },
+    {
+      "path": "resources/audio/sfx/defeat.wav",
+      "kind": "sfx",
+      "profile": "defeat",
+      "cue_ids": [
+        "defeat"
+      ],
+      "duration_ms": 1050,
+      "seed": 31073137,
+      "sha256": "4535bb0a65b6772b9f9097ff59cd219bb2ddc2d96028fa2c892aa6170f4e2a81"
+    },
+    {
+      "path": "resources/audio/sfx/upgrade_unlock.wav",
+      "kind": "sfx",
+      "profile": "upgrade_unlock",
+      "cue_ids": [
+        "upgrade_unlock",
+        "research_unlock",
+        "reward_claim"
+      ],
+      "duration_ms": 820,
+      "seed": 31073238,
+      "sha256": "019ce90b0ba37086d0bfdaf83b83d2a64e4c0975d5b110890a708cac0644438e"
+    },
+    {
+      "path": "resources/audio/music/planning_loop.wav",
+      "kind": "music",
+      "profile": "planning",
+      "music_contexts": [
+        "hub",
+        "preparation",
+        "upgrade",
+        "research",
+        "menu",
+        "summary"
+      ],
+      "duration_ms": 40000,
+      "bpm": 96,
+      "bars": 16,
+      "seed": 31082026,
+      "sha256": "8e48f1a2e04a1d0fdb690d11b9d7c97a17d9d4cc29eb3d0826fbed6d6fc6fb95"
+    },
+    {
+      "path": "resources/audio/music/battle_loop.wav",
+      "kind": "music",
+      "profile": "battle",
+      "music_contexts": [
+        "battle"
+      ],
+      "duration_ms": 30000,
+      "bpm": 128,
+      "bars": 16,
+      "seed": 31082127,
+      "sha256": "f91e1651d1f578ca7bb2b516b6bc94c6367534b75c68b988500d71e91ccea6ab"
+    }
+  ]
+}

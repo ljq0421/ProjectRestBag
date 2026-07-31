@@ -1,0 +1,4620 @@
+{
+  "schema_version": 2,
+  "source": {
+    "runtime": "doc/challenge/challenge_recipes.json",
+    "manifest": "doc/challenge/recipe_progression_manifest.json",
+    "confirmed_pilot": "doc/challenge/recipe_distinctiveness_pilot.json"
+  },
+  "rules": {
+    "near_duplicate_threshold": 85.0,
+    "shape_rotation_is_canonicalized": true,
+    "dominance_requires_same_shape_and_rotation_semantics": true,
+    "dominance_requires_role_and_tag_supersets": true
+  },
+  "summary": {
+    "recipe_count": 166,
+    "exact_signature_count": 145,
+    "exact_duplicate_cluster_count": 20,
+    "recipes_in_exact_duplicate_clusters": 41,
+    "redundant_recipe_slots": 21,
+    "near_duplicate_pair_count": 322,
+    "full_dominance_relation_count": 72,
+    "dominated_recipe_count": 35
+  },
+  "branch_recipe_counts": {
+    "crisp_bake": 12,
+    "fruit_set": 35,
+    "milk_soft": 33,
+    "savory_hearty": 29,
+    "signature_display": 20,
+    "spatial_combo": 10,
+    "tea_bittersweet": 24,
+    "tempo_display": 3
+  },
+  "exact_duplicate_clusters": [
+    {
+      "cluster_id": "exact-001",
+      "signature": {
+        "roles": [
+          "softness"
+        ],
+        "tags": [
+          "soft"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 2000,
+        "satisfaction": 9
+      },
+      "recipes": [
+        {
+          "recipe_id": "pumpkin_steamed_cake",
+          "display_name": "南瓜蒸糕",
+          "branch_id": "milk_soft",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "red_bean_milk_drink",
+          "display_name": "红豆牛奶饮",
+          "branch_id": "milk_soft",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "red_bean_rice_cake",
+          "display_name": "红豆沙米糕",
+          "branch_id": "milk_soft",
+          "tier": 3,
+          "batch": "C"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-002",
+      "signature": {
+        "roles": [
+          "pairing"
+        ],
+        "tags": [
+          "drink",
+          "fruit",
+          "refreshing"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 4000,
+        "satisfaction": 11
+      },
+      "recipes": [
+        {
+          "recipe_id": "berry_rice_drink",
+          "display_name": "莓果米浆饮",
+          "branch_id": "fruit_set",
+          "tier": 4,
+          "batch": "D"
+        },
+        {
+          "recipe_id": "berry_rice_flour_cake",
+          "display_name": "莓果米粉蒸糕",
+          "branch_id": "fruit_set",
+          "tier": 4,
+          "batch": "D"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-003",
+      "signature": {
+        "roles": [
+          "shape",
+          "tempo"
+        ],
+        "tags": [
+          "crisp",
+          "rich"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ]
+        ],
+        "rotatable": false,
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 6,
+        "cycle_ms": 4000,
+        "satisfaction": 8
+      },
+      "recipes": [
+        {
+          "recipe_id": "black_sesame_crisp_cake",
+          "display_name": "黑芝麻酥饼",
+          "branch_id": "crisp_bake",
+          "tier": 3,
+          "batch": "B"
+        },
+        {
+          "recipe_id": "matcha_cookie",
+          "display_name": "抹茶曲奇",
+          "branch_id": "crisp_bake",
+          "tier": 3,
+          "batch": "D"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-004",
+      "signature": {
+        "roles": [
+          "signature"
+        ],
+        "tags": [
+          "fast",
+          "rich"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 4000,
+        "satisfaction": 10
+      },
+      "recipes": [
+        {
+          "recipe_id": "black_sesame_oats_soup",
+          "display_name": "黑芝麻燕麦糊",
+          "branch_id": "signature_display",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "black_sesame_soup",
+          "display_name": "黑芝麻糊",
+          "branch_id": "signature_display",
+          "tier": 3,
+          "batch": "B"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-005",
+      "signature": {
+        "roles": [
+          "flavor"
+        ],
+        "tags": [
+          "rich",
+          "tea"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 8000,
+        "satisfaction": 12
+      },
+      "recipes": [
+        {
+          "recipe_id": "black_tea_caramel_mousse",
+          "display_name": "红茶焦糖慕斯",
+          "branch_id": "tea_bittersweet",
+          "tier": 4,
+          "batch": "D"
+        },
+        {
+          "recipe_id": "black_tea_mousse",
+          "display_name": "红茶慕斯杯",
+          "branch_id": "tea_bittersweet",
+          "tier": 4,
+          "batch": "D"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-006",
+      "signature": {
+        "roles": [
+          "sustain"
+        ],
+        "tags": [
+          "savory",
+          "tea"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "rotatable": false,
+        "supply_cost": 6,
+        "copy_limit": 1,
+        "virtual_stock": 2,
+        "cycle_ms": 8000,
+        "satisfaction": 16
+      },
+      "recipes": [
+        {
+          "recipe_id": "black_tea_chicken_baked_rice",
+          "display_name": "红茶鸡肉焗饭",
+          "branch_id": "savory_hearty",
+          "tier": 4,
+          "batch": "D"
+        },
+        {
+          "recipe_id": "black_tea_light_cheesecake",
+          "display_name": "红茶轻芝士蛋糕",
+          "branch_id": "savory_hearty",
+          "tier": 4,
+          "batch": "D"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-007",
+      "signature": {
+        "roles": [
+          "pairing"
+        ],
+        "tags": [
+          "drink",
+          "fruit",
+          "set"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 5,
+        "cycle_ms": 5000,
+        "satisfaction": 8
+      },
+      "recipes": [
+        {
+          "recipe_id": "blueberry_mousse",
+          "display_name": "蓝莓慕斯杯",
+          "branch_id": "fruit_set",
+          "tier": 2,
+          "batch": "baseline"
+        },
+        {
+          "recipe_id": "strawberry_mousse",
+          "display_name": "草莓慕斯杯",
+          "branch_id": "fruit_set",
+          "tier": 2,
+          "batch": "baseline"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-008",
+      "signature": {
+        "roles": [
+          "softness"
+        ],
+        "tags": [
+          "rich",
+          "soft"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ]
+        ],
+        "rotatable": false,
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 6,
+        "cycle_ms": 4000,
+        "satisfaction": 8
+      },
+      "recipes": [
+        {
+          "recipe_id": "chestnut_glutinous_rice_cake",
+          "display_name": "栗子糯米糍",
+          "branch_id": "milk_soft",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "cocoa_glutinous_rice_cake",
+          "display_name": "可可糯米糍",
+          "branch_id": "milk_soft",
+          "tier": 3,
+          "batch": "C"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-009",
+      "signature": {
+        "roles": [
+          "softness"
+        ],
+        "tags": [
+          "rich",
+          "soft"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 8000,
+        "satisfaction": 11
+      },
+      "recipes": [
+        {
+          "recipe_id": "chestnut_mousse",
+          "display_name": "栗子慕斯杯",
+          "branch_id": "milk_soft",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "matcha_redbean_mousse",
+          "display_name": "抹茶红豆慕斯",
+          "branch_id": "milk_soft",
+          "tier": 3,
+          "batch": "D"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-010",
+      "signature": {
+        "roles": [
+          "signature"
+        ],
+        "tags": [
+          "rich"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        "rotatable": false,
+        "supply_cost": 5,
+        "copy_limit": 1,
+        "virtual_stock": 2,
+        "cycle_ms": 8000,
+        "satisfaction": 13
+      },
+      "recipes": [
+        {
+          "recipe_id": "chestnut_pound_cake",
+          "display_name": "栗香磅蛋糕",
+          "branch_id": "signature_display",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "coffee_pound_cake",
+          "display_name": "咖啡磅蛋糕",
+          "branch_id": "signature_display",
+          "tier": 3,
+          "batch": "C"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-011",
+      "signature": {
+        "roles": [
+          "sustain"
+        ],
+        "tags": [
+          "rich",
+          "savory"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 2000,
+        "satisfaction": 8
+      },
+      "recipes": [
+        {
+          "recipe_id": "chicken_cream_soup",
+          "display_name": "鸡肉奶油浓汤",
+          "branch_id": "savory_hearty",
+          "tier": 2,
+          "batch": "A"
+        },
+        {
+          "recipe_id": "sea_salt_caramel_pudding",
+          "display_name": "海盐焦糖布丁",
+          "branch_id": "savory_hearty",
+          "tier": 2,
+          "batch": "B"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-012",
+      "signature": {
+        "roles": [
+          "sustain"
+        ],
+        "tags": [
+          "hearty",
+          "savory"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 2000,
+        "satisfaction": 7
+      },
+      "recipes": [
+        {
+          "recipe_id": "chicken_steamed_dumpling",
+          "display_name": "鸡肉蒸饺",
+          "branch_id": "savory_hearty",
+          "tier": 1,
+          "batch": "A"
+        },
+        {
+          "recipe_id": "chicken_wheat_porridge",
+          "display_name": "鸡肉麦仁粥",
+          "branch_id": "savory_hearty",
+          "tier": 1,
+          "batch": "A"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-013",
+      "signature": {
+        "roles": [
+          "signature"
+        ],
+        "tags": [
+          "rich"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 8000,
+        "satisfaction": 11
+      },
+      "recipes": [
+        {
+          "recipe_id": "cocoa_steamed_cake",
+          "display_name": "可可蒸蛋糕",
+          "branch_id": "signature_display",
+          "tier": 3,
+          "batch": "B"
+        },
+        {
+          "recipe_id": "coffee_muffin",
+          "display_name": "咖啡玛芬",
+          "branch_id": "signature_display",
+          "tier": 3,
+          "batch": "B"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-014",
+      "signature": {
+        "roles": [
+          "space"
+        ],
+        "tags": [
+          "spatial"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 4000,
+        "satisfaction": 8
+      },
+      "recipes": [
+        {
+          "recipe_id": "egg_rice_flour_custard",
+          "display_name": "蛋香米粉羹",
+          "branch_id": "spatial_combo",
+          "tier": 1,
+          "batch": "A"
+        },
+        {
+          "recipe_id": "white_sugar_rice_porridge",
+          "display_name": "白糖米粥",
+          "branch_id": "spatial_combo",
+          "tier": 1,
+          "batch": "A"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-015",
+      "signature": {
+        "roles": [
+          "flavor"
+        ],
+        "tags": [
+          "soft",
+          "tea"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 4000,
+        "satisfaction": 10
+      },
+      "recipes": [
+        {
+          "recipe_id": "goat_milk_black_tea_jelly",
+          "display_name": "羊奶红茶冻",
+          "branch_id": "tea_bittersweet",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "green_tea_panna_cotta",
+          "display_name": "绿茶奶冻",
+          "branch_id": "tea_bittersweet",
+          "tier": 3,
+          "batch": "C"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-016",
+      "signature": {
+        "roles": [
+          "pairing"
+        ],
+        "tags": [
+          "drink",
+          "fruit",
+          "refreshing"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 2000,
+        "satisfaction": 9
+      },
+      "recipes": [
+        {
+          "recipe_id": "honey_yogurt",
+          "display_name": "蜂蜜酸奶杯",
+          "branch_id": "fruit_set",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "orange_crepe",
+          "display_name": "橙香可丽饼",
+          "branch_id": "fruit_set",
+          "tier": 3,
+          "batch": "C"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-017",
+      "signature": {
+        "roles": [
+          "pairing"
+        ],
+        "tags": [
+          "drink",
+          "refreshing",
+          "rich"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 2000,
+        "satisfaction": 9
+      },
+      "recipes": [
+        {
+          "recipe_id": "matcha_pudding",
+          "display_name": "抹茶布丁",
+          "branch_id": "fruit_set",
+          "tier": 3,
+          "batch": "D"
+        },
+        {
+          "recipe_id": "mint_cocoa_cup",
+          "display_name": "薄荷可可杯",
+          "branch_id": "fruit_set",
+          "tier": 3,
+          "batch": "D"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-018",
+      "signature": {
+        "roles": [
+          "sustain"
+        ],
+        "tags": [
+          "hearty",
+          "savory"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 2000,
+        "satisfaction": 9
+      },
+      "recipes": [
+        {
+          "recipe_id": "mutton_glutinous_shumai",
+          "display_name": "羊肉糯米烧卖",
+          "branch_id": "savory_hearty",
+          "tier": 3,
+          "batch": "D"
+        },
+        {
+          "recipe_id": "sea_salt_duck_rice_cup",
+          "display_name": "海盐鸭肉米盏",
+          "branch_id": "savory_hearty",
+          "tier": 3,
+          "batch": "C"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-019",
+      "signature": {
+        "roles": [
+          "space"
+        ],
+        "tags": [
+          "spatial"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 2000,
+        "satisfaction": 9
+      },
+      "recipes": [
+        {
+          "recipe_id": "pumpkin_pudding",
+          "display_name": "南瓜布丁",
+          "branch_id": "spatial_combo",
+          "tier": 3,
+          "batch": "C"
+        },
+        {
+          "recipe_id": "redbean_pancake",
+          "display_name": "红豆煎饼",
+          "branch_id": "spatial_combo",
+          "tier": 3,
+          "batch": "C"
+        }
+      ]
+    },
+    {
+      "cluster_id": "exact-020",
+      "signature": {
+        "roles": [
+          "space"
+        ],
+        "tags": [
+          "spatial"
+        ],
+        "shape": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rotatable": true,
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 2000,
+        "satisfaction": 7
+      },
+      "recipes": [
+        {
+          "recipe_id": "rice_flour_steamed_cake",
+          "display_name": "米粉蒸糕",
+          "branch_id": "spatial_combo",
+          "tier": 1,
+          "batch": "A"
+        },
+        {
+          "recipe_id": "soft_steamed_egg_cake",
+          "display_name": "软蒸鸡蛋糕",
+          "branch_id": "spatial_combo",
+          "tier": 1,
+          "batch": "A"
+        }
+      ]
+    }
+  ],
+  "near_duplicate_pairs": [
+    {
+      "left_id": "butter_beef_baked_rice",
+      "right_id": "chestnut_mutton_baked_rice",
+      "score": 99.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_tea_nut_brownie",
+      "right_id": "black_tea_pound_cake",
+      "score": 99.29,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_pound_cake",
+      "right_id": "nuts_cocoa_brownie",
+      "score": 99.29,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "coffee_pound_cake",
+      "right_id": "nuts_cocoa_brownie",
+      "score": 99.29,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "apple_steamed_rice_cake",
+      "right_id": "duck_egg_banana_griddle_cake",
+      "score": 99.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_tea_rice_steamed_cake",
+      "right_id": "green_tea_rice_drink",
+      "score": 99.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "lemon_honey_black_tea",
+      "right_id": "mint_iced_green_tea",
+      "score": 99.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_rice_flour_cake",
+      "right_id": "pumpkin_duck_pancake",
+      "score": 99.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "mutton_glutinous_shumai",
+      "right_id": "steamed_meat_rice_cup",
+      "score": 99.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "sea_salt_duck_rice_cup",
+      "right_id": "steamed_meat_rice_cup",
+      "score": 99.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "butter_chicken_steamed_cake",
+      "right_id": "chicken_cream_soup",
+      "score": 98.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "butter_chicken_steamed_cake",
+      "right_id": "sea_salt_caramel_pudding",
+      "score": 98.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "rice_milk_drink",
+      "score": 98.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_redbean_steamed_cake",
+      "right_id": "rice_flour_steamed_cake",
+      "score": 98.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_redbean_steamed_cake",
+      "right_id": "soft_steamed_egg_cake",
+      "score": 98.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "red_bean_glutinous_rice_ball",
+      "right_id": "sugar_roasted_chestnut",
+      "score": 98.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_mousse",
+      "right_id": "chocolate_mousse",
+      "score": 96.59,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chocolate_mousse",
+      "right_id": "matcha_redbean_mousse",
+      "score": 96.59,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "lemon_madeleine",
+      "right_id": "mint_chocolate_pudding",
+      "score": 96.59,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_milk_drink",
+      "right_id": "cocoa_panna_cotta",
+      "score": 96.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "milk_rice_dew",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "pumpkin_steamed_cake",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "red_bean_milk_drink",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "red_bean_rice_cake",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_peach_jelly",
+      "right_id": "honey_yogurt",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_peach_jelly",
+      "right_id": "orange_crepe",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_redbean_steamed_cake",
+      "right_id": "pumpkin_pudding",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_redbean_steamed_cake",
+      "right_id": "redbean_pancake",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "mango_milk_drink",
+      "right_id": "mango_yogurt_cup",
+      "score": 96.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_steamed_dumpling",
+      "right_id": "mutton_glutinous_shumai",
+      "score": 95.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_steamed_dumpling",
+      "right_id": "sea_salt_duck_rice_cup",
+      "score": 95.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_wheat_porridge",
+      "right_id": "mutton_glutinous_shumai",
+      "score": 95.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_wheat_porridge",
+      "right_id": "sea_salt_duck_rice_cup",
+      "score": 95.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "pumpkin_pudding",
+      "right_id": "rice_flour_steamed_cake",
+      "score": 95.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "pumpkin_pudding",
+      "right_id": "soft_steamed_egg_cake",
+      "score": 95.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "redbean_pancake",
+      "right_id": "rice_flour_steamed_cake",
+      "score": 95.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "redbean_pancake",
+      "right_id": "soft_steamed_egg_cake",
+      "score": 95.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_rice_pudding",
+      "right_id": "peach_mousse",
+      "score": 95.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "berry_yogurt_ice",
+      "score": 95.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "berry_yogurt_ice",
+      "score": 95.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "egg_rice_flour_custard",
+      "right_id": "honey_redbean_steamed_cake",
+      "score": 95.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_redbean_steamed_cake",
+      "right_id": "white_sugar_rice_porridge",
+      "score": 95.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_steamed_dumpling",
+      "right_id": "steamed_meat_rice_cup",
+      "score": 94.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_wheat_porridge",
+      "right_id": "steamed_meat_rice_cup",
+      "score": 94.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "butter_beef_baked_rice",
+      "right_id": "chestnut_chicken_baked_rice",
+      "score": 94.38,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "beef_cheese_pie",
+      "right_id": "beef_nut_pie",
+      "score": 94.29,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "cheese_baked_pumpkin",
+      "right_id": "cheese_duck_baked_rice",
+      "score": 94.29,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_pound_cake",
+      "right_id": "coffee_duck_egg_cake",
+      "score": 94.23,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "coffee_duck_egg_cake",
+      "right_id": "coffee_pound_cake",
+      "score": 94.23,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_tea_rice_steamed_cake",
+      "right_id": "green_tea_steamed_cake",
+      "score": 94.17,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "cocoa_brownie",
+      "right_id": "coffee_duck_egg_cake",
+      "score": 94.17,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_mousse",
+      "right_id": "cocoa_panna_cotta",
+      "score": 94.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "cocoa_panna_cotta",
+      "right_id": "matcha_redbean_mousse",
+      "score": 94.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "cocoa_steamed_cake",
+      "right_id": "duck_egg_pumpkin_pudding",
+      "score": 94.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "coffee_muffin",
+      "right_id": "duck_egg_pumpkin_pudding",
+      "score": 94.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_milk_drink",
+      "right_id": "chocolate_mousse",
+      "score": 94.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_pancake",
+      "right_id": "duck_egg_banana_griddle_cake",
+      "score": 94.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "cocoa_panna_cotta",
+      "score": 94.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "community_parfait",
+      "right_id": "honey_yogurt",
+      "score": 94.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "community_parfait",
+      "right_id": "orange_crepe",
+      "score": 94.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_latte",
+      "right_id": "mint_iced_green_tea",
+      "score": 94.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_yogurt_cup",
+      "right_id": "oats_yogurt_bowl",
+      "score": 94.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_milk_drink",
+      "right_id": "milk_rice_dew",
+      "score": 93.89,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "red_bean_glutinous_rice_ball",
+      "right_id": "white_sugar_rice_ball",
+      "score": 93.81,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_chicken_baked_rice",
+      "right_id": "chestnut_mutton_baked_rice",
+      "score": 93.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_glutinous_rice_cake",
+      "right_id": "matcha_mochi",
+      "score": 93.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "cocoa_glutinous_rice_cake",
+      "right_id": "matcha_mochi",
+      "score": 93.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "egg_rice_flour_custard",
+      "right_id": "rice_flour_steamed_cake",
+      "score": 93.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "egg_rice_flour_custard",
+      "right_id": "soft_steamed_egg_cake",
+      "score": 93.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "rice_flour_steamed_cake",
+      "right_id": "white_sugar_rice_porridge",
+      "score": 93.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "soft_steamed_egg_cake",
+      "right_id": "white_sugar_rice_porridge",
+      "score": 93.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "blueberry_jelly",
+      "right_id": "peach_jelly",
+      "score": 93.57,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "coffee_duck_egg_cake",
+      "right_id": "nuts_cocoa_brownie",
+      "score": 93.57,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_yogurt_ice",
+      "right_id": "lemon_yogurt_muffin",
+      "score": 93.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_caramel_mousse",
+      "right_id": "matcha_goat_milk_mousse",
+      "score": 93.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_tea_mousse",
+      "right_id": "matcha_goat_milk_mousse",
+      "score": 93.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "green_tea_rice_drink",
+      "right_id": "green_tea_steamed_cake",
+      "score": 93.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "honey_peach_jelly",
+      "score": 93.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_lemon_jelly",
+      "right_id": "peach_jelly",
+      "score": 93.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "lemon_yogurt_muffin",
+      "right_id": "mint_chocolate_pudding",
+      "score": 93.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "apple_steamed_rice_cake",
+      "right_id": "banana_pancake",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "honey_yogurt",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "orange_crepe",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "honey_yogurt",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "orange_crepe",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_redbean_steamed_cake",
+      "right_id": "pumpkin_steamed_cake",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_redbean_steamed_cake",
+      "right_id": "red_bean_milk_drink",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_redbean_steamed_cake",
+      "right_id": "red_bean_rice_cake",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "green_tea_latte",
+      "right_id": "lemon_honey_black_tea",
+      "score": 93.18,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_butter_cookie",
+      "right_id": "black_tea_cocoa_cookie",
+      "score": 93.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "sugar_roasted_chestnut",
+      "right_id": "white_sugar_rice_ball",
+      "score": 92.92,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_milk_drink",
+      "right_id": "black_sesame_roll",
+      "score": 92.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_tart",
+      "right_id": "cocoa_brownie",
+      "score": 92.5,
+      "same_shape": false,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chocolate_mousse",
+      "right_id": "cocoa_panna_cotta",
+      "score": 92.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_peach_jelly",
+      "right_id": "rice_milk_drink",
+      "score": 92.08,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_redbean_steamed_cake",
+      "right_id": "vanilla_panna_cotta",
+      "score": 91.59,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "egg_rice_flour_custard",
+      "right_id": "pumpkin_pudding",
+      "score": 91.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "egg_rice_flour_custard",
+      "right_id": "redbean_pancake",
+      "score": 91.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "pumpkin_pudding",
+      "right_id": "white_sugar_rice_porridge",
+      "score": 91.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "redbean_pancake",
+      "right_id": "white_sugar_rice_porridge",
+      "score": 91.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "blueberry_mousse",
+      "right_id": "milk_pudding",
+      "score": 91.08,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "milk_pudding",
+      "right_id": "strawberry_mousse",
+      "score": 91.08,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_pound_cake",
+      "right_id": "cocoa_brownie",
+      "score": 90.96,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "cocoa_brownie",
+      "right_id": "coffee_pound_cake",
+      "score": 90.96,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "apple_pie",
+      "right_id": "blueberry_cream_tart",
+      "score": 90.86,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "nut_chicken_patty",
+      "right_id": "steamed_meat_rice_cup",
+      "score": 90.83,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_rice_pudding",
+      "right_id": "mango_milk_drink",
+      "score": 90.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "beef_baked_pie",
+      "right_id": "beef_cheese_pie",
+      "score": 90.69,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_baked_pancake",
+      "right_id": "pumpkin_pudding",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_baked_pancake",
+      "right_id": "redbean_pancake",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_milk_drink",
+      "right_id": "chestnut_mousse",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_milk_drink",
+      "right_id": "matcha_redbean_mousse",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_yogurt_ice",
+      "right_id": "honey_yogurt",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_yogurt_ice",
+      "right_id": "orange_crepe",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "chestnut_mousse",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "matcha_redbean_mousse",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "matcha_pudding",
+      "right_id": "mint_chocolate_pudding",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "mint_chocolate_pudding",
+      "right_id": "mint_cocoa_cup",
+      "score": 90.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "vanilla_panna_cotta",
+      "score": 90.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chocolate_mousse",
+      "right_id": "milk_rice_dew",
+      "score": 90.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "cocoa_panna_cotta",
+      "right_id": "milk_rice_dew",
+      "score": 90.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "community_parfait",
+      "right_id": "honey_peach_jelly",
+      "score": 90.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_milk_drink",
+      "right_id": "peach_mousse",
+      "score": 90.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "cocoa_brownie",
+      "right_id": "nuts_cocoa_brownie",
+      "score": 90.36,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_pancake",
+      "right_id": "mango_cream_cup",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_yogurt_ice",
+      "right_id": "mint_chocolate_pudding",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_oats_soup",
+      "right_id": "duck_egg_pumpkin_pudding",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "pumpkin_steamed_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "red_bean_milk_drink",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "red_bean_rice_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_soup",
+      "right_id": "duck_egg_pumpkin_pudding",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_caramel_mousse",
+      "right_id": "green_tea_steamed_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_mousse",
+      "right_id": "green_tea_steamed_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_rice_steamed_cake",
+      "right_id": "honey_orange_black_tea",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "mango_milk_drink",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "milk_rice_dew",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_rice_flour_cake",
+      "right_id": "steamed_meat_rice_cup",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chocolate_mousse",
+      "right_id": "vanilla_panna_cotta",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_black_tea_jelly",
+      "right_id": "green_tea_rice_drink",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_oats_porridge",
+      "right_id": "pumpkin_steamed_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_oats_porridge",
+      "right_id": "red_bean_milk_drink",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_oats_porridge",
+      "right_id": "red_bean_rice_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_panna_cotta",
+      "right_id": "green_tea_rice_drink",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_rice_drink",
+      "right_id": "matcha_goat_milk_mousse",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_steamed_cake",
+      "right_id": "nut_black_tea_crisp",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_steamed_cake",
+      "right_id": "oats_black_tea_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_yogurt",
+      "right_id": "matcha_pudding",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_yogurt",
+      "right_id": "mint_cocoa_cup",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_yogurt",
+      "right_id": "oats_yogurt_bowl",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_yogurt_cup",
+      "right_id": "pumpkin_steamed_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_yogurt_cup",
+      "right_id": "red_bean_milk_drink",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_yogurt_cup",
+      "right_id": "red_bean_rice_cake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "matcha_mochi",
+      "right_id": "red_bean_glutinous_rice_ball",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "matcha_pudding",
+      "right_id": "oats_yogurt_bowl",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "matcha_pudding",
+      "right_id": "orange_crepe",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mint_cocoa_cup",
+      "right_id": "oats_yogurt_bowl",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mint_cocoa_cup",
+      "right_id": "orange_crepe",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mutton_glutinous_shumai",
+      "right_id": "nut_chicken_patty",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "mutton_glutinous_shumai",
+      "right_id": "pumpkin_duck_pancake",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "nut_chicken_patty",
+      "right_id": "sea_salt_duck_rice_cup",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "oats_yogurt_bowl",
+      "right_id": "orange_crepe",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "peach_mousse",
+      "right_id": "vanilla_panna_cotta",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "pumpkin_duck_pancake",
+      "right_id": "sea_salt_duck_rice_cup",
+      "score": 90.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "lemon_madeleine",
+      "right_id": "lemon_yogurt_muffin",
+      "score": 89.92,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "baked_rice_cake",
+      "right_id": "nut_pumpkin_cake",
+      "score": 89.77,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_baked_pancake",
+      "right_id": "egg_rice_flour_custard",
+      "score": 89.77,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_baked_pancake",
+      "right_id": "white_sugar_rice_porridge",
+      "score": 89.77,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "honey_peach_jelly",
+      "score": 89.77,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "honey_peach_jelly",
+      "score": 89.77,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "chestnut_redbean_steamed_cake",
+      "score": 89.77,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "honey_yogurt",
+      "score": 89.72,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "matcha_pudding",
+      "score": 89.72,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "mint_cocoa_cup",
+      "score": 89.72,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "oats_yogurt_bowl",
+      "score": 89.72,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "orange_crepe",
+      "score": 89.72,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_cheese_cup",
+      "right_id": "mango_cream_cup",
+      "score": 89.72,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "banana_rice_pudding",
+      "right_id": "mango_yogurt_cup",
+      "score": 89.25,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "community_parfait",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "green_tea_yogurt_cup",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "community_parfait",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "green_tea_yogurt_cup",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_rice_steamed_cake",
+      "right_id": "goat_milk_black_tea_jelly",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_rice_steamed_cake",
+      "right_id": "green_tea_panna_cotta",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_rice_steamed_cake",
+      "right_id": "matcha_goat_milk_mousse",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_redbean_steamed_cake",
+      "right_id": "cocoa_panna_cotta",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_rice_drink",
+      "right_id": "honey_orange_black_tea",
+      "score": 89.09,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "chocolate_mousse",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_rice_flour_cake",
+      "right_id": "mutton_glutinous_shumai",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_rice_flour_cake",
+      "right_id": "sea_salt_duck_rice_cup",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_black_tea_jelly",
+      "right_id": "green_tea_latte",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_latte",
+      "right_id": "green_tea_panna_cotta",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "lemon_madeleine",
+      "right_id": "matcha_pudding",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "lemon_madeleine",
+      "right_id": "mint_cocoa_cup",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "mango_yogurt_cup",
+      "right_id": "peach_mousse",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "pumpkin_duck_pancake",
+      "right_id": "steamed_meat_rice_cup",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "pumpkin_steamed_cake",
+      "right_id": "vanilla_panna_cotta",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "red_bean_milk_drink",
+      "right_id": "vanilla_panna_cotta",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "red_bean_rice_cake",
+      "right_id": "vanilla_panna_cotta",
+      "score": 89.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_tea_latte",
+      "right_id": "green_tea_redbean_mochi",
+      "score": 88.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_panna",
+      "right_id": "goat_milk_black_tea_jelly",
+      "score": 88.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "black_tea_panna",
+      "right_id": "green_tea_panna_cotta",
+      "score": 88.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "matcha_mochi",
+      "right_id": "sugar_roasted_chestnut",
+      "score": 88.75,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_yogurt",
+      "right_id": "rice_milk_drink",
+      "score": 88.61,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "matcha_pudding",
+      "right_id": "rice_milk_drink",
+      "score": 88.61,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mint_cocoa_cup",
+      "right_id": "rice_milk_drink",
+      "score": 88.61,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "oats_yogurt_bowl",
+      "right_id": "rice_milk_drink",
+      "score": 88.61,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "orange_crepe",
+      "right_id": "rice_milk_drink",
+      "score": 88.61,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "lemon_yogurt_muffin",
+      "score": 88.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "lemon_yogurt_muffin",
+      "score": 88.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "caramel_brulee",
+      "right_id": "egg_milk_custard",
+      "score": 88.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "mint_rice_drink",
+      "score": 88.33,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "coffee_mousse",
+      "right_id": "duck_egg_pumpkin_pudding",
+      "score": 88.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "beef_baked_pie",
+      "right_id": "beef_nut_pie",
+      "score": 87.64,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "green_tea_yogurt_cup",
+      "right_id": "lemon_yogurt_muffin",
+      "score": 87.42,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "banana_baked_pancake",
+      "right_id": "honey_redbean_steamed_cake",
+      "score": 87.27,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "berry_yogurt_ice",
+      "right_id": "honey_peach_jelly",
+      "score": 87.27,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chestnut_mousse",
+      "right_id": "milk_rice_dew",
+      "score": 87.27,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "honey_lemon_drink",
+      "right_id": "lemon_yogurt_muffin",
+      "score": 87.27,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "matcha_redbean_mousse",
+      "right_id": "milk_rice_dew",
+      "score": 87.27,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "mint_rice_drink",
+      "right_id": "rice_milk_drink",
+      "score": 87.08,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "community_parfait",
+      "right_id": "matcha_pudding",
+      "score": 87.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "community_parfait",
+      "right_id": "mint_cocoa_cup",
+      "score": 87.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "community_parfait",
+      "right_id": "oats_yogurt_bowl",
+      "score": 87.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "blueberry_jelly",
+      "right_id": "honey_lemon_jelly",
+      "score": 86.9,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "apple_steamed_rice_cake",
+      "right_id": "berry_rice_drink",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "apple_steamed_rice_cake",
+      "right_id": "berry_rice_flour_cake",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "banana_pancake",
+      "right_id": "honey_yogurt",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "banana_pancake",
+      "right_id": "orange_crepe",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "goat_milk_oats_porridge",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "mango_yogurt_cup",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_butter_cookie",
+      "right_id": "green_tea_redbean_mochi",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_caramel_mousse",
+      "right_id": "nut_black_tea_crisp",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_caramel_mousse",
+      "right_id": "oats_black_tea_cake",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_chicken_baked_rice",
+      "right_id": "cheese_chicken_baked_rice",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_chicken_baked_rice",
+      "right_id": "chestnut_chicken_baked_rice",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_light_cheesecake",
+      "right_id": "cheese_chicken_baked_rice",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_light_cheesecake",
+      "right_id": "chestnut_chicken_baked_rice",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_mousse",
+      "right_id": "nut_black_tea_crisp",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_mousse",
+      "right_id": "oats_black_tea_cake",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_rice_steamed_cake",
+      "right_id": "lemon_honey_black_tea",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "butter_chicken_steamed_cake",
+      "right_id": "chicken_steamed_dumpling",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "butter_chicken_steamed_cake",
+      "right_id": "chicken_wheat_porridge",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "butter_cookie",
+      "right_id": "chocolate_cookie",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "cheese_chicken_baked_rice",
+      "right_id": "chestnut_chicken_baked_rice",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "cheese_duck_baked_rice",
+      "right_id": "chestnut_mutton_baked_rice",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_glutinous_rice_cake",
+      "right_id": "mango_glutinous_rice_cake",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_tart",
+      "right_id": "coffee_duck_egg_cake",
+      "score": 86.67,
+      "same_shape": false,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chocolate_mousse",
+      "right_id": "peach_mousse",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "cocoa_glutinous_rice_cake",
+      "right_id": "mango_glutinous_rice_cake",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_black_tea_jelly",
+      "right_id": "matcha_goat_milk_mousse",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_oats_porridge",
+      "right_id": "mango_yogurt_cup",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_panna_cotta",
+      "right_id": "matcha_goat_milk_mousse",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_rice_drink",
+      "right_id": "mint_iced_green_tea",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_milk_drink",
+      "right_id": "milk_rice_dew",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "nut_black_tea_crisp",
+      "right_id": "oats_black_tea_cake",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "oats_milk_porridge",
+      "right_id": "steamed_meat_rice_cup",
+      "score": 86.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_yogurt_ice",
+      "right_id": "community_parfait",
+      "score": 86.59,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_yogurt_ice",
+      "right_id": "lemon_madeleine",
+      "score": 86.59,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_mousse",
+      "right_id": "vanilla_panna_cotta",
+      "score": 86.59,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "matcha_redbean_mousse",
+      "right_id": "vanilla_panna_cotta",
+      "score": 86.59,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_sesame_roll",
+      "right_id": "caramel_pudding_steamed",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "goat_milk_oats_porridge",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "caramel_pudding_steamed",
+      "right_id": "mango_yogurt_cup",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_cream_soup",
+      "right_id": "pumpkin_duck_pancake",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_peach_jelly",
+      "right_id": "matcha_pudding",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_peach_jelly",
+      "right_id": "mint_cocoa_cup",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_peach_jelly",
+      "right_id": "oats_yogurt_bowl",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_milk_drink",
+      "right_id": "pumpkin_steamed_cake",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_milk_drink",
+      "right_id": "red_bean_milk_drink",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_milk_drink",
+      "right_id": "red_bean_rice_cake",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "milk_rice_dew",
+      "right_id": "pumpkin_steamed_cake",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "milk_rice_dew",
+      "right_id": "red_bean_milk_drink",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "milk_rice_dew",
+      "right_id": "red_bean_rice_cake",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "pumpkin_duck_pancake",
+      "right_id": "sea_salt_caramel_pudding",
+      "score": 86.39,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "banana_baked_pancake",
+      "right_id": "rice_flour_steamed_cake",
+      "score": 86.36,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "banana_baked_pancake",
+      "right_id": "soft_steamed_egg_cake",
+      "score": 86.36,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "lemon_yogurt_muffin",
+      "right_id": "rice_milk_drink",
+      "score": 86.36,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "butter_beef_baked_rice",
+      "right_id": "cheese_duck_baked_rice",
+      "score": 86.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_steamed_dumpling",
+      "right_id": "nut_chicken_patty",
+      "score": 85.83,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "chicken_wheat_porridge",
+      "right_id": "nut_chicken_patty",
+      "score": 85.83,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": true
+    },
+    {
+      "left_id": "nut_chicken_patty",
+      "right_id": "nut_oats_crisp",
+      "score": 85.83,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "duck_egg_banana_griddle_cake",
+      "score": 85.76,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "duck_egg_banana_griddle_cake",
+      "score": 85.76,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_rice_steamed_cake",
+      "right_id": "mint_iced_green_tea",
+      "score": 85.76,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_black_tea_jelly",
+      "right_id": "honey_orange_black_tea",
+      "score": 85.76,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_panna_cotta",
+      "right_id": "honey_orange_black_tea",
+      "score": 85.76,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_rice_drink",
+      "right_id": "lemon_honey_black_tea",
+      "score": 85.76,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_orange_black_tea",
+      "right_id": "matcha_goat_milk_mousse",
+      "score": 85.76,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "banana_milk_drink",
+      "right_id": "chestnut_redbean_steamed_cake",
+      "score": 85.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "milk_crisp_cake",
+      "right_id": "nut_pumpkin_cake",
+      "score": 85.68,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mutton_glutinous_shumai",
+      "right_id": "oats_milk_porridge",
+      "score": 85.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "oats_milk_porridge",
+      "right_id": "sea_salt_duck_rice_cup",
+      "score": 85.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "sea_salt_chocolate_cookie",
+      "right_id": "sea_salt_nuts_cookie",
+      "score": 85.67,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_cream_soup",
+      "right_id": "chicken_rice_flour_cake",
+      "score": 85.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_rice_flour_cake",
+      "right_id": "sea_salt_caramel_pudding",
+      "score": 85.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "community_parfait",
+      "right_id": "honey_lemon_drink",
+      "score": 85.5,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_cream_soup",
+      "right_id": "chicken_steamed_dumpling",
+      "score": 85.42,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_cream_soup",
+      "right_id": "chicken_wheat_porridge",
+      "score": 85.42,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_steamed_dumpling",
+      "right_id": "sea_salt_caramel_pudding",
+      "score": 85.42,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_wheat_porridge",
+      "right_id": "sea_salt_caramel_pudding",
+      "score": 85.42,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "butter_chicken_steamed_cake",
+      "right_id": "pumpkin_duck_pancake",
+      "score": 85.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_steamed_dumpling",
+      "right_id": "pumpkin_duck_pancake",
+      "score": 85.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chicken_wheat_porridge",
+      "right_id": "pumpkin_duck_pancake",
+      "score": 85.28,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "banana_rice_pudding",
+      "right_id": "vanilla_panna_cotta",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_drink",
+      "right_id": "mint_chocolate_pudding",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "berry_rice_flour_cake",
+      "right_id": "mint_chocolate_pudding",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "black_tea_mutton_pastry",
+      "right_id": "chicken_rice_flour_cake",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_glutinous_rice_cake",
+      "right_id": "sugar_roasted_chestnut",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_mousse",
+      "right_id": "chestnut_redbean_steamed_cake",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_mousse",
+      "right_id": "mint_mousse",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "chestnut_redbean_steamed_cake",
+      "right_id": "matcha_redbean_mousse",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "cocoa_glutinous_rice_cake",
+      "right_id": "sugar_roasted_chestnut",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "goat_milk_black_tea_jelly",
+      "right_id": "mint_iced_green_tea",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "green_tea_panna_cotta",
+      "right_id": "mint_iced_green_tea",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_orange_black_tea",
+      "right_id": "lemon_honey_black_tea",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "honey_yogurt",
+      "right_id": "mango_cream_cup",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_cream_cup",
+      "right_id": "matcha_pudding",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_cream_cup",
+      "right_id": "mint_cocoa_cup",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_cream_cup",
+      "right_id": "orange_crepe",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "mango_glutinous_rice_cake",
+      "right_id": "sugar_roasted_chestnut",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "matcha_goat_milk_mousse",
+      "right_id": "mint_iced_green_tea",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    },
+    {
+      "left_id": "matcha_redbean_mousse",
+      "right_id": "mint_mousse",
+      "score": 85.0,
+      "same_shape": true,
+      "same_roles": true,
+      "same_tags": false
+    }
+  ],
+  "dominance_relations": [
+    {
+      "dominant_id": "berry_rice_drink",
+      "dominated_id": "apple_steamed_rice_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "berry_rice_flour_cake",
+      "dominated_id": "apple_steamed_rice_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "community_parfait",
+      "dominated_id": "banana_pancake",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "honey_yogurt",
+      "dominated_id": "banana_pancake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "mango_cream_cup",
+      "dominated_id": "banana_pancake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "orange_crepe",
+      "dominated_id": "banana_pancake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "berry_rice_drink",
+      "dominated_id": "berry_yogurt_ice",
+      "advantages": [
+        "faster_cycle"
+      ]
+    },
+    {
+      "dominant_id": "berry_rice_flour_cake",
+      "dominated_id": "berry_yogurt_ice",
+      "advantages": [
+        "faster_cycle"
+      ]
+    },
+    {
+      "dominant_id": "black_tea_nut_brownie",
+      "dominated_id": "black_tea_pound_cake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "honey_orange_black_tea",
+      "dominated_id": "black_tea_rice_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "lemon_honey_black_tea",
+      "dominated_id": "black_tea_rice_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "chicken_cream_soup",
+      "dominated_id": "butter_chicken_steamed_cake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "sea_salt_caramel_pudding",
+      "dominated_id": "butter_chicken_steamed_cake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "mango_milk_drink",
+      "dominated_id": "caramel_pudding_steamed",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "milk_rice_dew",
+      "dominated_id": "caramel_pudding_steamed",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "butter_beef_baked_rice",
+      "dominated_id": "chestnut_mutton_baked_rice",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "nuts_cocoa_brownie",
+      "dominated_id": "chestnut_pound_cake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "steamed_meat_rice_cup",
+      "dominated_id": "chicken_rice_flour_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "nuts_cocoa_brownie",
+      "dominated_id": "coffee_pound_cake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "apple_steamed_rice_cake",
+      "dominated_id": "duck_egg_banana_griddle_cake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "berry_rice_drink",
+      "dominated_id": "duck_egg_banana_griddle_cake",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "berry_rice_flour_cake",
+      "dominated_id": "duck_egg_banana_griddle_cake",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "community_parfait",
+      "dominated_id": "duck_egg_banana_griddle_cake",
+      "advantages": [
+        "faster_cycle",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "black_sesame_oats_soup",
+      "dominated_id": "duck_egg_pumpkin_pudding",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "black_sesame_soup",
+      "dominated_id": "duck_egg_pumpkin_pudding",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "honey_redbean_steamed_cake",
+      "dominated_id": "egg_rice_flour_custard",
+      "advantages": [
+        "faster_cycle"
+      ]
+    },
+    {
+      "dominant_id": "black_tea_rice_steamed_cake",
+      "dominated_id": "green_tea_rice_drink",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "goat_milk_black_tea_jelly",
+      "dominated_id": "green_tea_rice_drink",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "green_tea_panna_cotta",
+      "dominated_id": "green_tea_rice_drink",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "honey_orange_black_tea",
+      "dominated_id": "green_tea_rice_drink",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "lemon_honey_black_tea",
+      "dominated_id": "green_tea_rice_drink",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "matcha_goat_milk_mousse",
+      "dominated_id": "green_tea_rice_drink",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "mint_iced_green_tea",
+      "dominated_id": "green_tea_rice_drink",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "black_tea_caramel_mousse",
+      "dominated_id": "green_tea_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "black_tea_mousse",
+      "dominated_id": "green_tea_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "nut_black_tea_crisp",
+      "dominated_id": "green_tea_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "oats_black_tea_cake",
+      "dominated_id": "green_tea_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "honey_peach_jelly",
+      "dominated_id": "honey_lemon_drink",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "peach_jelly",
+      "dominated_id": "honey_lemon_jelly",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "community_parfait",
+      "dominated_id": "honey_yogurt",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "berry_rice_drink",
+      "dominated_id": "lemon_yogurt_muffin",
+      "advantages": [
+        "faster_cycle",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "berry_rice_flour_cake",
+      "dominated_id": "lemon_yogurt_muffin",
+      "advantages": [
+        "faster_cycle",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "berry_yogurt_ice",
+      "dominated_id": "lemon_yogurt_muffin",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "mint_chocolate_pudding",
+      "dominated_id": "lemon_yogurt_muffin",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "blueberry_mousse",
+      "dominated_id": "milk_pudding",
+      "advantages": [
+        "higher_stock",
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "strawberry_mousse",
+      "dominated_id": "milk_pudding",
+      "advantages": [
+        "higher_stock",
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "lemon_honey_black_tea",
+      "dominated_id": "mint_iced_green_tea",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "steamed_meat_rice_cup",
+      "dominated_id": "mutton_glutinous_shumai",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "community_parfait",
+      "dominated_id": "orange_crepe",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "chicken_rice_flour_cake",
+      "dominated_id": "pumpkin_duck_pancake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "mutton_glutinous_shumai",
+      "dominated_id": "pumpkin_duck_pancake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "sea_salt_duck_rice_cup",
+      "dominated_id": "pumpkin_duck_pancake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "steamed_meat_rice_cup",
+      "dominated_id": "pumpkin_duck_pancake",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "black_sesame_roll",
+      "dominated_id": "pumpkin_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "goat_milk_oats_porridge",
+      "dominated_id": "pumpkin_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "mango_yogurt_cup",
+      "dominated_id": "pumpkin_steamed_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "matcha_mochi",
+      "dominated_id": "red_bean_glutinous_rice_ball",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "sugar_roasted_chestnut",
+      "dominated_id": "red_bean_glutinous_rice_ball",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "black_sesame_roll",
+      "dominated_id": "red_bean_milk_drink",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "goat_milk_oats_porridge",
+      "dominated_id": "red_bean_milk_drink",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "mango_yogurt_cup",
+      "dominated_id": "red_bean_milk_drink",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "black_sesame_roll",
+      "dominated_id": "red_bean_rice_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "goat_milk_oats_porridge",
+      "dominated_id": "red_bean_rice_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "mango_yogurt_cup",
+      "dominated_id": "red_bean_rice_cake",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "honey_redbean_steamed_cake",
+      "dominated_id": "rice_flour_steamed_cake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "honey_lemon_drink",
+      "dominated_id": "rice_milk_drink",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "honey_peach_jelly",
+      "dominated_id": "rice_milk_drink",
+      "advantages": [
+        "higher_satisfaction",
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "steamed_meat_rice_cup",
+      "dominated_id": "sea_salt_duck_rice_cup",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "honey_redbean_steamed_cake",
+      "dominated_id": "soft_steamed_egg_cake",
+      "advantages": [
+        "higher_satisfaction"
+      ]
+    },
+    {
+      "dominant_id": "chocolate_mousse",
+      "dominated_id": "vanilla_panna_cotta",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "peach_mousse",
+      "dominated_id": "vanilla_panna_cotta",
+      "advantages": [
+        "tag_superset"
+      ]
+    },
+    {
+      "dominant_id": "honey_redbean_steamed_cake",
+      "dominated_id": "white_sugar_rice_porridge",
+      "advantages": [
+        "faster_cycle"
+      ]
+    }
+  ],
+  "pilot_proposal": {
+    "status": "proposal_only_no_balance_changes",
+    "strategy": "Take complete largest exact-duplicate clusters, without splitting a cluster, and fill toward the 12-recipe upper bound.",
+    "target_range": [
+      10,
+      12
+    ],
+    "selected_cluster_ids": [
+      "exact-001",
+      "exact-002",
+      "exact-003",
+      "exact-004",
+      "exact-005"
+    ],
+    "recipe_ids": [
+      "pumpkin_steamed_cake",
+      "red_bean_milk_drink",
+      "red_bean_rice_cake",
+      "berry_rice_drink",
+      "berry_rice_flour_cake",
+      "black_sesame_crisp_cake",
+      "matcha_cookie",
+      "black_sesame_oats_soup",
+      "black_sesame_soup",
+      "black_tea_caramel_mousse",
+      "black_tea_mousse"
+    ]
+  },
+  "limitations": [
+    "Similarity is a deterministic triage score, not a claim that two recipes feel identical to players.",
+    "Dominance is intentionally conservative and ignores pairs with different canonical shapes or rotation semantics.",
+    "Research timing, boss demand, upgrade availability, and human preference still require route simulation and playtests."
+  ],
+  "confirmed_pilot_evaluation": {
+    "status": "pass",
+    "configured_status": "implemented_pending_human_playtest",
+    "baseline_summary": {
+      "exact_duplicate_cluster_count": 24,
+      "recipes_in_exact_duplicate_clusters": 53,
+      "redundant_recipe_slots": 29,
+      "near_duplicate_pair_count": 387,
+      "full_dominance_relation_count": 86,
+      "dominated_recipe_count": 40
+    },
+    "recipe_count": 12,
+    "unknown_recipe_ids": [],
+    "global_exact_collision_count": 0,
+    "global_exact_collisions": [],
+    "internal_near_duplicate_pair_count": 0,
+    "internal_near_duplicate_pairs": [],
+    "external_near_duplicate_pair_count": 14,
+    "external_near_duplicate_pairs": [
+      {
+        "left_id": "banana_rice_pudding",
+        "right_id": "peach_mousse",
+        "score": 95.0,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": true
+      },
+      {
+        "left_id": "green_tea_latte",
+        "right_id": "mint_iced_green_tea",
+        "score": 94.0,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": false
+      },
+      {
+        "left_id": "green_tea_latte",
+        "right_id": "lemon_honey_black_tea",
+        "score": 93.18,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": false
+      },
+      {
+        "left_id": "banana_rice_pudding",
+        "right_id": "mango_milk_drink",
+        "score": 90.75,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": true
+      },
+      {
+        "left_id": "banana_rice_pudding",
+        "right_id": "mango_yogurt_cup",
+        "score": 89.25,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": true
+      },
+      {
+        "left_id": "goat_milk_black_tea_jelly",
+        "right_id": "green_tea_latte",
+        "score": 89.0,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": false
+      },
+      {
+        "left_id": "green_tea_latte",
+        "right_id": "green_tea_panna_cotta",
+        "score": 89.0,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": false
+      },
+      {
+        "left_id": "black_tea_latte",
+        "right_id": "green_tea_redbean_mochi",
+        "score": 88.75,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": false
+      },
+      {
+        "left_id": "black_tea_panna",
+        "right_id": "goat_milk_black_tea_jelly",
+        "score": 88.75,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": true
+      },
+      {
+        "left_id": "black_tea_panna",
+        "right_id": "green_tea_panna_cotta",
+        "score": 88.75,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": true
+      },
+      {
+        "left_id": "honey_lemon_drink",
+        "right_id": "mint_rice_drink",
+        "score": 88.33,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": true
+      },
+      {
+        "left_id": "coffee_mousse",
+        "right_id": "duck_egg_pumpkin_pudding",
+        "score": 88.0,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": false
+      },
+      {
+        "left_id": "mint_rice_drink",
+        "right_id": "rice_milk_drink",
+        "score": 87.08,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": true
+      },
+      {
+        "left_id": "banana_rice_pudding",
+        "right_id": "vanilla_panna_cotta",
+        "score": 85.0,
+        "same_shape": true,
+        "same_roles": true,
+        "same_tags": false
+      }
+    ],
+    "involved_dominance_relation_count": 0,
+    "involved_dominance_relations": [],
+    "acceptance": {
+      "recipe_count": 12,
+      "require_global_exact_signature_uniqueness": true,
+      "max_internal_near_duplicate_pairs": 0,
+      "max_involved_dominance_relations": 0
+    },
+    "recipes": [
+      {
+        "recipe_id": "coffee_mousse",
+        "display_name": "咖啡慕斯",
+        "branch_id": "signature_display",
+        "tier": 3,
+        "batch": "B",
+        "baseline_cluster_id": "exact-001",
+        "design_role": "冷藏柔滑续航",
+        "tradeoff": "增加备货并放慢周期，以 soft 覆盖换取持续经营能力。",
+        "current_signature": {
+          "roles": [
+            "signature"
+          ],
+          "tags": [
+            "rich",
+            "soft"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rotatable": true,
+          "supply_cost": 4,
+          "copy_limit": 2,
+          "virtual_stock": 5,
+          "cycle_ms": 4000,
+          "satisfaction": 9
+        }
+      },
+      {
+        "recipe_id": "hot_cocoa_drink",
+        "display_name": "热可可饮",
+        "branch_id": "signature_display",
+        "tier": 3,
+        "batch": "C",
+        "baseline_cluster_id": "exact-001",
+        "design_role": "紧凑热饮快销",
+        "tradeoff": "压缩为单格并提高复制能力，但降低单次满足力。",
+        "current_signature": {
+          "roles": [
+            "signature"
+          ],
+          "tags": [
+            "drink",
+            "rich"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rotatable": false,
+          "supply_cost": 3,
+          "copy_limit": 3,
+          "virtual_stock": 5,
+          "cycle_ms": 2000,
+          "satisfaction": 7
+        }
+      },
+      {
+        "recipe_id": "matcha_redbean",
+        "display_name": "抹茶红豆杯",
+        "branch_id": "signature_display",
+        "tier": 3,
+        "batch": "D",
+        "baseline_cluster_id": "exact-001",
+        "design_role": "定向套装爆发",
+        "tradeoff": "固定朝向且减少库存，换取 set 覆盖和更高单次满足力。",
+        "current_signature": {
+          "roles": [
+            "signature"
+          ],
+          "tags": [
+            "rich",
+            "set"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rotatable": false,
+          "supply_cost": 4,
+          "copy_limit": 2,
+          "virtual_stock": 3,
+          "cycle_ms": 3000,
+          "satisfaction": 12
+        }
+      },
+      {
+        "recipe_id": "sea_salt_cream_coffee",
+        "display_name": "海盐奶盖咖啡",
+        "branch_id": "signature_display",
+        "tier": 3,
+        "batch": "D",
+        "baseline_cluster_id": "exact-001",
+        "design_role": "异形招牌重击",
+        "tradeoff": "改为三格 L 形、单份上阵和较高成本，换取高单次满足力。",
+        "current_signature": {
+          "roles": [
+            "signature"
+          ],
+          "tags": [
+            "drink",
+            "rich"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "rotatable": true,
+          "supply_cost": 5,
+          "copy_limit": 1,
+          "virtual_stock": 3,
+          "cycle_ms": 5000,
+          "satisfaction": 15
+        }
+      },
+      {
+        "recipe_id": "black_tea_latte",
+        "display_name": "醇香红茶拿铁",
+        "branch_id": "tea_bittersweet",
+        "tier": 3,
+        "batch": "C",
+        "baseline_cluster_id": "exact-002",
+        "design_role": "单格奶茶快销",
+        "tradeoff": "紧凑多复制，但单次满足力较低。",
+        "current_signature": {
+          "roles": [
+            "flavor"
+          ],
+          "tags": [
+            "drink",
+            "soft",
+            "tea"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rotatable": false,
+          "supply_cost": 3,
+          "copy_limit": 3,
+          "virtual_stock": 5,
+          "cycle_ms": 3000,
+          "satisfaction": 7
+        }
+      },
+      {
+        "recipe_id": "black_tea_panna",
+        "display_name": "红茶奶冻",
+        "branch_id": "tea_bittersweet",
+        "tier": 3,
+        "batch": "C",
+        "baseline_cluster_id": "exact-002",
+        "design_role": "定向奶冻高单次",
+        "tradeoff": "固定朝向、低库存和长周期，换取较高单次满足力。",
+        "current_signature": {
+          "roles": [
+            "flavor"
+          ],
+          "tags": [
+            "soft",
+            "tea"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rotatable": false,
+          "supply_cost": 4,
+          "copy_limit": 2,
+          "virtual_stock": 3,
+          "cycle_ms": 6000,
+          "satisfaction": 12
+        }
+      },
+      {
+        "recipe_id": "green_tea_latte",
+        "display_name": "清润绿茶拿铁",
+        "branch_id": "tea_bittersweet",
+        "tier": 3,
+        "batch": "C",
+        "baseline_cluster_id": "exact-002",
+        "design_role": "清润多标签覆盖",
+        "tradeoff": "保持常规两格效率，以更多需求标签换取较低满足力。",
+        "current_signature": {
+          "roles": [
+            "flavor"
+          ],
+          "tags": [
+            "drink",
+            "refreshing",
+            "soft",
+            "tea"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rotatable": true,
+          "supply_cost": 4,
+          "copy_limit": 2,
+          "virtual_stock": 4,
+          "cycle_ms": 4000,
+          "satisfaction": 9
+        }
+      },
+      {
+        "recipe_id": "mint_lemon_drink",
+        "display_name": "薄荷柠檬饮",
+        "branch_id": "fruit_set",
+        "tier": 3,
+        "batch": "C",
+        "baseline_cluster_id": "exact-003",
+        "design_role": "单格清爽快攻",
+        "tradeoff": "用 fast 标签、单格和短周期抢早期窗口，但满足力偏低。",
+        "current_signature": {
+          "roles": [
+            "pairing"
+          ],
+          "tags": [
+            "drink",
+            "fast",
+            "refreshing"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rotatable": false,
+          "supply_cost": 3,
+          "copy_limit": 3,
+          "virtual_stock": 5,
+          "cycle_ms": 3000,
+          "satisfaction": 8
+        }
+      },
+      {
+        "recipe_id": "mint_rice_drink",
+        "display_name": "薄荷米浆饮",
+        "branch_id": "fruit_set",
+        "tier": 3,
+        "batch": "C",
+        "baseline_cluster_id": "exact-003",
+        "design_role": "固定朝向长线饮品",
+        "tradeoff": "固定两格且满足力较低，换取较大的持续库存。",
+        "current_signature": {
+          "roles": [
+            "pairing"
+          ],
+          "tags": [
+            "drink",
+            "refreshing"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rotatable": false,
+          "supply_cost": 3,
+          "copy_limit": 2,
+          "virtual_stock": 6,
+          "cycle_ms": 4000,
+          "satisfaction": 8
+        }
+      },
+      {
+        "recipe_id": "mint_yogurt_cup",
+        "display_name": "薄荷酸奶杯",
+        "branch_id": "fruit_set",
+        "tier": 3,
+        "batch": "D",
+        "baseline_cluster_id": "exact-003",
+        "design_role": "异形复合覆盖",
+        "tradeoff": "三格 L 形、单份上阵和长周期，换取四标签与高单次满足力。",
+        "current_signature": {
+          "roles": [
+            "pairing"
+          ],
+          "tags": [
+            "drink",
+            "fruit",
+            "refreshing",
+            "soft"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "rotatable": true,
+          "supply_cost": 5,
+          "copy_limit": 1,
+          "virtual_stock": 3,
+          "cycle_ms": 6000,
+          "satisfaction": 14
+        }
+      },
+      {
+        "recipe_id": "banana_rice_pudding",
+        "display_name": "香蕉米布丁",
+        "branch_id": "milk_soft",
+        "tier": 2,
+        "batch": "B",
+        "baseline_cluster_id": "exact-005",
+        "design_role": "水果软糯小批次",
+        "tradeoff": "加入 fruit 覆盖并减少库存，以较高满足力服务复合需求。",
+        "current_signature": {
+          "roles": [
+            "softness"
+          ],
+          "tags": [
+            "fruit",
+            "soft"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "rotatable": true,
+          "supply_cost": 3,
+          "copy_limit": 2,
+          "virtual_stock": 3,
+          "cycle_ms": 5000,
+          "satisfaction": 10
+        }
+      },
+      {
+        "recipe_id": "rich_rice_drink",
+        "display_name": "醇香米浆",
+        "branch_id": "milk_soft",
+        "tier": 2,
+        "batch": "B",
+        "baseline_cluster_id": "exact-005",
+        "design_role": "低成本单格米饮",
+        "tradeoff": "降低成本并压缩为单格，以较低满足力换取灵活补位。",
+        "current_signature": {
+          "roles": [
+            "softness"
+          ],
+          "tags": [
+            "drink",
+            "soft"
+          ],
+          "shape": [
+            [
+              0,
+              0
+            ]
+          ],
+          "rotatable": false,
+          "supply_cost": 2,
+          "copy_limit": 3,
+          "virtual_stock": 5,
+          "cycle_ms": 3000,
+          "satisfaction": 6
+        }
+      }
+    ]
+  }
+}

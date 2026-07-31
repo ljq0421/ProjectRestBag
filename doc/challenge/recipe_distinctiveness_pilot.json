@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "status": "implemented_pending_human_playtest",
+  "confirmed_date": "2026-07-31",
+  "baseline_summary": {
+    "exact_duplicate_cluster_count": 24,
+    "recipes_in_exact_duplicate_clusters": 53,
+    "redundant_recipe_slots": 29,
+    "near_duplicate_pair_count": 387,
+    "full_dominance_relation_count": 86,
+    "dominated_recipe_count": 40
+  },
+  "acceptance": {
+    "recipe_count": 12,
+    "require_global_exact_signature_uniqueness": true,
+    "max_internal_near_duplicate_pairs": 0,
+    "max_involved_dominance_relations": 0
+  },
+  "recipes": {
+    "coffee_mousse": {
+      "baseline_cluster_id": "exact-001",
+      "design_role": "冷藏柔滑续航",
+      "tradeoff": "增加备货并放慢周期，以 soft 覆盖换取持续经营能力。",
+      "expected_branch_id": "signature_display",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0],
+          [0, 1]
+        ],
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 5,
+        "cycle_ms": 4000,
+        "satisfaction": 9,
+        "tags": [
+          "rich",
+          "soft"
+        ],
+        "rotatable": true
+      }
+    },
+    "hot_cocoa_drink": {
+      "baseline_cluster_id": "exact-001",
+      "design_role": "紧凑热饮快销",
+      "tradeoff": "压缩为单格并提高复制能力，但降低单次满足力。",
+      "expected_branch_id": "signature_display",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 5,
+        "cycle_ms": 2000,
+        "satisfaction": 7,
+        "tags": [
+          "drink",
+          "rich"
+        ],
+        "rotatable": false
+      }
+    },
+    "matcha_redbean": {
+      "baseline_cluster_id": "exact-001",
+      "design_role": "定向套装爆发",
+      "tradeoff": "固定朝向且减少库存，换取 set 覆盖和更高单次满足力。",
+      "expected_branch_id": "signature_display",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0],
+          [0, 1]
+        ],
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 3,
+        "cycle_ms": 3000,
+        "satisfaction": 12,
+        "tags": [
+          "rich",
+          "set"
+        ],
+        "rotatable": false
+      }
+    },
+    "sea_salt_cream_coffee": {
+      "baseline_cluster_id": "exact-001",
+      "design_role": "异形招牌重击",
+      "tradeoff": "改为三格 L 形、单份上阵和较高成本，换取高单次满足力。",
+      "expected_branch_id": "signature_display",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0],
+          [0, 1],
+          [1, 0]
+        ],
+        "supply_cost": 5,
+        "copy_limit": 1,
+        "virtual_stock": 3,
+        "cycle_ms": 5000,
+        "satisfaction": 15,
+        "tags": [
+          "drink",
+          "rich"
+        ],
+        "rotatable": true
+      }
+    },
+    "black_tea_latte": {
+      "baseline_cluster_id": "exact-002",
+      "design_role": "单格奶茶快销",
+      "tradeoff": "紧凑多复制，但单次满足力较低。",
+      "expected_branch_id": "tea_bittersweet",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 5,
+        "cycle_ms": 3000,
+        "satisfaction": 7,
+        "tags": [
+          "drink",
+          "soft",
+          "tea"
+        ],
+        "rotatable": false
+      }
+    },
+    "black_tea_panna": {
+      "baseline_cluster_id": "exact-002",
+      "design_role": "定向奶冻高单次",
+      "tradeoff": "固定朝向、低库存和长周期，换取较高单次满足力。",
+      "expected_branch_id": "tea_bittersweet",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0],
+          [0, 1]
+        ],
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 3,
+        "cycle_ms": 6000,
+        "satisfaction": 12,
+        "tags": [
+          "soft",
+          "tea"
+        ],
+        "rotatable": false
+      }
+    },
+    "green_tea_latte": {
+      "baseline_cluster_id": "exact-002",
+      "design_role": "清润多标签覆盖",
+      "tradeoff": "保持常规两格效率，以更多需求标签换取较低满足力。",
+      "expected_branch_id": "tea_bittersweet",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0],
+          [0, 1]
+        ],
+        "supply_cost": 4,
+        "copy_limit": 2,
+        "virtual_stock": 4,
+        "cycle_ms": 4000,
+        "satisfaction": 9,
+        "tags": [
+          "drink",
+          "refreshing",
+          "soft",
+          "tea"
+        ],
+        "rotatable": true
+      }
+    },
+    "mint_lemon_drink": {
+      "baseline_cluster_id": "exact-003",
+      "design_role": "单格清爽快攻",
+      "tradeoff": "用 fast 标签、单格和短周期抢早期窗口，但满足力偏低。",
+      "expected_branch_id": "fruit_set",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 5,
+        "cycle_ms": 3000,
+        "satisfaction": 8,
+        "tags": [
+          "drink",
+          "fast",
+          "refreshing"
+        ],
+        "rotatable": false
+      }
+    },
+    "mint_rice_drink": {
+      "baseline_cluster_id": "exact-003",
+      "design_role": "固定朝向长线饮品",
+      "tradeoff": "固定两格且满足力较低，换取较大的持续库存。",
+      "expected_branch_id": "fruit_set",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0],
+          [0, 1]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 6,
+        "cycle_ms": 4000,
+        "satisfaction": 8,
+        "tags": [
+          "drink",
+          "refreshing"
+        ],
+        "rotatable": false
+      }
+    },
+    "mint_yogurt_cup": {
+      "baseline_cluster_id": "exact-003",
+      "design_role": "异形复合覆盖",
+      "tradeoff": "三格 L 形、单份上阵和长周期，换取四标签与高单次满足力。",
+      "expected_branch_id": "fruit_set",
+      "expected_tier": 3,
+      "runtime": {
+        "shape_cells": [
+          [0, 0],
+          [0, 1],
+          [1, 0]
+        ],
+        "supply_cost": 5,
+        "copy_limit": 1,
+        "virtual_stock": 3,
+        "cycle_ms": 6000,
+        "satisfaction": 14,
+        "tags": [
+          "drink",
+          "fruit",
+          "refreshing",
+          "soft"
+        ],
+        "rotatable": true
+      }
+    },
+    "banana_rice_pudding": {
+      "baseline_cluster_id": "exact-005",
+      "design_role": "水果软糯小批次",
+      "tradeoff": "加入 fruit 覆盖并减少库存，以较高满足力服务复合需求。",
+      "expected_branch_id": "milk_soft",
+      "expected_tier": 2,
+      "runtime": {
+        "shape_cells": [
+          [0, 0],
+          [0, 1]
+        ],
+        "supply_cost": 3,
+        "copy_limit": 2,
+        "virtual_stock": 3,
+        "cycle_ms": 5000,
+        "satisfaction": 10,
+        "tags": [
+          "fruit",
+          "soft"
+        ],
+        "rotatable": true
+      }
+    },
+    "rich_rice_drink": {
+      "baseline_cluster_id": "exact-005",
+      "design_role": "低成本单格米饮",
+      "tradeoff": "降低成本并压缩为单格，以较低满足力换取灵活补位。",
+      "expected_branch_id": "milk_soft",
+      "expected_tier": 2,
+      "runtime": {
+        "shape_cells": [
+          [0, 0]
+        ],
+        "supply_cost": 2,
+        "copy_limit": 3,
+        "virtual_stock": 5,
+        "cycle_ms": 3000,
+        "satisfaction": 6,
+        "tags": [
+          "drink",
+          "soft"
+        ],
+        "rotatable": false
+      }
+    }
+  }
+}

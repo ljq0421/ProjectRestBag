@@ -141,7 +141,11 @@ func _connect_signals() -> void:
 	hub.continue_requested.connect(continue_run)
 	hub.menu_requested.connect(_show_menu)
 	hub.research_requested.connect(_show_research)
-	hub.route_selected.connect(func(route_id: String) -> void: _selected_route_id = route_id)
+	hub.route_selected.connect(
+		func(route_id: String) -> void:
+			AudioService.play_cue(&"ui_confirm")
+			_selected_route_id = route_id
+	)
 	var preparation = $Root/PageHost/PreparationHost/PreparationView
 	preparation.battle_requested.connect(_start_battle_with_draft)
 	preparation.expansion_purchase_requested.connect(_on_expansion_purchase_requested)
@@ -149,19 +153,30 @@ func _connect_signals() -> void:
 	preparation.placement_rejected.connect(
 		func(reasons: Array[String]) -> void:
 			if not reasons.is_empty():
+				AudioService.play_cue(&"action_rejected")
 				_set_status(reasons[0])
 	)
 	var board = preparation.board()
 	board.recipe_placed.connect(
 		func(_instance_id: String, recipe_id: String) -> void:
+			AudioService.play_cue(&"recipe_place")
 			_apply_tutorial_event("recipe_placed", {"recipe_id": recipe_id})
+	)
+	board.instance_moved.connect(
+		func(_instance_id: String) -> void:
+			AudioService.play_cue(&"recipe_move")
 	)
 	board.instance_rotated.connect(
 		func(_instance_id: String, recipe_id: String, _rotation: int, shape_changed: bool) -> void:
+			AudioService.play_cue(&"recipe_rotate")
 			_apply_tutorial_event("instance_rotated", {
 				"recipe_id": recipe_id,
 				"shape_changed": shape_changed
 			})
+	)
+	board.instance_removed.connect(
+		func(_instance_id: String) -> void:
+			AudioService.play_cue(&"recipe_move")
 	)
 	$Root/PageHost/BattleView.battle_finished.connect(_on_battle_finished)
 	$Root/PageHost/UpgradeHost/UpgradeSelectView.upgrade_requested.connect(_on_upgrade_requested)
@@ -275,6 +290,7 @@ func _show_saved_report() -> void:
 		and int(run_state.get("confidence", 0)) > 0,
 		String(run_state.get("phase", "")) in ["run_complete", "run_failed"]
 	)
+	AudioService.play_music(&"summary")
 	$SettlementDialog.open_report()
 	_apply_tutorial_event("battle_finished")
 	_refresh_tutorial()
@@ -368,6 +384,7 @@ func _show_summary() -> void:
 func _start_battle_with_draft(draft: Dictionary) -> void:
 	var result := _session.start_battle(_save_data, draft)
 	if not bool(result.get("applied", false)):
+		AudioService.play_cue(&"action_rejected")
 		_set_status(_error_text(result))
 		return
 	_adopt(result)
@@ -377,6 +394,7 @@ func _start_battle_with_draft(draft: Dictionary) -> void:
 	$Root/PageHost/BattleView.set_confidence(int(run_state.get("confidence", 0)))
 	$Root/PageHost/BattleView.set_paused(false)
 	_last_saved_second = 0
+	AudioService.play_cue(&"battle_start")
 	_set_page("battle")
 	_apply_tutorial_event("battle_started", {"draft": draft})
 	_refresh_top_bar()
@@ -384,6 +402,11 @@ func _start_battle_with_draft(draft: Dictionary) -> void:
 
 func _on_battle_finished(final_state: Dictionary) -> void:
 	battle_state = final_state.duplicate(true)
+	AudioService.play_cue(
+		&"victory"
+		if String(battle_state.get("outcome", "")) == "victory"
+		else &"defeat"
+	)
 	var settled := _session.settle_battle(_save_data, battle_state)
 	if not bool(settled.get("applied", false)):
 		_set_status(_error_text(settled))
@@ -406,9 +429,11 @@ func _on_expansion_purchase_requested(
 		anchor
 	)
 	if not bool(purchased.get("applied", false)):
+		AudioService.play_cue(&"action_rejected")
 		_set_status(_error_text(purchased))
 		return
 	_adopt(purchased)
+	AudioService.play_cue(&"reward_claim")
 	_set_status("扩建完成：消耗 %d 张扩建券" % int(purchased.get("price", 0)))
 	_show_preparation()
 
@@ -455,10 +480,12 @@ func _prepare_upgrade_offer() -> void:
 func _on_upgrade_requested(offer_id: String, upgrade_id: String) -> void:
 	var chosen := _session.choose_upgrade(_save_data, offer_id, upgrade_id)
 	if not bool(chosen.get("applied", false)):
+		AudioService.play_cue(&"action_rejected")
 		_set_status(_error_text(chosen))
 		_show_upgrade()
 		return
 	_adopt(chosen)
+	AudioService.play_cue(&"upgrade_unlock")
 	var summary: Dictionary = chosen.get("effect_summary", {})
 	_set_status(
 		"强化已应用，需要重排"
@@ -473,6 +500,7 @@ func _on_reward_requested() -> void:
 	var rewarded := _session.grant_completion_reward(_save_data)
 	if bool(rewarded.get("applied", false)):
 		_adopt(rewarded)
+		AudioService.play_cue(&"reward_claim")
 		_set_status("获得 %d 点研究点" % int(rewarded.get("points_granted", 0)))
 	_show_summary()
 
@@ -481,8 +509,10 @@ func _on_research_unlock_requested(node_id: String) -> void:
 	var unlocked := _session.unlock_research(_save_data, node_id)
 	if bool(unlocked.get("applied", false)):
 		_adopt(unlocked)
+		AudioService.play_cue(&"research_unlock")
 		_set_status("研究成果已进入永久收藏；加入本局菜单后，下局生效")
 	else:
+		AudioService.play_cue(&"action_rejected")
 		_set_status(_error_text(unlocked))
 	_show_research()
 
@@ -512,6 +542,7 @@ func _on_draft_changed(draft: Dictionary) -> void:
 
 
 func _set_page(page: String) -> void:
+	var previous_page := _page
 	_page = page
 	$Root/PageHost/HubHost.visible = page == "hub"
 	$Root/PageHost/PreparationHost.visible = page == "preparation"
@@ -520,6 +551,9 @@ func _set_page(page: String) -> void:
 	$Root/PageHost/ResearchHost.visible = page == "research"
 	$Root/PageHost/MenuHost.visible = page == "menu"
 	$Root/PageHost/SummaryHost.visible = page == "summary"
+	AudioService.play_music(StringName(page))
+	if previous_page != page and previous_page != "" and page != "battle":
+		AudioService.play_cue(&"page_transition")
 	call_deferred("_refresh_tutorial_after_layout")
 
 

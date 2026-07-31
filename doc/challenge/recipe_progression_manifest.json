@@ -345,34 +345,32 @@
       "research_tier": 2,
       "research_node_id": "family_milk_soft_t2_05",
       "combat_tags": [
+        "drink",
         "soft"
       ],
       "build_roles": [
         "softness"
       ],
-      "challenge_role_summary": "柔软续航；以soft覆盖需求，2 格可旋转，4 秒周期，成本 3，最多复制 2 份。",
+      "challenge_role_summary": "柔软续航；以drink、soft覆盖需求，1 格固定朝向，3 秒周期，成本 2，最多复制 3 份。",
       "runtime": {
         "shape_cells": [
           [
             0,
             0
-          ],
-          [
-            0,
-            1
           ]
         ],
-        "supply_cost": 3,
-        "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 4000,
-        "satisfaction": 9,
+        "supply_cost": 2,
+        "copy_limit": 3,
+        "virtual_stock": 5,
+        "cycle_ms": 3000,
+        "satisfaction": 6,
         "tags": [
+          "drink",
           "soft"
         ],
-        "rotatable": true
+        "rotatable": false
       },
-      "review_notes": "阶段 8 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：低成本单格米饮；降低成本并压缩为单格，以较低满足力换取灵活补位。"
     },
     "milk_rice_dew": {
       "recipe_id": "milk_rice_dew",
@@ -2127,12 +2125,13 @@
       "research_tier": 2,
       "research_node_id": "family_milk_soft_t2_03",
       "combat_tags": [
+        "fruit",
         "soft"
       ],
       "build_roles": [
         "softness"
       ],
-      "challenge_role_summary": "柔软续航；以soft覆盖需求，2 格可旋转，4 秒周期，成本 3，最多复制 2 份。",
+      "challenge_role_summary": "柔软续航；以fruit、soft覆盖需求，2 格可旋转，5 秒周期，成本 3，最多复制 2 份。",
       "runtime": {
         "shape_cells": [
           [
@@ -2146,15 +2145,16 @@
         ],
         "supply_cost": 3,
         "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 4000,
-        "satisfaction": 9,
+        "virtual_stock": 3,
+        "cycle_ms": 5000,
+        "satisfaction": 10,
         "tags": [
+          "fruit",
           "soft"
         ],
         "rotatable": true
       },
-      "review_notes": "阶段 8 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：水果软糯小批次；加入 fruit 覆盖并减少库存，以较高满足力服务复合需求。"
     },
     "strawberry_cream_cake": {
       "recipe_id": "strawberry_cream_cake",
@@ -3414,12 +3414,13 @@
       "research_tier": 3,
       "research_node_id": "family_signature_display_t3_03",
       "combat_tags": [
-        "rich"
+        "rich",
+        "soft"
       ],
       "build_roles": [
         "signature"
       ],
-      "challenge_role_summary": "招牌输出；以rich覆盖需求，2 格可旋转，2 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "招牌输出；以rich、soft覆盖需求，2 格可旋转，4 秒周期，成本 4，最多复制 2 份。",
       "runtime": {
         "shape_cells": [
           [
@@ -3433,15 +3434,16 @@
         ],
         "supply_cost": 4,
         "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 2000,
+        "virtual_stock": 5,
+        "cycle_ms": 4000,
         "satisfaction": 9,
         "tags": [
-          "rich"
+          "rich",
+          "soft"
         ],
         "rotatable": true
       },
-      "review_notes": "阶段 8 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：冷藏柔滑续航；增加备货并放慢周期，以 soft 覆盖换取持续经营能力。"
     },
     "redbean_pancake": {
       "recipe_id": "redbean_pancake",
@@ -5881,12 +5883,13 @@
       "research_tier": 3,
       "research_node_id": "family_signature_display_t3_06",
       "combat_tags": [
-        "rich"
+        "rich",
+        "set"
       ],
       "build_roles": [
         "signature"
       ],
-      "challenge_role_summary": "招牌输出；以rich覆盖需求，2 格可旋转，2 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "招牌输出；以rich、set覆盖需求，2 格固定朝向，3 秒周期，成本 4，最多复制 2 份。",
       "runtime": {
         "shape_cells": [
           [
@@ -5900,15 +5903,16 @@
         ],
         "supply_cost": 4,
         "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 2000,
-        "satisfaction": 9,
+        "virtual_stock": 3,
+        "cycle_ms": 3000,
+        "satisfaction": 12,
         "tags": [
-          "rich"
+          "rich",
+          "set"
         ],
-        "rotatable": true
+        "rotatable": false
       },
-      "review_notes": "阶段 10 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：定向套装爆发；固定朝向且减少库存，换取 set 覆盖和更高单次满足力。"
     },
     "mint_cocoa_cup": {
       "recipe_id": "mint_cocoa_cup",
@@ -6290,12 +6294,13 @@
       "research_tier": 3,
       "research_node_id": "family_signature_display_t3_06",
       "combat_tags": [
+        "drink",
         "rich"
       ],
       "build_roles": [
         "signature"
       ],
-      "challenge_role_summary": "招牌输出；以rich覆盖需求，2 格可旋转，2 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "招牌输出；以drink、rich覆盖需求，3 格可旋转，5 秒周期，成本 5，最多复制 1 份。",
       "runtime": {
         "shape_cells": [
           [
@@ -6305,19 +6310,24 @@
           [
             0,
             1
+          ],
+          [
+            1,
+            0
           ]
         ],
-        "supply_cost": 4,
-        "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 2000,
-        "satisfaction": 9,
+        "supply_cost": 5,
+        "copy_limit": 1,
+        "virtual_stock": 3,
+        "cycle_ms": 5000,
+        "satisfaction": 15,
         "tags": [
+          "drink",
           "rich"
         ],
         "rotatable": true
       },
-      "review_notes": "阶段 10 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：异形招牌重击；改为三格 L 形、单份上阵和较高成本，换取高单次满足力。"
     },
     "chestnut_pound_cake": {
       "recipe_id": "chestnut_pound_cake",
@@ -7356,35 +7366,33 @@
       "research_node_id": "family_fruit_set_t3_08",
       "combat_tags": [
         "drink",
+        "fast",
         "refreshing"
       ],
       "build_roles": [
         "pairing"
       ],
-      "challenge_role_summary": "搭配联动；以drink、refreshing覆盖需求，2 格可旋转，4 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "搭配联动；以drink、fast、refreshing覆盖需求，1 格固定朝向，3 秒周期，成本 3，最多复制 3 份。",
       "runtime": {
         "shape_cells": [
           [
             0,
             0
-          ],
-          [
-            0,
-            1
           ]
         ],
-        "supply_cost": 4,
-        "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 4000,
-        "satisfaction": 10,
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 5,
+        "cycle_ms": 3000,
+        "satisfaction": 8,
         "tags": [
           "drink",
+          "fast",
           "refreshing"
         ],
-        "rotatable": true
+        "rotatable": false
       },
-      "review_notes": "阶段 9 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：单格清爽快攻；用 fast 标签、单格和短周期抢早期窗口，但满足力偏低。"
     },
     "mint_mousse": {
       "recipe_id": "mint_mousse",
@@ -7574,7 +7582,7 @@
       "build_roles": [
         "pairing"
       ],
-      "challenge_role_summary": "搭配联动；以drink、refreshing覆盖需求，2 格可旋转，4 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "搭配联动；以drink、refreshing覆盖需求，2 格固定朝向，4 秒周期，成本 3，最多复制 2 份。",
       "runtime": {
         "shape_cells": [
           [
@@ -7586,18 +7594,18 @@
             1
           ]
         ],
-        "supply_cost": 4,
+        "supply_cost": 3,
         "copy_limit": 2,
-        "virtual_stock": 4,
+        "virtual_stock": 6,
         "cycle_ms": 4000,
-        "satisfaction": 10,
+        "satisfaction": 8,
         "tags": [
           "drink",
           "refreshing"
         ],
-        "rotatable": true
+        "rotatable": false
       },
-      "review_notes": "阶段 9 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：固定朝向长线饮品；固定两格且满足力较低，换取较大的持续库存。"
     },
     "cocoa_steamed_cake": {
       "recipe_id": "cocoa_steamed_cake",
@@ -7834,34 +7842,32 @@
       "research_tier": 3,
       "research_node_id": "family_signature_display_t3_05",
       "combat_tags": [
+        "drink",
         "rich"
       ],
       "build_roles": [
         "signature"
       ],
-      "challenge_role_summary": "招牌输出；以rich覆盖需求，2 格可旋转，2 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "招牌输出；以drink、rich覆盖需求，1 格固定朝向，2 秒周期，成本 3，最多复制 3 份。",
       "runtime": {
         "shape_cells": [
           [
             0,
             0
-          ],
-          [
-            0,
-            1
           ]
         ],
-        "supply_cost": 4,
-        "copy_limit": 2,
-        "virtual_stock": 4,
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 5,
         "cycle_ms": 2000,
-        "satisfaction": 9,
+        "satisfaction": 7,
         "tags": [
+          "drink",
           "rich"
         ],
-        "rotatable": true
+        "rotatable": false
       },
-      "review_notes": "阶段 9 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：紧凑热饮快销；压缩为单格并提高复制能力，但降低单次满足力。"
     },
     "nut_chicken_patty": {
       "recipe_id": "nut_chicken_patty",
@@ -8339,12 +8345,14 @@
       "research_node_id": "family_fruit_set_t3_10",
       "combat_tags": [
         "drink",
-        "refreshing"
+        "fruit",
+        "refreshing",
+        "soft"
       ],
       "build_roles": [
         "pairing"
       ],
-      "challenge_role_summary": "搭配联动；以drink、refreshing覆盖需求，2 格可旋转，4 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "搭配联动；以drink、fruit、refreshing、soft覆盖需求，3 格可旋转，6 秒周期，成本 5，最多复制 1 份。",
       "runtime": {
         "shape_cells": [
           [
@@ -8354,20 +8362,26 @@
           [
             0,
             1
+          ],
+          [
+            1,
+            0
           ]
         ],
-        "supply_cost": 4,
-        "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 4000,
-        "satisfaction": 10,
+        "supply_cost": 5,
+        "copy_limit": 1,
+        "virtual_stock": 3,
+        "cycle_ms": 6000,
+        "satisfaction": 14,
         "tags": [
           "drink",
-          "refreshing"
+          "fruit",
+          "refreshing",
+          "soft"
         ],
         "rotatable": true
       },
-      "review_notes": "阶段 10 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：异形复合覆盖；三格 L 形、单份上阵和长周期，换取四标签与高单次满足力。"
     },
     "black_sesame_oats_soup": {
       "recipe_id": "black_sesame_oats_soup",
@@ -8699,7 +8713,7 @@
       "build_roles": [
         "flavor"
       ],
-      "challenge_role_summary": "风味覆盖；以soft、tea覆盖需求，2 格可旋转，2 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "风味覆盖；以soft、tea覆盖需求，2 格固定朝向，6 秒周期，成本 4，最多复制 2 份。",
       "runtime": {
         "shape_cells": [
           [
@@ -8713,16 +8727,16 @@
         ],
         "supply_cost": 4,
         "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 2000,
-        "satisfaction": 9,
+        "virtual_stock": 3,
+        "cycle_ms": 6000,
+        "satisfaction": 12,
         "tags": [
           "soft",
           "tea"
         ],
-        "rotatable": true
+        "rotatable": false
       },
-      "review_notes": "阶段 9 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：定向奶冻高单次；固定朝向、低库存和长周期，换取较高单次满足力。"
     },
     "apple_cinnamon_pie": {
       "recipe_id": "apple_cinnamon_pie",
@@ -8911,36 +8925,34 @@
       "research_tier": 3,
       "research_node_id": "family_tea_bittersweet_t3_01",
       "combat_tags": [
+        "drink",
         "soft",
         "tea"
       ],
       "build_roles": [
         "flavor"
       ],
-      "challenge_role_summary": "风味覆盖；以soft、tea覆盖需求，2 格可旋转，2 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "风味覆盖；以drink、soft、tea覆盖需求，1 格固定朝向，3 秒周期，成本 3，最多复制 3 份。",
       "runtime": {
         "shape_cells": [
           [
             0,
             0
-          ],
-          [
-            0,
-            1
           ]
         ],
-        "supply_cost": 4,
-        "copy_limit": 2,
-        "virtual_stock": 4,
-        "cycle_ms": 2000,
-        "satisfaction": 9,
+        "supply_cost": 3,
+        "copy_limit": 3,
+        "virtual_stock": 5,
+        "cycle_ms": 3000,
+        "satisfaction": 7,
         "tags": [
+          "drink",
           "soft",
           "tea"
         ],
-        "rotatable": true
+        "rotatable": false
       },
-      "review_notes": "阶段 9 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：单格奶茶快销；紧凑多复制，但单次满足力较低。"
     },
     "green_tea_latte": {
       "recipe_id": "green_tea_latte",
@@ -8979,13 +8991,15 @@
       "research_tier": 3,
       "research_node_id": "family_tea_bittersweet_t3_03",
       "combat_tags": [
+        "drink",
+        "refreshing",
         "soft",
         "tea"
       ],
       "build_roles": [
         "flavor"
       ],
-      "challenge_role_summary": "风味覆盖；以soft、tea覆盖需求，2 格可旋转，2 秒周期，成本 4，最多复制 2 份。",
+      "challenge_role_summary": "风味覆盖；以drink、refreshing、soft、tea覆盖需求，2 格可旋转，4 秒周期，成本 4，最多复制 2 份。",
       "runtime": {
         "shape_cells": [
           [
@@ -9000,15 +9014,17 @@
         "supply_cost": 4,
         "copy_limit": 2,
         "virtual_stock": 4,
-        "cycle_ms": 2000,
+        "cycle_ms": 4000,
         "satisfaction": 9,
         "tags": [
+          "drink",
+          "refreshing",
           "soft",
           "tea"
         ],
         "rotatable": true
       },
-      "review_notes": "阶段 9 归一化迁移；继续以真人构筑数据复核。"
+      "review_notes": "第一批同质配方人工重做（2026-07-31）：清润多标签覆盖；保持常规两格效率，以更多需求标签换取较低满足力。"
     },
     "lemon_honey_black_tea": {
       "recipe_id": "lemon_honey_black_tea",

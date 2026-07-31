@@ -159,6 +159,8 @@ func _consume_new_events(animate: bool) -> void:
 func _apply_event(event: Dictionary, animate: bool) -> void:
 	match String(event.get("type", "")):
 		"sale":
+			if animate:
+				AudioService.play_cue(&"sale")
 			var recipe_name := _recipe_name(String(event.get("recipe_id", "")))
 			var base_satisfaction := int(event.get("base_satisfaction", 0))
 			var relation_bonus := int(event.get("relation_bonus", 0))
@@ -184,9 +186,17 @@ func _apply_event(event: Dictionary, animate: bool) -> void:
 			_show_sale_on_grid(event)
 			_pulse_instance(String(event.get("source_id", "")), Color("#ffc857"), animate)
 		"relation_trigger":
+			if animate:
+				AudioService.play_cue(&"relation_bonus")
 			_show_relation_on_grid(event)
 			_highlight_relation(String(event.get("source_id", "")), animate)
 		"demand_window":
+			if animate:
+				AudioService.play_cue(
+					&"demand_success"
+					if bool(event.get("passed", false))
+					else &"demand_failure"
+				)
 			_resolve_window_visual(event)
 			_show_window_on_grid(event)
 		"battle_end":

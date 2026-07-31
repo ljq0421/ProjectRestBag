@@ -13,10 +13,10 @@ This is a bounded deterministic content audit, not human balance proof.
 - Per-recipe coverage sweep cases: 332
 - Recipes selected by coverage sweep: 166 / 166
 - Synthetic obviously-insufficient cases: 234
-- Synthetic boundary-prediction cases: 261
-- Synthetic theoretically-reachable cases: 225
+- Synthetic boundary-prediction cases: 270
+- Synthetic theoretically-reachable cases: 216
 - Minimum bounded score: 60
-- Maximum bounded score: 492
+- Maximum bounded score: 420
 - Deterministic mismatches: 0
 
 ## Result

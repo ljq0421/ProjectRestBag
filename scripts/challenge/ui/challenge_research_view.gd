@@ -102,6 +102,7 @@ func _rebuild_selected_branch() -> void:
 
 
 func _select_branch(branch_id: String) -> void:
+	AudioService.play_cue(&"ui_confirm")
 	_selected_branch_id = branch_id
 	_rebuild_branch_buttons()
 	_rebuild_selected_branch()

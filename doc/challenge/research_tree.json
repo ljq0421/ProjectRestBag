@@ -500,6 +500,7 @@
       ],
       "tags": [
         "drink",
+        "fast",
         "fruit",
         "refreshing"
       ],
@@ -561,7 +562,9 @@
       "tags": [
         "drink",
         "fast",
-        "refreshing"
+        "fruit",
+        "refreshing",
+        "soft"
       ],
       "build_purpose": "解锁 2 个水果套装家族配方，在同主题下提供不同形状、周期和复制策略。",
       "unlocks": [
@@ -692,7 +695,8 @@
         "family_signature_display_t3_02"
       ],
       "tags": [
-        "rich"
+        "rich",
+        "soft"
       ],
       "build_purpose": "解锁 3 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
       "unlocks": [
@@ -749,6 +753,7 @@
         "family_signature_display_t3_04"
       ],
       "tags": [
+        "drink",
         "rich"
       ],
       "build_purpose": "解锁 3 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
@@ -777,7 +782,9 @@
         "family_signature_display_t3_05"
       ],
       "tags": [
-        "rich"
+        "drink",
+        "rich",
+        "set"
       ],
       "build_purpose": "解锁 2 个招牌展示家族配方，在同主题下提供不同形状、周期和复制策略。",
       "unlocks": [
@@ -868,6 +875,7 @@
         "family_milk_soft_t2_02"
       ],
       "tags": [
+        "fruit",
         "rich",
         "soft"
       ],
@@ -927,6 +935,7 @@
         "family_milk_soft_t2_04"
       ],
       "tags": [
+        "drink",
         "fruit",
         "soft"
       ],
@@ -1152,6 +1161,7 @@
       "prerequisite_ids": [],
       "tags": [
         "crisp",
+        "drink",
         "soft",
         "tea"
       ],
@@ -1211,6 +1221,8 @@
         "family_tea_bittersweet_t3_02"
       ],
       "tags": [
+        "drink",
+        "refreshing",
         "soft",
         "tea"
       ],

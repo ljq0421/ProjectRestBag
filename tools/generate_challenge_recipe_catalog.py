@@ -17,6 +17,9 @@ DISPLAY_PATH = ROOT / "doc/recipe_display_config.json"
 RUNTIME_PATH = ROOT / "doc/challenge/challenge_recipes.json"
 MANIFEST_PATH = ROOT / "doc/challenge/recipe_progression_manifest.json"
 TREE_PATH = ROOT / "doc/challenge/research_tree.json"
+DISTINCTIVENESS_PILOT_PATH = (
+    ROOT / "doc/challenge/recipe_distinctiveness_pilot.json"
+)
 
 BRANCHES = (
     "tempo_display",
@@ -270,6 +273,56 @@ def challenge_role_summary(
     )
 
 
+def apply_distinctiveness_pilot(manifest: dict[str, Any]) -> dict[str, Any]:
+    if not DISTINCTIVENESS_PILOT_PATH.exists():
+        return manifest
+    pilot = read_json(DISTINCTIVENESS_PILOT_PATH)
+    entries = manifest.get("recipes", {})
+    for recipe_id, pilot_entry in pilot.get("recipes", {}).items():
+        if recipe_id not in entries:
+            raise SystemExit(
+                f"Distinctiveness pilot references unknown recipe: {recipe_id}"
+            )
+        entry = entries[recipe_id]
+        expected_branch = str(pilot_entry.get("expected_branch_id", ""))
+        expected_tier = int(pilot_entry.get("expected_tier", 0))
+        if str(entry.get("research_branch_id", "")) != expected_branch:
+            raise SystemExit(
+                f"{recipe_id} pilot branch drift: "
+                f"{entry.get('research_branch_id')} != {expected_branch}"
+            )
+        if int(entry.get("research_tier", 0)) != expected_tier:
+            raise SystemExit(
+                f"{recipe_id} pilot tier drift: "
+                f"{entry.get('research_tier')} != {expected_tier}"
+            )
+        runtime_target = dict(pilot_entry.get("runtime", {}))
+        missing = [
+            field for field in RUNTIME_FIELDS if field not in runtime_target
+        ]
+        if missing:
+            raise SystemExit(
+                f"{recipe_id} pilot runtime fields missing: {missing}"
+            )
+        runtime_fields = {
+            field: runtime_target[field] for field in RUNTIME_FIELDS
+        }
+        combat_tags = list(runtime_fields["tags"])
+        entry["combat_tags"] = combat_tags
+        entry["runtime"] = runtime_fields
+        entry["challenge_role_summary"] = challenge_role_summary(
+            list(entry.get("build_roles", [])),
+            combat_tags,
+            runtime_fields,
+        )
+        entry["review_notes"] = (
+            "第一批同质配方人工重做（2026-07-31）："
+            f"{pilot_entry.get('design_role', '')}；"
+            f"{pilot_entry.get('tradeoff', '')}"
+        )
+    return manifest
+
+
 def sync_manifest() -> dict[str, Any]:
     catalog = load_catalog(CATALOG_PATH)
     _, display = load_display_config(DISPLAY_PATH)
@@ -517,6 +570,7 @@ def main() -> None:
         if args.sync_manifest or not MANIFEST_PATH.exists()
         else read_json(MANIFEST_PATH)
     )
+    manifest = apply_distinctiveness_pilot(manifest)
     tree = generated_research_tree(read_json(TREE_PATH), manifest)
     runtime = generated_runtime(current, manifest)
     write_or_check(MANIFEST_PATH, manifest, args.check)

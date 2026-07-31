@@ -773,10 +773,11 @@
       ],
       "supply_cost": 3,
       "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 4000,
-      "satisfaction": 9,
+      "virtual_stock": 3,
+      "cycle_ms": 5000,
+      "satisfaction": 10,
       "tags": [
+        "fruit",
         "soft"
       ],
       "rotatable": true,
@@ -1216,22 +1217,19 @@
         [
           0,
           0
-        ],
-        [
-          0,
-          1
         ]
       ],
-      "supply_cost": 4,
-      "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 2000,
-      "satisfaction": 9,
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 5,
+      "cycle_ms": 3000,
+      "satisfaction": 7,
       "tags": [
+        "drink",
         "soft",
         "tea"
       ],
-      "rotatable": true,
+      "rotatable": false,
       "build_roles": [
         "flavor"
       ]
@@ -1361,14 +1359,14 @@
       ],
       "supply_cost": 4,
       "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 2000,
-      "satisfaction": 9,
+      "virtual_stock": 3,
+      "cycle_ms": 6000,
+      "satisfaction": 12,
       "tags": [
         "soft",
         "tea"
       ],
-      "rotatable": true,
+      "rotatable": false,
       "build_roles": [
         "flavor"
       ]
@@ -2207,11 +2205,12 @@
       ],
       "supply_cost": 4,
       "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 2000,
+      "virtual_stock": 5,
+      "cycle_ms": 4000,
       "satisfaction": 9,
       "tags": [
-        "rich"
+        "rich",
+        "soft"
       ],
       "rotatable": true,
       "build_roles": [
@@ -2465,9 +2464,11 @@
       "supply_cost": 4,
       "copy_limit": 2,
       "virtual_stock": 4,
-      "cycle_ms": 2000,
+      "cycle_ms": 4000,
       "satisfaction": 9,
       "tags": [
+        "drink",
+        "refreshing",
         "soft",
         "tea"
       ],
@@ -2802,21 +2803,18 @@
         [
           0,
           0
-        ],
-        [
-          0,
-          1
         ]
       ],
-      "supply_cost": 4,
-      "copy_limit": 2,
-      "virtual_stock": 4,
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 5,
       "cycle_ms": 2000,
-      "satisfaction": 9,
+      "satisfaction": 7,
       "tags": [
+        "drink",
         "rich"
       ],
-      "rotatable": true,
+      "rotatable": false,
       "build_roles": [
         "signature"
       ]
@@ -3156,13 +3154,14 @@
       ],
       "supply_cost": 4,
       "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 2000,
-      "satisfaction": 9,
+      "virtual_stock": 3,
+      "cycle_ms": 3000,
+      "satisfaction": 12,
       "tags": [
-        "rich"
+        "rich",
+        "set"
       ],
-      "rotatable": true,
+      "rotatable": false,
       "build_roles": [
         "signature"
       ]
@@ -3326,22 +3325,19 @@
         [
           0,
           0
-        ],
-        [
-          0,
-          1
         ]
       ],
-      "supply_cost": 4,
-      "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 4000,
-      "satisfaction": 10,
+      "supply_cost": 3,
+      "copy_limit": 3,
+      "virtual_stock": 5,
+      "cycle_ms": 3000,
+      "satisfaction": 8,
       "tags": [
         "drink",
+        "fast",
         "refreshing"
       ],
-      "rotatable": true,
+      "rotatable": false,
       "build_roles": [
         "pairing"
       ]
@@ -3383,16 +3379,16 @@
           1
         ]
       ],
-      "supply_cost": 4,
+      "supply_cost": 3,
       "copy_limit": 2,
-      "virtual_stock": 4,
+      "virtual_stock": 6,
       "cycle_ms": 4000,
-      "satisfaction": 10,
+      "satisfaction": 8,
       "tags": [
         "drink",
         "refreshing"
       ],
-      "rotatable": true,
+      "rotatable": false,
       "build_roles": [
         "pairing"
       ]
@@ -3406,16 +3402,22 @@
         [
           0,
           1
+        ],
+        [
+          1,
+          0
         ]
       ],
-      "supply_cost": 4,
-      "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 4000,
-      "satisfaction": 10,
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 3,
+      "cycle_ms": 6000,
+      "satisfaction": 14,
       "tags": [
         "drink",
-        "refreshing"
+        "fruit",
+        "refreshing",
+        "soft"
       ],
       "rotatable": true,
       "build_roles": [
@@ -4111,21 +4113,18 @@
         [
           0,
           0
-        ],
-        [
-          0,
-          1
         ]
       ],
-      "supply_cost": 3,
-      "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 4000,
-      "satisfaction": 9,
+      "supply_cost": 2,
+      "copy_limit": 3,
+      "virtual_stock": 5,
+      "cycle_ms": 3000,
+      "satisfaction": 6,
       "tags": [
+        "drink",
         "soft"
       ],
-      "rotatable": true,
+      "rotatable": false,
       "build_roles": [
         "softness"
       ]
@@ -4185,14 +4184,19 @@
         [
           0,
           1
+        ],
+        [
+          1,
+          0
         ]
       ],
-      "supply_cost": 4,
-      "copy_limit": 2,
-      "virtual_stock": 4,
-      "cycle_ms": 2000,
-      "satisfaction": 9,
+      "supply_cost": 5,
+      "copy_limit": 1,
+      "virtual_stock": 3,
+      "cycle_ms": 5000,
+      "satisfaction": 15,
       "tags": [
+        "drink",
         "rich"
       ],
       "rotatable": true,
