@@ -301,7 +301,16 @@ const RECIPES := {
 	"goat_milk_oats_porridge":      {"id": "goat_milk_oats_porridge", "name": "羊奶燕麦粥", "device": "round_pot", "materials": ["goat_milk", "oats", "sugar"], "production_duration_seconds": 2, "price": 28, "output_count": 3, "unlock_level": 5, "tags": ["低负担", "奶香"]},
 	"chestnut_mutton_baked_rice":   {"id": "chestnut_mutton_baked_rice", "name": "栗子羊肉焗饭", "device": "oven", "materials": ["mutton", "rice", "chestnut", "butter"], "production_duration_seconds": 4, "price": 42, "output_count": 2, "unlock_level": 5, "tags": ["咸香", "饱腹"]},
 	"black_tea_mutton_pastry":      {"id": "black_tea_mutton_pastry", "name": "红茶羊肉酥饼", "device": "oven", "materials": ["mutton", "black_tea", "flour", "butter"], "production_duration_seconds": 4, "price": 40, "output_count": 3, "unlock_level": 5, "tags": ["茶香", "咸香"]},
-	"mutton_glutinous_shumai":      {"id": "mutton_glutinous_shumai", "name": "羊肉糯米烧卖", "device": "round_pot", "materials": ["mutton", "glutinous_rice_flour", "sea_salt"], "production_duration_seconds": 2, "price": 38, "output_count": 3, "unlock_level": 5, "tags": ["咸香", "饱腹"]}
+	"mutton_glutinous_shumai":      {"id": "mutton_glutinous_shumai", "name": "羊肉糯米烧卖", "device": "round_pot", "materials": ["mutton", "glutinous_rice_flour", "sea_salt"], "production_duration_seconds": 2, "price": 38, "output_count": 3, "unlock_level": 5, "tags": ["咸香", "饱腹"]},
+
+	# ===== 现有原材料扩展配方 =====
+	"cinnamon_chestnut_scone":      {"id": "cinnamon_chestnut_scone", "name": "肉桂栗子司康", "device": "oven", "materials": ["flour", "butter", "chestnut", "cinnamon", "milk"], "production_duration_seconds": 8, "price": 34, "output_count": 3, "unlock_level": 5, "tags": ["香脆", "浓郁"]},
+	"almond_orange_cookie":         {"id": "almond_orange_cookie", "name": "杏仁橙香曲奇", "device": "oven", "materials": ["flour", "butter", "almond", "orange", "sugar"], "production_duration_seconds": 8, "price": 32, "output_count": 4, "unlock_level": 5, "tags": ["香脆", "果香"]},
+	"beef_wheat_porridge":          {"id": "beef_wheat_porridge", "name": "牛肉麦仁粥", "device": "round_pot", "materials": ["wheat", "beef", "spring_water", "sea_salt"], "production_duration_seconds": 4, "price": 28, "output_count": 3, "unlock_level": 3, "tags": ["饱腹", "咸香"]},
+	"vanilla_peach_panna_cotta":    {"id": "vanilla_peach_panna_cotta", "name": "香草蜜桃奶冻", "device": "chiller", "materials": ["peach", "milk", "cream", "vanilla", "gelatin"], "production_duration_seconds": 8, "price": 34, "output_count": 3, "unlock_level": 3, "tags": ["果香", "奶香"]},
+	"caramel_duck_egg_pudding":     {"id": "caramel_duck_egg_pudding", "name": "焦糖鸭蛋布丁", "device": "chiller", "materials": ["duck_egg", "milk", "caramel", "sugar"], "production_duration_seconds": 4, "price": 32, "output_count": 3, "unlock_level": 4, "tags": ["经典", "浓郁"]},
+	"orange_goat_milk_jelly":       {"id": "orange_goat_milk_jelly", "name": "橙香羊奶冻", "device": "chiller", "materials": ["goat_milk", "orange", "gelatin", "honey"], "production_duration_seconds": 4, "price": 36, "output_count": 3, "unlock_level": 5, "tags": ["奶香", "清爽"]},
+	"honey_orange_duck_baked_rice": {"id": "honey_orange_duck_baked_rice", "name": "蜜橙鸭肉焗饭", "device": "oven", "materials": ["duck_meat", "rice", "orange", "honey", "sea_salt"], "production_duration_seconds": 8, "price": 42, "output_count": 2, "unlock_level": 4, "tags": ["果香", "咸香"]}
 }
 
 const PROCESSING_RECIPES := {
